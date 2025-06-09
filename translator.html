@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pig Latin Translator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 1rem;
+      background: #fffafc;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #ff69b4;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+    .output {
+      padding: 0.5rem;
+      background: #fce4ec;
+      border-radius: 0.5rem;
+      min-height: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>Pig Latin Translator</h2>
+  <input type="text" id="input" placeholder="Enter English...">
+  <div class="output" id="output"></div>
+
+  <script>
+    function translateWord(word) {
+      const vowels = ['a', 'e', 'i', 'o', 'u'];
+      const punct = word.match(/[.,!?;:]$/);
+      let cleanWord = punct ? word.slice(0, -1) : word;
+      let suffix = punct ? punct[0] : '';
+
+      const isCapitalized = cleanWord[0] === cleanWord[0].toUpperCase();
+      cleanWord = cleanWord.toLowerCase();
+
+      let translated = '';
+      if (vowels.includes(cleanWord[0])) {
+        translated = cleanWord + 'yay';
+      } else {
+        const match = cleanWord.match(/^[^aeiou]+/);
+        const cluster = match ? match[0] : '';
+        translated = cleanWord.slice(cluster.length) + cluster + 'ay';
+      }
+
+      if (isCapitalized) {
+        translated = translated.charAt(0).toUpperCase() + translated.slice(1);
+      }
+
+      return translated + suffix;
+    }
+
+    document.getElementById("input").addEventListener("input", function(e) {
+      const words = e.target.value.trim().split(/\\s+/).map(translateWord);
+      document.getElementById("output").innerText = words.join(" ");
+    });
+  </script>
+</body>
+</html>
