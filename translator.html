@@ -8,13 +8,31 @@
     body {
       font-family: sans-serif;
       margin: 0;
-      padding: 1rem;
+      padding: 2rem;
       background: #fffafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     h2 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
       color: #ff69b4;
+      text-align: center;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
     }
     select, input {
       width: 100%;
@@ -33,12 +51,75 @@
   </style>
 </head>
 <body>
-  <h2>Pig Latin Translator</h2>
-  <label for="mode">Translation Mode:</label>
-  <select id="mode">
-    <option value="enToPig">English to Pig Latin</option>
-    <option value="pigToEn">Pig Latin to English</option>
-  </select>
+  <div class="card">
+    <h2>Pig Latin Translator</h2>
+    <label for="mode">Translation Mode:</label>
+    <select id="mode">
+      <option value="enToPig">English to Pig Latin</option>
+      <option value="pigToEn">Pig Latin to English</option>
+    </select>
 
-  <input type="text" id="input" placeholder="Enter your text...">
-  <div class="output" id="output"></div>
+    <label for="input">Enter text:</label>
+    <input type="text" id="input" placeholder="Type your sentence here...">
+    <label>Translation:</label>
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    function translateToPigLatin(word) {
+      const vowels = ['a', 'e', 'i', 'o', 'u'];
+      const punct = word.match(/[.,!?;:]$/);
+      let cleanWord = punct ? word.slice(0, -1) : word;
+      let suffix = punct ? punct[0] : '';
+
+      const isCapitalized = cleanWord[0] === cleanWord[0].toUpperCase();
+      cleanWord = cleanWord.toLowerCase();
+
+      let translated = '';
+      if (vowels.includes(cleanWord[0])) {
+        translated = cleanWord + 'yay';
+      } else {
+        const match = cleanWord.match(/^[^aeiou]+/);
+        const cluster = match ? match[0] : '';
+        translated = cleanWord.slice(cluster.length) + cluster + 'ay';
+      }
+
+      if (isCapitalized) {
+        translated = translated.charAt(0).toUpperCase() + translated.slice(1);
+      }
+
+      return translated + suffix;
+    }
+
+    function translateToEnglish(word) {
+      const punct = word.match(/[.,!?;:]$/);
+      let cleanWord = punct ? word.slice(0, -1) : word;
+      let suffix = punct ? punct[0] : '';
+      let translated = cleanWord;
+
+      if (cleanWord.toLowerCase().endsWith("yay")) {
+        translated = cleanWord.slice(0, -3);
+      } else if (cleanWord.toLowerCase().endsWith("ay")) {
+        let core = cleanWord.slice(0, -2);
+        const match = core.match(/(.*?)([^aeiou]+)$/);
+        if (match) {
+          translated = match[2] + match[1];
+        } else {
+          translated = core;
+        }
+      }
+
+      return translated + suffix;
+    }
+
+    document.getElementById("input").addEventListener("input", function(e) {
+      const mode = document.getElementById("mode").value;
+      const words = e.target.value.trim().split(/\s+/);
+      const result = words.map(word =>
+        mode === "enToPig" ? translateToPigLatin(word) : translateToEnglish(word)
+      ).join(" ");
+      document.getElementById("output").innerText = result;
+    });
+  </script>
+</body>
+</html>
