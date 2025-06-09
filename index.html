@@ -35,6 +35,24 @@
     section {
       margin-bottom: 2rem;
     }
+    .card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1.5s ease-in;
+    }
+    #about {
+      background: url('https://images.unsplash.com/photo-1503437313881-503a91226402?fit=crop&w=1200&h=600&auto=format') no-repeat center center;
+      background-size: cover;
+      border-radius: 1rem;
+      padding: 2rem;
+      color: #fff;
+    }
+    #about .card {
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+    }
     footer {
       background: #ff69b4;
       color: white;
@@ -43,6 +61,10 @@
       position: fixed;
       bottom: 0;
       width: 100%;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -56,13 +78,13 @@
     <a href="#translator">Translator</a>
     <a href="#lessons">Lessons</a>
     <a href="#games">Games</a>
-    <a href="#about">About Piglatinia</a>
+    <a href="#about">About</a>
   </nav>
 
   <main>
     <section id="translator">
       <h2>Pig Latin Translator</h2>
-      <iframe src="translator.html" width="100%" height="200" style="border:none;"></iframe>
+      <iframe src="translator.html" width="100%" height="300" style="border:none;"></iframe>
     </section>
 
     <section id="lessons">
@@ -76,8 +98,12 @@
     </section>
 
     <section id="about">
-      <h2>About Piglatinia</h2>
-      <p>Discover the mythical land of Piglatinia and its quirky language-loving citizens, the Piglatinians!</p>
+      <div class="card">
+        <h2>The Lonely Pig Latin Lady & the Land of Piglatinia</h2>
+        <p><strong>Pig Latin</strong> is a language that originates from <strong>Piglatinia</strong>. In Piglatinia, the population is primarily the indigenous <em>Piglatinians</em>.</p>
+        <p>Piglatinians are very friendly and enjoy <strong>hula hooping</strong> as their main pastime. They hold hula hooping in high regard and consider running a race without one to be quite disgraceful.</p>
+        <p>Piglatinians speak primarily Pig Latin, though some also speak <em>español latín de cerdo</em> (Spanish Pig Latin). Piglatinia is a beautiful and peaceful country — and the legend lives on through <strong>The Lonely Pig Latin Lady in America</strong>.</p>
+      </div>
     </section>
   </main>
 
@@ -86,4 +112,3 @@
   </footer>
 </body>
 </html>
-   
