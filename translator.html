@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pig Latin Translator</title>
   <style>
     body {
       font-family: sans-serif;
       margin: 0;
-      padding: 2rem;
+      padding: 0;
       background: #fffafc;
+    }
+    header {
+      background-color: #ff69b4;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      background: #ffd6e8;
+      padding: 1rem;
+      gap: 2rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
     }
     .card {
       background: #ffffff;
       border-radius: 1rem;
       padding: 2rem;
       max-width: 500px;
-      width: 100%;
+      width: 90%;
+      margin: 2rem auto;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     h2 {
@@ -67,9 +82,29 @@
     .button:hover {
       background-color: #ff4899;
     }
+    footer {
+      background-color: #ff69b4;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Pig Latin Translator</h1>
+    <p>Type your sentence, pick a mode, and watch the Pig Latin magic!</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="lessons.html">Lessons</a>
+    <a href="translator.html">Translator</a>
+    <a href="#games">Games</a>
+    <a href="#about">About</a>
+  </nav>
+
   <div class="card">
     <h2>Pig Latin Translator</h2>
     <label for="mode">Translation Mode:</label>
@@ -79,7 +114,7 @@
     </select>
 
     <label for="input">Enter text:</label>
-    <input type="text" id="input" placeholder="Type your sentence here...">
+    <input type="text" id="input" placeholder="Type your sentence here..." />
     <label>Translation:</label>
     <div class="output" id="output"></div>
 
@@ -88,6 +123,10 @@
       <button class="button" onclick="copyOutput()">Copy</button>
     </div>
   </div>
+
+  <footer>
+    &copy; 2025 Learn Pig Latin. Oink yeah!
+  </footer>
 
   <script>
     function translateToPigLatin(word) {
