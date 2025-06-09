@@ -16,7 +16,7 @@
       margin-bottom: 1rem;
       color: #ff69b4;
     }
-    input {
+    select, input {
       width: 100%;
       padding: 0.5rem;
       font-size: 1rem;
@@ -34,11 +34,17 @@
 </head>
 <body>
   <h2>Pig Latin Translator</h2>
-  <input type="text" id="input" placeholder="Enter English...">
+  <label for="mode">Translation Mode:</label>
+  <select id="mode">
+    <option value="enToPig">English to Pig Latin</option>
+    <option value="pigToEn">Pig Latin to English</option>
+  </select>
+
+  <input type="text" id="input" placeholder="Enter your text...">
   <div class="output" id="output"></div>
 
   <script>
-    function translateWord(word) {
+    function translateToPigLatin(word) {
       const vowels = ['a', 'e', 'i', 'o', 'u'];
       const punct = word.match(/[.,!?;:]$/);
       let cleanWord = punct ? word.slice(0, -1) : word;
@@ -63,9 +69,34 @@
       return translated + suffix;
     }
 
+    function translateToEnglish(word) {
+      const punct = word.match(/[.,!?;:]$/);
+      let cleanWord = punct ? word.slice(0, -1) : word;
+      let suffix = punct ? punct[0] : '';
+      let translated = cleanWord;
+
+      if (cleanWord.toLowerCase().endsWith("yay")) {
+        translated = cleanWord.slice(0, -3);
+      } else if (cleanWord.toLowerCase().endsWith("ay")) {
+        let core = cleanWord.slice(0, -2);
+        const match = core.match(/(.*?)([^aeiou]+)$/);
+        if (match) {
+          translated = match[2] + match[1];
+        } else {
+          translated = core;
+        }
+      }
+
+      return translated + suffix;
+    }
+
     document.getElementById("input").addEventListener("input", function(e) {
-      const words = e.target.value.trim().split(/\\s+/).map(translateWord);
-      document.getElementById("output").innerText = words.join(" ");
+      const mode = document.getElementById("mode").value;
+      const words = e.target.value.trim().split(/\s+/);
+      const result = words.map(word =>
+        mode === "enToPig" ? translateToPigLatin(word) : translateToEnglish(word)
+      ).join(" ");
+      document.getElementById("output").innerText = result;
     });
   </script>
 </body>
