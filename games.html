@@ -41,23 +41,42 @@
     .game-section {
       margin-bottom: 2rem;
     }
-    .download-list {
-      list-style: none;
-      padding: 0;
+    .printable-preview {
+      text-align: center;
+      margin-top: 1rem;
     }
-    .download-list li {
-      margin-bottom: 1rem;
+    .printable-preview img {
+      max-width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .download-list a {
+    .print-btn {
+      display: inline-block;
+      margin-top: 1rem;
       background: #ff69b4;
       color: white;
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
       text-decoration: none;
       font-weight: bold;
+      cursor: pointer;
     }
-    .download-list a:hover {
-      background: #ff4899;
+    .print-btn:hover {
+      background-color: #ff4899;
+    }
+    iframe.scramble-box {
+      width: 100%;
+      max-width: 600px;
+      height: 400px;
+      border: 2px solid #ff69b4;
+      border-radius: 1rem;
+      margin-top: 1rem;
+    }
+    .coming-soon {
+      color: gray;
+      font-style: italic;
+      margin-top: 0.5rem;
     }
     footer {
       background-color: #ff69b4;
@@ -83,43 +102,30 @@
 
   <main>
     <section class="game-section">
-      <h2>🎲 Printable Games</h2>
-      <ul class="download-list">
-        <li><a href="crossword1.png" download>🧩 Pig Latin Crossword (PDF)</a></li>
-        <li><a href="fill_in_piglatin.png" download>✍️ Fill in the Piglatin (PDF)</a></li>
-      </ul>
+      <h2>🧩 Printable Game: Animal Crossword</h2>
+      <p>Print it and play instantly — no download needed!</p>
+      <div class="printable-preview">
+        <img src="crossword1.png" alt="Pig Latin Animal Crossword">
+        <br>
+        <button class="print-btn" onclick="window.print()">🖨️ Print This Page</button>
+      </div>
     </section>
 
     <section class="game-section">
       <h2>🎨 Printable Coloring Pages</h2>
-      <ul class="download-list">
-        <li><a href="ovelaylaughlive.png" download>Ovelay, Aughlay, Ivelay</a></li>
-        <li><a href="feedtheducks.png" download>Eedfay ethay Ucksday</a></li>
-        <li><a href="speakpiglatin.png" download>Eakspay Igpay Atinlay</a></li>
-        <li><a href="happyhooping.png" download>Appyhay Oopinghay</a></li>
-        <li><a href="dreamitdoit.png" download>Eamdray itay, Oday itay</a></li>
+      <ul>
+        <li>Ovelay, Aughlay, Ivelay <span class="coming-soon">– Coming Soon!</span></li>
+        <li>Eedfay ethay Ucksday <span class="coming-soon">– Coming Soon!</span></li>
+        <li>Eakspay Igpay Atinlay <span class="coming-soon">– Coming Soon!</span></li>
+        <li>Appyhay Oopinghay <span class="coming-soon">– Coming Soon!</span></li>
+        <li>Eamdray itay, Oday itay <span class="coming-soon">– Coming Soon!</span></li>
       </ul>
     </section>
 
     <section class="game-section">
-      <section class="game-section">
-  <h2>🧠 Interactive Games</h2>
-  <div style="display: flex; justify-content: center;">
-    <iframe 
-      src="piglatin_scramble_game.html" 
-      width="400" 
-      height="500" 
-      style="border: 2px solid #ff69b4; border-radius: 1rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);"
-      title="Pig Latin Word Scramble"
-    ></iframe>
-  </div>
-  <p style="text-align:center; margin-top: 1rem;">
-    More games coming soon: word scrambles, translation challenges, and other fun surprises!
-  </p>
-</section>
-     <p><a href="piglatin_scramble_game.html" target="_blank">🧠 Play the Pig Latin Word Scramble!</a>
-</p>
-      <p>More games coming soon: word scrambles, translation challenges, and other fun surprises!</p>
+      <h2>🧠 Interactive Game: Word Scramble</h2>
+      <p>Can you unscramble the Pig Latin word into English?</p>
+      <iframe class="scramble-box" src="piglatin_scramble_game.html"></iframe>
     </section>
   </main>
 
