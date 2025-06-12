@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pig Latin Word Scramble</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fffafc;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #ff69b4;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .scrambled-word {
+      font-size: 2rem;
+      color: #ff69b4;
+      margin-bottom: 1rem;
+    }
+    input[type="text"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 80%;
+      margin-bottom: 1rem;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff4899;
+    }
+    .message {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pig Latin Word Scramble</h1>
+    <p>Unscramble the Pig Latin word into English!</p>
+  </header>
+  <main>
+    <div class="scrambled-word" id="scrambledWord">Ellohay</div>
+    <input type="text" id="userGuess" placeholder="Your guess..." />
+    <br />
+    <button onclick="checkAnswer()">Submit</button>
+    <div class="message" id="message"></div>
+  </main>
+
+  <script>
+    const words = [
+      { pig: "Ellohay", english: "Hello" },
+      { pig: "Iendfray", english: "Friend" },
+      { pig: "Appleyay", english: "Apple" },
+      { pig: "Oolschay", english: "School" },
+      { pig: "Ingstray", english: "String" }
+    ];
+
+    let currentIndex = 0;
+
+    function displayWord() {
+      document.getElementById("scrambledWord").innerText = words[currentIndex].pig;
+      document.getElementById("userGuess").value = "";
+      document.getElementById("message").innerText = "";
+    }
+
+    function checkAnswer() {
+      const guess = document.getElementById("userGuess").value.trim().toLowerCase();
+      const correct = words[currentIndex].english.toLowerCase();
+      if (guess === correct) {
+        document.getElementById("message").innerText = "🎉 Correct!";
+        currentIndex = (currentIndex + 1) % words.length;
+        setTimeout(displayWord, 1500);
+      } else {
+        document.getElementById("message").innerText = "❌ Try again!";
+      }
+    }
+
+    displayWord();
+  </script>
+</body>
+</html>
