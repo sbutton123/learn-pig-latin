@@ -90,10 +90,10 @@
     section {
       margin-bottom: 2.5rem;
     }
-    iframe {
-      width: 100%;
-      height: 400px;
-      border: 1px solid #ccc;
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
       margin-top: 1rem;
     }
     footer {
@@ -111,13 +111,12 @@
     <p>Learn how to speak Pig Latin — and translate like a pro!</p>
   </header>
 
- <nav>
-  <a href="lessons.html">Lessons & Translator</a>
-  <a href="games.html">Games & Printables</a>
-  <a href="piglatinia.html">Piglatinia</a>
-  <a href="products.html">Products</a>
-</nav>
-
+  <nav>
+    <a href="lessons.html">Lessons & Translator</a>
+    <a href="games.html">Games & Printables</a>
+    <a href="piglatinia.html">Piglatinia</a>
+    <a href="products.html">Products</a>
+  </nav>
 
   <div class="card">
     <h2>Pig Latin Translator</h2>
@@ -137,49 +136,6 @@
       <button class="button" onclick="copyOutput()">Copy</button>
     </div>
   </div>
-<section>
-  <h2 style="color:#ff69b4; text-align:center;">🎥 Pig Latin Tutorial Videos</h2>
-
-  <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
-
-    <iframe width="300" height="169" src="https://www.youtube.com/embed/yHaViGbDGWY" 
-      title="Pig Latin Tutorial 1" frameborder="0" allowfullscreen></iframe>
-
-    <iframe width="300" height="169" src="https://www.youtube.com/embed/vHPnQabKxpQ" 
-      title="Pig Latin Tutorial 2" frameborder="0" allowfullscreen></iframe>
-
-    <iframe width="300" height="169" src="https://www.youtube.com/embed/lRPGPIWiico" 
-      title="Pig Latin Tutorial 3" frameborder="0" allowfullscreen></iframe>
-
-    <iframe width="300" height="169" src="https://www.youtube.com/embed/_2890bUKmtk" 
-      title="Pig Latin Tutorial 4" frameborder="0" allowfullscreen></iframe>
-
-  </div>
-</section>
-<section style="max-width: 900px; margin: 4rem auto; padding: 0 1rem;">
-
-  <h2 style="color: #ff69b4; text-align: center;">📚 What is Pig Latin?</h2>
-  <p>Pig Latin is a playful English language game where words are transformed according to simple rules. It’s used for secret messages, fun, and even language learning.</p>
-  <ul>
-    <li>Move the first consonant or consonant cluster to the end</li>
-    <li>Add “ay” to the end (e.g., “Hello” → “Ellohay”)</li>
-    <li>For words starting with vowels, add “yay” or “way” (e.g., “Apple” → “Appleyay”)</li>
-  </ul>
-
-  <h2 style="color: #ff69b4; text-align: center; margin-top: 3rem;">📜 A Brief History</h2>
-  <p>Pig Latin dates back to the 16th century, once called “Dog Latin.” It was even mentioned in Shakespeare’s <em>Love’s Labour’s Lost</em> (1598). It gained popularity among kids in the early 1900s for its fun and secrecy!</p>
-
-  <h2 style="color: #ff69b4; text-align: center; margin-top: 3rem;">🎥 Tutorial Videos</h2>
-  <p style="text-align: center;">Watch and learn Pig Latin in action!</p>
-
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1rem;">
-    <iframe width="100%" height="169" src="https://www.youtube.com/embed/yHaViGbDGWY" frameborder="0" allowfullscreen></iframe>
-    <iframe width="100%" height="169" src="https://www.youtube.com/embed/vHPnQabKxpQ" frameborder="0" allowfullscreen></iframe>
-    <iframe width="100%" height="169" src="https://www.youtube.com/embed/lRPGPIWiico" frameborder="0" allowfullscreen></iframe>
-    <iframe width="100%" height="169" src="https://www.youtube.com/embed/_2890bUKmtk" frameborder="0" allowfullscreen></iframe>
-  </div>
-
-</section>
 
   <main>
     <section>
@@ -197,26 +153,15 @@
       <p>Pig Latin dates back to the 16th century, once called “Dog Latin.” It was even mentioned in Shakespeare’s <em>Love’s Labour’s Lost</em> (1598). It gained popularity among kids in the early 1900s for its fun and secrecy!</p>
     </section>
 
-   <section>
-  <h2 style="color:#ff69b4; text-align:center;">🎥 Tutorial Videos</h2>
-  <p style="text-align:center;">Watch and learn Pig Latin in action!</p>
-
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
-
-    <iframe width="300" height="169" src="https://www.youtube.com/embed/yHaViGbDGWY" title="Pig Latin Tutorial 1" frameborder="0" allowfullscreen></iframe>
-
-    <iframe width="300" height="169" src="https://www.youtube.com/embed/vHPnQabKxpQ" title="Pig Latin Tutorial 2" frameborder="0" allowfullscreen></iframe>
-
-    <iframe width="300" height="169" src="https://www.youtube.com/embed/lRPGPIWiico" title="Pig Latin Tutorial 3" frameborder="0" allowfullscreen></iframe>
-
-    <iframe width="300" height="169" src="https://www.youtube.com/embed/_2890bUKmtk" title="Pig Latin Tutorial 4" frameborder="0" allowfullscreen></iframe>
-
-  </div>
-</section>
-
+    <section>
       <h2>🎥 Tutorial Videos</h2>
-      <p>Watch and learn Pig Latin in action! Videos coming soon...</p>
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Pig Latin Tutorial"></iframe>
+      <p style="text-align:center;">Watch and learn Pig Latin in action!</p>
+      <div class="video-grid">
+        <iframe src="https://www.youtube.com/embed/yHaViGbDGWY" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/vHPnQabKxpQ" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/lRPGPIWiico" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/_2890bUKmtk" frameborder="0" allowfullscreen></iframe>
+      </div>
     </section>
   </main>
 
