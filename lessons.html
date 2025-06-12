@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pig Latin 101 - Learn Pig Latin</title>
+ <title>Lessons & Games - Learn Pig Latin</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -48,6 +48,21 @@
       padding: 1rem;
       margin-top: 3rem;
     }
+    iframe {
+      width: 100%;
+      height: 700px;
+      border: 1px solid #ccc;
+    }
+    .print-button {
+      display: block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 16px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -66,34 +81,10 @@
 
   <main>
     <section>
-      <h2>What is Pig Latin?</h2>
-      <p>Pig Latin is a playful English language game where words are transformed according to simple rules. It’s used for secret messages, fun, and even language learning.</p>
-      <ul>
-        <li>Move the first consonant or consonant cluster to the end</li>
-        <li>Add “ay” to the end (e.g., “Hello” → “Ellohay”)</li>
-        <li>For words starting with vowels, add “yay” or “way” (e.g., “Apple” → “Appleyay”)</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>The Real History of Pig Latin</h2>
-      <p>Pig Latin dates back to the 16th century, known then as “Dog Latin.” It was even referenced in Shakespeare’s <em>Love’s Labour’s Lost</em> in 1598! It gained popularity in the 1920s and 1930s in America, especially among kids and in comedic writing.</p>
-    </section>
-
-    <section>
-      <h2>How to Speak Pig Latin</h2>
-      <p>Let’s break it down:</p>
-      <ul>
-        <li><strong>Consonant Start:</strong> “banana” → “ananabay”</li>
-        <li><strong>Vowel Start:</strong> “orange” → “orangeyay”</li>
-        <li><strong>Cluster:</strong> “string” → “ingstray”</li>
-      </ul>
-      <p>Tip: Say it aloud and practice with friends!</p>
-    </section>
-
-    <section>
-      <h2>Try It Yourself</h2>
-      <p>Go back to the <a href="translator.html">Pig Latin Translator</a> and test your skills!</p>
+      <h2>Printable: Pig Latin Crossword – Animalsyay</h2>
+      <p>Download or print this fun animal-themed Pig Latin crossword with an optional answer key below!</p>
+      <iframe src="Pig_Latin_Crossword_1_Animalsyay_Bundle.pdf" id="puzzleFrame"></iframe>
+      <button class="print-button" onclick="document.getElementById('puzzleFrame').contentWindow.print()">🖨️ Print Puzzle + Answer Key</button>
     </section>
   </main>
 
