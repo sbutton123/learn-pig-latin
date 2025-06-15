@@ -35,11 +35,11 @@
       max-width: 900px;
       margin: auto;
     }
-    h1, h2 {
+    h1, h2, h3 {
       color: #ff69b4;
     }
     .game-section {
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
     }
     .download-list {
       list-style: none;
@@ -110,15 +110,48 @@
   <main>
     <section class="game-section">
       <h2>🎲 Printable Games</h2>
+
       <h3>🐷 Pig Latin Crossword: Animalsyay</h3>
-      <iframe 
-        src="printables/animalsyay.pdf" 
-        width="100%" 
-        height="700px" 
-        id="puzzleFrame">
-      </iframe>
+      <iframe src="printables/animalsyay.pdf" width="100%" height="700px" id="crosswordFrame"></iframe>
       <br>
-      <button onclick="document.getElementById('puzzleFrame').contentWindow.print()" class="print-btn">
+      <button onclick="document.getElementById('crosswordFrame').contentWindow.print()" class="print-btn">
+        🖨️ Print Puzzle + Answer Key
+      </button>
+
+      <h2>🔍 Pig Latin Word Search Puzzles</h2>
+
+      <h3>🎨 Colors & Shapes</h3>
+      <iframe src="printables/PigLatin_Colors_Shapes_with_translations_final.pdf" width="100%" height="700px" id="colorsFrame"></iframe>
+      <br>
+      <button onclick="document.getElementById('colorsFrame').contentWindow.print()" class="print-btn">
+        🖨️ Print Puzzle + Answer Key
+      </button>
+
+      <h3>🐾 Animals</h3>
+      <iframe src="printables/PigLatin_Animals_with_translations_final.pdf" width="100%" height="700px" id="animalsFrame"></iframe>
+      <br>
+      <button onclick="document.getElementById('animalsFrame').contentWindow.print()" class="print-btn">
+        🖨️ Print Puzzle + Answer Key
+      </button>
+
+      <h3>🏠 Nouns</h3>
+      <iframe src="printables/PigLatin_Nouns_with_translations_final.pdf" width="100%" height="700px" id="nounsFrame"></iframe>
+      <br>
+      <button onclick="document.getElementById('nounsFrame').contentWindow.print()" class="print-btn">
+        🖨️ Print Puzzle + Answer Key
+      </button>
+
+      <h3>🏃 Verbs</h3>
+      <iframe src="printables/PigLatin_Verbs_with_translations_final.pdf" width="100%" height="700px" id="verbsFrame"></iframe>
+      <br>
+      <button onclick="document.getElementById('verbsFrame').contentWindow.print()" class="print-btn">
+        🖨️ Print Puzzle + Answer Key
+      </button>
+
+      <h3>🎈 Adjectives</h3>
+      <iframe src="printables/PigLatin_Adjectives_with_translations_final.pdf" width="100%" height="700px" id="adjectivesFrame"></iframe>
+      <br>
+      <button onclick="document.getElementById('adjectivesFrame').contentWindow.print()" class="print-btn">
         🖨️ Print Puzzle + Answer Key
       </button>
     </section>
