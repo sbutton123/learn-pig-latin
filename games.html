@@ -7,10 +7,10 @@
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
       background: #fffdf7;
       color: #333;
+      margin: 0;
+      padding: 0;
     }
     header {
       background-color: #ff69b4;
@@ -31,59 +31,25 @@
       font-weight: bold;
     }
     main {
-      padding: 2rem;
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
+      padding: 2rem;
     }
-    h1, h2, h3 {
+    h2 {
       color: #ff69b4;
+      margin-top: 2rem;
     }
-    .game-section {
-      margin-bottom: 3rem;
-    }
-    .download-list {
-      list-style: none;
-      padding: 0;
-    }
-    .download-list li {
-      margin-bottom: 1rem;
-    }
-    .download-list a {
-      background: #ff69b4;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .download-list a:hover {
-      background: #ff4899;
+    .pdf-pair {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 2rem;
     }
     iframe {
+      width: 48%;
+      height: 500px;
       border: 1px solid #ccc;
-      border-radius: 1rem;
-    }
-    .scramble-box {
-      margin-top: 2rem;
-      border: 1px solid #ccc;
-      border-radius: 1rem;
-      padding: 1rem;
-      background: #fff;
-      text-align: center;
-    }
-    .scrambled-word {
-      font-size: 1.5rem;
-      color: #ff69b4;
-    }
-    .print-btn {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      font-size: 16px;
-      background: #ff69b4;
-      color: white;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
     }
     footer {
       background-color: #ff69b4;
@@ -108,73 +74,35 @@
   </nav>
 
   <main>
-    <section class="game-section">
-      <h2>🎲 Printable Games</h2>
+    <h2>📄 Printable Word Searches</h2>
 
-      <h3>🐷 Pig Latin Crossword: Animalsyay</h3>
-      <iframe src="printables/animalsyay.pdf" width="100%" height="700px" id="crosswordFrame"></iframe>
-      <br>
-      <button onclick="document.getElementById('crosswordFrame').contentWindow.print()" class="print-btn">
-        🖨️ Print Puzzle + Answer Key
-      </button>
+    <div class="pdf-pair">
+      <iframe src="printables/PigLatin_Animals_with_translations_final.pdf"></iframe>
+      <iframe src="printables/PigLatin_Animals_answer_key_circled_final.pdf"></iframe>
+    </div>
 
-      <h2>🔍 Pig Latin Word Search Puzzles</h2>
+    <div class="pdf-pair">
+      <iframe src="printables/PigLatin_Adjectives_with_translations_final.pdf"></iframe>
+      <iframe src="printables/PigLatin_Adjectives_answer_key_circled_final.pdf"></iframe>
+    </div>
 
-      <h3>🎨 Colors & Shapes</h3>
-      <iframe src="printables/PigLatin_Colors_Shapes_with_translations_final.pdf" width="100%" height="700px" id="colorsFrame"></iframe>
-      <br>
-      <button onclick="document.getElementById('colorsFrame').contentWindow.print()" class="print-btn">
-        🖨️ Print Puzzle + Answer Key
-      </button>
+    <div class="pdf-pair">
+      <iframe src="printables/PigLatin_Colors_Shapes_with_translations_final.pdf"></iframe>
+      <iframe src="printables/PigLatin_Colors_Shapes_answer_key_circled_final.pdf"></iframe>
+    </div>
 
-      <h3>🐾 Animals</h3>
-      <iframe src="printables/PigLatin_Animals_with_translations_final.pdf" width="100%" height="700px" id="animalsFrame"></iframe>
-      <br>
-      <button onclick="document.getElementById('animalsFrame').contentWindow.print()" class="print-btn">
-        🖨️ Print Puzzle + Answer Key
-      </button>
+    <div class="pdf-pair">
+      <iframe src="printables/PigLatin_Nouns_with_translations_final.pdf"></iframe>
+      <iframe src="printables/PigLatin_Nouns_answer_key_circled_final.pdf"></iframe>
+    </div>
 
-      <h3>🏠 Nouns</h3>
-      <iframe src="printables/PigLatin_Nouns_with_translations_final.pdf" width="100%" height="700px" id="nounsFrame"></iframe>
-      <br>
-      <button onclick="document.getElementById('nounsFrame').contentWindow.print()" class="print-btn">
-        🖨️ Print Puzzle + Answer Key
-      </button>
+    <div class="pdf-pair">
+      <iframe src="printables/PigLatin_Verbs_with_translations_final.pdf"></iframe>
+      <iframe src="printables/PigLatin_Verbs_answer_key_circled_final.pdf"></iframe>
+    </div>
 
-      <h3>🏃 Verbs</h3>
-      <iframe src="printables/PigLatin_Verbs_with_translations_final.pdf" width="100%" height="700px" id="verbsFrame"></iframe>
-      <br>
-      <button onclick="document.getElementById('verbsFrame').contentWindow.print()" class="print-btn">
-        🖨️ Print Puzzle + Answer Key
-      </button>
-
-      <h3>🎈 Adjectives</h3>
-      <iframe src="printables/PigLatin_Adjectives_with_translations_final.pdf" width="100%" height="700px" id="adjectivesFrame"></iframe>
-      <br>
-      <button onclick="document.getElementById('adjectivesFrame').contentWindow.print()" class="print-btn">
-        🖨️ Print Puzzle + Answer Key
-      </button>
-    </section>
-
-    <section class="game-section">
-      <h2>🎨 Printable Coloring Pages</h2>
-      <ul class="download-list">
-        <li><a href="#">Ovelay, Aughlay, Ivelay</a></li>
-        <li><a href="#">Eedfay ethay Ucksday</a></li>
-        <li><a href="#">Eakspay Igpay Atinlay</a></li>
-        <li><a href="#">Appyhay Oopinghay</a></li>
-        <li><a href="#">Eamdray itay, Oday itay</a></li>
-      </ul>
-    </section>
-
-    <section class="game-section">
-      <h2>🧠 Interactive Games</h2>
-      <div class="scramble-box">
-        <h3>Pig Latin Word Scramble</h3>
-        <iframe src="piglatin_scramble_game.html" width="100%" height="350px"></iframe>
-      </div>
-      <p>More games coming soon: word scrambles, translation challenges, and other fun surprises!</p>
-    </section>
+    <h2>🧠 Interactive Game: Word Scramble</h2>
+    <p><a href="piglatin_scramble_game.html" target="_blank">Play the Pig Latin Word Scramble</a></p>
   </main>
 
   <footer>
