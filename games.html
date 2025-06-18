@@ -8,9 +8,9 @@
     body {
       font-family: Arial, sans-serif;
       background: #fffdf7;
+      color: #333;
       margin: 0;
       padding: 0;
-      color: #333;
     }
     header {
       background-color: #ff69b4;
@@ -31,7 +31,7 @@
       color: #333;
     }
     main {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: auto;
       padding: 2rem;
     }
@@ -40,167 +40,177 @@
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
       gap: 2rem;
     }
     .puzzle-card {
       background: white;
-      border: 1px solid #ddd;
-      border-radius: 0.5rem;
       padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
       text-align: center;
     }
-    .puzzle-image, .answer-image {
-      width: 100%;
-      max-width: 700px;
+    .puzzle-card img {
+      max-width: 100%;
       height: auto;
-      border: 1px solid #ccc;
-      background: white;
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      background: #fff;
+    }
+    .button-row {
+      margin-top: 0.8rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
     }
     .btn {
       background-color: #ff69b4;
+      color: white;
       border: none;
       padding: 0.5rem 1rem;
-      color: white;
-      font-weight: bold;
       border-radius: 0.5rem;
+      font-weight: bold;
       cursor: pointer;
-      margin: 0.5rem;
     }
     .btn:hover {
-      background-color: #ff4899;
+      background-color: #ff4b9b;
     }
-    .answer-image {
+    .answer-key {
       display: none;
       margin-top: 1rem;
     }
-    @media print {
-      body {
-        margin: 0;
-        padding: 0;
-      }
-      nav, header, .btn, .answer-image:not(.print-only) {
-        display: none;
-      }
-      .puzzle-image, .answer-image.print-only {
-        display: block !important;
-        width: 100%;
-        max-width: 700px;
-        height: auto;
-        page-break-inside: avoid;
-      }
-      .puzzle-card {
-        break-inside: avoid;
-        page-break-inside: avoid;
-        margin: 0;
-        padding: 0;
-      }
+    footer {
+      background-color: #ff69b4;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Pig Latin Games & Printables</h1>
-    <p>Learn, laugh, and play with Pig Latin!</p>
-  </header>
-  <nav>
-    <a href="lessons.html">Lessons & Translator</a>
-    <a href="games.html">Games & Printables</a>
-    <a href="piglatinia.html">Piglatinia</a>
-    <a href="products.html">Products</a>
-  </nav>
-  <main>
-    <h2>📄 Printable Word Searches</h2>
-    <div class="grid">
-      <!-- Template: repeat this block for each puzzle -->
-     <!-- 🐷 Animals Puzzle -->
-<div class="puzzle-card">
-  <h3><span class="emoji">🐷</span> Animals Word Search</h3>
-  <img id="animalsPuzzle" src="printables/PigLatin_Animals_with_translations_final_page1.png" alt="Animals Puzzle">
-  <div class="button-row">
-    <button onclick="printImage('animalsPuzzle')">🖨️ Print Puzzle</button>
-    <button onclick="toggleAnswer('animalsAnswer')">🔍 Show Answer Key</button>
-  </div>
-  <div class="answer" id="animalsAnswer">
-    <img id="animalsAnswerImg" src="printables/PigLatin_Animals_answer_key_circled_final_page1.png" alt="Animals Answer Key">
-    <div class="button-row">
-      <button onclick="printImage('animalsAnswerImg')">🖨️ Print Answer</button>
-    </div>
-  </div>
-</div>
-      <div class="puzzle-card">
-        <h3>🎨 Adjectives Word Search</h3>
-        <img id="adjectivesPuzzle" class="puzzle-image" src="printables/PigLatin_Adjectives_with_translations_final_page1.png" alt="Adjectives Puzzle" />
-        <img id="adjectivesAnswer" class="answer-image" src="printables/PigLatin_Adjectives_answer_key_circled_final_page1.png" alt="Adjectives Answer Key" />
-        <br />
-        <button class="btn" onclick="printImage('adjectivesPuzzle')">🖨️ Print Puzzle</button>
-        <button class="btn" onclick="toggleAnswer('adjectivesAnswer')">🔍 Show Answer Key</button>
-      </div>
 
-      <div class="puzzle-card">
-        <h3>🔵 Colors & Shapes Word Search</h3>
-        <img id="colorsPuzzle" class="puzzle-image" src="printables/PigLatin_Colors_Shapes_with_translations_final_page1.png" alt="Colors Puzzle" />
-        <img id="colorsAnswer" class="answer-image" src="printables/PigLatin_Colors_Shapes_answer_key_circled_final_page1.png" alt="Colors Answer Key" />
-        <br />
-        <button class="btn" onclick="printImage('colorsPuzzle')">🖨️ Print Puzzle</button>
-        <button class="btn" onclick="toggleAnswer('colorsAnswer')">🔍 Show Answer Key</button>
-      </div>
+<header>
+  <h1>Pig Latin Games & Printables</h1>
+  <p>Learn, laugh, and play with Pig Latin!</p>
+</header>
 
-      <div class="puzzle-card">
-        <h3>🟡 Nouns Word Search</h3>
-        <img id="nounsPuzzle" class="puzzle-image" src="printables/PigLatin_Nouns_with_translations_final_page1.png" alt="Nouns Puzzle" />
-        <img id="nounsAnswer" class="answer-image" src="printables/PigLatin_Nouns_answer_key_circled_final_page1.png" alt="Nouns Answer Key" />
-        <br />
-        <button class="btn" onclick="printImage('nounsPuzzle')">🖨️ Print Puzzle</button>
-        <button class="btn" onclick="toggleAnswer('nounsAnswer')">🔍 Show Answer Key</button>
-      </div>
+<nav>
+  <a href="lessons.html">Lessons & Translator</a>
+  <a href="games.html">Games & Printables</a>
+  <a href="piglatinia.html">Piglatinia</a>
+  <a href="products.html">Products</a>
+</nav>
 
-      <div class="puzzle-card">
-        <h3>🟢 Verbs Word Search</h3>
-        <img id="verbsPuzzle" class="puzzle-image" src="printables/PigLatin_Verbs_with_translations_final_page1.png" alt="Verbs Puzzle" />
-        <img id="verbsAnswer" class="answer-image" src="printables/PigLatin_Verbs_answer_key_circled_final_page1.png" alt="Verbs Answer Key" />
-        <br />
-        <button class="btn" onclick="printImage('verbsPuzzle')">🖨️ Print Puzzle</button>
-        <button class="btn" onclick="toggleAnswer('verbsAnswer')">🔍 Show Answer Key</button>
+<main>
+  <h2>📄 Printable Word Searches</h2>
+  <div class="grid">
+
+    <!-- Puzzle Template -->
+    <div class="puzzle-card">
+      <h3>🐷 Animals Word Search</h3>
+      <img id="animal-puzzle" src="printables/animalsPuzzle.png" alt="Animals Puzzle" />
+      <div class="button-row">
+        <button class="btn" onclick="printImage('animal-puzzle')">🖨️ Print Puzzle</button>
+        <button class="btn" onclick="toggleAnswer('animal-answer')">🔍 Show Answer Key</button>
+      </div>
+      <div class="answer-key" id="animal-answer">
+        <img id="animal-answer-img" src="printables/animalsAnswerImg.png" alt="Animals Answer Key" />
+        <div class="button-row">
+          <button class="btn" onclick="printImage('animal-answer-img')">🖨️ Print Answer</button>
+        </div>
       </div>
     </div>
-    <h2>🧠 Interactive Game: Word Scramble</h2>
-    <p><a href="piglatin_scramble_game.html" target="_blank">Play the Pig Latin Word Scramble</a></p>
-  </main>
-  <footer>
-    &copy; 2025 Learn Pig Latin. Oink yeah!
-  </footer>
-  <script>
-    function printImage(id) {
-      const img = document.getElementById(id);
-      const win = window.open('', '_blank');
-      win.document.write(`
-        <html>
-          <head>
-            <title>Print Puzzle</title>
-            <style>
-              body { margin: 0; text-align: center; }
-              img { width: 100%; max-width: 700px; height: auto; }
-            </style>
-          </head>
-          <body>
-            <img src="${img.src}" alt="Print" />
-            <script>
-              window.onload = function() {
-                window.print();
-                window.onafterprint = function() { window.close(); };
-              };
-            <\/script>
-          </body>
-        </html>
-      `);
-      win.document.close();
-    }
 
-    function toggleAnswer(id) {
-      const el = document.getElementById(id);
-      el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
-    }
-  </script>
+    <div class="puzzle-card">
+      <h3>🎨 Adjectives Word Search</h3>
+      <img id="adj-puzzle" src="printables/PigLatin_Adjectives_with_translations_final_page1.png" alt="Adjectives Puzzle" />
+      <div class="button-row">
+        <button class="btn" onclick="printImage('adj-puzzle')">🖨️ Print Puzzle</button>
+        <button class="btn" onclick="toggleAnswer('adj-answer')">🔍 Show Answer Key</button>
+      </div>
+      <div class="answer-key" id="adj-answer">
+        <img id="adj-answer-img" src="printables/PigLatin_Adjectives_answer_key_circled_final_page1.png" alt="Adjectives Answer Key" />
+        <div class="button-row">
+          <button class="btn" onclick="printImage('adj-answer-img')">🖨️ Print Answer</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="puzzle-card">
+      <h3>🔷 Colors & Shapes Word Search</h3>
+      <img id="colors-puzzle" src="printables/PigLatin_Colors_Shapes_with_translations_final_page1.png" alt="Colors Puzzle" />
+      <div class="button-row">
+        <button class="btn" onclick="printImage('colors-puzzle')">🖨️ Print Puzzle</button>
+        <button class="btn" onclick="toggleAnswer('colors-answer')">🔍 Show Answer Key</button>
+      </div>
+      <div class="answer-key" id="colors-answer">
+        <img id="colors-answer-img" src="printables/PigLatin_Colors_Shapes_answer_key_circled_final_page1.png" alt="Colors Answer Key" />
+        <div class="button-row">
+          <button class="btn" onclick="printImage('colors-answer-img')">🖨️ Print Answer</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="puzzle-card">
+      <h3>📦 Nouns Word Search</h3>
+      <img id="nouns-puzzle" src="printables/PigLatin_Nouns_with_translations_final_page1.png" alt="Nouns Puzzle" />
+      <div class="button-row">
+        <button class="btn" onclick="printImage('nouns-puzzle')">🖨️ Print Puzzle</button>
+        <button class="btn" onclick="toggleAnswer('nouns-answer')">🔍 Show Answer Key</button>
+      </div>
+      <div class="answer-key" id="nouns-answer">
+        <img id="nouns-answer-img" src="printables/PigLatin_Nouns_answer_key_circled_final_page1.png" alt="Nouns Answer Key" />
+        <div class="button-row">
+          <button class="btn" onclick="printImage('nouns-answer-img')">🖨️ Print Answer</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="puzzle-card">
+      <h3>🏃 Verbs Word Search</h3>
+      <img id="verbs-puzzle" src="printables/PigLatin_Verbs_with_translations_final_page1.png" alt="Verbs Puzzle" />
+      <div class="button-row">
+        <button class="btn" onclick="printImage('verbs-puzzle')">🖨️ Print Puzzle</button>
+        <button class="btn" onclick="toggleAnswer('verbs-answer')">🔍 Show Answer Key</button>
+      </div>
+      <div class="answer-key" id="verbs-answer">
+        <img id="verbs-answer-img" src="printables/PigLatin_Verbs_answer_key_circled_final_page1.png" alt="Verbs Answer Key" />
+        <div class="button-row">
+          <button class="btn" onclick="printImage('verbs-answer-img')">🖨️ Print Answer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>🧠 Interactive Game: Word Scramble</h2>
+  <p><a href="piglatin_scramble_game.html" target="_blank">Play the Pig Latin Word Scramble</a></p>
+</main>
+
+<footer>
+  &copy; 2025 Learn Pig Latin. Oink yeah!
+</footer>
+
+<script>
+  function toggleAnswer(id) {
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === 'none' || el.style.display === '' ? 'block' : 'none';
+  }
+
+  function printImage(imgId) {
+    const img = document.getElementById(imgId);
+    const win = window.open('', '_blank');
+    win.document.write(`
+      <html>
+        <head><title>Print</title></head>
+        <body style="margin:0; display:flex; justify-content:center; align-items:center;">
+          <img src="${img.src}" style="max-width:95%; max-height:95%;" onload="window.print(); window.onafterprint = () => window.close();" />
+        </body>
+      </html>
+    `);
+    win.document.close();
+  }
+</script>
+
 </body>
 </html>
