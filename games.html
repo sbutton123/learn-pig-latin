@@ -113,15 +113,21 @@
     <h2>📄 Printable Word Searches</h2>
     <div class="grid">
       <!-- Template: repeat this block for each puzzle -->
-      <div class="puzzle-card">
-        <h3>🐷 Animals Word Search</h3>
-        <img id="animalsPuzzle" class="puzzle-image" src="printables/PigLatin_Animals_with_translations_final_page1.png" alt="Animals Puzzle" />
-        <img id="animalsAnswer" class="answer-image" src="printables/PigLatin_Animals_answer_key_circled_final_page1.png" alt="Animals Answer Key" />
-        <br />
-        <button class="btn" onclick="printImage('animalsPuzzle')">🖨️ Print Puzzle</button>
-        <button class="btn" onclick="toggleAnswer('animalsAnswer')">🔍 Show Answer Key</button>
-      </div>
-
+     <!-- 🐷 Animals Puzzle -->
+<div class="puzzle-card">
+  <h3><span class="emoji">🐷</span> Animals Word Search</h3>
+  <img id="animalsPuzzle" src="printables/PigLatin_Animals_with_translations_final_page1.png" alt="Animals Puzzle">
+  <div class="button-row">
+    <button onclick="printImage('animalsPuzzle')">🖨️ Print Puzzle</button>
+    <button onclick="toggleAnswer('animalsAnswer')">🔍 Show Answer Key</button>
+  </div>
+  <div class="answer" id="animalsAnswer">
+    <img id="animalsAnswerImg" src="printables/PigLatin_Animals_answer_key_circled_final_page1.png" alt="Animals Answer Key">
+    <div class="button-row">
+      <button onclick="printImage('animalsAnswerImg')">🖨️ Print Answer</button>
+    </div>
+  </div>
+</div>
       <div class="puzzle-card">
         <h3>🎨 Adjectives Word Search</h3>
         <img id="adjectivesPuzzle" class="puzzle-image" src="printables/PigLatin_Adjectives_with_translations_final_page1.png" alt="Adjectives Puzzle" />
