@@ -87,15 +87,17 @@
   </nav>
 
   <main>
-   <h2>📄 Printable Word Searches</h2>
+   <!-- Inside <main> block -->
+<h2>📄 Printable Word Searches</h2>
 
-<div style="display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem;">
-  <!-- Animal Puzzle -->
-  <div style="text-align: center;">
-    <img id="animalPuzzle" src="printables/PigLatin_Animals_with_translations_final_page1.png" alt="Animals Word Search" style="max-width: 100%; width: 400px; border: 1px solid #ccc; padding: 0.5rem; background: white;" />
-    <div style="margin-top: 0.5rem;">
-      <button onclick="printImage('animalPuzzle')">🖨️ Print Puzzle</button>
-      <button onclick="toggleAnswer('animalAnswer')">👁️ Show Answer</button>
+<div class="puzzle-section">
+  <h3>🐾 Animals Word Search</h3>
+  <img id="animalPuzzle" src="printables/PigLatin_Animals_with_translations_final_page1.png" alt="Animals Word Search">
+  <button class="btn" onclick="printImage('animalPuzzle')">🖨️ Print Puzzle</button>
+  <button class="btn" onclick="toggleAnswer('animalAnswer')">🔍 Show Answer Key</button>
+  <div id="animalAnswer" class="answer-key">
+    <img src="printables/PigLatin_Animals_answer_key_circled_final_page1.png" id="animalAnswerImg" alt="Animals Answer Key">
+    <button class="btn" onclick="printImage('animalAnswerImg')">🖨️ Print Answer Key</button>
     </div>
   </div>
 
