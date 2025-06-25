@@ -74,6 +74,30 @@
       display: none;
       margin-top: 0.5rem;
     }
+    /* Styles for the interactive adjective word search */
+    .adj-grid {
+      display: grid;
+      grid-template-columns: repeat(14, 2rem);
+      gap: 2px;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .adj-cell {
+      width: 2rem;
+      height: 2rem;
+      background: white;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+    .adj-selected {
+      background: #f72585;
+      color: white;
+    }
     footer {
       background: linear-gradient(to right, #1e3c72, #9b59b6);
       color: white;
@@ -226,6 +250,49 @@ function printCanvas() {
 
 fillGrid();
 drawGrid();
+</script>
+
+<section id="adjective-wordsearch" style="text-align: center; margin-top: 3rem;">
+  <h2 style="color: #6e00ff;">🧠 Interactive Word Search: Adjectives</h2>
+  <p style="color: #333;">Click letters to highlight Pig Latin adjectives!</p>
+  <div id="adj-grid" class="adj-grid"></div>
+</section>
+
+<script>
+const adjWords = [
+  "APPYHAY", "ADSAY", "IGBAY", "MALLSAY", "ASTFAY",
+  "OWSLAY", "ALLTAY", "ORTSHAY", "EANCLAY", "IRTYDAY",
+  "IGHTBRAY", "IMDAY", "OLDCAY", "OTHAY"
+];
+const adjGridSize = 14;
+const adjGridElement = document.getElementById("adj-grid");
+const adjGrid = Array.from({ length: adjGridSize }, () =>
+  Array.from({ length: adjGridSize }, () =>
+    String.fromCharCode(65 + Math.floor(Math.random() * 26))
+  )
+);
+
+function placeAdjWord(word) {
+  const row = Math.floor(Math.random() * adjGridSize);
+  const col = Math.floor(Math.random() * (adjGridSize - word.length));
+  for (let i = 0; i < word.length; i++) {
+    adjGrid[row][col + i] = word[i];
+  }
+}
+
+adjWords.forEach(word => placeAdjWord(word));
+
+adjGrid.forEach(row => {
+  row.forEach(letter => {
+    const cell = document.createElement('div');
+    cell.textContent = letter;
+    cell.className = 'adj-cell';
+    cell.addEventListener('click', () => {
+      cell.classList.toggle('adj-selected');
+    });
+    adjGridElement.appendChild(cell);
+  });
+});
 </script>
 
     <!-- Puzzle Template -->
