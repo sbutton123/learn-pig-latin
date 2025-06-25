@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Interactive Word Search - Animals</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #3a0ca3, #7209b7);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    #wordList {
+      margin-bottom: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(14, 2rem);
+      gap: 2px;
+      justify-content: center;
+    }
+    .cell {
+      width: 2rem;
+      height: 2rem;
+      background: white;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+    .found {
+      background: #90e0ef;
+      color: #000;
+    }
+    .selected {
+      background: #f72585;
+      color: white;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      color: #f1f1f1;
+    }
+    .found-word {
+      text-decoration: line-through;
+      color: #a6f4ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Interactive Word Search: Animals</h1>
+  <p>Click letters to highlight and find Pig Latin animal words!</p>
+  <div id="wordList">
+    <ul id="words">
+      <!-- Word list here -->
+    </ul>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    const words = [
+      "EBRAZAY", "ONKEYMAY", "IRDBAY", "ISHFAY", "ATCAY", "OGDAY",
+      "IGPAY", "ABBITRAY", "UCKDAY", "ORSEHAY", "IRAFFEGAY", "ELEPHANTWAY",
+      "IONLAY", "OOSTERRAY"
+    ];
+    const gridSize = 14;
+    const gridElement = document.getElementById("grid");
+    const wordListElement = document.getElementById("words");
+
+    // Create a 2D array of random letters
+    const grid = Array.from({ length: gridSize }, () =>
+      Array.from({ length: gridSize }, () =>
+        String.fromCharCode(65 + Math.floor(Math.random() * 26))
+      )
+    );
+
+    // Function to insert a word horizontally into the grid
+    function placeWord(word) {
+      const row = Math.floor(Math.random() * gridSize);
+      const col = Math.floor(Math.random() * (gridSize - word.length));
+      for (let i = 0; i < word.length; i++) {
+        grid[row][col + i] = word[i];
+      }
+    }
+
+    words.forEach(word => {
+      placeWord(word);
+      const li = document.createElement("li");
+      li.textContent = word;
+      li.id = `word-${word}`;
+      wordListElement.appendChild(li);
+    });
+
+    let selection = [];
+
+    function checkSelection() {
+      const selectedWord = selection.map(cell => cell.textContent).join("");
+      const reversed = selectedWord.split("").reverse().join("");
+      const match = words.find(w => w === selectedWord || w === reversed);
+      if (match) {
+        selection.forEach(cell => {
+          cell.classList.remove("selected");
+          cell.classList.add("found");
+        });
+        document.getElementById(`word-${match}`).classList.add("found-word");
+      } else {
+        selection.forEach(cell => cell.classList.remove("selected"));
+      }
+      selection = [];
+    }
+
+    // Render the grid
+    grid.forEach((row, rowIndex) => {
+      row.forEach((letter, colIndex) => {
+        const cell = document.createElement("div");
+        cell.textContent = letter;
+        cell.classList.add("cell");
+        cell.dataset.row = rowIndex;
+        cell.dataset.col = colIndex;
+        cell.addEventListener("click", () => {
+          if (!cell.classList.contains("found")) {
+            cell.classList.toggle("selected");
+            if (selection.includes(cell)) {
+              selection = selection.filter(c => c !== cell);
+            } else {
+              selection.push(cell);
+            }
+            if (selection.length >= 2) checkSelection();
+          }
+        });
+        gridElement.appendChild(cell);
+      });
+    });
+  </script>
+</body>
+</html>
