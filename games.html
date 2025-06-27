@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Games & Printables - Learn Pig Latin</title>
+  <style>
+    :root {
+      --primary: #a97ef9;
+      --primary-dark: #9063f5;
+      --secondary: #d682f4;
+      --accent: #78aaff;
+      --background: #ede4ff;
+      --text-dark: #2c174e;
+      --card-bg: #f7f4ff;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--background);
+      color: var(--text-dark);
+    }
+
+    header {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: var(--secondary);
+      padding: 1rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background: var(--primary-dark);
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .puzzle-box {
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
+      border-radius: 0.75rem;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: bold;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .puzzle-box:hover {
+      transform: scale(1.02);
+      background: #e5d7ff;
+    }
+
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      border-radius: 1rem;
+      margin-top: 2rem;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Games & Printables</h1>
+    <p>Practice Pig Latin through fun, interactive challenges!</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Lessons & Translator</a>
+    <a href="games.html">Games & Printables</a>
+    <a href="piglatinia.html">Piglatinia</a>
+    <a href="products.html">Products</a>
+  </nav>
+
+  <main>
+    <h2>Word Search</h2>
+    <div class="grid">
+      <a class="puzzle-box" href="#animalsway">Animalsway</a>
+      <div class="puzzle-box">Olorscay & Apesshay</div>
+      <div class="puzzle-box">Oodfay</div>
+      <div class="puzzle-box">Erbsvay</div>
+    </div>
+
+    <h2 style="margin-top: 3rem;">Crossword</h2>
+    <div class="grid">
+      <div class="puzzle-box">Animalsway</div>
+      <div class="puzzle-box">Olorscay & Apesshay</div>
+      <div class="puzzle-box">Oodfay</div>
+      <div class="puzzle-box">Erbsvay</div>
+    </div>
+
+    <div id="animalsway">
+      <h2 style="margin-top: 4rem;">Animalsway Interactive Word Search</h2>
+      <iframe src="animalsway-wordsearch.html" title="Animalsway Puzzle"></iframe>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Learn Pig Latin. Oink yeah!
+  </footer>
+</body>
+</html>
