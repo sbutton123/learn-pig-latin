@@ -1,13 +1,14 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Animalsway Word Search</title>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Animalsway Word Search
+  </title>
   <style>
-    body {
+   body {
       font-family: sans-serif;
       background: #ede4ff;
       color: #2c174e;
@@ -103,17 +104,24 @@
       }
     }
   </style>
-</head>
-<body>
+ </head>
+ <body>
   <div id="puzzle-wrapper">
-    <h1>Animalsway Word Search</h1>
-    <div id="wordsearch"></div>
-    <div id="wordlist"></div>
-    <button id="printBtn">Print Puzzle</button>
+   <h1>
+    Animalsway Word Search
+   </h1>
+   <div id="wordsearch">
+   </div>
+   <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 2rem; width: 100%; max-width: 680px; margin-left: auto; margin-right: auto;">
+    <div id="wordlist" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; max-width: 100%;">
+    </div>
+    <button id="printBtn" style="background: #ff69b4; color: white; padding: 0.5rem 1rem; border: none; border-radius: 1rem; font-size: 1rem; cursor: pointer; min-width: 100px;">
+     Print
+    </button>
+   </div>
   </div>
-
   <script>
-    const words = [
+   const words = [
       "EBRAZAY", "ONKEYMAY", "IRDBAY", "ISHFAY", "ATCAY", "OGDAY", "IGPAY",
       "ABBITRAY", "UCKDAY", "ORSEHAY", "IRAFFEGAY", "ELEPHANTWAY", "IONLAY", "OOSTERRAY"
     ];
@@ -237,5 +245,6 @@
       window.print();
     });
   </script>
-</body>
+ </body>
 </html>
+
