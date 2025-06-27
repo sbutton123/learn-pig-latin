@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animalsway Word Search</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #ede4ff;
+      color: #2c174e;
+      text-align: center;
+      padding: 1rem;
+    }
+    h1 {
+      color: #a97ef9;
+    }
+    #puzzle-wrapper {
+      max-width: 800px;
+      margin: auto;
+    }
+    #wordsearch {
+      display: grid;
+      grid-template-columns: repeat(15, 2rem);
+      gap: 2px;
+      justify-content: center;
+      margin: 2rem auto;
+      user-select: none;
+    }
+    .cell {
+      width: 2rem;
+      height: 2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 1rem;
+      text-align: center;
+      border: 1px solid #ccc;
+      background: #f7f4ff;
+      cursor: pointer;
+    }
+    .cell.selected {
+      background: #a97ef9;
+      color: white;
+    }
+    .cell.found {
+      background: #78aaff;
+      color: white;
+    }
+    #wordlist {
+      max-width: 600px;
+      margin: 2rem auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .word {
+      padding: 0.3rem 0.8rem;
+      background: #f7f4ff;
+      border-radius: 1rem;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    .word.found {
+      background: #a97ef9;
+      color: white;
+      text-decoration: line-through;
+    }
+    button#printBtn {
+      margin-top: 2rem;
+      background: #a97ef9;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      .cell {
+        background: white !important;
+        color: black !important;
+        border: 1px solid black;
+      }
+      .cell.found,
+      .cell.selected {
+        background: white !important;
+        color: black !important;
+      }
+      .word.found {
+        color: black !important;
+        background: white !important;
+        text-decoration: none !important;
+      }
+      #printBtn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="puzzle-wrapper">
+    <h1>Animalsway Word Search</h1>
+    <div id="wordsearch"></div>
+    <div id="wordlist"></div>
+    <button id="printBtn">Print Puzzle</button>
+  </div>
+
+  <script>
+    const words = [
+      "EBRAZAY", "ONKEYMAY", "IRDBAY", "ISHFAY", "ATCAY", "OGDAY", "IGPAY",
+      "ABBITRAY", "UCKDAY", "ORSEHAY", "IRAFFEGAY", "ELEPHANTWAY", "IONLAY", "OOSTERRAY"
+    ];
+
+    const gridSize = 15;
+    const grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
+    const directions = [
+      [0,1], [1,0], [1,1], [-1,1], [0,-1], [-1,0], [-1,-1], [1,-1]
+    ];
+    const placedWords = [];
+
+    function canPlace(word, row, col, dir) {
+      const [dx, dy] = dir;
+      for (let i = 0; i < word.length; i++) {
+        let x = row + i * dx;
+        let y = col + i * dy;
+        if (x < 0 || x >= gridSize || y < 0 || y >= gridSize) return false;
+        if (grid[x][y] && grid[x][y] !== word[i]) return false;
+      }
+      return true;
+    }
+
+    function placeWord(word) {
+      for (let tries = 0; tries < 1000; tries++) {
+        let dir = directions[Math.floor(Math.random() * directions.length)];
+        let row = Math.floor(Math.random() * gridSize);
+        let col = Math.floor(Math.random() * gridSize);
+        if (canPlace(word, row, col, dir)) {
+          let positions = [];
+          for (let i = 0; i < word.length; i++) {
+            let x = row + i * dir[0];
+            let y = col + i * dir[1];
+            grid[x][y] = word[i];
+            positions.push(`${x}-${y}`);
+          }
+          placedWords.push({ word, positions });
+          return;
+        }
+      }
+      console.warn("Could not place word:", word);
+    }
+
+    words.forEach(w => placeWord(w));
+
+    for (let r = 0; r < gridSize; r++) {
+      for (let c = 0; c < gridSize; c++) {
+        if (!grid[r][c]) grid[r][c] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+      }
+    }
+
+    const searchEl = document.getElementById('wordsearch');
+    const wordListEl = document.getElementById('wordlist');
+    const selectedCells = [];
+    const cells = {};
+
+    for (let r = 0; r < gridSize; r++) {
+      for (let c = 0; c < gridSize; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.textContent = grid[r][c];
+        cell.dataset.row = r;
+        cell.dataset.col = c;
+        searchEl.appendChild(cell);
+        cells[`${r}-${c}`] = cell;
+
+        cell.addEventListener('click', () => {
+          if (cell.classList.contains('selected')) {
+            cell.classList.remove('selected');
+            selectedCells.splice(selectedCells.indexOf(cell), 1);
+          } else {
+            cell.classList.add('selected');
+            selectedCells.push(cell);
+          }
+          checkSelection();
+        });
+      }
+    }
+
+    words.forEach(word => {
+      const span = document.createElement('span');
+      span.textContent = word;
+      span.className = 'word';
+      span.dataset.word = word;
+      wordListEl.appendChild(span);
+
+      span.addEventListener('click', () => {
+        const entry = placedWords.find(w => w.word === word);
+        if (!entry) return;
+        const isFound = span.classList.toggle('found');
+        entry.positions.forEach(pos => {
+          const cell = cells[pos];
+          if (isFound) {
+            cell.classList.add('found');
+          } else {
+            cell.classList.remove('found');
+          }
+        });
+      });
+    });
+
+    function checkSelection() {
+      const selectedWord = selectedCells.map(c => c.textContent).join('');
+      const reversed = selectedWord.split('').reverse().join('');
+
+      const match = words.find(w => w === selectedWord || w === reversed);
+      if (match) {
+        const entry = placedWords.find(w => w.word === match);
+        if (entry) {
+          entry.positions.forEach(pos => {
+            cells[pos].classList.remove('selected');
+            cells[pos].classList.add('found');
+          });
+          document.querySelector(`.word[data-word="${match}"]`).classList.add('found');
+        }
+        selectedCells.length = 0;
+      }
+    }
+
+    document.getElementById('printBtn').addEventListener('click', function (e) {
+      e.preventDefault();
+      window.print();
+    });
+  </script>
+</body>
+</html>
