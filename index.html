@@ -5,43 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Learn Pig Latin</title>
   <style>
+    :root {
+      --primary: #a97ef9;
+      --primary-dark: #9063f5;
+      --secondary: #d682f4;
+      --accent: #78aaff;
+      --background: #ede4ff;
+      --text-dark: #2c174e;
+      --card-bg: #f7f4ff;
+    }
+
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background: #fdf6f0;
+      background: var(--background);
+      color: var(--text-dark);
     }
+
     header {
-      background-color: #ff69b4;
+      background: linear-gradient(to right, var(--primary), var(--accent));
       color: white;
-      padding: 1rem;
+      padding: 1.5rem;
       text-align: center;
     }
+
     nav {
       display: flex;
       justify-content: center;
-      background: #ffd6e8;
+      background: var(--secondary);
       padding: 1rem;
       gap: 2rem;
+      flex-wrap: wrap;
     }
+
     nav a {
       text-decoration: none;
-      color: #333;
+      color: white;
       font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: background 0.3s;
     }
+
+    nav a:hover {
+      background: var(--primary-dark);
+    }
+
     main {
       padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
     }
+
     section {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
+
     .card {
-      background: white;
+      background: var(--card-bg);
       border-radius: 1rem;
       padding: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      animation: fadeIn 1.5s ease-in;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      animation: fadeIn 1s ease-in;
     }
+
+    #translator-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .translator-description {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .translator-card {
+      flex: 1;
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      min-width: 280px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1rem;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+
+    .output {
+      padding: 0.5rem;
+      background: #e0d3ff;
+      border-radius: 0.5rem;
+      min-height: 2rem;
+      margin-top: 1rem;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .button {
+      flex: 1;
+      padding: 0.5rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    h2 {
+      color: var(--primary);
+    }
+
     #about {
       background: url('https://images.unsplash.com/photo-1503437313881-503a91226402?fit=crop&w=1200&h=600&auto=format') no-repeat center center;
       background-size: cover;
@@ -49,19 +147,20 @@
       padding: 2rem;
       color: #fff;
     }
+
     #about .card {
-      background: rgba(255, 255, 255, 0.9);
-      color: #333;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--text-dark);
     }
+
     footer {
-      background: #ff69b4;
+      background: var(--primary);
       color: white;
       text-align: center;
       padding: 1rem;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+      margin-top: 2rem;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -74,17 +173,48 @@
     <p>Your quirky guide to mastering Pig Latin!</p>
   </header>
 
- <nav>
-  <a href="lessons.html">Lessons & Translator</a>
-  <a href="games.html">Games & Printables</a>
-  <a href="piglatinia.html">Piglatinia</a>
-  <a href="products.html">Products</a>
-</nav>
+  <nav>
+    <a href="lessons.html">Lessons & Translator</a>
+    <a href="games.html">Games & Printables</a>
+    <a href="piglatinia.html">Piglatinia</a>
+    <a href="products.html">Products</a>
+  </nav>
 
   <main>
     <section id="translator">
       <h2>Pig Latin Translator</h2>
-      <iframe src="translator.html" width="100%" height="300" style="border:none;"></iframe>
+      <div id="translator-section">
+        <div class="translator-description">
+          <div class="card">
+  <h3>What is Pig Latin?</h3>
+  <p>Pig Latin is a language that originates from <strong>Piglatinia</strong>. Pig Latin has spread to America and has become a playful secret code where English words are altered in fun ways. It was popular among kids for making conversations sound silly or private! While it's a popular rumor that Thomas Jefferson used Pig Latin in his letters, it's not definitively proven.</p>
+  <h4>How to Translate:</h4>
+  <ul>
+    <li>If a word starts with a vowel (a, e, i, o, u), just add <strong>"yay"</strong> or <strong>"way"</strong> to the end. Example: <em>"apple" → "appleyay"</em>. In Piglatinia, Piglatinians add either "way" or "yay" depending on whether they come from the East or West side of Piglatinia.</li>
+    <li>If it starts with a consonant or consonant cluster, move it to the end and add <strong>"ay"</strong>. Example: <em>"hello" → "ellohay"</em></li>
+    <li>Punctuation and capitalization are preserved!</li>
+  </ul>
+          </div>
+        </div>
+
+        <div class="translator-card">
+          <label for="mode">Translation Mode:</label>
+          <select id="mode">
+            <option value="enToPig">English to Pig Latin</option>
+            <option value="pigToEn">Pig Latin to English</option>
+          </select>
+
+          <label for="input">Enter text:</label>
+          <input type="text" id="input" placeholder="Type your sentence here..." />
+          <label>Translation:</label>
+          <div class="output" id="output"></div>
+
+          <div class="button-group">
+            <button class="button" onclick="clearFields()">Clear</button>
+            <button class="button" onclick="copyOutput()">Copy</button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="lessons">
@@ -110,5 +240,75 @@
   <footer>
     &copy; 2025 Learn Pig Latin. All rights reserved.
   </footer>
+
+  <script>
+    function translateToPigLatin(word) {
+      const vowels = ['a', 'e', 'i', 'o', 'u'];
+      const punct = word.match(/[.,!?;:]$/);
+      let cleanWord = punct ? word.slice(0, -1) : word;
+      let suffix = punct ? punct[0] : '';
+      const isCapitalized = cleanWord[0] === cleanWord[0].toUpperCase();
+      cleanWord = cleanWord.toLowerCase();
+
+      let translated = '';
+      if (vowels.includes(cleanWord[0])) {
+        translated = cleanWord + 'yay';
+      } else {
+        const match = cleanWord.match(/^[^aeiou]+/);
+        const cluster = match ? match[0] : '';
+        translated = cleanWord.slice(cluster.length) + cluster + 'ay';
+      }
+
+      if (isCapitalized) {
+        translated = translated.charAt(0).toUpperCase() + translated.slice(1);
+      }
+
+      return translated + suffix;
+    }
+
+    function translateToEnglish(word) {
+      const punct = word.match(/[.,!?;:]$/);
+      let cleanWord = punct ? word.slice(0, -1) : word;
+      let suffix = punct ? punct[0] : '';
+      let translated = cleanWord;
+
+      if (cleanWord.toLowerCase().endsWith("yay")) {
+        translated = cleanWord.slice(0, -3);
+      } else if (cleanWord.toLowerCase().endsWith("ay")) {
+        let core = cleanWord.slice(0, -2);
+        const match = core.match(/(.*?)([^aeiou]+)$/);
+        if (match) {
+          translated = match[2] + match[1];
+        } else {
+          translated = core;
+        }
+      }
+
+      return translated + suffix;
+    }
+
+    document.getElementById("input").addEventListener("input", function(e) {
+      const mode = document.getElementById("mode").value;
+      const words = e.target.value.trim().split(/\s+/);
+      const result = words.map(word =>
+        mode === "enToPig" ? translateToPigLatin(word) : translateToEnglish(word)
+      ).join(" ");
+      document.getElementById("output").innerText = result;
+    });
+
+    function clearFields() {
+      document.getElementById("input").value = "";
+      document.getElementById("output").innerText = "";
+    }
+
+    function copyOutput() {
+      const outputText = document.getElementById("output").innerText;
+      navigator.clipboard.writeText(outputText).then(() => {
+        alert("Translation copied to clipboard!");
+      }).catch(err => {
+        alert("Failed to copy text: " + err);
+      });
+    }
+  </script>
 </body>
 </html>
