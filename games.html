@@ -1,13 +1,14 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Games & Printables - Learn Pig Latin</title>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Games &amp; Printables
+  </title>
   <style>
-    :root {
+   :root {
       --primary: #a97ef9;
       --primary-dark: #9063f5;
       --secondary: #d682f4;
@@ -63,45 +64,31 @@
     h2 {
       text-align: center;
       color: var(--primary);
+      margin-bottom: 2rem;
     }
 
-    .grid {
+    .puzzle-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
-      margin-top: 2rem;
+      justify-items: center;
     }
 
     .puzzle-box {
       background: var(--card-bg);
       border: 2px solid var(--primary);
       border-radius: 0.75rem;
-      height: 700px;
       padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      text-align: center;
-      font-weight: bold;
-      color: var(--text-dark);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      height: 700px;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     .puzzle-box iframe {
       width: 100%;
       height: 100%;
       border: none;
-      border-radius: 0.5rem;
-    }
-
-    .placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      font-size: 1.2rem;
-      color: #999;
     }
 
     footer {
@@ -109,59 +96,51 @@
       color: white;
       text-align: center;
       padding: 1rem;
-      margin-top: 3rem;
+      margin-top: 2rem;
     }
   </style>
-</head>
-<body>
+ </head>
+ <body>
   <header>
-    <h1>Games & Printables</h1>
-    <p>Practice Pig Latin through fun, interactive challenges!</p>
+   <h1>
+    Games &amp; Printables
+   </h1>
+   <p>
+    Practice Pig Latin through fun, interactive challenges!
+   </p>
   </header>
-
   <nav>
-    <a href="index.html">Lessons & Translator</a>
-    <a href="games.html">Games & Printables</a>
-    <a href="piglatinia.html">Piglatinia</a>
-    <a href="products.html">Products</a>
+   <a href="index.html">
+    Lessons &amp; Translator
+   </a>
+   <a href="games.html">
+    Games &amp; Printables
+   </a>
+   <a href="piglatinia.html">
+    Piglatinia
+   </a>
+   <a href="products.html">
+    Products
+   </a>
   </nav>
-
   <main>
-    <h2>Word Search</h2>
-    <div class="grid">
-      <div class="puzzle-box">
-        <iframe src="animalsway-wordsearch.html" title="Animalsway Puzzle"></iframe>
-      </div>
-      <div class="puzzle-box">
-        <div class="placeholder">Olorscay & Apesshay<br/><small>(Coming soon)</small></div>
-      </div>
-      <div class="puzzle-box">
-        <div class="placeholder">Oodfay<br/><small>(Coming soon)</small></div>
-      </div>
-      <div class="puzzle-box">
-        <div class="placeholder">Erbsvay<br/><small>(Coming soon)</small></div>
-      </div>
+   <h2>
+    Word Search
+   </h2>
+   <div class="puzzle-grid">
+    <div class="puzzle-box" style="background: var(--card-bg); border: 2px solid var(--primary); border-radius: 0.75rem; padding: 1rem; width: 100%; height: 920px; box-sizing: border-box; overflow: hidden;">
+     <iframe scrolling="no" src="animalsway-wordsearch.html" style="width: 100%; height: 100%; border: none; overflow: hidden;" title="Animalsway Puzzle">
+     </iframe>
     </div>
-
-    <h2 style="margin-top: 3rem;">Crossword</h2>
-    <div class="grid">
-      <div class="puzzle-box">
-        <div class="placeholder">Animalsway<br/><small>(Coming soon)</small></div>
-      </div>
-      <div class="puzzle-box">
-        <div class="placeholder">Olorscay & Apesshay<br/><small>(Coming soon)</small></div>
-      </div>
-      <div class="puzzle-box">
-        <div class="placeholder">Oodfay<br/><small>(Coming soon)</small></div>
-      </div>
-      <div class="puzzle-box">
-        <div class="placeholder">Erbsvay<br/><small>(Coming soon)</small></div>
-      </div>
+    <div class="puzzle-box" style="background: var(--card-bg); border: 2px solid var(--primary); border-radius: 0.75rem; padding: 1rem; width: 100%; height: 920px; box-sizing: border-box; overflow: hidden;">
+     <p style="text-align:center; margin-top: 40%;">
+      Coming soon...
+     </p>
     </div>
+   </div>
   </main>
-
   <footer>
-    &copy; 2025 Learn Pig Latin. Oink yeah!
+   © 2025 Learn Pig Latin. All rights reserved.
   </footer>
-</body>
+ </body>
 </html>
