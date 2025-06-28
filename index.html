@@ -1,14 +1,13 @@
 
 <!DOCTYPE html>
-
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
    Learn Pig Latin
   </title>
-<style>
+  <style>
    :root {
       --primary: #a97ef9;
       --primary-dark: #9063f5;
@@ -170,53 +169,50 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
-</head>
-<body>
-<header>
-<h1>
+ </head>
+ <body>
+  <header>
+   <h1>
     Learn Pig Latin
    </h1>
-<p>
+   <p>
     Your quirky guide to mastering Pig Latin!
    </p>
-</header>
-<nav>
-<a href="lessons.html">
+  </header>
+  <nav>
+   <a href="lessons.html">
     Lessons &amp; Translator
    </a>
-<a href="games.html">
+   <a href="games.html">
     Games &amp; Printables
    </a>
-<a href="piglatinia.html">
+   <a href="piglatinia.html">
     Piglatinia
    </a>
-<a href="products.html">
+   <a href="products.html">
     Products
    </a>
-</nav>
-<main>
-<h2>
-    Pig Latin Translator
-   </h2>
-<section id="translator">
-<div id="translator-section">
-<div class="translator-description">
-<div class="card">
-<h3>
+  </nav>
+  <main>
+   <section id="translator">
+    <div id="translator-section">
+     <div class="translator-description">
+      <div class="card">
+       <h3>
         What is Pig Latin?
        </h3>
-<p>
+       <p>
         Pig Latin is a language that originates from
         <strong>
          Piglatinia
         </strong>
         . Pig Latin has spread to America and has become a playful secret code where English words are altered in fun ways. It was popular among kids for making conversations sound silly or private! While it's a popular rumor that Thomas Jefferson used Pig Latin in his letters, it's not definitively proven.
        </p>
-<h4>
+       <h4>
         How to Translate:
        </h4>
-<ul>
-<li>
+       <ul>
+        <li>
          If a word starts with a vowel (a, e, i, o, u), just add
          <strong>
           "yay"
@@ -231,7 +227,7 @@
          </em>
          . In Piglatinia, Piglatinians add either "way" or "yay" depending on whether they come from the East or West side of Piglatinia.
         </li>
-<li>
+        <li>
          If it starts with a consonant or consonant cluster, move it to the end and add
          <strong>
           "ay"
@@ -240,63 +236,66 @@
          <em>
           "hello" → "ellohay"
          </em>
-</li>
-<li>
+        </li>
+        <li>
          Punctuation and capitalization are preserved!
         </li>
-</ul>
-</div>
-</div>
-<div class="translator-card">
-<label for="mode">
+       </ul>
+      </div>
+     </div>
+     <div class="translator-card">
+      <h2 style="text-align: center; color: #a97ef9; margin-top: 0;">
+       Pig Latin Translator
+      </h2>
+      <label for="mode">
        Translation Mode:
       </label>
-<select id="mode">
-<option value="enToPig">
+      <select id="mode">
+       <option value="enToPig">
         English to Pig Latin
        </option>
-<option value="pigToEn">
+       <option value="pigToEn">
         Pig Latin to English
        </option>
-</select>
-<label for="input">
+      </select>
+      <label for="input">
        Enter text:
       </label>
-<input id="input" placeholder="Type your sentence here..." type="text"/>
-<label>
+      <input id="input" placeholder="Type your sentence here..." type="text"/>
+      <label>
        Translation:
       </label>
-<div class="output" id="output">
-</div>
-<div class="button-group">
-<button class="button" onclick="clearFields()">
+      <div class="output" id="output">
+      </div>
+      <div class="button-group">
+       <button class="button" onclick="clearFields()">
         Clear
        </button>
-<button class="button" onclick="copyOutput()">
+       <button class="button" onclick="copyOutput()">
         Copy
        </button>
-</div>
-</div>
-</div>
-</section>
-</main>
-<section id="lesson-videos" style="margin-top: 1rem;">
-<h2 style="text-align:center; margin-bottom: 0.5rem; color: #a97ef9;">
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section id="lesson-videos" style="margin-top: 1rem;">
+   <h2 style="text-align:center; margin-bottom: 0.5rem; color: #a97ef9;">
     Videos
    </h2>
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; max-width: 100%; margin-top: 1rem;">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="True" frameborder="0" height="315" src="https://www.youtube.com/embed/APrST3lK3NE" style="width: 100%; max-width: 350px; height: 200px; border: none;" width="100%">
-</iframe>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="True" frameborder="0" height="315" src="https://www.youtube.com/embed/kSCfnrs5v9g" style="width: 100%; max-width: 350px; height: 200px; border: none;" width="100%">
-</iframe>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="True" frameborder="0" height="315" src="https://www.youtube.com/embed/ntJ76JzKSdY" style="width: 100%; max-width: 350px; height: 200px; border: none;" width="100%">
-</iframe>
-</div>
-</section>
-<footer>
+   <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; max-width: 100%; margin-top: 1rem;">
+    <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="True" frameborder="0" height="315" src="https://www.youtube.com/embed/APrST3lK3NE" style="width: 100%; max-width: 350px; height: 200px; border: none;" width="100%">
+    </iframe>
+    <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="True" frameborder="0" height="315" src="https://www.youtube.com/embed/kSCfnrs5v9g" style="width: 100%; max-width: 350px; height: 200px; border: none;" width="100%">
+    </iframe>
+    <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="True" frameborder="0" height="315" src="https://www.youtube.com/embed/ntJ76JzKSdY" style="width: 100%; max-width: 350px; height: 200px; border: none;" width="100%">
+    </iframe>
+   </div>
+  </section>
+  <footer>
    © 2025 Learn Pig Latin. All rights reserved.
   </footer>
-<script>
+  <script>
    function translateToPigLatin(word) {
       const vowels = ['a', 'e', 'i', 'o', 'u'];
       const punct = word.match(/[.,!?;:]$/);
@@ -365,5 +364,5 @@
       });
     }
   </script>
-</body>
+ </body>
 </html>
