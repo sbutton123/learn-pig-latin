@@ -1,11 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pig Latin Translator</title>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Pig Latin Translator
+  </title>
   <style>
-    body {
+   body {
       font-family: sans-serif;
       margin: 0;
       padding: 0;
@@ -90,45 +93,60 @@
       margin-top: 3rem;
     }
   </style>
-</head>
-<body>
-  <header>
-    <h1>Pig Latin Translator</h1>
-    <p>Type your sentence, pick a mode, and watch the Pig Latin magic!</p>
-  </header>
-
- <nav>
-  <a href="lessons.html">Lessons & Translator</a>
-  <a href="games.html">Games & Printables</a>
-  <a href="piglatinia.html">Piglatinia</a>
-  <a href="products.html">Products</a>
-</nav>
-
+ </head>
+ <body>
+  <nav>
+   <a href="lessons.html">
+    Lessons &amp; Translator
+   </a>
+   <a href="games.html">
+    Games &amp; Printables
+   </a>
+   <a href="piglatinia.html">
+    Piglatinia
+   </a>
+   <a href="products.html">
+    Products
+   </a>
+  </nav>
   <div class="card">
-    <h2>Pig Latin Translator</h2>
-    <label for="mode">Translation Mode:</label>
-    <select id="mode">
-      <option value="enToPig">English to Pig Latin</option>
-      <option value="pigToEn">Pig Latin to English</option>
-    </select>
-
-    <label for="input">Enter text:</label>
-    <input type="text" id="input" placeholder="Type your sentence here..." />
-    <label>Translation:</label>
-    <div class="output" id="output"></div>
-
-    <div class="button-group">
-      <button class="button" onclick="clearFields()">Clear</button>
-      <button class="button" onclick="copyOutput()">Copy</button>
-    </div>
+   <h2 style="text-align: center; color: #a97ef9;">
+    Pig Latin Translator
+   </h2>
+   <label for="mode">
+    Translation Mode:
+   </label>
+   <select id="mode">
+    <option value="enToPig">
+     English to Pig Latin
+    </option>
+    <option value="pigToEn">
+     Pig Latin to English
+    </option>
+   </select>
+   <label for="input">
+    Enter text:
+   </label>
+   <input id="input" placeholder="Type your sentence here..." type="text"/>
+   <label>
+    Translation:
+   </label>
+   <div class="output" id="output">
+   </div>
+   <div class="button-group">
+    <button class="button" onclick="clearFields()">
+     Clear
+    </button>
+    <button class="button" onclick="copyOutput()">
+     Copy
+    </button>
+   </div>
   </div>
-
   <footer>
-    &copy; 2025 Learn Pig Latin. Oink yeah!
+   © 2025 Learn Pig Latin. Oink yeah!
   </footer>
-
   <script>
-    function translateToPigLatin(word) {
+   function translateToPigLatin(word) {
       const vowels = ['a', 'e', 'i', 'o', 'u'];
       const punct = word.match(/[.,!?;:]$/);
       let cleanWord = punct ? word.slice(0, -1) : word;
@@ -197,5 +215,5 @@
       });
     }
   </script>
-</body>
+ </body>
 </html>
