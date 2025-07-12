@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Animalsway Word Search</title>
   <style>
@@ -10,15 +10,19 @@
       background: #ede4ff;
       color: #2c174e;
       text-align: center;
+      margin: 0;
       padding: 1rem;
     }
+
     h1 {
       color: #a97ef9;
     }
+
     #puzzle-wrapper {
-      max-width: 800px;
+      max-width: 680px;
       margin: auto;
     }
+
     #wordsearch {
       display: grid;
       grid-template-columns: repeat(15, 2rem);
@@ -26,8 +30,8 @@
       justify-content: center;
       margin: 2rem auto;
       user-select: none;
-      overflow-x: auto;
     }
+
     .cell {
       width: 2rem;
       height: 2rem;
@@ -39,51 +43,57 @@
       background: #f7f4ff;
       cursor: pointer;
     }
+
     .cell.selected {
       background: #a97ef9;
       color: white;
     }
+
     .cell.found {
       background: #78aaff;
       color: white;
     }
+
     #wordlist {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 0.5rem;
-      max-width: 600px;
-      margin: 1rem auto 2rem;
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
+      max-width: 680px;
+      margin: 1.5rem auto;
     }
+
     .word {
-  padding: 0.5rem 1rem;
-  background: #f7f4ff;
-  border-radius: 1.2rem;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  white-space: nowrap;
-  text-align: center;
-  font-weight: bold;
-  min-width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-}
+      background: #f7f4ff;
+      border-radius: 1rem;
+      border: 1px solid #ccc;
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+      font-weight: bold;
+      margin: 0.3rem;
+      min-width: 110px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
     .word.found {
       background: #a97ef9;
       color: white;
       text-decoration: line-through;
     }
+
     .buttons {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
     }
-    .btn {
-      background: #c568ff;
+
+    button {
+      background: #a97ef9;
       color: white;
       padding: 0.6rem 1.5rem;
       border: none;
@@ -92,12 +102,6 @@
       font-weight: bold;
       cursor: pointer;
       min-width: 140px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .btn:hover {
-      background: #a64dce;
     }
 
     @media print {
@@ -110,15 +114,13 @@
         color: black !important;
         border: 1px solid black;
       }
-      .cell.found,
-      .cell.selected {
+      .cell.found, .cell.selected {
         background: white !important;
         color: black !important;
       }
-      .word {
+      .word.found {
         color: black !important;
         background: white !important;
-        border: 1px solid black;
         text-decoration: none !important;
       }
       .buttons {
@@ -133,8 +135,8 @@
     <div id="wordsearch"></div>
     <div id="wordlist"></div>
     <div class="buttons">
-      <button class="btn" onclick="window.print()">🖨️ Print</button>
-      <button class="btn" onclick="location.href='games.html'">⬅️ Return to Games</button>
+      <button onclick="window.print()">🖨️ Print</button>
+      <button onclick="window.location.href='/games'">⬅️ Return to Games</button>
     </div>
   </div>
 
@@ -143,9 +145,12 @@
       "EBRAZAY", "ONKEYMAY", "IRDBAY", "ISHFAY", "ATCAY", "OGDAY", "IGPAY",
       "ABBITRAY", "UCKDAY", "ORSEHAY", "IRAFFEGAY", "ELEPHANTWAY", "IONLAY", "OOSTERRAY"
     ];
+
     const gridSize = 15;
     const grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
-    const directions = [[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0],[-1,-1],[1,-1]];
+    const directions = [
+      [0,1], [1,0], [1,1], [-1,1], [0,-1], [-1,0], [-1,-1], [1,-1]
+    ];
     const placedWords = [];
 
     function canPlace(word, row, col, dir) {
@@ -216,7 +221,7 @@
     }
 
     words.forEach(word => {
-      const span = document.createElement('span');
+      const span = document.createElement('div');
       span.textContent = word;
       span.className = 'word';
       span.dataset.word = word;
