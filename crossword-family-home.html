@@ -2,151 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Family & Home Crossword</title>
   <style>
     body {
-      background-color: #f0e4ff;
-      font-family: sans-serif;
+      background: #f3e6ff;
+      font-family: Arial, sans-serif;
       text-align: center;
-      color: #6a39b1;
-      padding: 1rem;
+      padding: 20px;
+      color: #5c2e91;
     }
+
     h1 {
-      margin-bottom: 0.5rem;
+      color: #7b3fc4;
     }
+
     .instructions {
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+      margin-bottom: 20px;
+      font-size: 14px;
     }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(10, 2rem);
-      grid-template-rows: repeat(10, 2rem);
-      gap: 2px;
+      grid-template-columns: repeat(15, 30px);
+      grid-template-rows: repeat(15, 30px);
       justify-content: center;
-      margin: 0 auto 2rem;
+      margin: 0 auto 30px;
     }
+
     .cell {
-      width: 2rem;
-      height: 2rem;
-      border: 1px solid #999;
-      background: white;
-      font-weight: bold;
-      font-size: 1rem;
+      width: 30px;
+      height: 30px;
       text-transform: uppercase;
+      font-weight: bold;
+      font-size: 18px;
       text-align: center;
-      line-height: 2rem;
-      cursor: pointer;
+      line-height: 30px;
     }
-    .cell.hidden {
-      border: none;
-      background: transparent;
-      cursor: default;
+
+    .letter {
+      border: 1px solid #ccc;
     }
-    .cell.revealed {
-      background-color: #a97ef9;
-      color: white;
+
+    .hidden {
+      color: transparent;
     }
+
     .clues {
       display: flex;
       justify-content: center;
-      gap: 4rem;
-      margin-bottom: 2rem;
+      gap: 60px;
+      margin-bottom: 20px;
       text-align: left;
     }
+
     .clues h3 {
-      margin-bottom: 0.5rem;
+      margin-bottom: 5px;
     }
-    .clues ul {
-      padding-left: 1rem;
-    }
+
     .clues li {
-      margin-bottom: 0.3rem;
+      margin-bottom: 6px;
       cursor: pointer;
-      color: #865cd6;
     }
+
     .clues li:hover {
       text-decoration: underline;
     }
-    #returnBtn {
-      background-color: hotpink;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
+
+    .button {
+      background-color: #f765a3;
       color: white;
-      font-size: 1rem;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
       cursor: pointer;
-    }
-    @media print {
-      #returnBtn, .instructions { display: none; }
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <h1>Family & Home Crossword</h1>
-  <p class="instructions">Stuck? Tap on a clue to reveal or hide the Pig Latin answer in the puzzle.</p>
-  <div class="grid" id="crossword"></div>
+  <div class="instructions">Stuck? Tap on a clue to reveal or hide the Pig Latin answer in the puzzle.</div>
+
+  <div class="grid" id="puzzle-grid"></div>
 
   <div class="clues">
     <div>
       <h3>Across</h3>
       <ul>
-        <li data-answer="OMMAY" data-cells="2-3,2-4,2-5,2-6,2-7">1. Female parent.</li>
-        <li data-answer="UNCLEWAY" data-cells="4-1,4-2,4-3,4-4,4-5,4-6,4-7,4-8">2. Your father's brother.</li>
-        <li data-answer="OMEHAY" data-cells="6-2,6-3,6-4,6-5,6-6,6-7">3. Where you live.</li>
-        <li data-answer="ADDAY" data-cells="8-3,8-4,8-5,8-6,8-7">4. A male parent.</li>
-        <li data-answer="EDBAY" data-cells="10-4,10-5,10-6,10-7,10-8">5. What you sleep on.</li>
+        <li onclick="toggleAnswer('a1')">1. Female parent.</li>
+        <li onclick="toggleAnswer('a3')">3. Where you live.</li>
+        <li onclick="toggleAnswer('a4')">4. A male parent.</li>
+        <li onclick="toggleAnswer('a6')">6. What you sleep on.</li>
       </ul>
     </div>
     <div>
       <h3>Down</h3>
       <ul>
-        <li data-answer="OTHERBRAY" data-cells="0-0,1-0,2-0,3-0,4-0,5-0,6-0,7-0,8-0">1. Male sibling.</li>
-        <li data-answer="ISTERSAY" data-cells="0-9,1-9,2-9,3-9,4-9,5-9,6-9,7-9">2. A female sibling.</li>
-        <li data-answer="ANDPARENTSGRAY" data-cells="0-5,1-5,2-5,3-5,4-5,5-5,6-5,7-5,8-5,9-5,10-5,11-5,12-5,13-5">3. Your mother or father's parents.</li>
-        <li data-answer="IFEWAY" data-cells="0-7,1-7,2-7,3-7,4-7,5-7">4. The woman a man marries.</li>
-        <li data-answer="ITCHENKAY" data-cells="0-2,1-2,2-2,3-2,4-2,5-2,6-2,7-2,8-2">5. Where you cook food.</li>
+        <li onclick="toggleAnswer('d1')">1. Male sibling.</li>
+        <li onclick="toggleAnswer('d2')">2. A female sibling.</li>
+        <li onclick="toggleAnswer('d3')">3. Your mother or father's parents.</li>
+        <li onclick="toggleAnswer('d5')">5. The woman a man marries.</li>
+        <li onclick="toggleAnswer('d7')">7. Where you cook food.</li>
       </ul>
     </div>
   </div>
-  <button id="returnBtn" onclick="location.href='games.html'">Return to Games</button>
+
+  <a class="button" href="games.html">Return to Games</a>
 
   <script>
-    const grid = document.getElementById("crossword");
-    const numRows = 14;
-    const numCols = 10;
-    const cells = {};
+    const grid = Array(15).fill(null).map(() => Array(15).fill(""));
 
-    for (let r = 0; r < numRows; r++) {
-      for (let c = 0; c < numCols; c++) {
-        const div = document.createElement("div");
-        div.classList.add("cell", "hidden");
-        div.id = `${r}-${c}`;
-        grid.appendChild(div);
-        cells[`${r}-${c}`] = div;
+    const answers = {
+      a1: { word: "OMMAY", row: 2, col: 2, dir: "across" },
+      a3: { word: "OMEHAY", row: 6, col: 4, dir: "across" },
+      a4: { word: "ADDAY", row: 8, col: 5, dir: "across" },
+      a6: { word: "EDBAY", row: 10, col: 3, dir: "across" },
+      d1: { word: "OTHERBRAY", row: 1, col: 6, dir: "down" },
+      d2: { word: "ISTERSAY", row: 1, col: 10, dir: "down" },
+      d3: { word: "ANDPARENTSGRAY", row: 1, col: 12, dir: "down" },
+      d5: { word: "IFEWAY", row: 3, col: 8, dir: "down" },
+      d7: { word: "ITCHENKAY", row: 3, col: 1, dir: "down" },
+    };
+
+    const cellMap = {};
+
+    for (const [key, { word, row, col, dir }] of Object.entries(answers)) {
+      for (let i = 0; i < word.length; i++) {
+        const r = dir === "across" ? row : row + i;
+        const c = dir === "across" ? col + i : col;
+        if (!cellMap[`${r},${c}`]) {
+          cellMap[`${r},${c}`] = { letter: word[i], classes: [`${key}`] };
+        } else {
+          cellMap[`${r},${c}`].letter = word[i];
+          cellMap[`${r},${c}`].classes.push(`${key}`);
+        }
       }
     }
 
-    document.querySelectorAll("li[data-answer]").forEach(clue => {
-      clue.addEventListener("click", () => {
-        const cellIds = clue.dataset.cells.split(',');
-        const letters = clue.dataset.answer.split('');
-        const isRevealed = clue.classList.toggle("active");
+    const gridDiv = document.getElementById("puzzle-grid");
 
-        cellIds.forEach((id, idx) => {
-          const cell = cells[id];
-          if (!cell) return;
-          cell.classList.remove("hidden");
-          cell.textContent = isRevealed ? letters[idx] : '';
-          if (isRevealed) {
-            cell.classList.add("revealed");
-          } else {
-            cell.classList.remove("revealed");
-          }
-        });
+    for (let r = 0; r < 15; r++) {
+      for (let c = 0; c < 15; c++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        const info = cellMap[`${r},${c}`];
+        if (info) {
+          cell.classList.add("letter", ...info.classes, "hidden");
+          cell.textContent = info.letter;
+        }
+        gridDiv.appendChild(cell);
+      }
+    }
+
+    function toggleAnswer(className) {
+      document.querySelectorAll(`.${className}`).forEach(el => {
+        el.classList.toggle("hidden");
       });
-    });
+    }
   </script>
 </body>
 </html>
