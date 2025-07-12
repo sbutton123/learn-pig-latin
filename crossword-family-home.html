@@ -2,190 +2,132 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Family & Home Crossword</title>
   <style>
     body {
-      background-color: #f2ddfc;
+      background-color: #f0d8ff;
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
       text-align: center;
-      color: #5a189a;
+      padding: 20px;
     }
+
     h1 {
-      font-size: 28px;
+      color: #6a1b9a;
     }
+
     .instructions {
-      font-size: 14px;
+      font-size: 0.9rem;
       margin-bottom: 20px;
     }
+
     .crossword {
-      display: inline-grid;
-      grid-template-columns: repeat(10, 40px);
-      grid-gap: 2px;
+      display: grid;
+      grid-template-columns: repeat(11, 30px);
+      justify-content: center;
       margin: 0 auto 30px;
+      gap: 1px;
     }
+
     .cell {
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
-      text-transform: uppercase;
-      text-align: center;
-    }
-    .blank {
-      background: none;
-      border: none;
-    }
-    .filled {
-      background: white;
+      width: 30px;
+      height: 30px;
       border: 1px solid #aaa;
+      background-color: white;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 1rem;
     }
+
+    .blank {
+      border: none;
+      background-color: transparent;
+    }
+
+    input.cell {
+      text-transform: uppercase;
+    }
+
     .clues {
       display: flex;
       justify-content: center;
-      gap: 80px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 20px;
     }
-    .clues div {
+
+    .clues ul {
       text-align: left;
+      list-style: none;
+      padding: 0;
     }
-    button {
+
+    .clues li {
+      margin-bottom: 6px;
+    }
+
+    .btn {
+      margin-top: 30px;
       background-color: #f06292;
-      color: white;
       border: none;
       padding: 10px 20px;
+      color: white;
       font-weight: bold;
-      border-radius: 6px;
+      border-radius: 5px;
       cursor: pointer;
     }
+
     @media print {
-      button, .instructions {
+      .btn, .instructions {
         display: none;
-      }
-      .filled {
-        color: black;
-        border: 1px solid #000;
       }
     }
   </style>
 </head>
 <body>
-
   <h1>Family & Home Crossword</h1>
   <p class="instructions">Stuck? Click a clue to toggle the Pig Latin answer in the puzzle.</p>
-
-  <div class="crossword" id="puzzle">
-    <!-- 10x10 grid with inputs only where letters go -->
+  <div class="crossword">
+    <!-- 11x11 grid (with some blanks) for 7 words -->
     <!-- Row 1 -->
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="1-4" maxlength="1"/>
-    <input class="cell filled" id="1-5" maxlength="1"/>
-    <input class="cell filled" id="1-6" maxlength="1"/>
-    <input class="cell filled" id="1-7" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-
+    <div class="blank"></div><div class="blank"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
     <!-- Row 2 -->
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="2-4" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-
+    <div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
     <!-- Row 3 -->
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="3-3" maxlength="1"/>
-    <input class="cell filled" id="3-4" maxlength="1"/>
-    <input class="cell filled" id="3-5" maxlength="1"/>
-    <input class="cell filled" id="3-6" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
     <!-- Row 4 -->
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="4-2" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="4-4" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="4-6" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-
+    <div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
     <!-- Row 5 -->
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="5-2" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="5-4" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="5-6" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-
+    <div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
     <!-- Row 6 -->
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="6-2" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="6-4" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell filled" id="6-6" maxlength="1"/>
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
-    <input class="cell blank" disabled />
+    <div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <!-- Row 7 -->
+    <div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
+    <!-- Row 8 -->
+    <div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
+    <!-- Row 9 -->
+    <div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
+    <!-- Row 10 -->
+    <div class="blank"></div><div class="blank"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="blank"></div><div class="cell"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
+    <!-- Row 11 -->
+    <div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
   </div>
 
   <div class="clues">
-    <div>
-      <h3>Across</h3>
-      <p><a href="#" onclick="fillWord(['1-4','1-5','1-6','1-7'],'omday')">1. Female parent.</a></p>
-      <p><a href="#" onclick="fillWord(['3-3','3-4','3-5','3-6'],'edbay')">3. What you sleep on.</a></p>
-    </div>
-    <div>
-      <h3>Down</h3>
-      <p><a href="#" onclick="fillWord(['1-4','2-4','3-4','4-4','5-4','6-4'],'rotherbay')">1. Male sibling.</a></p>
-      <p><a href="#" onclick="fillWord(['4-2','5-2','6-2'],'addytay')">2. A male parent.</a></p>
-      <p><a href="#" onclick="fillWord(['4-6','5-6','6-6'],'itchenkay')">3. Where you cook food.</a></p>
-    </div>
+    <ul><strong>Across</strong>
+      <li>1. Female parent</li>
+      <li>3. Where you live</li>
+      <li>4. A male parent</li>
+      <li>6. What you sleep on</li>
+    </ul>
+    <ul><strong>Down</strong>
+      <li>1. Male sibling</li>
+      <li>2. A female sibling</li>
+      <li>3. Your mother or father's parents</li>
+      <li>5. The woman a man marries</li>
+    </ul>
   </div>
 
-  <button onclick="window.location.href='games.html'">Return to Games</button>
+  <button class="btn" onclick="window.location.href='games.html'">Return to Games</button>
 
-  <script>
-    const filled = {};
-
-    function fillWord(cells, word) {
-      if (filled[cells[0]]) {
-        cells.forEach(id => {
-          document.getElementById(id).value = '';
-          filled[id] = false;
-        });
-      } else {
-        for (let i = 0; i < cells.length; i++) {
-          const input = document.getElementById(cells[i]);
-          if (input) {
-            input.value = word[i] || '';
-            filled[cells[i]] = true;
-          }
-        }
-      }
-    }
-  </script>
 </body>
 </html>
