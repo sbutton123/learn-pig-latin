@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Animalsway Word Search</title>
   <style>
     body {
@@ -47,13 +47,13 @@
       background: #78aaff;
       color: white;
     }
-    .wordlist {
-      margin: 2rem auto 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+    #wordlist {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       gap: 0.5rem;
-      max-width: 700px;
+      max-width: 600px;
+      margin: 1rem auto 2rem;
+      justify-content: center;
     }
     .word {
       padding: 0.4rem 0.8rem;
@@ -61,6 +61,7 @@
       border-radius: 1rem;
       border: 1px solid #ccc;
       cursor: pointer;
+      white-space: nowrap;
     }
     .word.found {
       background: #a97ef9;
@@ -69,9 +70,10 @@
     }
     .buttons {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
-      margin-top: 1.5rem;
+      gap: 1rem;
+      margin-top: 1rem;
     }
     .btn {
       background: #c568ff;
@@ -106,12 +108,10 @@
         background: white !important;
         color: black !important;
       }
-      .wordlist, .word {
+      .word {
         color: black !important;
         background: white !important;
         border: 1px solid black;
-        padding: 0.2rem 0.6rem;
-        font-weight: bold;
         text-decoration: none !important;
       }
       .buttons {
@@ -124,11 +124,7 @@
   <div id="puzzle-wrapper">
     <h1>Animalsway</h1>
     <div id="wordsearch"></div>
-
-    <div class="wordlist">
-      <div id="wordlist"></div>
-    </div>
-
+    <div id="wordlist"></div>
     <div class="buttons">
       <button class="btn" onclick="window.print()">🖨️ Print</button>
       <button class="btn" onclick="location.href='games.html'">⬅️ Return to Games</button>
