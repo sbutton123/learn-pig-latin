@@ -129,27 +129,40 @@
   </nav>
 
   <main>
-    <h2>Word Search</h2>
-    <div class="grid">
-      <div class="puzzle-box">
-        <iframe src="animalsway-wordsearch.html" title="Animalsway Word Search"></iframe>
-      </div>
-      <div class="puzzle-box">
-       <iframe src="colorsshapes-wordsearch.html" title="Olorscay & Apesshay Word Search"></iframe>
-      </div>
-    
-      <div class="puzzle-box">
-        <iframe src="oodfay-wordsearch.html" title="Oodfay Word Search"></iframe>
-      </div>
-    
-      <div class="puzzle-box">
-        <iframe src="erbsvay-wordsearch.html" title="Erbsvay Word Search"></iframe>
-      </div>
-    </div>
-  </main>
+  <h2>Word Search</h2>
+  <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; padding: 1rem;">
 
-  <footer>
-    &copy; 2025 Learn Pig Latin. All rights reserved.
-  </footer>
-</body>
-</html>
+    <!-- Puzzle 1: Animalsway -->
+    <a href="animalsway-wordsearch.html" style="text-decoration: none; color: inherit;">
+      <div class="game-thumb" style="background: var(--card-bg); border: 2px solid var(--primary); border-radius: 1rem; overflow: hidden; box-shadow: 2px 2px 6px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer;">
+        <img src="thumbnails/animalsway-thumb.jpg" alt="Animal Word Search" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 0.75rem; font-weight: bold; text-align: center;">Animal Word Search</div>
+      </div>
+    </a>
+
+    <!-- Puzzle 2: Colors & Shapes -->
+    <a href="colorsshapes-wordsearch.html" style="text-decoration: none; color: inherit;">
+      <div class="game-thumb" style="background: var(--card-bg); border: 2px solid var(--primary); border-radius: 1rem; overflow: hidden; box-shadow: 2px 2px 6px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer;">
+        <img src="thumbnails/colorsshapes-thumb.jpg" alt="Colors & Shapes Word Search" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 0.75rem; font-weight: bold; text-align: center;">Colors & Shapes</div>
+      </div>
+    </a>
+
+    <!-- Puzzle 3: Food -->
+    <a href="oodfay-wordsearch.html" style="text-decoration: none; color: inherit;">
+      <div class="game-thumb" style="background: var(--card-bg); border: 2px solid var(--primary); border-radius: 1rem; overflow: hidden; box-shadow: 2px 2px 6px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer;">
+        <img src="thumbnails/oodfay-thumb.jpg" alt="Food Word Search" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 0.75rem; font-weight: bold; text-align: center;">Food Word Search</div>
+      </div>
+    </a>
+
+    <!-- Puzzle 4: Verbs -->
+    <a href="erbsvay-wordsearch.html" style="text-decoration: none; color: inherit;">
+      <div class="game-thumb" style="background: var(--card-bg); border: 2px solid var(--primary); border-radius: 1rem; overflow: hidden; box-shadow: 2px 2px 6px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer;">
+        <img src="thumbnails/erbsvay-thumb.jpg" alt="Verbs Word Search" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 0.75rem; font-weight: bold; text-align: center;">Verb Word Search</div>
+      </div>
+    </a>
+
+  </div>
+</main>
