@@ -1,27 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-8ZL77F3HRT');
-</script>
-
-  <head>
+<head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Oodfay Word Search</title>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-8ZL77F3HRT');
-  </script>
+  <title>Oodfay</title>
   <style>
     body {
       font-family: sans-serif;
@@ -64,39 +46,60 @@
       background: #78aaff;
       color: white;
     }
-    #wordlist {
-      max-width: 600px;
-      margin: 2rem auto;
+    .word-bank {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 0.5rem;
+      margin-bottom: 2rem;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .word {
-      padding: 0.3rem 0.8rem;
+      padding: 0.4rem 0.9rem;
       background: #f7f4ff;
       border-radius: 1rem;
       border: 1px solid #ccc;
       cursor: pointer;
+      font-size: 0.95rem;
+      white-space: nowrap;
     }
     .word.found {
       background: #a97ef9;
       color: white;
       text-decoration: line-through;
     }
-    button#printBtn {
-      margin-top: 1rem;
-      background: #ff69b4;
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    button {
+      background: #cc66dd;
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.4rem;
       border: none;
-      border-radius: 0.5rem;
+      border-radius: 0.7rem;
       font-size: 1rem;
       cursor: pointer;
     }
     @media print {
-      #printBtn { display: none; }
-      .cell, .word { background: white !important; color: black !important; }
+      body {
+        background: white;
+        color: black;
+      }
+      .cell, .word {
+        background: white !important;
+        color: black !important;
+        border: 1px solid black;
+      }
+      .word.found {
+        text-decoration: none !important;
+      }
+      .controls button {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -104,8 +107,11 @@
   <div id="puzzle-wrapper">
     <h1>Oodfay</h1>
     <div id="wordsearch"></div>
-    <div id="wordlist"></div>
-    <button id="printBtn">Print</button>
+    <div class="word-bank" id="wordlist"></div>
+    <div class="controls">
+      <button onclick="window.print()">Print</button>
+      <button onclick="window.location.href='/games.html'">Return to Games</button>
+    </div>
   </div>
   <script>
     const words = ['IZZAPAY', 'ACOTAY', 'EGGWAY', 'ARROTCAY', 'ALADSAY', 'OCOLATECHAY', 'EATMAY', 'ILKMAY', 'ANDYCAY', 'ODASAY', 'OCCOLIBRAY', 'AKECAY', 'OOKIECAY', 'EESECHAY'];
@@ -142,6 +148,7 @@
           return;
         }
       }
+      console.warn("Could not place word:", word);
     }
 
     words.forEach(w => placeWord(w));
@@ -205,7 +212,6 @@
     function checkSelection() {
       const selectedWord = selectedCells.map(c => c.textContent).join('');
       const reversed = selectedWord.split('').reverse().join('');
-
       const match = words.find(w => w === selectedWord || w === reversed);
       if (match) {
         const entry = placedWords.find(w => w.word === match);
@@ -219,11 +225,6 @@
         selectedCells.length = 0;
       }
     }
-
-    document.getElementById('printBtn').addEventListener('click', function (e) {
-      e.preventDefault();
-      window.print();
-    });
   </script>
 </body>
 </html>
