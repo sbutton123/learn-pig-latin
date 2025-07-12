@@ -33,19 +33,22 @@
     .cell {
       width: 30px;
       height: 30px;
-      text-transform: uppercase;
       font-weight: bold;
       font-size: 18px;
       text-align: center;
       line-height: 30px;
     }
 
-    .letter {
-      border: 1px solid #ccc;
+    .answer-box {
+      border: 1px solid #999;
     }
 
-    .hidden {
+    .letter.hidden {
       color: transparent;
+    }
+
+    .letter.visible {
+      color: #5c2e91;
     }
 
     .clues {
@@ -112,7 +115,8 @@
   <a class="button" href="games.html">Return to Games</a>
 
   <script>
-    const grid = Array(15).fill(null).map(() => Array(15).fill(""));
+    const gridSize = 15;
+    const grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(null));
 
     const answers = {
       a1: { word: "OMMAY", row: 2, col: 2, dir: "across" },
@@ -133,25 +137,27 @@
         const r = dir === "across" ? row : row + i;
         const c = dir === "across" ? col + i : col;
         if (!cellMap[`${r},${c}`]) {
-          cellMap[`${r},${c}`] = { letter: word[i], classes: [`${key}`] };
+          cellMap[`${r},${c}`] = { letter: word[i], classes: [key] };
         } else {
-          cellMap[`${r},${c}`].letter = word[i];
-          cellMap[`${r},${c}`].classes.push(`${key}`);
+          cellMap[`${r},${c}`].classes.push(key);
         }
       }
     }
 
     const gridDiv = document.getElementById("puzzle-grid");
 
-    for (let r = 0; r < 15; r++) {
-      for (let c = 0; c < 15; c++) {
+    for (let r = 0; r < gridSize; r++) {
+      for (let c = 0; c < gridSize; c++) {
         const cell = document.createElement("div");
+        const id = `${r},${c}`;
+        const info = cellMap[id];
         cell.className = "cell";
-        const info = cellMap[`${r},${c}`];
+
         if (info) {
-          cell.classList.add("letter", ...info.classes, "hidden");
+          cell.classList.add("answer-box", "letter", "hidden", ...info.classes);
           cell.textContent = info.letter;
         }
+
         gridDiv.appendChild(cell);
       }
     }
@@ -159,6 +165,7 @@
     function toggleAnswer(className) {
       document.querySelectorAll(`.${className}`).forEach(el => {
         el.classList.toggle("hidden");
+        el.classList.toggle("visible");
       });
     }
   </script>
