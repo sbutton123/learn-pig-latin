@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family & Home Crossword</title>
+  <style>
+    body {
+      background-color: #f0e4ff;
+      font-family: sans-serif;
+      text-align: center;
+      color: #6a39b1;
+      padding: 1rem;
+    }
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+    .instructions {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(10, 2rem);
+      grid-template-rows: repeat(10, 2rem);
+      gap: 2px;
+      justify-content: center;
+      margin: 0 auto 2rem;
+    }
+    .cell {
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid #999;
+      background: white;
+      font-weight: bold;
+      font-size: 1rem;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 2rem;
+      cursor: pointer;
+    }
+    .cell.hidden {
+      border: none;
+      background: transparent;
+      cursor: default;
+    }
+    .cell.revealed {
+      background-color: #a97ef9;
+      color: white;
+    }
+    .clues {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .clues h3 {
+      margin-bottom: 0.5rem;
+    }
+    .clues ul {
+      padding-left: 1rem;
+    }
+    .clues li {
+      margin-bottom: 0.3rem;
+      cursor: pointer;
+      color: #865cd6;
+    }
+    .clues li:hover {
+      text-decoration: underline;
+    }
+    #returnBtn {
+      background-color: hotpink;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    @media print {
+      #returnBtn, .instructions { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Family & Home Crossword</h1>
+  <p class="instructions">Stuck? Tap on a clue to reveal or hide the Pig Latin answer in the puzzle.</p>
+  <div class="grid" id="crossword"></div>
+
+  <div class="clues">
+    <div>
+      <h3>Across</h3>
+      <ul>
+        <li data-answer="OMMAY" data-cells="2-3,2-4,2-5,2-6,2-7">1. Female parent.</li>
+        <li data-answer="UNCLEWAY" data-cells="4-1,4-2,4-3,4-4,4-5,4-6,4-7,4-8">2. Your father's brother.</li>
+        <li data-answer="OMEHAY" data-cells="6-2,6-3,6-4,6-5,6-6,6-7">3. Where you live.</li>
+        <li data-answer="ADDAY" data-cells="8-3,8-4,8-5,8-6,8-7">4. A male parent.</li>
+        <li data-answer="EDBAY" data-cells="10-4,10-5,10-6,10-7,10-8">5. What you sleep on.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Down</h3>
+      <ul>
+        <li data-answer="OTHERBRAY" data-cells="0-0,1-0,2-0,3-0,4-0,5-0,6-0,7-0,8-0">1. Male sibling.</li>
+        <li data-answer="ISTERSAY" data-cells="0-9,1-9,2-9,3-9,4-9,5-9,6-9,7-9">2. A female sibling.</li>
+        <li data-answer="ANDPARENTSGRAY" data-cells="0-5,1-5,2-5,3-5,4-5,5-5,6-5,7-5,8-5,9-5,10-5,11-5,12-5,13-5">3. Your mother or father's parents.</li>
+        <li data-answer="IFEWAY" data-cells="0-7,1-7,2-7,3-7,4-7,5-7">4. The woman a man marries.</li>
+        <li data-answer="ITCHENKAY" data-cells="0-2,1-2,2-2,3-2,4-2,5-2,6-2,7-2,8-2">5. Where you cook food.</li>
+      </ul>
+    </div>
+  </div>
+  <button id="returnBtn" onclick="location.href='games.html'">Return to Games</button>
+
+  <script>
+    const grid = document.getElementById("crossword");
+    const numRows = 14;
+    const numCols = 10;
+    const cells = {};
+
+    for (let r = 0; r < numRows; r++) {
+      for (let c = 0; c < numCols; c++) {
+        const div = document.createElement("div");
+        div.classList.add("cell", "hidden");
+        div.id = `${r}-${c}`;
+        grid.appendChild(div);
+        cells[`${r}-${c}`] = div;
+      }
+    }
+
+    document.querySelectorAll("li[data-answer]").forEach(clue => {
+      clue.addEventListener("click", () => {
+        const cellIds = clue.dataset.cells.split(',');
+        const letters = clue.dataset.answer.split('');
+        const isRevealed = clue.classList.toggle("active");
+
+        cellIds.forEach((id, idx) => {
+          const cell = cells[id];
+          if (!cell) return;
+          cell.classList.remove("hidden");
+          cell.textContent = isRevealed ? letters[idx] : '';
+          if (isRevealed) {
+            cell.classList.add("revealed");
+          } else {
+            cell.classList.remove("revealed");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
