@@ -1,170 +1,123 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-8ZL77F3HRT');
-</script>
-
-  <head>
+<head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Games & Printables</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Games & Printables - Learn Pig Latin</title>
   <style>
-    :root {
-      --primary: #a97ef9;
-      --primary-dark: #9063f5;
-      --secondary: #d682f4;
-      --accent: #78aaff;
-      --background: #ede4ff;
-      --text-dark: #2c174e;
-      --card-bg: #f7f4ff;
-    }
-
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
+      background-color: #f3e8ff;
       margin: 0;
       padding: 0;
-      background: var(--background);
-      color: var(--text-dark);
+      color: #4a148c;
     }
 
-    header {
-      background: linear-gradient(to right, var(--primary), var(--accent));
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-    }
-
-    nav {
+    .navbar {
+      background: linear-gradient(to right, #ba68c8, #9575cd);
+      padding: 15px;
       display: flex;
       justify-content: center;
-      background: var(--secondary);
-      padding: 1rem;
-      gap: 2rem;
-      flex-wrap: wrap;
+      gap: 40px;
     }
 
-    nav a {
-      text-decoration: none;
+    .navbar a {
       color: white;
+      text-decoration: none;
       font-weight: bold;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      transition: background 0.3s;
     }
 
-    nav a:hover {
-      background: var(--primary-dark);
-    }
-
-    main {
-      padding: 2rem;
-      max-width: 1400px;
-      margin: auto;
+    h1 {
+      text-align: center;
+      background: linear-gradient(to right, #9575cd, #ba68c8);
+      color: white;
+      margin: 0;
+      padding: 20px 0;
     }
 
     h2 {
       text-align: center;
-      color: var(--primary);
-      margin-bottom: 1.5rem;
+      margin-top: 30px;
+      color: #8e24aa;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
     }
 
-    .puzzle-box {
-      background: var(--card-bg);
-      border: 2px solid var(--primary);
-      border-radius: 1rem;
-      padding: 0.5rem;
-      box-sizing: border-box;
+    .card {
+      background-color: white;
+      border: 2px solid #ce93d8;
+      border-radius: 12px;
       overflow: hidden;
-      height: 920px;
-    }
-
-    .puzzle-box iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    footer {
-      background: var(--primary);
-      color: white;
       text-align: center;
-      padding: 1rem;
-      margin-top: 3rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
     }
 
-    @media screen and (max-width: 768px) {
-      .puzzle-box {
-        height: 900px;
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-title {
+      font-weight: bold;
+      padding: 10px;
+      color: #4a148c;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Games & Printables</h1>
-    <p>Practice Pig Latin through fun, interactive challenges!</p>
-  </header>
 
-  <nav>
+  <h1>Games & Printables</h1>
+
+  <div class="navbar">
     <a href="index.html">Lessons & Translator</a>
     <a href="games.html">Games & Printables</a>
     <a href="piglatinia.html">Piglatinia</a>
     <a href="products.html">Products</a>
-  </nav>
+  </div>
 
-  <main>
   <h2>Word Search</h2>
-  <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; padding: 1rem;">
 
-    <!-- Puzzle 1: Animalsway -->
-    <a href="animalsway-wordsearch.html" style="text-decoration: none; color: inherit;">
-  <div class="game-thumb" style="background: var(--card-bg); border: 2px solid var(--primary); border-radius: 1rem; overflow: hidden; box-shadow: 2px 2px 6px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer;">
-    <img src="thumbnails/animalsway-thumb.jpg" alt="Animal Word Search">
- style="width: 100%; height: 160px; object-fit: cover;">
-    <div style="padding: 0.75rem; font-weight: bold; text-align: center;">Animal Word Search</div>
+  <div class="grid">
+    <a class="card" href="animalsway-wordsearch.html">
+      <img src="thumbnails/animalsway-thumb.jpg" alt="Animal Word Search">
+      <div class="card-title">Animal Word Search</div>
+    </a>
+
+    <a class="card" href="colorsshapes-wordsearch.html">
+      <img src="thumbnails/colorsshapes-thumb.jpg" alt="Colors & Shapes Word Search">
+      <div class="card-title">Colors & Shapes</div>
+    </a>
+
+    <a class="card" href="oodfay-wordsearch.html">
+      <img src="thumbnails/oodfay-thumb.jpg" alt="Food Word Search">
+      <div class="card-title">Food Word Search</div>
+    </a>
+
+    <a class="card" href="erbsvay-wordsearch.html">
+      <img src="thumbnails/erbsvay-thumb.jpg" alt="Verb Word Search">
+      <div class="card-title">Verb Word Search</div>
+    </a>
   </div>
-</a>
 
-
-    <!-- Puzzle 2: Colors & Shapes -->
-    <a href="colorsshapes-wordsearch.html" style="text-decoration: none; color: inherit;">
-      <div class="game-thumb" style="background: var(--card-bg); border: 2px solid var(--primary); border-radius: 1rem; overflow: hidden; box-shadow: 2px 2px 6px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer;">
-        <img src="thumbnails/colorsshapes-thumb.jpg" alt="Colors & Shapes Word Search" style="width: 100%; height: 160px; object-fit: cover;">
-        <div style="padding: 0.75rem; font-weight: bold; text-align: center;">Colors & Shapes</div>
-      </div>
-    </a>
-
-    <!-- Puzzle 3: Food -->
-    <a href="oodfay-wordsearch.html" style="text-decoration: none; color: inherit;">
-      <div class="game-thumb" style="background: var(--card-bg); border: 2px solid var(--primary); border-radius: 1rem; overflow: hidden; box-shadow: 2px 2px 6px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer;">
-        <img src="thumbnails/oodfay-thumb.jpg" alt="Food Word Search" style="width: 100%; height: 160px; object-fit: cover;">
-        <div style="padding: 0.75rem; font-weight: bold; text-align: center;">Food Word Search</div>
-      </div>
-    </a>
-
-    <!-- Puzzle 4: Verbs -->
-    <a href="erbsvay-wordsearch.html" style="text-decoration: none; color: inherit;">
-      <div class="game-thumb" style="background: var(--card-bg); border: 2px solid var(--primary); border-radius: 1rem; overflow: hidden; box-shadow: 2px 2px 6px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer;">
-        <img src="thumbnails/erbsvay-thumb.jpg" alt="Verbs Word Search" style="width: 100%; height: 160px; object-fit: cover;">
-        <div style="padding: 0.75rem; font-weight: bold; text-align: center;">Verb Word Search</div>
-      </div>
-    </a>
-
-  </div>
-</main>
+</body>
+</html>
