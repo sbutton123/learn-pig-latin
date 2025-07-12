@@ -1,37 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-8ZL77F3HRT');
-</script>
-
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Olorscay &amp; Apesshay
-  </title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Olorscay & Apesshay</title>
   <style>
-   body {
+    body {
       font-family: sans-serif;
       background: #ede4ff;
       color: #2c174e;
       text-align: center;
+      margin: 0;
       padding: 1rem;
     }
+
     h1 {
       color: #a97ef9;
     }
+
     #puzzle-wrapper {
-      max-width: 800px;
+      max-width: 680px;
       margin: auto;
     }
+
     #wordsearch {
       display: grid;
       grid-template-columns: repeat(15, 2rem);
@@ -40,6 +31,7 @@
       margin: 2rem auto;
       user-select: none;
     }
+
     .cell {
       width: 2rem;
       height: 2rem;
@@ -51,44 +43,67 @@
       background: #f7f4ff;
       cursor: pointer;
     }
+
     .cell.selected {
       background: #a97ef9;
       color: white;
     }
+
     .cell.found {
       background: #78aaff;
       color: white;
     }
+
     #wordlist {
-      max-width: 600px;
-      margin: 2rem auto;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
+      max-width: 680px;
+      margin: 1.5rem auto;
     }
+
     .word {
-      padding: 0.3rem 0.8rem;
       background: #f7f4ff;
       border-radius: 1rem;
       border: 1px solid #ccc;
-      cursor: pointer;
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+      font-weight: bold;
+      margin: 0.3rem;
+      min-width: 110px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      white-space: nowrap;
+      box-sizing: border-box;
     }
+
     .word.found {
       background: #a97ef9;
       color: white;
       text-decoration: line-through;
     }
-    button#printBtn {
-      margin-top: 2rem;
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    button {
       background: #a97ef9;
       color: white;
-      padding: 0.6rem 1.2rem;
+      padding: 0.6rem 1.5rem;
       border: none;
-      border-radius: 0.5rem;
+      border-radius: 0.8rem;
       font-size: 1rem;
+      font-weight: bold;
       cursor: pointer;
+      min-width: 140px;
     }
+
     @media print {
       body {
         background: white;
@@ -99,8 +114,7 @@
         color: black !important;
         border: 1px solid black;
       }
-      .cell.found,
-      .cell.selected {
+      .cell.found, .cell.selected {
         background: white !important;
         color: black !important;
       }
@@ -109,35 +123,32 @@
         background: white !important;
         text-decoration: none !important;
       }
-      #printBtn {
+      .buttons {
         display: none;
       }
     }
   </style>
- </head>
- <body>
+</head>
+<body>
   <div id="puzzle-wrapper">
-   <h1>
-    Olorscay &amp; Apesshay
-   </h1>
-   <div id="wordsearch">
-   </div>
-   <div style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem; margin-top: 0.5rem; width: 100%; max-width: 680px; margin-left: auto; margin-right: auto;">
-    <div id="wordlist" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem; max-width: 100%; margin: 0;">
+    <h1>Olorscay & Apesshay</h1>
+    <div id="wordsearch"></div>
+    <div id="wordlist"></div>
+    <div class="buttons">
+      <button onclick="window.print()">🖨️ Print</button>
+      <button onclick="window.location.href='/games'">⬅️ Return to Games</button>
     </div>
-    <button id="printBtn" style="background: #ff69b4; color: white; padding: 0.3rem 1rem; border: none; border-radius: 1rem; font-size: 1rem; cursor: pointer; min-width: 90px; margin: 0;">
-     Print
-    </button>
-   </div>
   </div>
+
   <script>
-   const words = ["INKPAY", "ITEWHAY", "ACKBLAY", "ELLOWYAY", "EENGRAY", "UEBLAY", "EDRAY", "EARTHAY", "UARESQAY", "IANGLETRAY", "IRCLECAY", "ARSTAY", "OWNBRAY", "URPLEPAY"];
+    const words = [
+      "INKPAY", "ITEWHAY", "ACKBLAY", "ELLOWYAY", "EENGRAY", "UEBLAY", "EDRAY",
+      "EARTHAY", "UARESQAY", "IANGLETRAY", "IRCLECAY", "ARSTAY", "OWNBRAY", "URPLEPAY"
+    ];
 
     const gridSize = 15;
     const grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
-    const directions = [
-      [0,1], [1,0], [1,1], [-1,1], [0,-1], [-1,0], [-1,-1], [1,-1]
-    ];
+    const directions = [[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0],[-1,-1],[1,-1]];
     const placedWords = [];
 
     function canPlace(word, row, col, dir) {
@@ -208,7 +219,7 @@
     }
 
     words.forEach(word => {
-      const span = document.createElement('span');
+      const span = document.createElement('div');
       span.textContent = word;
       span.className = 'word';
       span.dataset.word = word;
@@ -246,12 +257,6 @@
         selectedCells.length = 0;
       }
     }
-
-    document.getElementById('printBtn').addEventListener('click', function (e) {
-      e.preventDefault();
-      window.print();
-    });
   </script>
- </body>
+</body>
 </html>
-
