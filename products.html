@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products | Learn Pig Latin</title>
+  <style>
+    :root {
+      --primary: #a97ef9;
+      --secondary: #d682f4;
+      --background: #e6dbff;
+      --text-dark: #2c174e;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text-dark);
+    }
+    nav {
+      background: var(--secondary);
+      text-align: center;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: white;
+      margin: 0 16px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: opacity 0.3s;
+    }
+    nav a:hover { opacity: 0.8; }
+    .container {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    .card-content {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-content h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+      color: var(--primary);
+    }
+    .card-content p {
+      flex: 1;
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+    }
+    .card-content a {
+      align-self: flex-start;
+      text-decoration: none;
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .card-content a:hover {
+      background: var(--secondary);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Lessons &amp; Translator</a>
+    <a href="games.html">Games &amp; Printables</a>
+    <a href="piglatinia.html">Piglatinia</a>
+    <a href="products.html">Products</a>
+  </nav>
+  <div class="container">
+    <h1>🛍️ Our Products</h1>
+
+    <h2>📚 Dual-Language Books</h2>
+    <div class="grid">
+      <!-- Placeholder 1 -->
+      <div class="card">
+        <img src="https://via.placeholder.com/240x320?text=Cover+Image" alt="Book Title" />
+        <div class="card-content">
+          <h3>Book Title #1</h3>
+          <p>Short description of the dual-language Pig Latin book. Covers lessons, examples, and exercises.</p>
+          <a href="#">Buy on Amazon</a>
+        </div>
+      </div>
+      <!-- Placeholder 2 -->
+      <div class="card">
+        <img src="https://via.placeholder.com/240x320?text=Cover+Image" alt="Book Title" />
+        <div class="card-content">
+          <h3>Book Title #2</h3>
+          <p>Short description of the dual-language Pig Latin storybook. Includes glossary and fun activities.</p>
+          <a href="#">Buy on Amazon</a>
+        </div>
+      </div>
+      <!-- Additional book cards here -->
+    </div>
+
+    <h2>👕 Apparel & Merch</h2>
+    <p>Coming soon: t-shirts, tank tops, mugs, and more branded with Piglatinia style!</p>
+
+    <h2>🖼️ Prints & Posters</h2>
+    <p>Coming soon: colorful posters and art prints featuring Piglatinian lore.</p>
+
+  </div>
+</body>
+</html>
