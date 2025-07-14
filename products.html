@@ -43,10 +43,22 @@
       color: var(--primary);
       margin-bottom: 1rem;
     }
+    h2 {
+      color: var(--primary);
+      margin-top: 2rem;
+      font-size: 1.4rem;
+    }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 1024px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
     }
     .card {
       background: white;
@@ -103,31 +115,44 @@
 
     <h2>📚 Dual-Language Books</h2>
     <div class="grid">
-      <!-- Placeholder 1 -->
       <div class="card">
-        <img src="https://via.placeholder.com/240x320?text=Cover+Image" alt="Book Title" />
+        <img src="https://m.media-amazon.com/images/I/71ZIRARgWbL._SL1500_.jpg" alt="Pig Latin Tales: The Three Little Pigs" />
         <div class="card-content">
-          <h3>Book Title #1</h3>
-          <p>Short description of the dual-language Pig Latin book. Covers lessons, examples, and exercises.</p>
-          <a href="#">Buy on Amazon</a>
+          <h3>Pig Latin Tales: The Three Little Pigs</h3>
+          <p>The classic fairy tale—translated into Pig Latin!</p>
+          <a href="https://www.amazon.com/Pig-Latin-Tales-Eethray-Itttlelay-ebook/dp/B0FD83WYNK/">Buy on Amazon</a>
         </div>
       </div>
-      <!-- Placeholder 2 -->
       <div class="card">
-        <img src="https://via.placeholder.com/240x320?text=Cover+Image" alt="Book Title" />
+        <img src="https://m.media-amazon.com/images/I/81NlnF6wxWL._SL1500_.jpg" alt="Pig Latin Tales: Goldilocks and The Three Bears" />
         <div class="card-content">
-          <h3>Book Title #2</h3>
-          <p>Short description of the dual-language Pig Latin storybook. Includes glossary and fun activities.</p>
-          <a href="#">Buy on Amazon</a>
+          <h3>Pig Latin Tales: Goldilocks and The Three Bears</h3>
+          <p>The classic fairy tale—translated into Pig Latin!</p>
+          <a href="https://www.amazon.com/Pig-Latin-Tales-Goldilocks-Classic-ebook/dp/B0FG4J13FG/">Buy on Amazon</a>
         </div>
       </div>
-      <!-- Additional book cards here -->
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/61WXjh4mZuL._SL1499_.jpg" alt="Pig Latin Tales: Little Red Riding Hood" />
+        <div class="card-content">
+          <h3>Pig Latin Tales: Little Red Riding Hood</h3>
+          <p>A Classic Tale with a Pig Latin Twist!</p>
+          <a href="https://www.amazon.com/Pig-Latin-Tales-Ittlelay-Idingray/dp/B0FGQ6PWRC/">Buy on Amazon</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/616gLfXsAIL._SL1499_.jpg" alt="Pig Latin Classic Tales: Triple Anthology" />
+        <div class="card-content">
+          <h3>Pig Latin Classic Tales: Triple Anthology</h3>
+          <p>Three Classic Fairy Tales — with a Hilarious Pig Latin Twist!</p>
+          <a href="https://www.amazon.com/Pig-Latin-Classic-Tales-Goldilocks/dp/B0FGWHCVVL/">Buy on Amazon</a>
+        </div>
+      </div>
     </div>
 
-    <h2>👕 Apparel & Merch</h2>
+    <h2>👕 Apparel &amp; Merch</h2>
     <p>Coming soon: t-shirts, tank tops, mugs, and more branded with Piglatinia style!</p>
 
-    <h2>🖼️ Prints & Posters</h2>
+    <h2>🖼️ Prints &amp; Posters</h2>
     <p>Coming soon: colorful posters and art prints featuring Piglatinian lore.</p>
 
   </div>
