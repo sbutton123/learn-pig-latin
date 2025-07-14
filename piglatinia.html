@@ -3,123 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to Piglatinia</title>
+  <title>Piglatinia</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #fdfaff;
-      color: #2c174e;
       margin: 0;
-      padding: 2rem;
-      line-height: 1.7;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f9f3ff, #f3f0ff);
+      background-size: 200% 200%;
+      animation: swirl 20s ease infinite;
+      color: #2a2a2a;
+      padding: 20px;
     }
-    h2 {
-      font-size: 1.8rem;
-      color: #a97ef9;
-      margin-top: 2rem;
+
+    @keyframes swirl {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      color: #8b5cf6;
+    }
+
     h1 {
       text-align: center;
-      color: #9063f5;
     }
-    p, li {
-      font-size: 1.1rem;
+
+    ul {
+      padding-left: 1.2em;
+    }
+
+    section {
+      margin-bottom: 2rem;
     }
   </style>
 </head>
 <body>
-  <h1>🌍 Welcome to Piglatinia</h1>
-  <p>You won’t find Piglatinia on most maps — unless the map is printed in Pig Latin and shaped like a hula hoop. This glorious, peculiar nation is hidden just northeast of Who-Knows-Where and surrounded by the Sea of Whimsy.</p>
-  <p>It’s a land full of laughter, wordplay, flying hoops, and the occasional runaway juggling pin. Here, Pig Latin isn’t a novelty — it’s simply the language everyone’s spoken since birth. No one questions it. No one translates it. They just live it.</p>
+  <div class="container">
+    <h1>🌍 Welcome to Piglatinia</h1>
+    <section>
+      <p>You won’t find Piglatinia on most maps — unless the map is printed in Pig Latin and shaped like a hula hoop. This glorious, peculiar nation is hidden just northeast of Who-Knows-Where and surrounded by the Sea of Whimsy.</p>
+      <p>It’s a land full of laughter, wordplay, flying hoops, and the occasional runaway juggling pin. Here, Pig Latin isn’t a novelty — it’s simply the language everyone’s spoken since birth. No one questions it. No one translates it. They just live it.</p>
+    </section>
 
-  <h2>🌀 Language & Life</h2>
-  <ul>
-    <li>Pig Latin is the native language. It’s spoken at home, in schools, on government forms, and even in bedtime lullabies.</li>
-    <li>Visitors may be confused. Locals won’t notice.</li>
-    <li>Most Piglatinians are completely unaware that their language is considered unusual anywhere else.</li>
-    <li>“Itway ustjay akesmay ensesay otay usyay.”</li>
-  </ul>
+    <section>
+      <h2>🌀 Language & Life</h2>
+      <ul>
+        <li>Pig Latin is the native language. It’s spoken at home, in schools, on government forms, and even in bedtime lullabies.</li>
+        <li>Visitors may be confused. Locals won’t notice.</li>
+        <li>Most Piglatinians are completely unaware that their language is considered unusual anywhere else.</li>
+        <li>“Itway ustjay akesmay ensesay otay usyay.”</li>
+      </ul>
+    </section>
 
-  <h2>🏛️ Capital City: Atinlay Ouncay</h2>
-  <ul>
-    <li>The Spiral Tower of Loops</li>
-    <li>The annual Flip-Your-Words Festival</li>
-    <li>A public transit system powered entirely by hula hoopers on roller skates</li>
-  </ul>
+    <section>
+      <h2>🏢 Capital City: Atinlay Ouncay</h2>
+      <ul>
+        <li>The Spiral Tower of Loops</li>
+        <li>The annual Flip-Your-Words Festival</li>
+        <li>A public transit system powered entirely by hula hoopers on roller skates</li>
+      </ul>
+    </section>
 
-  <h2>💃 Traditions & National Pastimes</h2>
-  <strong>🔀 Hula Hooping</strong>
-  <p>Considered the oldest and most sacred tradition. It’s used in:</p>
-  <ul>
-    <li>Meditation</li>
-    <li>Education</li>
-    <li>Political debates</li>
-    <li>Fire drills</li>
-  </ul>
-  <p>It’s said that the first Piglatinian baby was born mid-hoop. (That baby grew up to invent shoulder hooping.)</p>
+    <section>
+      <h2>🏋 Traditions & National Pastimes</h2>
+      <h3>🚛 Hula Hooping</h3>
+      <p>Considered the oldest and most sacred tradition. It’s used in:</p>
+      <ul>
+        <li>Meditation</li>
+        <li>Education</li>
+        <li>Political debates</li>
+        <li>Fire drills</li>
+      </ul>
 
-  <strong>🎪 Juggling</strong>
-  <p>A newer cultural trend, introduced by a mysterious traveler named Gregor. Within weeks, juggling-while-hooping became a national art form called <em>Rings of Gravity</em>.</p>
+      <h3>🎭 Juggling</h3>
+      <p>Introduced by a traveler named Gregor. It quickly became a national obsession and is now often paired with hooping in performances called “Rings of Gravity.”</p>
+    </section>
 
-  <h2>🏫 Education in Piglatinia</h2>
-  <p>Schools in Piglatinia teach:</p>
-  <ul>
-    <li>Spinning Arts</li>
-    <li>Facial Expression Theory</li>
-    <li>Syllable Stretching</li>
-    <li>Reversal Rhetoric</li>
-    <li>Lunch</li>
-  </ul>
-  <p>Homework often includes glitter.</p>
+    <section>
+      <h2>🏫 Education in Piglatinia</h2>
+      <ul>
+        <li>Spinning Arts</li>
+        <li>Facial Expression Theory</li>
+        <li>Syllable Stretching</li>
+        <li>Reversal Rhetoric</li>
+        <li>Lunch (Very important)</li>
+      </ul>
+    </section>
 
-  <h2>🗓️ Holidays in Piglatinia</h2>
-  <ul>
-    <li><strong>Oopay Ayday</strong> – Celebrating the invention of the hula hoop. Participants spin while reciting tongue twisters.</li>
-    <li><strong>National Word Flip Week</strong> – All words reversed twice for fun.</li>
-    <li><strong>JuggleHoopmas</strong> – A winter celebration with lights, scarves, and high-velocity hoop juggling.</li>
-  </ul>
+    <section>
+      <h2>🍌 Holidays in Piglatinia</h2>
+      <ul>
+        <li><strong>Oopay Ayday</strong> – The invention of the hula hoop</li>
+        <li><strong>National Word Flip Week</strong> – All words reversed twice</li>
+        <li><strong>JuggleHoopmas</strong> – Winter celebration with hoop juggling</li>
+      </ul>
+    </section>
 
-  <h2>🎗️ Fashion & Style</h2>
-  <ul>
-    <li>Formalwear: hoop belts, leg warmers, and spinning accessories</li>
-    <li>Hairstyles: expressive but practical (for hoop clearance)</li>
-    <li>Only fashion crime: being boring</li>
-  </ul>
+    <section>
+      <h2>👗 Fashion & Style</h2>
+      <ul>
+        <li>Formalwear: Hoop belts and leg warmers</li>
+        <li>Hairstyles: Functional and expressive</li>
+        <li>Color palette: Bright, clashing, joyful</li>
+        <li>Emergency hooping readiness is key</li>
+      </ul>
+    </section>
 
-  <h2>🥝 Tourism in Piglatinia</h2>
-  <ul>
-    <li>Spontaneous hoop-offs</li>
-    <li>Conversations that sound like riddles</li>
-    <li>Your name translated to Pig Latin at customs</li>
-  </ul>
-  <p><strong>Tips:</strong> Don’t out-hoop a local. Accept glitter. If given a juggling ball, just go with it.</p>
+    <section>
+      <h2>🧱 Tourism in Piglatinia</h2>
+      <ul>
+        <li>Spontaneous public hoop-offs</li>
+        <li>Your name translated to Pig Latin at customs</li>
+        <li>Accept glitter with gratitude</li>
+      </ul>
+    </section>
 
-  <h2>📏 Citizenship Requirements</h2>
-  <ul>
-    <li>Basic Pig Latin fluency (or effort)</li>
-    <li>5-hoop spin-and-speak challenge</li>
-    <li>Submit one funny joke</li>
-    <li>Yell “Ivelay Igpay Atinlay!” into a cereal bowl</li>
-    <li>Receive free sticker. Citizenship is for life.</li>
-  </ul>
+    <section>
+      <h2>📏 Piglatinian Citizenship Requirements</h2>
+      <ul>
+        <li>Demonstrate Pig Latin fluency (or try really hard)</li>
+        <li>Complete the 5-hoop spin-and-speak challenge</li>
+        <li>Submit a joke that makes a native laugh</li>
+        <li>Yell “Ivelay Igpay Atinlay!” into a cereal bowl</li>
+        <li>Citizenship comes with a free sticker</li>
+      </ul>
+    </section>
 
-  <h2>🧳 Meet the Lonely Pig Latin Lady</h2>
-  <p>Once a proud Piglatinian, she ventured to America to share her culture. But people didn’t understand her.</p>
-  <ul>
-    <li>She spoke fluently. They blinked.</li>
-    <li>She laughed. They shuffled away.</li>
-    <li>She wore a hoop. Someone asked if it was a life preserver.</li>
-  </ul>
-  <p>Crushed but determined, she built LearnPigLatin.com — a bridge between Piglatinia and the world.</p>
-  <p>Every printable, product, and page is designed by her, straight from the heart of her homeland.</p>
-  <blockquote>“Iway antedway otay areshay oopslay andway aughlay ithway ethay orldway.”</blockquote>
+    <section>
+      <h2>🧕 Meet the Lonely Pig Latin Lady</h2>
+      <p>Once a proud Piglatinian, she ventured to America to share her gifts. But the world wasn’t ready.</p>
+      <p>Crushed but not defeated, she built LearnPigLatin.com to bring joy, silliness, and hooping to everyone.</p>
+      <p>“Iway antedway otay areshay oopslay andway aughlay ithway ethay orldway.”</p>
+    </section>
 
-  <h2>✨ Start Your Journey</h2>
-  <ul>
-    <li>🧠 <a href="translator.html">Learn Pig Latin</a></li>
-    <li>🏦 <a href="products.html">Visit the Shop</a></li>
-    <li>🎮 <a href="games.html">Play Games</a></li>
-    <li>📚 <a href="books.html">Read Dual-Language Books</a></li>
-  </ul>
+    <section>
+      <h2>✨ Explore the Culture</h2>
+      <ul>
+        <li>🧠 Learn Pig Latin the fun way</li>
+        <li>🛒 Visit the Piglatinian Product Shop</li>
+        <li>🧹 Play Pig Latin games and download silliness</li>
+      </ul>
+    </section>
+  </div>
 </body>
 </html>
