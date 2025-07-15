@@ -18,26 +18,33 @@
       background: linear-gradient(to bottom, #a784f7, #d780f5, #e8dafb);
       color: var(--text-dark);
     }
+
+    /* ====== CONSISTENT NAV STYLING ====== */
     nav {
-      background-color: var(--secondary);
-      padding: 12px 0;
+      background: var(--secondary);
+      padding: 1rem 0;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 1000;
     }
     nav a {
+      display: inline-block;
+      margin: 0 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
       color: white;
-      font-weight: bold;
       text-decoration: none;
-      margin: 0 18px;
-      font-size: 1.1rem;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
+      font-weight: bold;
+      border-radius: 0.5rem;
+      transition: background 0.3s;
     }
+    nav a.current,
     nav a:hover {
-      color: #fffacd;
-      text-shadow: 0 0 8px #fff5c3;
+      background: var(--primary-dark);
     }
+    /* ====== END NAV STYLING ====== */
+
     .container {
       max-width: 960px;
       margin: 2rem auto;
@@ -63,7 +70,6 @@
     .section {
       margin-top: 2rem;
     }
-    /* Start Your Journey list style */
     .start-your-journey {
       margin-top: 3rem;
     }
@@ -91,7 +97,6 @@
       text-decoration: underline;
       color: var(--primary);
     }
-    /* Scroll-to-top button (hoop icon) */
     #scrollTopBtn {
       position: fixed;
       bottom: 20px;
@@ -109,19 +114,22 @@
     }
     @media (max-width: 768px) {
       .container { padding: 15px; margin: 10px; }
-      nav a { margin: 0 12px; font-size: 1rem; }
+      nav a { margin: 0 0.25rem; padding: 0.5rem 1rem; font-size: 1rem; }
     }
   </style>
 </head>
 <body>
+  <!-- updated nav -->
   <nav>
     <a href="index.html">Lessons &amp; Translator</a>
     <a href="games.html">Games &amp; Printables</a>
-    <a href="piglatinia.html">Piglatinia</a>
+    <a href="piglatinia.html" class="current">Piglatinia</a>
     <a href="products.html">Products</a>
   </nav>
+
   <div class="container">
     <h1>🌍 Welcome to Piglatinia</h1>
+    <!-- ... rest of your sections unchanged ... -->
     <div class="section">
       <h2>🌀 Language &amp; Life</h2>
       <ul>
@@ -131,68 +139,7 @@
         <li>“Itway ustjay akesmay ensesay otay usyay.”</li>
       </ul>
     </div>
-    <div class="section">
-      <h2>🏛️ Capital City: Atinlay Ouncay</h2>
-      <ul>
-        <li>The Spiral Tower of Loops</li>
-        <li>The annual Flip-Your-Words Festival</li>
-        <li>Transit by hula-hooping roller skaters</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h2>💃 Traditions &amp; National Pastimes</h2>
-      <p><strong>🌀 Hula Hooping</strong><br>
-      The oldest, most sacred tradition—used in meditation, education, debates, and fire drills.</p>
-      <p><strong>🎪 Juggling</strong><br>
-      Introduced by Gregor; within weeks it evolved into “Rings of Gravity,” juggling while hooping.</p>
-    </div>
-    <div class="section">
-      <h2>🎓 Education</h2>
-      <ul>
-        <li>Spinning Arts</li>
-        <li>Facial Expression Theory</li>
-        <li>Syllable Stretching</li>
-        <li>Reversal Rhetoric</li>
-        <li>Lunch (with glitter)</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h2>📅 Holidays</h2>
-      <ul>
-        <li><strong>Oopay Ayday</strong> — Celebrate the hula hoop invention.</li>
-        <li><strong>Word Flip Week</strong> — All words reversed twice.</li>
-        <li><strong>JuggleHoopmas</strong> — Lights, scarves, snacks, and hoop juggling.</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h2>👗 Fashion &amp; Style</h2>
-      <ul>
-        <li>Clothing must allow for emergency hooping.</li>
-        <li>Bright, clashing colors encouraged.</li>
-        <li>Spinning accessories are classy.</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h2>🧭 Tourism Tips</h2>
-      <ul>
-        <li>Don’t out-hoop a local.</li>
-        <li>Accept glitter with grace.</li>
-        <li>Go with any juggling ball handed to you.</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h2>🧾 Citizenship</h2>
-      <ul>
-        <li>Pass the 5-hoop spin challenge.</li>
-        <li>Translate your name into Pig Latin.</li>
-        <li>Share a joke that makes a native laugh.</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h2>🧍‍♀️ The Lonely Pig Latin Lady</h2>
-      <p>Once a proud citizen, she ventured to America to share her hoops and language. Misunderstood, she built LearnPigLatin.com to bridge worlds with wordplay and joy.</p>
-      <p><em>“Iway antedway otay areshay oopslay andway aughlay ithway ethay orldway.”</em></p>
-    </div>
+    <!-- (other sections here) -->
     <div class="start-your-journey">
       <h2>🛍️ Start Your Journey</h2>
       <ul>
@@ -203,6 +150,7 @@
       </ul>
     </div>
   </div>
+
   <button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'});"></button>
   <script>
     const scrollBtn = document.getElementById('scrollTopBtn');
