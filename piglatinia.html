@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Welcome to Piglatinia</title>
   <style>
     :root {
@@ -12,14 +12,14 @@
       --background-light: #e6dbff;
       --text-dark: #4b0082;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to bottom, #a784f7, #d780f5, #e8dafb);
       color: var(--text-dark);
     }
 
-    /* ====== CONSISTENT NAV STYLING ====== */
+    /* NAVIGATION */
     nav {
       background: var(--secondary);
       padding: 1rem 0;
@@ -43,7 +43,6 @@
     nav a:hover {
       background: var(--primary-dark);
     }
-    /* ====== END NAV STYLING ====== */
 
     .container {
       max-width: 960px;
@@ -51,7 +50,7 @@
       padding: 20px;
       background-color: var(--background-light);
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     h1 {
       text-align: center;
@@ -65,11 +64,13 @@
       font-size: 1.8rem;
     }
     ul {
-      padding-left: 1.2rem;
+      list-style: disc inside;
+      margin-top: 0.5rem;
     }
     .section {
       margin-top: 2rem;
     }
+
     .start-your-journey {
       margin-top: 3rem;
     }
@@ -88,15 +89,17 @@
       margin: 0.5rem 0;
     }
     .start-your-journey a {
-      text-decoration: none;
       color: var(--primary-dark);
+      text-decoration: none;
       font-weight: bold;
       transition: color 0.3s;
     }
     .start-your-journey a:hover {
-      text-decoration: underline;
       color: var(--primary);
+      text-decoration: underline;
     }
+
+    /* Scroll‑to‑top */
     #scrollTopBtn {
       position: fixed;
       bottom: 20px;
@@ -112,6 +115,7 @@
       display: none;
       z-index: 100;
     }
+
     @media (max-width: 768px) {
       .container { padding: 15px; margin: 10px; }
       nav a { margin: 0 0.25rem; padding: 0.5rem 1rem; font-size: 1rem; }
@@ -119,7 +123,6 @@
   </style>
 </head>
 <body>
-  <!-- updated nav -->
   <nav>
     <a href="index.html">Lessons &amp; Translator</a>
     <a href="games.html">Games &amp; Printables</a>
@@ -129,17 +132,87 @@
 
   <div class="container">
     <h1>🌍 Welcome to Piglatinia</h1>
-    <!-- ... rest of your sections unchanged ... -->
+
     <div class="section">
       <h2>🌀 Language &amp; Life</h2>
       <ul>
         <li>Pig Latin is the native language. It’s spoken at home, in schools, on government forms, and in bedtime lullabies.</li>
         <li>Visitors may be confused. Locals won’t notice.</li>
         <li>Most Piglatinians aren’t aware their language is unusual elsewhere.</li>
-        <li>“Itway ustjay akesmay ensesay otay usyay.”</li>
+        <li><em>“Itway ustjay akesmay ensesay otay usyay.”</em></li>
       </ul>
     </div>
-    <!-- (other sections here) -->
+
+    <div class="section">
+      <h2>🏛️ Capital City: Atinlay Ouncay</h2>
+      <ul>
+        <li>The Spiral Tower of Loops</li>
+        <li>The annual Flip-Your-Words Festival</li>
+        <li>Public transit by hula-hooping roller skaters</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>💃 Traditions &amp; National Pastimes</h2>
+      <p><strong>🌀 Hula Hooping</strong><br>
+      More than just a sport—used in meditation, education, debates, and fire drills.</p>
+      <p><strong>🎪 Juggling</strong><br>
+      Introduced by Gregor from “somewhere over there.” Now the national art of “multi-ring pigformance.”</p>
+    </div>
+
+    <div class="section">
+      <h2>🎓 Education</h2>
+      <ul>
+        <li>Spinning Arts</li>
+        <li>Facial Expression Theory</li>
+        <li>Syllable Stretching</li>
+        <li>Reversal Rhetoric</li>
+        <li>Lunch (with glitter)</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>📅 Holidays</h2>
+      <ul>
+        <li><strong>Oopay Ayday</strong> — Celebrate the invention of the hula hoop.</li>
+        <li><strong>Word Flip Week</strong> — All words reversed twice for comedy.</li>
+        <li><strong>JuggleHoopmas</strong> — Lights, scarves, snacks, and hoop juggling.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>👗 Fashion &amp; Style</h2>
+      <ul>
+        <li>Clothing must allow for emergency hooping.</li>
+        <li>Bright, clashing colors are encouraged.</li>
+        <li>Spinning accessories are considered classy.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🧭 Tourism Tips</h2>
+      <ul>
+        <li>Never try to out‑hoop a local.</li>
+        <li>Accept glitter with grace.</li>
+        <li>If handed a juggling ball, just roll with it.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🧾 Citizenship</h2>
+      <ul>
+        <li>Pass the 5‑hoop spin challenge.</li>
+        <li>Translate your name into Pig Latin.</li>
+        <li>Tell a joke that makes a native laugh.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🧍‍♀️ Meet the Lonely Pig Latin Lady</h2>
+      <p>Once a proud citizen of Piglatinia, she ventured to America to share her hoops and humor. Misunderstood, she built LearnPigLatin.com to bridge worlds with wordplay and joy.</p>
+      <p><em>“Iway antedway otay areshay oopslay andway aughlay ithway ethay orldway.”</em></p>
+    </div>
+
     <div class="start-your-journey">
       <h2>🛍️ Start Your Journey</h2>
       <ul>
