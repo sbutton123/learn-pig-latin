@@ -2,90 +2,118 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Almsnay — Crossword</title>
-
-  <!-- js‑crossword CSS -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/js-crossword@2.1.1/dist/js-crossword.min.css"
-  />
-
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OUNSNAY — Nouns Crossword</title>
   <style>
+    :root {
+      --bg: #f3e6ff;
+      --primary: #a968d2;
+      --primary-dark: #8b69da;
+      --text: #2c174e;
+      --block: #dcd0f0;
+      --input-bg: #fff;
+      --input-focus: #e0d3ff;
+      --highlight: #ffe082;
+    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f3e6ff;
-      color: #2c174e;
+      background: var(--bg);
+      color: var(--text);
     }
     header {
-      background: linear-gradient(to right, #a968d2, #8b69da);
-      color: white;
+      background: linear-gradient(to right, var(--primary), var(--primary-dark));
+      color: #fff;
       text-align: center;
       padding: 1rem 0;
     }
     nav {
-      background: #d47dd7;
+      background: var(--primary-dark);
       text-align: center;
-      padding: 0.75rem 0;
+      padding: .75rem 0;
     }
     nav a {
-      margin: 0 1rem;
-      color: white;
+      display: inline-block;
+      margin: 0 .75rem;
+      color: #fff;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1.1rem;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      transition: background 0.2s;
+      padding: .5rem 1rem;
+      border-radius: .5rem;
+      transition: background .2s;
     }
-    nav a:hover {
-      background: #8b69da;
-    }
+    nav a:hover { background: var(--primary); }
     main {
       max-width: 800px;
       margin: 2rem auto;
       padding: 0 1rem;
       text-align: center;
     }
-    h1 {
-      margin-bottom: 0.5rem;
+    table.crossword {
+      border-collapse: collapse;
+      margin: 0 auto;
     }
-    #crossword-container {
-      margin: 1.5rem auto;
-      max-width: 100%;
+    table.crossword td {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid #bbb;
+      position: relative;
+      background: var(--input-bg);
+    }
+    table.crossword td.block {
+      background: var(--block);
+    }
+    table.crossword td input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      text-align: center;
+      font-size: 1rem;
+      background: transparent;
+    }
+    table.crossword td input:focus {
+      outline: none;
+      background: var(--input-focus);
+    }
+    td .num {
+      position: absolute;
+      top: 2px; left: 2px;
+      font-size: .6rem;
+      color: var(--text);
     }
     #clues {
       text-align: left;
-      margin-top: 2rem;
-      font-size: 1rem;
+      margin: 1.5rem auto;
+      max-width: 400px;
+      list-style: none;
+      padding: 0;
     }
     #clues li {
-      margin-bottom: 0.5rem;
+      margin: .5rem 0;
       cursor: pointer;
     }
+    #clues li.highlight {
+      background: var(--highlight);
+      border-radius: .25rem;
+    }
     #print-btn {
-      margin-top: 1.5rem;
-      padding: 0.5rem 1.5rem;
-      background: #6b00b3;
-      color: white;
+      margin-top: 1rem;
+      padding: .5rem 1.5rem;
+      background: var(--primary);
+      color: #fff;
       border: none;
-      border-radius: 0.25rem;
+      border-radius: .25rem;
       cursor: pointer;
       font-size: 1rem;
     }
-    #print-btn:hover {
-      background: #4e0085;
-    }
+    #print-btn:hover { background: var(--primary-dark); }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>Almsnay</h1>
+    <h1>OUNSNAY</h1>
     <p>Your Nouns Crossword in Pig Latin</p>
   </header>
-
   <nav>
     <a href="index.html">Lessons &amp; Translator</a>
     <a href="games.html">Games &amp; Printables</a>
@@ -94,10 +122,8 @@
   </nav>
 
   <main>
-    <!-- this is where the interactive grid will go -->
-    <div id="crossword-container"></div>
+    <table class="crossword" id="cw"></table>
 
-    <!-- optional manual clue list -->
     <ul id="clues">
       <li data-num="1">1. This pet says “woof.”</li>
       <li data-num="2">2. This pet says “meow.”</li>
@@ -114,54 +140,118 @@
     <button id="print-btn" onclick="window.print()">Print Puzzle</button>
   </main>
 
-  <!-- js‑crossword script -->
-  <script src="https://cdn.jsdelivr.net/npm/js-crossword@2.1.1/dist/js-crossword.min.js"></script>
   <script>
-    // define your puzzle
-    const puzzle = {
-      across: {
-        1: { clue: "This pet says “woof.”", answer: "OGDAY", row: 1, col: 1 },
-        3: { clue: "This pet says “meow.”", answer: "ATCAY", row: 3, col: 1 },
-        5: { clue: "The place where you live.", answer: "OUSEHAY", row: 5, col: 1 },
-        7: { clue: "A red (or green) fruit you can eat.", answer: "APPLEYAY", row: 7, col: 1 },
-        9: { clue: "You write with this on paper.", answer: "ENCILPAY", row: 9, col: 1 },
-      },
-      down: {
-        2: { clue: "You read this for stories.", answer: "OOKBAY", row: 3, col: 3 },
-        4: { clue: "A tall plant with a trunk and leaves.", answer: "EETRAY", row: 1, col: 5 },
-        6: { clue: "You wear these on your feet.", answer: "OESSHAY", row: 1, col: 7 },
-        8: { clue: "You drive this on the road.", answer: "ARCAY", row: 1, col: 9 },
-        10:{ clue: "A form of melody you listen to.", answer: "USICMAY", row: 5, col: 5 },
-      }
-    };
+    (function(){
+      // 0 = block, 1 = white cell
+      const pattern = [
+        [1,1,1,1,1,0,0,0,0,0],  // row1: OGDAY ──
+        [0,0,0,0,1,0,0,0,0,0],
+        [1,1,1,1,1,0,0,0,0,0],  // row3: ATCAY ──
+        [0,0,0,0,1,0,0,0,0,0],
+        [1,1,1,1,1,1,1,0,0,0],  // row5: OUSEHAY ─
+        [0,0,0,0,1,0,0,0,0,0],
+        [1,1,1,1,1,1,1,1,0,0],  // row7: APPLEYAY
+        [0,0,0,0,0,0,0,0,0,0],
+        [1,1,1,1,1,1,1,1,0,0],  // row9: ENCILPAY
+        [0,0,0,0,0,0,0,0,0,0]
+      ];
 
-    // create the crossword
-    new Crossword({
-      puzzle,
-      container: "#crossword-container",
-      allowIncorrect: false,      // no red X on bad letters
-      numberPrefix: "<strong>",
-      numberingClass: "num",
-      cellClass: "cell",
-      focusedCellClass: "focused",
-      filledCellClass: "filled",
-      correctCellClass: "correct",
-      onCellClick({ x, y, clueNumber, direction }) {
-        // highlight corresponding clue in list
-        document
-          .querySelectorAll("#clues li")
-          .forEach(li => li.classList.toggle("highlight", +li.dataset.num === clueNumber));
-      }
-    });
+      // entries: {num, dir, row, col, word}
+      const entries = [
+        {num:1, dir:'across', row:0, col:0, word:'OGDAY'},
+        {num:2, dir:'down',   row:2, col:0, word:'ATCAY'},    // placeholder; we’ll swap
+        {num:3, dir:'across', row:2, col:0, word:'ATCAY'},
+        {num:4, dir:'down',   row:0, col:4, word:'EETRAY'},
+        {num:5, dir:'across', row:4, col:0, word:'OUSEHAY'},
+        {num:6, dir:'down',   row:0, col:6, word:'OESSHAY'},
+        {num:7, dir:'across', row:6, col:0, word:'APPLEYAY'},
+        {num:8, dir:'down',   row:0, col:8, word:'ARCAY'},
+        {num:9, dir:'across', row:8, col:0, word:'ENCILPAY'},
+        {num:10,dir:'down',   row:4, col:4, word:'USICMAY'}
+      ];
 
-    // clicking a clue scrolls to its location
-    document.querySelectorAll("#clues li").forEach(li => {
-      li.addEventListener("click", () => {
-        const num = +li.dataset.num;
-        const dir = puzzle.across[num] ? "across" : "down";
-        Crossword.prototype.scrollToClue(num, dir);
+      const table = document.getElementById('cw');
+      // build grid
+      for(let r=0; r<10; r++){
+        const tr = table.insertRow();
+        for(let c=0; c<10; c++){
+          const td = tr.insertCell();
+          if(!pattern[r][c]){
+            td.classList.add('block');
+            continue;
+          }
+          // white cell → input
+          const inp = document.createElement('input');
+          inp.setAttribute('maxlength','1');
+          inp.dataset.r = r;
+          inp.dataset.c = c;
+          td.appendChild(inp);
+        }
+      }
+
+      // place clue numbers
+      entries.forEach(e=>{
+        const cell = table.rows[e.row].cells[e.col];
+        if(cell && !cell.classList.contains('block')){
+          const num = document.createElement('div');
+          num.className='num';
+          num.textContent=e.num;
+          cell.appendChild(num);
+        }
       });
-    });
+
+      // helper to scroll to cell
+      function scrollTo(r,c){
+        const inp = table.rows[r].cells[c].querySelector('input');
+        if(inp) inp.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+
+      // clicking on a clue
+      document.querySelectorAll('#clues li').forEach(li=>{
+        li.addEventListener('click',()=>{
+          const n=+li.dataset.num;
+          // highlight
+          document.querySelectorAll('#clues li')
+            .forEach(x=>x.classList.toggle('highlight', +x.dataset.num===n));
+          // find entry
+          const e = entries.find(x=>x.num===n);
+          if(!e) return;
+          // scroll to its start
+          scrollTo(e.row,e.col);
+          // focus that input
+          const inp = table.rows[e.row].cells[e.col].querySelector('input');
+          if(inp) inp.focus();
+        });
+      });
+
+      // auto‑advance
+      table.addEventListener('input', e=>{
+        if(e.target.tagName!=='INPUT') return;
+        const r=+e.target.dataset.r, c=+e.target.dataset.c;
+        // find entry we’re in
+        const en = entries.find(x=>{
+          if(x.dir==='across'){
+            return r===x.row && c>=x.col && c<x.col + x.word.length;
+          }else{
+            return c===x.col && r>=x.row && r<x.row + x.word.length;
+          }
+        });
+        if(!en) return;
+        // next cell coords
+        let nr=r, nc=c;
+        if(e.target.value.match(/[A-Za-z]/)){
+          if(en.dir==='across') nc++;
+          else nr++;
+        }
+        setTimeout(()=>{
+          if(nr<10 && nc<10){
+            const ni = table.rows[nr].cells[nc].querySelector('input');
+            if(ni) ni.focus();
+          }
+        },0);
+      });
+
+    })();
   </script>
 </body>
 </html>
