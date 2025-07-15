@@ -80,6 +80,7 @@
       z-index: 100;
     }
     nav a {
+      background: var(--primary);
       color: white;
       text-decoration: none;
       font-weight: bold;
@@ -252,23 +253,22 @@
 
   <script>
     function translateToPigLatin(word) {
-      const vowels=['a','e','i','o','u'];
-      const punct=word.match(/[.,!?;:]$/); const suffix=punct?punct[0]:'';
-      let clean=punct?word.slice(0,-1):word; const cap=clean[0]===clean[0].toUpperCase(); clean=clean.toLowerCase();
-      let translated=''; if(vowels.includes(clean[0])) translated=clean+'yay'; else { const m=clean.match(/^[^aeiou]+/); const c=m?m[0]:''; translated=clean.slice(c.length)+c+'ay'; }
-      if(cap) translated=translated.charAt(0).toUpperCase()+translated.slice(1);
-      return translated+suffix;
+      const vowels=['a','e','i','o','u']; const punct=word.match(/[.,!?;:]$/); const suffix=punct?punct[0]:'';
+      let clean=punct?word.slice(0,-1):word; const cap=clean[0]===clean[0].toUpperCase(); clean=clean.toLowerCase(); let translation='';
+      if(vowels.includes(clean[0])) translation=clean+'yay'; else { const m=clean.match(/^[^aeiou]+/); const c=m?m[0]:''; translation=clean.slice(c.length)+c+'ay'; }
+      if(cap) translation=translation.charAt(0).toUpperCase()+translation.slice(1);
+      return translation+suffix;
     }
     function translateToEnglish(word) {
-      const punct=word.match(/[.,!?;:]$/); const suffix=punct?punct[0]:'';
-      let clean=punct?word.slice(0,-1):word; let result=clean;
+      const punct=word.match(/[.,!?;:]$/); const suffix=punct?punct[0]:''; let clean=punct?word.slice(0,-1):word; let result=clean;
       if(clean.toLowerCase().endsWith('yay')) result=clean.slice(0,-3);
       else if(clean.toLowerCase().endsWith('ay')) { const core=clean.slice(0,-2); const m=core.match(/(.*?)([^aeiou]+)$/); result=m?m[2]+m[1]:core; }
       return result+suffix;
     }
-    document.getElementById('input').addEventListener('input',e=>{const w=e.target.value.trim().split(/\s+/);const out=w.map(wd=>document.getElementById('mode').value==='enToPig'?translateToPigLatin(wd):translateToEnglish(wd)).join(' ');document.getElementById('output').innerText=out;});
-    function clearFields(){document.getElementById('input').value='';document.getElementById('output').innerText='';}
-    function copyOutput(){navigator.clipboard.writeText(document.getElementById('output').innerText);alert('Translation copied to clipboard!');}
+    document.getElementById('input').addEventListener('input',e=>{const words=e.target.value.trim().split(/\s+/); const out=words.map(w=>document.getElementById('mode').value==='enToPig'?translateToPigLatin(w):translateToEnglish(w)).join(' '); document.getElementById('output').innerText=out;});
+    function clearFields(){document.getElementById('input').value=''; document.getElementById('output').innerText='';}
+    function copyOutput(){navigator.clipboard.writeText(document.getElementById('output').innerText); alert('Translation copied to clipboard!');}
   </script>
 </body>
 </html>
+
