@@ -2,271 +2,166 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Almsnay (Nouns Crossword)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Almsnay — Crossword</title>
+
+  <!-- js‑crossword CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/js-crossword@2.1.1/dist/js-crossword.min.css"
+  />
+
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background: #f3e6ff;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      color: #2c174e;
+    }
+    header {
+      background: linear-gradient(to right, #a968d2, #8b69da);
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+    nav {
+      background: #d47dd7;
+      text-align: center;
+      padding: 0.75rem 0;
+    }
+    nav a {
+      margin: 0 1rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: background 0.2s;
+    }
+    nav a:hover {
+      background: #8b69da;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      text-align: center;
     }
     h1 {
-      margin: 1rem 0 0.5rem;
-      color: #6b00b3;
+      margin-bottom: 0.5rem;
     }
-    #crossword {
-      border-collapse: collapse;
-      margin: 1rem 0;
-    }
-    #crossword td {
-      width: 2.2rem;
-      height: 2.2rem;
-      border: 1px solid #ccc;
-      position: relative;
-      background: #fff;
-    }
-    #crossword td.block {
-      background: #333;
-    }
-    #crossword input {
-      width: 100%;
-      height: 100%;
-      border: none;
-      text-align: center;
-      font-size: 1rem;
-      text-transform: uppercase;
-      background: transparent;
-      outline: none;
-    }
-    .number {
-      position: absolute;
-      top: 0.1rem;
-      left: 0.1rem;
-      font-size: 0.6rem;
-      color: #666;
+    #crossword-container {
+      margin: 1.5rem auto;
+      max-width: 100%;
     }
     #clues {
-      max-width: 600px;
-      margin-bottom: 1rem;
-    }
-    #clues ul {
-      list-style: none;
-      padding: 0;
+      text-align: left;
+      margin-top: 2rem;
+      font-size: 1rem;
     }
     #clues li {
-      margin: 0.4rem 0;
+      margin-bottom: 0.5rem;
       cursor: pointer;
-      color: #6b00b3;
-    }
-    #clues li.filled {
-      color: #aaa;
     }
     #print-btn {
-      margin-bottom: 2rem;
-      padding: 0.5rem 1rem;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1.5rem;
       background: #6b00b3;
-      color: #fff;
+      color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 0.25rem;
       cursor: pointer;
+      font-size: 1rem;
     }
-    @media (max-width: 600px) {
-      #crossword td { width: 1.6rem; height: 1.6rem; }
-      #crossword input { font-size: 0.8rem; }
+    #print-btn:hover {
+      background: #4e0085;
     }
   </style>
 </head>
 <body>
 
-  <h1>Almsnay</h1>
-  <table id="crossword">
-    <!-- each <tr> is a row of 10 cells -->
-    <!-- row 1: OGDAY at col 2–6 -->
-    <tr>
-      <td class="block"></td>
-      <td><span class="number">1</span><input maxlength="1" data-word="1"/></td>
-      <td><input maxlength="1" data-word="1"/></td>
-      <td><input maxlength="1" data-word="1"/></td>
-      <td><input maxlength="1" data-word="1"/></td>
-      <td><input maxlength="1" data-word="1"/></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-    </tr>
-    <!-- row 2: ATCAY -->
-    <tr>
-      <td class="block"></td>
-      <td><span class="number">2</span><input maxlength="1" data-word="2"/></td>
-      <td><input maxlength="1" data-word="2"/></td>
-      <td><input maxlength="1" data-word="2"/></td>
-      <td><input maxlength="1" data-word="2"/></td>
-      <td><input maxlength="1" data-word="2"/></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-    </tr>
-    <!-- row 3: OUSEHAY (7) -->
-    <tr>
-      <td class="block"></td>
-      <td><span class="number">3</span><input maxlength="1" data-word="3"/></td>
-      <td><input maxlength="1" data-word="3"/></td>
-      <td><input maxlength="1" data-word="3"/></td>
-      <td><input maxlength="1" data-word="3"/></td>
-      <td><input maxlength="1" data-word="3"/></td>
-      <td><input maxlength="1" data-word="3"/></td>
-      <td><input maxlength="1" data-word="3"/></td>
-      <td class="block"></td>
-      <td class="block"></td>
-    </tr>
-    <!-- row 4: APPLEYAY (8) -->
-    <tr>
-      <td class="block"></td>
-      <td><span class="number">4</span><input maxlength="1" data-word="4"/></td>
-      <td><input maxlength="1" data-word="4"/></td>
-      <td><input maxlength="1" data-word="4"/></td>
-      <td><input maxlength="1" data-word="4"/></td>
-      <td><input maxlength="1" data-word="4"/></td>
-      <td><input maxlength="1" data-word="4"/></td>
-      <td><input maxlength="1" data-word="4"/></td>
-      <td class="block"></td>
-      <td class="block"></td>
-    </tr>
-    <!-- row 5: ENCILPAY (8) -->
-    <tr>
-      <td class="block"></td>
-      <td><span class="number">5</span><input maxlength="1" data-word="5"/></td>
-      <td><input maxlength="1" data-word="5"/></td>
-      <td><input maxlength="1" data-word="5"/></td>
-      <td><input maxlength="1" data-word="5"/></td>
-      <td><input maxlength="1" data-word="5"/></td>
-      <td><input maxlength="1" data-word="5"/></td>
-      <td><input maxlength="1" data-word="5"/></td>
-      <td class="block"></td>
-      <td class="block"></td>
-    </tr>
-    <!-- row 6: OOKBAY (6) -->
-    <tr>
-      <td class="block"></td>
-      <td><span class="number">6</span><input maxlength="1" data-word="6"/></td>
-      <td><input maxlength="1" data-word="6"/></td>
-      <td><input maxlength="1" data-word="6"/></td>
-      <td><input maxlength="1" data-word="6"/></td>
-      <td><input maxlength="1" data-word="6"/></td>
-      <td><input maxlength="1" data-word="6"/></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-    </tr>
-    <!-- row 7: EETRAY (6) -->
-    <tr>
-      <td class="block"></td>
-      <td><span class="number">7</span><input maxlength="1" data-word="7"/></td>
-      <td><input maxlength="1" data-word="7"/></td>
-      <td><input maxlength="1" data-word="7"/></td>
-      <td><input maxlength="1" data-word="7"/></td>
-      <td><input maxlength="1" data-word="7"/></td>
-      <td><input maxlength="1" data-word="7"/></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-    </tr>
-    <!-- row 8: OESSHAY (7) -->
-    <tr>
-      <td class="block"></td>
-      <td><span class="number">8</span><input maxlength="1" data-word="8"/></td>
-      <td><input maxlength="1" data-word="8"/></td>
-      <td><input maxlength="1" data-word="8"/></td>
-      <td><input maxlength="1" data-word="8"/></td>
-      <td><input maxlength="1" data-word="8"/></td>
-      <td><input maxlength="1" data-word="8"/></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-    </tr>
-    <!-- row 9: ARCAY (5) -->
-    <tr>
-      <td class="block"></td>
-      <td><span class="number">9</span><input maxlength="1" data-word="9"/></td>
-      <td><input maxlength="1" data-word="9"/></td>
-      <td><input maxlength="1" data-word="9"/></td>
-      <td><input maxlength="1" data-word="9"/></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-    </tr>
-    <!-- row10: USICMAY (7) -->
-    <tr>
-      <td class="block"></td>
-      <td><span class="number">10</span><input maxlength="1" data-word="10"/></td>
-      <td><input maxlength="1" data-word="10"/></td>
-      <td><input maxlength="1" data-word="10"/></td>
-      <td><input maxlength="1" data-word="10"/></td>
-      <td><input maxlength="1" data-word="10"/></td>
-      <td><input maxlength="1" data-word="10"/></td>
-      <td class="block"></td>
-      <td class="block"></td>
-      <td class="block"></td>
-    </tr>
-  </table>
+  <header>
+    <h1>Almsnay</h1>
+    <p>Your Nouns Crossword in Pig Latin</p>
+  </header>
 
-  <div id="clues">
-    <h2>Clues (click to show/hide)</h2>
-    <ul>
-      <li data-word="1">1. This pet says “woof.”</li>
-      <li data-word="2">2. This pet says “meow.”</li>
-      <li data-word="3">3. The place where you live.</li>
-      <li data-word="4">4. A red (or green) fruit you can eat.</li>
-      <li data-word="5">5. You write with this on paper.</li>
-      <li data-word="6">6. You read this for stories.</li>
-      <li data-word="7">7. A tall plant with a trunk and leaves.</li>
-      <li data-word="8">8. You wear these on your feet.</li>
-      <li data-word="9">9. You drive this on the road.</li>
-      <li data-word="10">10. A form of melody you listen to.</li>
+  <nav>
+    <a href="index.html">Lessons &amp; Translator</a>
+    <a href="games.html">Games &amp; Printables</a>
+    <a href="piglatinia.html">Piglatinia</a>
+    <a href="products.html">Products</a>
+  </nav>
+
+  <main>
+    <!-- this is where the interactive grid will go -->
+    <div id="crossword-container"></div>
+
+    <!-- optional manual clue list -->
+    <ul id="clues">
+      <li data-num="1">1. This pet says “woof.”</li>
+      <li data-num="2">2. This pet says “meow.”</li>
+      <li data-num="3">3. The place where you live.</li>
+      <li data-num="4">4. A red (or green) fruit you can eat.</li>
+      <li data-num="5">5. You write with this on paper.</li>
+      <li data-num="6">6. You read this for stories.</li>
+      <li data-num="7">7. A tall plant with a trunk and leaves.</li>
+      <li data-num="8">8. You wear these on your feet.</li>
+      <li data-num="9">9. You drive this on the road.</li>
+      <li data-num="10">10. A form of melody you listen to.</li>
     </ul>
-  </div>
 
-  <button id="print-btn">Print Puzzle</button>
+    <button id="print-btn" onclick="window.print()">Print Puzzle</button>
+  </main>
 
+  <!-- js‑crossword script -->
+  <script src="https://cdn.jsdelivr.net/npm/js-crossword@2.1.1/dist/js-crossword.min.js"></script>
   <script>
-    // Our Pig Latin answers:
-    const answers = {
-      1: 'OGDAY',
-      2: 'ATCAY',
-      3: 'OUSEHAY',
-      4: 'APPLEYAY',
-      5: 'ENCILPAY',
-      6: 'OOKBAY',
-      7: 'EETRAY',
-      8: 'OESSHAY',
-      9: 'ARCAY',
-      10:'USICMAY'
+    // define your puzzle
+    const puzzle = {
+      across: {
+        1: { clue: "This pet says “woof.”", answer: "OGDAY", row: 1, col: 1 },
+        3: { clue: "This pet says “meow.”", answer: "ATCAY", row: 3, col: 1 },
+        5: { clue: "The place where you live.", answer: "OUSEHAY", row: 5, col: 1 },
+        7: { clue: "A red (or green) fruit you can eat.", answer: "APPLEYAY", row: 7, col: 1 },
+        9: { clue: "You write with this on paper.", answer: "ENCILPAY", row: 9, col: 1 },
+      },
+      down: {
+        2: { clue: "You read this for stories.", answer: "OOKBAY", row: 3, col: 3 },
+        4: { clue: "A tall plant with a trunk and leaves.", answer: "EETRAY", row: 1, col: 5 },
+        6: { clue: "You wear these on your feet.", answer: "OESSHAY", row: 1, col: 7 },
+        8: { clue: "You drive this on the road.", answer: "ARCAY", row: 1, col: 9 },
+        10:{ clue: "A form of melody you listen to.", answer: "USICMAY", row: 5, col: 5 },
+      }
     };
 
-    // Toggle fill on clue click
-    document.querySelectorAll('#clues li').forEach(li => {
-      li.addEventListener('click', () => {
-        const n = li.dataset.word;
-        const isFilled = li.classList.toggle('filled');
-        document.querySelectorAll(`#crossword input[data-word="${n}"]`)
-          .forEach((inp, i) => {
-            inp.value = isFilled ? answers[n][i] : '';
-          });
-      });
+    // create the crossword
+    new Crossword({
+      puzzle,
+      container: "#crossword-container",
+      allowIncorrect: false,      // no red X on bad letters
+      numberPrefix: "<strong>",
+      numberingClass: "num",
+      cellClass: "cell",
+      focusedCellClass: "focused",
+      filledCellClass: "filled",
+      correctCellClass: "correct",
+      onCellClick({ x, y, clueNumber, direction }) {
+        // highlight corresponding clue in list
+        document
+          .querySelectorAll("#clues li")
+          .forEach(li => li.classList.toggle("highlight", +li.dataset.num === clueNumber));
+      }
     });
 
-    // Print button
-    document.getElementById('print-btn').addEventListener('click', () => {
-      window.print();
+    // clicking a clue scrolls to its location
+    document.querySelectorAll("#clues li").forEach(li => {
+      li.addEventListener("click", () => {
+        const num = +li.dataset.num;
+        const dir = puzzle.across[num] ? "across" : "down";
+        Crossword.prototype.scrollToClue(num, dir);
+      });
     });
   </script>
 </body>
 </html>
-
