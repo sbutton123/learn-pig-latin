@@ -4,14 +4,29 @@
   <meta charset="UTF-8"/>
   <title>Print IVELAY OVELAY AUGHLAY</title>
   <style>
+    /* set page to US‑letter portrait with zero margins */
+    @page {
+      size: letter portrait;
+      margin: 0;
+    }
+    /* remove all default spacing */
     html, body {
-      margin:0;
-      padding:0;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    /* make the image fill the printable area without spilling */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     img {
-      width:100vw;
-      height:auto;
-      display:block;
+      /* fit width to page, scale height proportionally */
+      width: 100%;
+      height: auto;
+      /* prevent any page‑break around the image */
+      page-break-inside: avoid;
     }
   </style>
   <script>
