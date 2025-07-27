@@ -5,23 +5,26 @@
   <title>EAMDRAY IGBAY Coloring Page</title>
   <style>
     @page { size: letter portrait; margin: 0.25in; }
-    html, body { margin: 0; padding: 0; height: 100%; }
+    html, body { margin:0; padding:0; height:100%; }
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:white;
     }
     img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      page-break-inside: avoid;
+      max-width:100%; 
+      max-height:100%;
+      object-fit:contain;
+      page-break-inside:avoid;
     }
   </style>
-  <script>window.onload = () => window.print();</script>
+  <script>
+    window.onload = () => window.print();
+  </script>
 </head>
 <body>
-  <img src="../thumbnails/dreambig.png" alt="EAMDRAY IGBAY Coloring Page">
+  <!-- note: no "../" here, just the local filename -->
+  <img src="dreambig.png" alt="EAMDRAY IGBAY Coloring Page">
 </body>
 </html>
