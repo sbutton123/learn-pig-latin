@@ -115,13 +115,35 @@
     .buttons button:hover {
       background: var(--primary-dark);
     }
+    /* print-specific rules */
+    @page {
+      size: letter portrait;
+      margin: 0.25in;
+    }
     @media print {
-      nav, .buttons { display: none; }
-      body { background: white; color: black; }
-      table.crossword, table.crossword td, table.crossword td input { 
+      /* hide navigation and buttons */
+      nav, .buttons { display: none !important; }
+      body {
         background: white !important;
         color: black !important;
+      }
+      /* scale main content to fit one page */
+      main {
+        transform: scale(0.9);
+        transform-origin: top center;
+      }
+      /* ensure crossword prints cleanly */
+      table.crossword, table.crossword td {
         border-color: black !important;
+        background: white !important;
+      }
+      table.crossword td input {
+        background: transparent !important;
+        color: black !important;
+      }
+      /* print clues in black */
+      .clue-section h2, li {
+        color: black !important;
       }
     }
   </style>
@@ -242,7 +264,6 @@
       if(inp.tagName!=='INPUT') return;
       const r = +inp.dataset.r;
       const c = +inp.dataset.c;
-      // find entry containing this cell
       const en = entries.find(x=>{
         if(x.dir==='across') {
           return r===x.row && c>=x.col && c<x.col+x.word.length;
@@ -251,7 +272,6 @@
         }
       });
       if(!en) return;
-      // move focus
       let nr=r, nc=c;
       if(inp.value.match(/[A-Za-z]/)){
         if(en.dir==='across') nc++;
