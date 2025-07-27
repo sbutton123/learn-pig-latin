@@ -26,6 +26,7 @@
       justify-content: center;
       margin: 2rem auto;
       user-select: none;
+      page-break-inside: avoid;
     }
     .cell {
       width: 2rem;
@@ -55,6 +56,7 @@
       max-width: 620px;
       margin-left: auto;
       margin-right: auto;
+      page-break-inside: avoid;
     }
     .word {
       padding: 0.4rem 0.9rem;
@@ -84,21 +86,43 @@
       font-size: 1rem;
       cursor: pointer;
     }
+
+    /* print adjustments */
+    @page {
+      size: letter portrait;
+      margin: 0;
+    }
     @media print {
+      /* hide on-screen controls */
+      .controls { display: none !important; }
+      /* reset background/text */
       body {
-        background: white;
-        color: black;
-      }
-      .cell, .word {
         background: white !important;
         color: black !important;
-        border: 1px solid black;
+        margin: 0;
+        padding: 0;
       }
+      /* scale wrapper to fit one page */
+      #puzzle-wrapper {
+        transform: scale(0.75);
+        transform-origin: top center;
+        margin: 0;
+        width: 100%;
+      }
+      /* ensure grid prints cleanly */
+      .cell,
+      .cell.selected,
+      .cell.found {
+        background: white !important;
+        color: black !important;
+        border: 1px solid black !important;
+      }
+      /* word bank print style */
+      .word,
       .word.found {
+        background: white !important;
+        color: black !important;
         text-decoration: none !important;
-      }
-      .controls button {
-        display: none;
       }
     }
   </style>
