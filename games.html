@@ -16,14 +16,12 @@
       --card-bg: #ffffff;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(to bottom, var(--background-start), var(--background-end));
       color: var(--text-dark);
       line-height: 1.6;
     }
-
     header {
       background: linear-gradient(to right, var(--primary), var(--accent));
       color: white;
@@ -32,7 +30,6 @@
     }
     header h1 { font-size: 2.5rem; }
     header p  { margin-top: 0.5rem; font-size: 1.2rem; }
-
     nav {
       background: var(--secondary);
       text-align: center;
@@ -53,35 +50,29 @@
       background: var(--primary);
       transform: translateY(-2px);
     }
-
     main {
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
-
     .instruction {
       text-align: center;
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
       font-weight: bold;
-      color: var(--text-dark);
     }
-
     .section-title {
       text-align: center;
       color: var(--primary);
       font-size: 2rem;
       margin: 1rem 0 1.5rem;
     }
-
     .game-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
-
     .game-card {
       background: var(--card-bg);
       border-radius: 1rem;
@@ -101,20 +92,19 @@
       cursor: pointer;
     }
     .game-card img {
-      display: block;
       width: 100%;
       height: auto;
       object-fit: contain;
     }
     .badge {
       position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
+      top: .5rem;
+      right: .5rem;
       background: var(--accent);
       color: white;
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
-      font-size: 0.75rem;
+      padding: .25rem .5rem;
+      border-radius: .25rem;
+      font-size: .75rem;
       pointer-events: none;
     }
     .overlay {
@@ -122,18 +112,17 @@
       inset: 0;
       background: rgba(0,0,0,0.5);
       color: white;
-      font-weight: bold;
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       transition: opacity .2s;
+      font-weight: bold;
       font-size: 1.2rem;
     }
     .game-card:hover .overlay {
       opacity: 1;
     }
-
     footer {
       background: var(--primary);
       color: white;
@@ -142,7 +131,6 @@
       margin-top: 3rem;
       font-size: .9rem;
     }
-
     @media (max-width: 768px) {
       nav a { padding: .5rem 1rem; font-size: 1rem; }
     }
@@ -153,20 +141,45 @@
     <h1>Games &amp; Printables</h1>
     <p>Practice Pig Latin through fun, interactive challenges!</p>
   </header>
-
   <nav>
     <a href="index.html">Lessons &amp; Translator</a>
     <a href="games.html">Games &amp; Printables</a>
     <a href="piglatinia.html">Piglatinia</a>
     <a href="products.html">Products</a>
   </nav>
-
   <main>
     <!-- Word Search Section -->
     <p class="instruction">Click any card below to play online or print your own copy!</p>
     <h2 class="section-title">Word Search</h2>
     <div class="game-grid">
-      <!-- ... your four word-search cards ... -->
+      <div class="game-card">
+        <a href="animalsway-wordsearch.html">
+          <div class="badge">Printable</div>
+          <div class="overlay">Play Now</div>
+          <img src="thumbnails/animalsway-thumb.jpg" alt="Animalsway Word Search">
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="colorsshapes-wordsearch.html">
+          <div class="badge">Printable</div>
+          <div class="overlay">Play Now</div>
+          <img src="thumbnails/colorsshapes-thumb.jpg" alt="Olorscay &amp; Apesshay Word Search">
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="oodfay-wordsearch.html">
+          <div class="badge">Printable</div>
+          <div class="overlay">Play Now</div>
+          <img src="thumbnails/food-thumb.jpg" alt="Oodfay Word Search">
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="erbsvay-wordsearch.html">
+          <div class="badge">Printable</div>
+          <div class="overlay">Play Now</div>
+          <img src="thumbnails/verbs-thumb.jpg" alt="Erbsvay Word Search">
+        </a>
+      </div>
     </div>
 
     <!-- Coloring Pages Section -->
@@ -176,18 +189,16 @@
         <a href="coloring/ivelay-ovelay-aughlay.pdf" target="_blank">
           <div class="badge">Printable</div>
           <div class="overlay">Color &amp; Print</div>
-          <!-- updated to match your actual filename: -->
-          <img src="thumbnails/IVELAYOVELAYAUGHLAY.png"
-               alt="Ible Uble Afle Coloring Page">
+          <!-- exactly matching your GitHub filename: -->
+          <img src="thumbnails/IVELAYOVELAYAUGLAY.png"
+               alt="IVELAY OVELAY AUGHLAY Coloring Page">
         </a>
       </div>
-      <!-- add more coloring cards here -->
+      <!-- future coloring pages go here -->
     </div>
   </main>
-
   <footer>
     © 2025 Learn Pig Latin. All rights reserved.
   </footer>
 </body>
 </html>
-
