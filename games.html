@@ -23,6 +23,7 @@
       color: var(--text-dark);
       line-height: 1.6;
     }
+
     header {
       background: linear-gradient(to right, var(--primary), var(--accent));
       color: white;
@@ -58,33 +59,88 @@
       margin: 2rem auto;
       padding: 0 1rem;
     }
+
+    /* 1. Instruction header */
+    .instruction {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+      color: var(--text-dark);
+    }
+
     .section-title {
       text-align: center;
       color: var(--primary);
       font-size: 2rem;
-      margin: 2rem 0 1rem;
+      margin: 1rem 0 1.5rem;
     }
+
     .game-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
       gap: 1.5rem;
-      padding: 0 1rem;
     }
+
     .game-card {
       background: var(--card-bg);
       border-radius: 1rem;
+      border: 2px solid var(--accent);
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       overflow: hidden;
-      transition: transform .2s;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
     }
+
+    /* 4. Pop‑out on hover */
     .game-card:hover {
-      transform: translateY(-5px);
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border-color: var(--primary);
     }
+
+    /* Make the whole card look clickable */
+    .game-card a {
+      display: block;
+      position: relative;
+      cursor: pointer;
+    }
+
     .game-card img {
       display: block;
       width: 100%;
       height: auto;
       object-fit: contain;
+    }
+
+    /* 2. Printable badge */
+    .badge {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      pointer-events: none;
+    }
+
+    /* 3. Play Now overlay */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .2s;
+      font-size: 1.2rem;
+    }
+    .game-card:hover .overlay {
+      opacity: 1;
     }
 
     footer {
@@ -115,25 +171,36 @@
   </nav>
 
   <main>
+    <!-- Instruction header -->
+    <p class="instruction">Click any card below to play online or print your own copy!</p>
+
     <h2 class="section-title">Word Search</h2>
     <div class="game-grid">
       <div class="game-card">
         <a href="animalsway-wordsearch.html">
+          <div class="badge">Printable</div>
+          <div class="overlay">Play Now</div>
           <img src="thumbnails/animalsway-thumb.jpg" alt="Animalsway Word Search">
         </a>
       </div>
       <div class="game-card">
         <a href="colorsshapes-wordsearch.html">
+          <div class="badge">Printable</div>
+          <div class="overlay">Play Now</div>
           <img src="thumbnails/colorsshapes-thumb.jpg" alt="Olorscay &amp; Apesshay Word Search">
         </a>
       </div>
       <div class="game-card">
         <a href="oodfay-wordsearch.html">
+          <div class="badge">Printable</div>
+          <div class="overlay">Play Now</div>
           <img src="thumbnails/food-thumb.jpg" alt="Oodfay Word Search">
         </a>
       </div>
       <div class="game-card">
         <a href="erbsvay-wordsearch.html">
+          <div class="badge">Printable</div>
+          <div class="overlay">Play Now</div>
           <img src="thumbnails/verbs-thumb.jpg" alt="Erbsvay Word Search">
         </a>
       </div>
