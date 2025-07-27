@@ -15,9 +15,9 @@
       --text-dark: #2c174e;
       --card-bg: #ffffff;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box‑sizing: border‑box; margin: 0; padding: 0; }
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial, sans‑serif;
       background: linear-gradient(to bottom, var(--background-start), var(--background-end));
       color: var(--text-dark);
       line-height: 1.6;
@@ -29,14 +29,13 @@
       padding: 2rem 1rem;
     }
     header h1 { font-size: 2.5rem; }
-    header p  { margin-top: 0.5rem; font-size: 1.2rem; }
+    header p  { margin-top: .5rem; font-size: 1.2rem; }
     nav {
       background: var(--secondary);
       text-align: center;
       padding: 1rem;
     }
     nav a {
-      display: inline-block;
       margin: 0 .5rem;
       padding: .75rem 1.5rem;
       background: var(--accent);
@@ -72,6 +71,11 @@
       grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
       gap: 1.5rem;
       margin-bottom: 2rem;
+    }
+    /* force single-coloring card to stay 180px wide */
+    .coloring-grid {
+      grid-template-columns: repeat(auto-fill, 180px) !important;
+      justify-content: start;
     }
     .game-card {
       background: var(--card-bg);
@@ -141,12 +145,14 @@
     <h1>Games &amp; Printables</h1>
     <p>Practice Pig Latin through fun, interactive challenges!</p>
   </header>
+
   <nav>
     <a href="index.html">Lessons &amp; Translator</a>
     <a href="games.html">Games &amp; Printables</a>
     <a href="piglatinia.html">Piglatinia</a>
     <a href="products.html">Products</a>
   </nav>
+
   <main>
     <!-- Word Search Section -->
     <p class="instruction">Click any card below to play online or print your own copy!</p>
@@ -184,21 +190,23 @@
 
     <!-- Coloring Pages Section -->
     <h2 class="section-title">Printable Coloring Pages</h2>
-    <div class="game-grid">
+    <div class="game-grid coloring-grid">
       <div class="game-card">
-        <a href="coloring/ivelay-ovelay-aughlay.pdf" target="_blank">
+        <!-- instead of a missing PDF, link directly to your PNG so it opens in a new tab & prints -->
+        <a href="thumbnails/IVELAYOVELAYAUGLAY.png" target="_blank">
           <div class="badge">Printable</div>
           <div class="overlay">Color &amp; Print</div>
-          <!-- exactly matching your GitHub filename: -->
           <img src="thumbnails/IVELAYOVELAYAUGLAY.png"
                alt="IVELAY OVELAY AUGHLAY Coloring Page">
         </a>
       </div>
-      <!-- future coloring pages go here -->
+      <!-- add more coloring cards here -->
     </div>
   </main>
+
   <footer>
     © 2025 Learn Pig Latin. All rights reserved.
   </footer>
 </body>
 </html>
+
