@@ -7,7 +7,6 @@
   <style>
     :root {
       --primary: #a97ef9;
-      --primary-dark: #9063f5;
       --secondary: #d682f4;
       --accent: #78aaff;
       --background-start: #f3eaff;
@@ -15,9 +14,13 @@
       --text-dark: #2c174e;
       --card-bg: #ffffff;
     }
-    *, *::before, *::after { box‑sizing: border‑box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     body {
-      font-family: Arial, sans‑serif;
+      font-family: Arial, sans-serif;
       background: linear-gradient(to bottom, var(--background-start), var(--background-end));
       color: var(--text-dark);
       line-height: 1.6;
@@ -28,22 +31,28 @@
       text-align: center;
       padding: 2rem 1rem;
     }
-    header h1 { font-size: 2.5rem; }
-    header p  { margin-top: .5rem; font-size: 1.2rem; }
+    header h1 {
+      font-size: 2.5rem;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+    }
     nav {
       background: var(--secondary);
       text-align: center;
       padding: 1rem;
     }
     nav a {
-      margin: 0 .5rem;
-      padding: .75rem 1.5rem;
+      display: inline-block;
+      margin: 0 0.5rem;
+      padding: 0.75rem 1.5rem;
       background: var(--accent);
       color: white;
       text-decoration: none;
       font-weight: bold;
-      border-radius: .5rem;
-      transition: background .3s, transform .2s;
+      border-radius: 0.5rem;
+      transition: background 0.3s, transform 0.2s;
     }
     nav a:hover {
       background: var(--primary);
@@ -72,8 +81,8 @@
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
-    /* force single-coloring card to stay 180px wide */
     .coloring-grid {
+      /* ensure coloring page cards stay same size */
       grid-template-columns: repeat(auto-fill, 180px) !important;
       justify-content: start;
     }
@@ -83,7 +92,7 @@
       border: 2px solid var(--accent);
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       overflow: hidden;
-      transition: transform .2s, box-shadow .2s, border-color .2s;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
     .game-card:hover {
       transform: scale(1.05);
@@ -102,13 +111,13 @@
     }
     .badge {
       position: absolute;
-      top: .5rem;
-      right: .5rem;
+      top: 0.5rem;
+      right: 0.5rem;
       background: var(--accent);
       color: white;
-      padding: .25rem .5rem;
-      border-radius: .25rem;
-      font-size: .75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
       pointer-events: none;
     }
     .overlay {
@@ -120,7 +129,7 @@
       align-items: center;
       justify-content: center;
       opacity: 0;
-      transition: opacity .2s;
+      transition: opacity 0.2s;
       font-weight: bold;
       font-size: 1.2rem;
     }
@@ -133,10 +142,13 @@
       text-align: center;
       padding: 1rem;
       margin-top: 3rem;
-      font-size: .9rem;
+      font-size: 0.9rem;
     }
     @media (max-width: 768px) {
-      nav a { padding: .5rem 1rem; font-size: 1rem; }
+      nav a {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -154,7 +166,7 @@
   </nav>
 
   <main>
-    <!-- Word Search Section -->
+    <!-- Word Search Row -->
     <p class="instruction">Click any card below to play online or print your own copy!</p>
     <h2 class="section-title">Word Search</h2>
     <div class="game-grid">
@@ -188,19 +200,16 @@
       </div>
     </div>
 
-    <!-- Coloring Pages Section -->
+    <!-- Coloring Pages Row -->
     <h2 class="section-title">Printable Coloring Pages</h2>
     <div class="game-grid coloring-grid">
       <div class="game-card">
-        <!-- instead of a missing PDF, link directly to your PNG so it opens in a new tab & prints -->
-        <a href="thumbnails/IVELAYOVELAYAUGLAY.png" target="_blank">
+        <a href="coloring/ivelay-ovelay-aughlay.html" target="_blank">
           <div class="badge">Printable</div>
           <div class="overlay">Color &amp; Print</div>
-          <img src="thumbnails/IVELAYOVELAYAUGLAY.png"
-               alt="IVELAY OVELAY AUGHLAY Coloring Page">
+          <img src="thumbnails/IVELAYOVELAYAUGLAY.png" alt="IVELAY OVELAY AUGHLAY Coloring Page">
         </a>
       </div>
-      <!-- add more coloring cards here -->
     </div>
   </main>
 
@@ -209,4 +218,3 @@
   </footer>
 </body>
 </html>
-
