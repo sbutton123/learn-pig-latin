@@ -2,41 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>Print IVELAY OVELAY AUGHLAY</title>
+  <title>IVELAY OVELAY AUGHLAY Coloring Page</title>
   <style>
-    /* force portrait letter with a tiny margin so most printers will honor it */
-    @page {
-      size: letter portrait;
-      margin: 0.25in;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
+    /* print to a single letter‑portrait sheet */
+    @page { size: letter portrait; margin: 0.25in; }
+    html, body { margin: 0; padding: 0; height: 100%; }
     body {
       display: flex;
       justify-content: center;
       align-items: center;
+      background: white;
     }
     img {
-      /* constrain by both dims so it never overflows */
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      display: block;
-    }
-    /* hide any print headers/footers if browser allows */
-    @media print {
-      body { margin: 0; }
+      page-break-inside: avoid;
     }
   </style>
   <script>
-    window.onload = () => window.print();
+    window.onload = function() {
+      window.print();
+    };
   </script>
 </head>
 <body>
-  <img src="../thumbnails/IVELAYOVELAYAUGLAY.png"
-       alt="IVELAY OVELAY AUGHLAY Coloring Page">
+  <!-- make sure this file lives at /coloring/IVELAYOVELAYAUGLAY.png -->
+  <img
+    src="IVELAYOVELAYAUGLAY.png"
+    alt="IVELAY OVELAY AUGHLAY Coloring Page">
 </body>
 </html>
