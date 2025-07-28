@@ -14,7 +14,7 @@
       --text-dark: #2c174e;
       --card-bg: #ffffff;
     }
-    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(to bottom, var(--background-start), var(--background-end));
@@ -66,10 +66,13 @@
       gap:1.5rem;
       margin-bottom:2rem;
     }
+    /* force exactly 3 columns for coloring pages */
     .coloring-grid {
-      /* reuse same layout for coloring row */
-      grid-template-columns:repeat(auto-fill,180px) !important;
-      justify-content:start;
+      display:grid;
+      grid-template-columns:repeat(3, minmax(200px,1fr)) !important;
+      gap:1.5rem;
+      justify-content:center;
+      margin:0 auto;
     }
     .game-card {
       background:var(--card-bg);
@@ -77,7 +80,7 @@
       border:2px solid var(--accent);
       box-shadow:0 4px 10px rgba(0,0,0,0.05);
       overflow:hidden;
-      transition:transform .2s, box-shadow .2s, border-color .2s;
+      transition:transform .2s,box-shadow .2s,border-color .2s;
     }
     .game-card:hover {
       transform:scale(1.05);
@@ -96,8 +99,7 @@
     }
     .badge {
       position:absolute;
-      top:.5rem;
-      right:.5rem;
+      top:.5rem; right:.5rem;
       background:var(--accent);
       color:white;
       padding:.25rem .5rem;
@@ -128,6 +130,9 @@
       font-size:.9rem;
     }
     @media (max-width:768px) {
+      .coloring-grid {
+        grid-template-columns:repeat(auto-fit, minmax(180px,1fr)) !important;
+      }
       nav a { padding:.5rem 1rem; font-size:1rem; }
     }
   </style>
@@ -146,10 +151,11 @@
   </nav>
 
   <main>
-    <!-- Word Search Row -->
     <p class="instruction">Click any card below to play online or print your own copy!</p>
+
     <h2 class="section-title">Word Search</h2>
     <div class="game-grid">
+      <!-- your four word-search cards here -->
       <div class="game-card">
         <a href="animalsway-wordsearch.html">
           <div class="badge">Printable</div>
@@ -180,55 +186,49 @@
       </div>
     </div>
 
-    <!-- Coloring Pages Row -->
     <h2 class="section-title">Printable Coloring Pages</h2>
     <div class="game-grid coloring-grid">
-      <!-- 1) Ivelay Ovelay Aughlay -->
+      <!-- six coloring cards in a 3×2 grid -->
       <div class="game-card">
         <a href="coloring/ivelay-ovelay-aughlay.html" target="_blank">
           <div class="badge">Printable</div>
           <div class="overlay">Color &amp; Print</div>
-          <img src="coloring/IVELAYOVELAYAUGLAY.png" alt="IVELAY OVELAY AUGHLAY Coloring Page">
+          <img src="coloring/IVELAYOVELAYAUGLAY.png" alt="IVELAY OVELAY AUGHLAY">
         </a>
       </div>
-      <!-- 2) Eamdray Igbay -->
       <div class="game-card">
         <a href="coloring/dreamray-igbay.html" target="_blank">
           <div class="badge">Printable</div>
           <div class="overlay">Color &amp; Print</div>
-          <img src="coloring/dreambig.png" alt="EAMDRAY IGBAY Coloring Page">
+          <img src="coloring/dreambig.png" alt="EAMDRAY IGBAY">
         </a>
       </div>
-      <!-- 3) Appyhay Oopinghay -->
       <div class="game-card">
         <a href="coloring/appyhay-oopinghay.html" target="_blank">
           <div class="badge">Printable</div>
           <div class="overlay">Color &amp; Print</div>
-          <img src="coloring/Happyhooping.png" alt="APPYHAY OOPINGHAY Coloring Page">
+          <img src="coloring/Happyhooping.png" alt="APPYHAY OOPINGHAY">
         </a>
       </div>
-      <!-- 4) Ont'day Orryway – Ebay Appyhay -->
       <div class="game-card">
         <a href="coloring/ontday-orryway-ebay-appyhay.html" target="_blank">
           <div class="badge">Printable</div>
           <div class="overlay">Color &amp; Print</div>
-          <img src="coloring/dontworrybehappy.png" alt="ONT'DAY ORRYWAY – EBAY APPYHAY Coloring Page">
+          <img src="coloring/dontworrybehappy.png" alt="ONT'DAY ORRYWAY – EBAY APPYHAY">
         </a>
       </div>
-      <!-- 5) Asechay Ouryay Eamsdray -->
       <div class="game-card">
         <a href="coloring/asechay-ouryay-eamsdray.html" target="_blank">
           <div class="badge">Printable</div>
           <div class="overlay">Color &amp; Print</div>
-          <img src="coloring/chaseyourdreams.png" alt="ASECHAY OURYAY EAMSDRAY Coloring Page">
+          <img src="coloring/chaseyourdreams.png" alt="ASECHAY OURYAY EAMSDRAY">
         </a>
       </div>
-      <!-- 6) Elievebay -->
       <div class="game-card">
         <a href="coloring/elievebay.html" target="_blank">
           <div class="badge">Printable</div>
           <div class="overlay">Color &amp; Print</div>
-          <img src="coloring/BELIEVE.png" alt="ELIEVEBAY Coloring Page">
+          <img src="coloring/BELIEVE.png" alt="ELIEVEBAY">
         </a>
       </div>
     </div>
