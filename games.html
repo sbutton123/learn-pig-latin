@@ -72,7 +72,7 @@
       grid-template-columns:repeat(3, minmax(200px,1fr)) !important;
       gap:1.5rem;
       justify-content:center;
-      margin:0 auto;
+      margin:0 auto 2rem;
     }
     .game-card {
       background:var(--card-bg);
@@ -121,6 +121,24 @@
       font-size:1.2rem;
     }
     .game-card:hover .overlay { opacity:1; }
+    .buy-button {
+      text-align:center;
+      margin:2rem 0;
+    }
+    .buy-button a {
+      display:inline-block;
+      padding:.75rem 1.5rem;
+      background:var(--accent);
+      color:white;
+      text-decoration:none;
+      font-weight:bold;
+      border-radius:.5rem;
+      transition:background .3s,transform .2s;
+    }
+    .buy-button a:hover {
+      background:var(--primary);
+      transform:translateY(-2px);
+    }
     footer {
       background:var(--primary);
       color:white;
@@ -186,9 +204,9 @@
       </div>
     </div>
 
-    <h2 class="section-title">Printable Coloring Pages</h2>
+    <h2 class="section-title">Free Coloring Pages</h2>
     <div class="game-grid coloring-grid">
-      <!-- six coloring cards in a 3×2 grid -->
+      <!-- keep only these three free coloring cards -->
       <div class="game-card">
         <a href="coloring/ivelay-ovelay-aughlay.html" target="_blank">
           <div class="badge">Printable</div>
@@ -204,33 +222,16 @@
         </a>
       </div>
       <div class="game-card">
-        <a href="coloring/appyhay-oopinghay.html" target="_blank">
-          <div class="badge">Printable</div>
-          <div class="overlay">Color &amp; Print</div>
-          <img src="coloring/Happyhooping.png" alt="APPYHAY OOPINGHAY">
-        </a>
-      </div>
-      <div class="game-card">
         <a href="coloring/ontday-orryway-ebay-appyhay.html" target="_blank">
           <div class="badge">Printable</div>
           <div class="overlay">Color &amp; Print</div>
           <img src="coloring/dontworrybehappy.png" alt="ONT'DAY ORRYWAY – EBAY APPYHAY">
         </a>
       </div>
-      <div class="game-card">
-        <a href="coloring/asechay-ouryay-eamsdray.html" target="_blank">
-          <div class="badge">Printable</div>
-          <div class="overlay">Color &amp; Print</div>
-          <img src="coloring/chaseyourdreams.png" alt="ASECHAY OURYAY EAMSDRAY">
-        </a>
-      </div>
-      <div class="game-card">
-        <a href="coloring/elievebay.html" target="_blank">
-          <div class="badge">Printable</div>
-          <div class="overlay">Color &amp; Print</div>
-          <img src="coloring/BELIEVE.png" alt="ELIEVEBAY">
-        </a>
-      </div>
+    </div>
+
+    <div class="buy-button">
+      <a href="products.html" target="_blank">Buy Full Coloring Book</a>
     </div>
   </main>
 
