@@ -2,199 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Products | Learn Pig Latin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pig Latin Products</title>
   <style>
-    :root {
-      --primary: #a97ef9;
-      --secondary: #d682f4;
-      --background: #e6dbff;
-      --text-dark: #2c174e;
-    }
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: var(--background);
-      color: var(--text-dark);
+      background: #fff8fc;
+      margin: 0;
+      padding: 20px;
+      color: #222;
     }
-    nav {
-      background: var(--secondary);
+
+    h1 {
       text-align: center;
-      padding: 12px 0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    nav a {
-      color: white;
-      margin: 0 16px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: opacity 0.3s;
-    }
-    nav a:hover { opacity: 0.8; }
-
-    .container {
-      max-width: 960px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+      margin-bottom: 40px;
+      color: #a833b9;
     }
 
-    h2 {
-      color: var(--primary);
-      margin-top: 2rem;
-      font-size: 1.4rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    @media (max-width: 1024px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 600px) {
-      .grid { grid-template-columns: 1fr; }
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
     }
 
     .card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      width: 200px;
+      border: 2px solid #f0c7f0;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
 
-    .card img {
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card-image-wrapper {
       width: 100%;
-      max-height: 280px;
-      object-fit: contain;
-      background-color: white;
-      display: block;
-      border-bottom: 1px solid #eee;
-    }
-
-    .card-content {
-      padding: 0.75rem 1rem;
-      flex: 1;
+      aspect-ratio: 2 / 3;
+      background: white;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .card-content h3 {
-      margin: 0 0 0.4rem;
-      font-size: 1rem;
-      color: var(--primary);
+    .card-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
-    .card-content p {
-      flex: 1;
-      margin: 0 0 0.6rem;
+    .card h2 {
+      font-size: 1.1rem;
+      margin: 10px;
+      color: #a833b9;
+    }
+
+    .card p {
       font-size: 0.9rem;
-      line-height: 1.3;
+      padding: 0 10px 10px;
     }
 
-    .price {
-      font-weight: bold;
-      margin: 0 0 1rem;
-    }
-
-    .card-content a {
-      align-self: flex-start;
-      text-decoration: none;
-      background: var(--primary);
+    .card a {
+      display: inline-block;
+      margin: 10px;
+      padding: 8px 12px;
+      background-color: #a833b9;
       color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      font-weight: bold;
-      transition: background 0.3s;
+      text-decoration: none;
+      border-radius: 6px;
     }
 
-    .card-content a:hover {
-      background: var(--secondary);
+    .card a:hover {
+      background-color: #870fa1;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Lessons &amp; Translator</a>
-    <a href="games.html">Games &amp; Printables</a>
-    <a href="piglatinia.html">Piglatinia</a>
-    <a href="products.html">Products</a>
-  </nav>
 
-  <div class="container">
-    <h2>📚 Dual-Language Books &amp; Printables</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="thumbnails/piglatincoloringbook.webp" alt="Pig Latin Coloring Book" />
-        <div class="card-content">
-          <h3>Pig Latin Coloring Book</h3>
-          <p>A fun and silly Pig Latin-themed coloring book for kids. Buy the digital version or order a physical copy!</p>
-          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-            <a href="https://www.etsy.com/listing/4345537260/ipgay-atinlay-oloringcay-ookbay-an" target="_blank">Buy Printable PDF — $3.99</a>
-            <a href="https://www.amazon.com/dp/B0FL7GPQLC" target="_blank" style="background-color: #f4b400;">Buy Physical Book — $8.38</a>
-          </div>
-        </div>
-      </div>
+  <h1>Dual-Language Books & Products</h1>
 
-      <div class="card">
-        <img src="thumbnails/threelittlepigs.webp" alt="Pig Latin Tales: The Three Little Pigs" />
-        <div class="card-content">
-          <h3>Pig Latin Tales: The Three Little Pigs</h3>
-          <p>The classic fairy tale—translated into Pig Latin!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Tales-Eethray-Itttlelay-ebook/dp/B0FD83WYNK/" target="_blank">Buy on Amazon</a>
-        </div>
-      </div>
+  <div class="product-grid">
 
-      <div class="card">
-        <img src="thumbnails/Goldilocks.webp" alt="Pig Latin Tales: Goldilocks and The Three Bears" />
-        <div class="card-content">
-          <h3>Pig Latin Tales: Goldilocks and The Three Bears</h3>
-          <p>The classic fairy tale—translated into Pig Latin!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Tales-Goldilocks-Classic-ebook/dp/B0FG4J13FG/" target="_blank">Buy on Amazon</a>
-        </div>
+    <div class="card">
+      <div class="card-image-wrapper">
+        <img src="thumbnails/PigLATIN3BOOKS.webp" alt="Pig Latin 3 Books Bundle">
       </div>
-
-      <div class="card">
-        <img src="thumbnails/littleredriding.webp" alt="Pig Latin Tales: Little Red Riding Hood" />
-        <div class="card-content">
-          <h3>Pig Latin Tales: Little Red Riding Hood</h3>
-          <p>A classic fairy tale with a Pig Latin twist!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Tales-Ittlelay-Idingray/dp/B0FGQ6PWRC/" target="_blank">Buy on Amazon</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="thumbnails/PigLATIN3BOOKS.webp" alt="Pig Latin Classic Tales: Triple Anthology" />
-        <div class="card-content">
-          <h3>Pig Latin Classic Tales: Triple Anthology</h3>
-          <p>Three classic fairy tales — with a hilarious Pig Latin twist!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Classic-Tales-Goldilocks/dp/B0FGWHCVVL/" target="_blank">Buy on Amazon</a>
-        </div>
-      </div>
+      <h2>Pig Latin 3-Book Bundle</h2>
+      <p>Includes Three Little Pigs, Goldilocks, and Little Red Riding Hood in Pig Latin & English!</p>
+      <a href="https://www.amazon.com/dp/B0D33ZF5ST" target="_blank">Buy on Amazon</a>
     </div>
 
-    <h2>👕 Apparel &amp; Merch</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="thumbnails/piglatintshirt.webp" alt="Ivelay Ovelay Aughlay Tee" />
-        <div class="card-content">
-          <h3>Ivelay Ovelay Aughlay Tee</h3>
-          <p>The Pig Latin twist on Live, Love, Laugh — Ivelay Ovelay Aughlay.</p>
-          <p class="price">$15.25 + shipping</p>
-          <a href="https://www.etsy.com/listing/4335457946/ivelay-ovelay-aughlay-pig-latin-shirt" target="_blank">Buy on Etsy</a>
-        </div>
+    <div class="card">
+      <div class="card-image-wrapper">
+        <img src="thumbnails/littleredriding.webp" alt="Little Red Riding Hood Pig Latin">
       </div>
+      <h2>Little Red Riding Hood</h2>
+      <p>Read this classic fairy tale in both English and Pig Latin side-by-side.</p>
+      <a href="https://www.amazon.com/dp/B0D33N2TBW" target="_blank">Buy on Amazon</a>
     </div>
 
-    <h2>🖼️ Prints &amp; Posters</h2>
-    <p>Coming soon: colorful posters and art prints featuring Piglatinian lore.</p>
+    <div class="card">
+      <div class="card-image-wrapper">
+        <img src="thumbnails/piglatintshirt.webp" alt="Ivelay Ovelay Aughlay T-Shirt">
+      </div>
+      <h2>Ivelay Ovelay Aughlay Tee</h2>
+      <p>Show your Pig Latin pride with this bold and funny t-shirt!</p>
+      <a href="https://www.etsy.com/listing/123456789/ivelay-ovel...t-shirt" target="_blank">Buy on Etsy</a>
+    </div>
+
   </div>
+
 </body>
 </html>
