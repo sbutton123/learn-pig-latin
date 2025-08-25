@@ -48,34 +48,39 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
       margin-top: 1rem;
     }
 
+    @media (max-width: 1024px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
     .card {
       background: white;
-      border-radius: 10px;
+      border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
     }
 
     .card img {
       width: 100%;
-      height: auto;
+      max-height: 280px;
+      object-fit: contain;
+      background-color: white;
       display: block;
       border-bottom: 1px solid #eee;
     }
 
     .card-content {
-      padding: 1rem;
+      padding: 0.75rem 1rem;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -132,12 +137,8 @@
           <h3>Pig Latin Coloring Book</h3>
           <p>A fun and silly Pig Latin-themed coloring book for kids. Buy the digital version or order a physical copy!</p>
           <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-            <a href="https://www.etsy.com/listing/4345537260/ipgay-atinlay-oloringcay-ookbay-an" target="_blank">
-              Buy Printable PDF — $3.99
-            </a>
-            <a href="https://www.amazon.com/dp/B0FL7GPQLC" target="_blank" style="background-color: #f4b400;">
-              Buy Physical Book — $8.38
-            </a>
+            <a href="https://www.etsy.com/listing/4345537260/ipgay-atinlay-oloringcay-ookbay-an" target="_blank">Buy Printable PDF — $3.99</a>
+            <a href="https://www.amazon.com/dp/B0FL7GPQLC" target="_blank" style="background-color: #f4b400;">Buy Physical Book — $8.38</a>
           </div>
         </div>
       </div>
