@@ -48,38 +48,34 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.5rem;
       margin-top: 1rem;
     }
 
-    @media (max-width: 1024px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-
     .card {
       background: white;
-      border-radius: 8px;
+      border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
     }
 
     .card img {
       width: 100%;
       height: auto;
-      max-height: 250px;
-      object-fit: contain;
       display: block;
-      margin: 0 auto;
+      border-bottom: 1px solid #eee;
     }
 
     .card-content {
-      padding: 0.75rem 1rem;
+      padding: 1rem;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -128,11 +124,10 @@
   </nav>
 
   <div class="container">
-
     <h2>📚 Dual-Language Books &amp; Printables</h2>
     <div class="grid">
       <div class="card">
-        <img src="https://i.etsystatic.com/20639649/r/il/552a80/7123514127/il_794xN.7123514127_sbw9.jpg" alt="Pig Latin Coloring Book" />
+        <img src="thumbnails/piglatincoloringbook.webp" alt="Pig Latin Coloring Book" />
         <div class="card-content">
           <h3>Pig Latin Coloring Book</h3>
           <p>A fun and silly Pig Latin-themed coloring book for kids. Buy the digital version or order a physical copy!</p>
@@ -148,7 +143,7 @@
       </div>
 
       <div class="card">
-        <img src="https://m.media-amazon.com/images/I/71ZIRARgWbL._SL1500_.jpg" alt="Pig Latin Tales: The Three Little Pigs" />
+        <img src="thumbnails/threelittlepigs.webp" alt="Pig Latin Tales: The Three Little Pigs" />
         <div class="card-content">
           <h3>Pig Latin Tales: The Three Little Pigs</h3>
           <p>The classic fairy tale—translated into Pig Latin!</p>
@@ -157,7 +152,7 @@
       </div>
 
       <div class="card">
-        <img src="https://m.media-amazon.com/images/I/81NlnF6wxWL._SL1500_.jpg" alt="Pig Latin Tales: Goldilocks and The Three Bears" />
+        <img src="thumbnails/Goldilocks.webp" alt="Pig Latin Tales: Goldilocks and The Three Bears" />
         <div class="card-content">
           <h3>Pig Latin Tales: Goldilocks and The Three Bears</h3>
           <p>The classic fairy tale—translated into Pig Latin!</p>
@@ -166,7 +161,7 @@
       </div>
 
       <div class="card">
-        <img src="https://m.media-amazon.com/images/I/61WXjh4mZuL._SL1499_.jpg" alt="Pig Latin Tales: Little Red Riding Hood" />
+        <img src="thumbnails/littleredriding.webp" alt="Pig Latin Tales: Little Red Riding Hood" />
         <div class="card-content">
           <h3>Pig Latin Tales: Little Red Riding Hood</h3>
           <p>A classic fairy tale with a Pig Latin twist!</p>
@@ -175,7 +170,7 @@
       </div>
 
       <div class="card">
-        <img src="https://m.media-amazon.com/images/I/616gLfXsAIL._SL1499_.jpg" alt="Pig Latin Classic Tales: Triple Anthology" />
+        <img src="thumbnails/PigLATIN3BOOKS.webp" alt="Pig Latin Classic Tales: Triple Anthology" />
         <div class="card-content">
           <h3>Pig Latin Classic Tales: Triple Anthology</h3>
           <p>Three classic fairy tales — with a hilarious Pig Latin twist!</p>
@@ -187,7 +182,7 @@
     <h2>👕 Apparel &amp; Merch</h2>
     <div class="grid">
       <div class="card">
-        <img src="https://i.etsystatic.com/20639649/r/il/67486c/7068128411/il_1140xN.7068128411_9sx9.jpg" alt="Ivelay Ovelay Aughlay Tee" />
+        <img src="thumbnails/piglatintshirt.webp" alt="Ivelay Ovelay Aughlay Tee" />
         <div class="card-content">
           <h3>Ivelay Ovelay Aughlay Tee</h3>
           <p>The Pig Latin twist on Live, Love, Laugh — Ivelay Ovelay Aughlay.</p>
@@ -199,7 +194,6 @@
 
     <h2>🖼️ Prints &amp; Posters</h2>
     <p>Coming soon: colorful posters and art prints featuring Piglatinian lore.</p>
-
   </div>
 </body>
 </html>
