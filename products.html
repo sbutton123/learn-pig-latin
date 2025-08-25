@@ -3,198 +3,185 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Products | Learn Pig Latin</title>
+  <title>Dual-Language Books & Printables</title>
   <style>
-    :root {
-      --primary: #a97ef9;
-      --secondary: #d682f4;
-      --background: #e6dbff;
-      --text-dark: #2c174e;
-    }
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: var(--background);
-      color: var(--text-dark);
+      background-color: #f1e3ff;
+      color: #333;
+      margin: 0;
+      padding: 0;
     }
-    nav {
-      background: var(--secondary);
+
+    h1 {
       text-align: center;
-      padding: 12px 0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    nav a {
-      color: white;
-      margin: 0 16px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: opacity 0.3s;
-    }
-    nav a:hover { opacity: 0.8; }
-
-    .container {
-      max-width: 960px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+      padding: 1rem;
+      color: #8e44ec;
     }
 
-    h2 {
-      color: var(--primary);
-      margin-top: 2rem;
-      font-size: 1.4rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+    .products-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1.5rem;
-      margin-top: 1rem;
+      padding: 2rem;
     }
 
-    @media (max-width: 1024px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      padding-top: 0.5rem;
+    }
+
+    .product-info {
+      padding: 0.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-info h2 {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      color: #8e44ec;
+      text-align: center;
+    }
+
+    .product-info p {
+      font-size: 0.85rem;
+      margin: 0.25rem 0 0.5rem;
+      text-align: center;
+    }
+
+    .product-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .purple-btn {
+      background-color: #a569ff;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .yellow-btn {
+      background-color: #f7b733;
+      color: black;
+      padding: 0.4rem 0.8rem;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      text-decoration: none;
+      text-align: center;
     }
 
     @media (max-width: 600px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-
-    .card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card img {
-      width: 100%;
-      max-height: 220px;
-      object-fit: contain;
-      background-color: white;
-      display: block;
-      border-bottom: 1px solid #eee;
-    }
-
-    .card-content {
-      padding: 0.75rem 1rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card-content h3 {
-      margin: 0 0 0.4rem;
-      font-size: 1rem;
-      color: var(--primary);
-    }
-
-    .card-content p {
-      flex: 1;
-      margin: 0 0 0.6rem;
-      font-size: 0.9rem;
-      line-height: 1.3;
-    }
-
-    .price {
-      font-weight: bold;
-      margin: 0 0 1rem;
-    }
-
-    .card-content a {
-      align-self: flex-start;
-      text-decoration: none;
-      background: var(--primary);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .card-content a:hover {
-      background: var(--secondary);
+      .product-card {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Lessons &amp; Translator</a>
-    <a href="games.html">Games &amp; Printables</a>
-    <a href="piglatinia.html">Piglatinia</a>
-    <a href="products.html">Products</a>
-  </nav>
 
-  <div class="container">
-    <h2>📚 Dual-Language Books &amp; Printables</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="thumbnails/piglatincoloringbook.webp" alt="Pig Latin Coloring Book" />
-        <div class="card-content">
-          <h3>Pig Latin Coloring Book</h3>
-          <p>A fun and silly Pig Latin-themed coloring book for kids. Buy the digital version or order a physical copy!</p>
-          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-            <a href="https://www.etsy.com/listing/4345537260/ipgay-atinlay-oloringcay-ookbay-an" target="_blank">Buy Printable PDF — $3.99</a>
-            <a href="https://www.amazon.com/dp/B0FL7GPQLC" target="_blank" style="background-color: #f4b400;">Buy Physical Book — $8.38</a>
-          </div>
-        </div>
-      </div>
+  <h1>📚 Dual-Language Books & Printables</h1>
 
-      <div class="card">
-        <img src="thumbnails/threelittlepigs.webp" alt="Pig Latin Tales: The Three Little Pigs" />
-        <div class="card-content">
-          <h3>Pig Latin Tales: The Three Little Pigs</h3>
-          <p>The classic fairy tale—translated into Pig Latin!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Tales-Eethray-Itttlelay-ebook/dp/B0FD83WYNK/" target="_blank">Buy on Amazon</a>
-        </div>
-      </div>
+  <div class="products-container">
 
-      <div class="card">
-        <img src="thumbnails/Goldilocks.webp" alt="Pig Latin Tales: Goldilocks and The Three Bears" />
-        <div class="card-content">
-          <h3>Pig Latin Tales: Goldilocks and The Three Bears</h3>
-          <p>The classic fairy tale—translated into Pig Latin!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Tales-Goldilocks-Classic-ebook/dp/B0FG4J13FG/" target="_blank">Buy on Amazon</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="thumbnails/littleredriding.webp" alt="Pig Latin Tales: Little Red Riding Hood" />
-        <div class="card-content">
-          <h3>Pig Latin Tales: Little Red Riding Hood</h3>
-          <p>A classic fairy tale with a Pig Latin twist!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Tales-Ittlelay-Idingray/dp/B0FGQ6PWRC/" target="_blank">Buy on Amazon</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="thumbnails/PigLATIN3BOOKS.webp" alt="Pig Latin Classic Tales: Triple Anthology" />
-        <div class="card-content">
-          <h3>Pig Latin Classic Tales: Triple Anthology</h3>
-          <p>Three classic fairy tales — with a hilarious Pig Latin twist!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Classic-Tales-Goldilocks/dp/B0FGWHCVVL/" target="_blank">Buy on Amazon</a>
+    <!-- Pig Latin Coloring Book -->
+    <div class="product-card">
+      <img src="thumbnails/coloringbook.webp" alt="Pig Latin Coloring Book" />
+      <div class="product-info">
+        <h2>Pig Latin Coloring Book</h2>
+        <p>A fun and silly Pig Latin–themed coloring book for kids!</p>
+        <div class="product-buttons">
+          <a href="https://payhip.com/b/O3QyK" class="purple-btn">Buy Printable PDF — $3.99</a>
+          <a href="https://www.amazon.com/dp/B0D4NBQQ6P" class="yellow-btn">Buy Physical Book — $8.38</a>
         </div>
       </div>
     </div>
 
-    <h2>👕 Apparel &amp; Merch</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="thumbnails/piglatintshirt.webp" alt="Ivelay Ovelay Aughlay Tee" />
-        <div class="card-content">
-          <h3>Ivelay Ovelay Aughlay Tee</h3>
-          <p>The Pig Latin twist on Live, Love, Laugh — Ivelay Ovelay Aughlay.</p>
-          <p class="price">$15.25 + shipping</p>
-          <a href="https://www.etsy.com/listing/4335457946/ivelay-ovelay-aughlay-pig-latin-shirt" target="_blank">Buy on Etsy</a>
+    <!-- Three Little Pigs -->
+    <div class="product-card">
+      <img src="thumbnails/threelittlepigs.webp" alt="Pig Latin Tales: The Three Little Pigs" />
+      <div class="product-info">
+        <h2>Pig Latin Tales: The Three Little Pigs</h2>
+        <p>The classic fairy tale—translated into Pig Latin!</p>
+        <div class="product-buttons">
+          <a href="https://www.amazon.com/dp/B0D4N63C9Y" class="purple-btn">Buy on Amazon</a>
         </div>
       </div>
     </div>
 
-    <h2>🖼️ Prints &amp; Posters</h2>
-    <p>Coming soon: colorful posters and art prints featuring Piglatinian lore.</p>
+    <!-- Goldilocks -->
+    <div class="product-card">
+      <img src="thumbnails/goldilocks.webp" alt="Goldilocks and the Three Bears" />
+      <div class="product-info">
+        <h2>Pig Latin Tales: Goldilocks and The Three Bears</h2>
+        <p>The classic fairy tale—translated into Pig Latin!</p>
+        <div class="product-buttons">
+          <a href="https://www.amazon.com/dp/B0D4MZPVBG" class="purple-btn">Buy on Amazon</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Little Red Riding Hood -->
+    <div class="product-card">
+      <img src="thumbnails/littleredriding.webp" alt="Little Red Riding Hood Pig Latin" />
+      <div class="product-info">
+        <h2>Pig Latin Tales: Little Red Riding Hood</h2>
+        <p>A classic fairy tale with a Pig Latin twist!</p>
+        <div class="product-buttons">
+          <a href="https://www.amazon.com/dp/B0D4P3P1F2" class="purple-btn">Buy on Amazon</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anthology Book -->
+    <div class="product-card">
+      <img src="thumbnails/PigLATIN3BOOKS.webp" alt="Pig Latin Anthology" />
+      <div class="product-info">
+        <h2>Pig Latin Classic Tales: Triple Anthology</h2>
+        <p>Three classic fairy tales with a hilarious Pig Latin twist!</p>
+        <div class="product-buttons">
+          <a href="https://www.amazon.com/dp/B0D4MZKLQS" class="purple-btn">Buy on Amazon</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- T-Shirt -->
+    <div class="product-card">
+      <img src="thumbnails/piglatintshirt.webp" alt="Pig Latin T-Shirt" />
+      <div class="product-info">
+        <h2>Pig Latin T-Shirt</h2>
+        <p>Show off your Pig Latin pride with this colorful design!</p>
+        <div class="product-buttons">
+          <a href="https://www.etsy.com/listing/your-link-here" class="purple-btn">Buy on Etsy</a>
+        </div>
+      </div>
+    </div>
+
   </div>
+
 </body>
 </html>
