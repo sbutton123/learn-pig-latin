@@ -8,7 +8,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-8ZL77F3HRT');
   </script>
@@ -142,11 +142,32 @@
       gap: 1rem;
       justify-content: center;
     }
-    .video-grid iframe {
+    .video-thumb {
+      position: relative;
       width: 100%;
       max-width: 350px;
-      height: 200px;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .video-thumb img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.6);
+      color: white;
       border: none;
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      border-radius: 50%;
+      cursor: pointer;
     }
     footer {
       background: var(--primary);
@@ -201,16 +222,28 @@
         </div>
       </div>
     </section>
+
     <section id="lesson-videos">
       <h2>Videos</h2>
       <div class="video-grid">
-        <iframe src="https://www.youtube.com/embed/APrST3lK3NE" title="Pig Latin Video 1" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/kSCfnrs5v9g" title="Pig Latin Video 2" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/ntJ76JzKSdY" title="Pig Latin Video 3" allowfullscreen></iframe>
+        <div class="video-thumb" data-id="APrST3lK3NE">
+          <img src="https://img.youtube.com/vi/APrST3lK3NE/hqdefault.jpg" alt="Video 1 thumbnail">
+          <button class="play-button">▶</button>
+        </div>
+        <div class="video-thumb" data-id="kSCfnrs5v9g">
+          <img src="https://img.youtube.com/vi/kSCfnrs5v9g/hqdefault.jpg" alt="Video 2 thumbnail">
+          <button class="play-button">▶</button>
+        </div>
+        <div class="video-thumb" data-id="ntJ76JzKSdY">
+          <img src="https://img.youtube.com/vi/ntJ76JzKSdY/hqdefault.jpg" alt="Video 3 thumbnail">
+          <button class="play-button">▶</button>
+        </div>
       </div>
     </section>
   </main>
+
   <footer>© 2025 Learn Pig Latin. All rights reserved.</footer>
+
   <script>
     function translateToPigLatin(word) {
       const vowels=['a','e','i','o','u'];
@@ -234,9 +267,27 @@
       else if(core.toLowerCase().endsWith('ay')) { let b=core.slice(0,-2); const m=b.match(/(.*?)([^aeiou]+)$/); res=m?m[2]+m[1]:b; }
       return res+suffix;
     }
-    document.getElementById('input').addEventListener('input',e=>{ const words=e.target.value.trim().split(/\s+/); const out=words.map(w=>document.getElementById('mode').value==='enToPig'?translateToPigLatin(w):translateToEnglish(w)).join(' '); document.getElementById('output').innerText=out; });
+    document.getElementById('input').addEventListener('input',e=>{
+      const words=e.target.value.trim().split(/\s+/);
+      const out=words.map(w=>document.getElementById('mode').value==='enToPig'?translateToPigLatin(w):translateToEnglish(w)).join(' ');
+      document.getElementById('output').innerText=out;
+    });
     function clearFields(){document.getElementById('input').value='';document.getElementById('output').innerText='';}
     function copyOutput(){navigator.clipboard.writeText(document.getElementById('output').innerText).then(_=>alert('Copied!')).catch(_=>alert('Failed to copy.'));}
+
+    document.querySelectorAll('.video-thumb').forEach(div => {
+      div.addEventListener('click', () => {
+        const id = div.dataset.id;
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        iframe.style.width = "100%";
+        iframe.style.height = "200px";
+        div.innerHTML = '';
+        div.appendChild(iframe);
+      });
+    });
   </script>
 </body>
 </html>
