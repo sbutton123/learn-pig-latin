@@ -11,12 +11,14 @@
       --background: #e6dbff;
       --text-dark: #2c174e;
     }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: var(--background);
       color: var(--text-dark);
     }
+
     nav {
       background: var(--secondary);
       text-align: center;
@@ -25,6 +27,7 @@
       top: 0;
       z-index: 10;
     }
+
     nav a {
       color: white;
       margin: 0 16px;
@@ -32,34 +35,34 @@
       font-weight: bold;
       transition: opacity 0.3s;
     }
+
     nav a:hover { opacity: 0.8; }
+
     .container {
-      max-width: 960px;
+      max-width: 1200px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
+
     h1 {
       text-align: center;
       color: var(--primary);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
+
     h2 {
       color: var(--primary);
       margin-top: 2rem;
       font-size: 1.4rem;
     }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
       gap: 1.5rem;
       margin-top: 1rem;
     }
-    @media (max-width: 1024px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .grid { grid-template-columns: 1fr; }
-    }
+
     .card {
       background: white;
       border-radius: 8px;
@@ -67,39 +70,59 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      width: 330px;
+      margin: 0 auto;
     }
+
     .card img {
       width: 100%;
-      height: auto;
+      height: 450px;
+      object-fit: cover;
+      display: block;
     }
+
     .card-content {
-      padding: 1rem;
+      padding: 0.8rem 1rem 1rem;
       flex: 1;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
     }
+
     .card-content h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.1rem;
+      margin: 0 0 0.4rem;
+      font-size: 1rem;
       color: var(--primary);
     }
+
     .card-content p {
       flex: 1;
-      margin: 0 0 1rem;
-      font-size: 0.95rem;
+      margin: 0 0 0.8rem;
+      font-size: 0.9rem;
+      line-height: 1.3;
     }
-    .card-content a {
-      align-self: flex-start;
-      text-decoration: none;
+
+    .card-content .btn {
       background: var(--primary);
       color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
       font-weight: bold;
       transition: background 0.3s;
+      margin: 2px;
+      display: inline-block;
     }
-    .card-content a:hover {
+
+    .card-content .btn:hover {
       background: var(--secondary);
+    }
+
+    .btn.yellow {
+      background: #ffcc66;
+      color: black;
     }
   </style>
 </head>
@@ -110,51 +133,68 @@
     <a href="piglatinia.html">Piglatinia</a>
     <a href="products.html">Products</a>
   </nav>
+
   <div class="container">
     <h1>🛍️ Our Products</h1>
 
-    <h2>📚 Dual-Language Books</h2>
     <div class="grid">
+
       <div class="card">
-        <img src="https://m.media-amazon.com/images/I/71ZIRARgWbL._SL1500_.jpg" alt="Pig Latin Tales: The Three Little Pigs" />
+        <img src="thumbnails/coloringbook.webp" alt="Pig Latin Coloring Book">
+        <div class="card-content">
+          <h3>Pig Latin Coloring Book</h3>
+          <p>A fun and silly Pig Latin–themed coloring book!</p>
+          <a href="https://www.etsy.com/listing/1569230486" class="btn">$3.99 PDF</a>
+          <a href="https://www.amazon.com/dp/B0CGL46WZP" class="btn yellow">$8.38 Physical</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="thumbnails/threelittlepigs.webp" alt="Three Little Pigs Book">
         <div class="card-content">
           <h3>Pig Latin Tales: The Three Little Pigs</h3>
           <p>The classic fairy tale—translated into Pig Latin!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Tales-Eethray-Itttlelay-ebook/dp/B0FD83WYNK/">Buy on Amazon</a>
+          <a href="https://www.amazon.com/dp/B0CFYQJ13C" class="btn">Buy on Amazon</a>
         </div>
       </div>
+
       <div class="card">
-        <img src="https://m.media-amazon.com/images/I/81NlnF6wxWL._SL1500_.jpg" alt="Pig Latin Tales: Goldilocks and The Three Bears" />
+        <img src="thumbnails/goldilocks.webp" alt="Goldilocks Book">
         <div class="card-content">
           <h3>Pig Latin Tales: Goldilocks and The Three Bears</h3>
           <p>The classic fairy tale—translated into Pig Latin!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Tales-Goldilocks-Classic-ebook/dp/B0FG4J13FG/">Buy on Amazon</a>
+          <a href="https://www.amazon.com/dp/B0CFZJ65Z3" class="btn">Buy on Amazon</a>
         </div>
       </div>
+
       <div class="card">
-        <img src="https://m.media-amazon.com/images/I/61WXjh4mZuL._SL1499_.jpg" alt="Pig Latin Tales: Little Red Riding Hood" />
+        <img src="thumbnails/littleredriding.webp" alt="Little Red Riding Hood Book">
         <div class="card-content">
           <h3>Pig Latin Tales: Little Red Riding Hood</h3>
-          <p>A Classic Tale with a Pig Latin Twist!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Tales-Ittlelay-Idingray/dp/B0FGQ6PWRC/">Buy on Amazon</a>
+          <p>A classic fairy tale with a Pig Latin twist!</p>
+          <a href="https://www.amazon.com/dp/B0G7B7YTR9" class="btn">Buy on Amazon</a>
         </div>
       </div>
+
       <div class="card">
-        <img src="https://m.media-amazon.com/images/I/616gLfXsAIL._SL1499_.jpg" alt="Pig Latin Classic Tales: Triple Anthology" />
+        <img src="thumbnails/tripleanthology.webp" alt="Triple Anthology Book">
         <div class="card-content">
           <h3>Pig Latin Classic Tales: Triple Anthology</h3>
-          <p>Three Classic Fairy Tales — with a Hilarious Pig Latin Twist!</p>
-          <a href="https://www.amazon.com/Pig-Latin-Classic-Tales-Goldilocks/dp/B0FGWHCVVL/">Buy on Amazon</a>
+          <p>Three classic fairy tales in one hilarious Pig Latin volume!</p>
+          <a href="https://www.amazon.com/dp/B0CH84GJQH" class="btn">Buy on Amazon</a>
         </div>
       </div>
+
+      <div class="card">
+        <img src="thumbnails/piglatintshirt.webp" alt="Pig Latin T-Shirt">
+        <div class="card-content">
+          <h3>Pig Latin T-Shirt</h3>
+          <p>Show off your Pig Latin pride with this colorful design!</p>
+          <a href="https://www.etsy.com/listing/1569231624" class="btn">Buy on Etsy</a>
+        </div>
+      </div>
+
     </div>
-
-    <h2>👕 Apparel &amp; Merch</h2>
-    <p>Coming soon: t-shirts, tank tops, mugs, and more branded with Piglatinia style!</p>
-
-    <h2>🖼️ Prints &amp; Posters</h2>
-    <p>Coming soon: colorful posters and art prints featuring Piglatinian lore.</p>
-
   </div>
 </body>
 </html>
