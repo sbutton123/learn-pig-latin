@@ -14,7 +14,7 @@
       --text-dark: #2c174e;
       --card-bg: #ffffff;
     }
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(to bottom, var(--background-start), var(--background-end));
@@ -23,31 +23,30 @@
     }
     header {
       background: linear-gradient(to right, var(--primary), var(--accent));
-      color:#fff; text-align:center; padding:2rem 1rem;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
     }
-    header h1 { font-size:2.5rem; }
-    header p { margin-top:.5rem; font-size:1.2rem; }
+    header h1 { font-size: 2.2rem; }
     nav {
       background: var(--secondary);
-      text-align: center; padding: 1rem;
+      text-align: center;
+      padding: 1rem;
     }
     nav a {
       display: inline-block;
       margin: 0 .5rem;
-      padding: .75rem 1.5rem;
+      padding: .5rem 1rem;
       background: var(--accent);
       color: #fff;
       text-decoration: none;
       font-weight: bold;
       border-radius: .5rem;
-      transition: background .3s, transform .2s;
+      transition: background .3s;
     }
-    nav a:hover {
-      background: var(--primary);
-      transform: translateY(-2px);
-    }
+    nav a:hover { background: var(--primary); }
     main {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
@@ -55,70 +54,66 @@
       margin-bottom: 3rem;
     }
     .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-      gap: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
     }
     .card {
+      width: 150px;
       background: var(--card-bg);
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       overflow: hidden;
-      transition: transform .2s, box-shadow .2s;
       display: flex;
       flex-direction: column;
-    }
-    .card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      align-items: center;
+      text-align: center;
     }
     .card img {
       width: 100%;
       height: auto;
-      object-fit: cover;
+      object-fit: contain;
     }
     .card-content {
-      padding: 1rem;
+      padding: 0.5rem;
       display: flex;
       flex-direction: column;
+      flex: 1;
     }
     .card-content h3 {
-      margin: 0 0 .5rem;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
+      margin: 0.25rem 0;
       color: var(--primary);
     }
     .card-content p {
-      flex: 1;
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
     }
     .card-content a {
-      align-self: flex-start;
       text-decoration: none;
       background: var(--primary);
-      color: #fff;
-      padding: 0.5rem 1rem;
+      color: white;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.6rem;
       border-radius: 4px;
-      font-weight: bold;
-      transition: background .3s;
+      transition: background 0.3s;
     }
     .card-content a:hover {
       background: var(--accent);
     }
     footer {
       background: var(--primary);
-      color: #fff;
+      color: white;
       text-align: center;
       padding: 1rem;
-      font-size: .9rem;
-      margin-top: 4rem;
+      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Our Products</h1>
-    <p>Books, coloring, and gear from the Pig Latin universe</p>
   </header>
 
   <nav>
@@ -130,66 +125,60 @@
 
   <main>
     <section class="product-section">
-      <h2 class="section-title">📚 Dual-Language Books</h2>
+      <h2>📚 Dual-Language Books</h2>
       <div class="product-grid">
         <div class="card">
           <img src="thumbnails/threelittlepigs.webp" alt="Three Little Pigs">
           <div class="card-content">
-            <h3>The Three Little Pigs</h3>
-            <p>The classic tale retold in Pig Latin—fun and educational!</p>
-            <a href="https://www.amazon.com/dp/B0FD83WYNK/">Buy on Amazon</a>
+            <h3>Three Little Pigs</h3>
+            <a href="https://www.amazon.com/dp/B0FD83WYNK/">Amazon</a>
           </div>
         </div>
         <div class="card">
-          <img src="thumbnails/Goldilocks.webp" alt="Goldilocks and the Three Bears">
+          <img src="thumbnails/Goldilocks.webp" alt="Goldilocks">
           <div class="card-content">
-            <h3>Goldilocks and the Three Bears</h3>
-            <p>A dual-language twist on a beloved tale!</p>
-            <a href="https://www.amazon.com/dp/B0FG4J13FG/">Buy on Amazon</a>
+            <h3>Goldilocks</h3>
+            <a href="https://www.amazon.com/dp/B0FG4J13FG/">Amazon</a>
           </div>
         </div>
         <div class="card">
           <img src="thumbnails/littleredriding.webp" alt="Little Red Riding Hood">
           <div class="card-content">
-            <h3>Little Red Riding Hood</h3>
-            <p>A Classic Tale with a Pig Latin twist!</p>
-            <a href="https://www.amazon.com/dp/B0FGQ6PWRC/">Buy on Amazon</a>
+            <h3>Little Red</h3>
+            <a href="https://www.amazon.com/dp/B0FGQ6PWRC/">Amazon</a>
           </div>
         </div>
         <div class="card">
           <img src="thumbnails/tripleanthology.webp" alt="Triple Anthology">
           <div class="card-content">
-            <h3>Triple Anthology</h3>
-            <p>Three stories in one! Goldilocks, Little Red, and the Three Pigs.</p>
-            <a href="https://www.amazon.com/dp/B0FGWHCVVL/">Buy on Amazon</a>
+            <h3>Anthology</h3>
+            <a href="https://www.amazon.com/dp/B0FGWHCVVL/">Amazon</a>
           </div>
         </div>
       </div>
     </section>
 
     <section class="product-section">
-      <h2 class="section-title">🎨 Coloring Book</h2>
+      <h2>🎨 Coloring Book</h2>
       <div class="product-grid">
         <div class="card">
-          <img src="thumbnails/coloringbook.webp" alt="Pig Latin Coloring Book">
+          <img src="thumbnails/coloringbook.webp" alt="Coloring Book">
           <div class="card-content">
-            <h3>Pig Latin Coloring Book</h3>
-            <p>Fun pages that teach Pig Latin while coloring!</p>
-            <a href="https://www.amazon.com/dp/YOUR-COLORING-BOOK-ASIN">Buy on Amazon</a>
+            <h3>Coloring Book</h3>
+            <a href="https://www.amazon.com/dp/YOUR-COLORING-ASIN">Amazon</a>
           </div>
         </div>
       </div>
     </section>
 
     <section class="product-section">
-      <h2 class="section-title">👕 Apparel</h2>
+      <h2>👕 Apparel</h2>
       <div class="product-grid">
         <div class="card">
-          <img src="thumbnails/piglatintshirt.webp" alt="Pig Latin Shirt">
+          <img src="thumbnails/piglatintshirt.webp" alt="T-shirt">
           <div class="card-content">
-            <h3>Piglatinia Tee</h3>
-            <p>Show your love for Pig Latin with this bold design!</p>
-            <a href="https://www.etsy.com/listing/YOUR-T-SHIRT-ID">Shop on Etsy</a>
+            <h3>Pig Latin Shirt</h3>
+            <a href="https://www.etsy.com/listing/YOUR-TSHIRT-ID">Etsy</a>
           </div>
         </div>
       </div>
