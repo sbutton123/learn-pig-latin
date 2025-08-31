@@ -2,156 +2,292 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pig Latin Translator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn Pig Latin</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8ZL77F3HRT');
+  </script>
   <style>
+    :root {
+      --primary: #a97ef9;
+      --primary-dark: #9063f5;
+      --secondary: #d682f4;
+      --accent: #78aaff;
+      --background-start: #f3eaff;
+      --background-end: #ede4ff;
+      --text-dark: #1f1440;
+      --card-bg: #f7f4ff;
+    }
+    * { box-sizing: border-box; }
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #fff8e1;
-      padding: 30px;
-      max-width: 700px;
-      margin: auto;
-      color: #333;
+      background: linear-gradient(to bottom, var(--background-start), var(--background-end));
+      color: var(--text-dark);
     }
-
-    h1 {
+    header {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: white;
       text-align: center;
-      color: #d32f2f;
+      padding: 1.5rem;
     }
-
-    textarea {
+    header h1 { margin: 0; font-size: 2.5rem; }
+    header p {
+      margin: 0.5rem 0 0;
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      background: var(--secondary);
+      padding: 1rem;
+      border-bottom: 2px solid rgba(0,0,0,0.1);
+    }
+    nav a {
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: background 0.3s, transform 0.2s;
+    }
+    nav a:hover {
+      background: var(--primary);
+      transform: translateY(-2px);
+    }
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+    .translator-section {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      flex: 1;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+    }
+    .card h3, .card h4 { margin-top: 0; }
+    .translator-card h2 {
+      text-align: center;
+      margin: 0 0 1rem;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+    label { font-weight: bold; margin-top: 1rem; display: block; }
+    select, input {
       width: 100%;
-      height: 100px;
-      font-size: 1.1em;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 2px solid #fbc02d;
-      border-radius: 5px;
-      resize: vertical;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
     }
-
-    select, button {
-      padding: 10px;
-      font-size: 1em;
-      margin-right: 10px;
+    .output {
+      background: #e0d3ff;
+      border-radius: 0.5rem;
+      min-height: 2rem;
+      margin-top: 1rem;
+      padding: 0.5rem;
+    }
+    .button-group {
+      margin-top: auto;
+      display: flex;
+      gap: 1rem;
+    }
+    .button {
+      flex: 1;
+      background: var(--primary);
+      color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
     }
-
-    button {
-      background-color: #fbc02d;
-      color: #000;
+    .button:hover { background: var(--primary-dark); }
+    #lesson-videos {
+      margin-top: 3rem;
+    }
+    #lesson-videos h2 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .video-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .video-thumb {
+      position: relative;
+      width: 100%;
+      max-width: 350px;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .video-thumb img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      border-radius: 50%;
       cursor: pointer;
     }
-
-    button:hover {
-      background-color: #f9a825;
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
     }
-
-    #output {
-      background: #f1f8e9;
-      padding: 15px;
-      min-height: 80px;
-      border: 2px dashed #aed581;
-      border-radius: 5px;
-      white-space: pre-wrap;
-      font-size: 1.1em;
+    @media (max-width: 768px) {
+      .translator-section { flex-direction: column; }
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Learn Pig Latin</h1>
+    <p>Your quirky guide to mastering Pig Latin!</p>
+  </header>
+  <nav>
+    <a href="index.html">Lessons &amp; Translator</a>
+    <a href="games.html">Games &amp; Printables</a>
+    <a href="piglatinia.html">Piglatinia</a>
+    <a href="products.html">Products</a>
+  </nav>
+  <main>
+    <section id="translator">
+      <div class="translator-section">
+        <div class="card">
+          <h3>What is Pig Latin?</h3>
+          <p>Pig Latin originates from Piglatinia, a secret land of word‑flippers. It’s now a playful code in America, turning English words into fun phrases. Popular rumor says Thomas Jefferson used it, though it’s never confirmed!</p>
+          <h3>How to Translate:</h3>
+          <ul>
+            <li>If a word starts with a vowel, add <strong>"yay"</strong> or <strong>"way"</strong>, depending on which region of Piglatinia you come from (e.g. "apple" → "appleyay" or "appleway").</li>
+            <li>If it starts with a consonant or consonant cluster, move it to the end and add <strong>"ay"</strong> (e.g. "hello" → "ellohay").</li>
+            <li>Punctuation and capitalization stay the same.</li>
+          </ul>
+        </div>
+        <div class="card translator-card">
+          <h2>Pig Latin Translator</h2>
+          <label for="mode">Translation mode:</label>
+          <select id="mode">
+            <option value="enToPig">English to Pig Latin</option>
+            <option value="pigToEn">Pig Latin to English</option>
+          </select>
+          <label for="input">Enter text:</label>
+          <input id="input" type="text" placeholder="Type your sentence here…" />
+          <div class="output" id="output"></div>
+          <div class="button-group">
+            <button class="button" onclick="clearFields()">Clear</button>
+            <button class="button" onclick="copyOutput()">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <h1>Pig Latin Translator</h1>
+    <section id="lesson-videos">
+      <h2>Videos</h2>
+      <div class="video-grid">
+        <div class="video-thumb" data-id="APrST3lK3NE">
+          <img src="https://img.youtube.com/vi/APrST3lK3NE/hqdefault.jpg" alt="Video 1 thumbnail">
+          <button class="play-button">▶</button>
+        </div>
+        <div class="video-thumb" data-id="kSCfnrs5v9g">
+          <img src="https://img.youtube.com/vi/kSCfnrs5v9g/hqdefault.jpg" alt="Video 2 thumbnail">
+          <button class="play-button">▶</button>
+        </div>
+        <div class="video-thumb" data-id="ntJ76JzKSdY">
+          <img src="https://img.youtube.com/vi/ntJ76JzKSdY/hqdefault.jpg" alt="Video 3 thumbnail">
+          <button class="play-button">▶</button>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <label for="mode">Translation Mode:</label>
-  <select id="mode">
-    <option value="enToPig">English to Pig Latin</option>
-    <option value="pigToEn">Pig Latin to English</option>
-  </select>
-
-  <textarea id="input" placeholder="Type your sentence here..."></textarea>
-
-  <div style="margin-bottom: 15px;">
-    <button onclick="clearFields()">Clear</button>
-    <button onclick="copyOutput()">Copy Output</button>
-  </div>
-
-  <div id="output">Your translation will appear here...</div>
+  <footer>© 2025 Learn Pig Latin. All rights reserved.</footer>
 
   <script>
     function translateToPigLatin(word) {
-      const vowels = ['a', 'e', 'i', 'o', 'u'];
-      const punct = word.match(/[.,!?;:]$/);
-      let clean = punct ? word.slice(0, -1) : word;
-      let suffix = punct ? punct[0] : '';
-
-      const isCap = clean[0] === clean[0].toUpperCase();
-      clean = clean.toLowerCase();
-
-      const match = clean.match(/^([^aeiou']*)(.+)/);
-      let result = '';
-
-      if (vowels.includes(clean[0])) {
-        result = clean + 'yay';
-      } else if (match) {
-        result = match[2] + match[1] + 'ay';
-      } else {
-        result = clean + 'ay';
-      }
-
-      if (isCap) result = result.charAt(0).toUpperCase() + result.slice(1);
-      return result + suffix;
+      const vowels=['a','e','i','o','u'];
+      const punct=word.match(/[.,!?;:]$/);
+      let core=punct?word.slice(0,-1):word;
+      let suffix=punct?punct[0]:'';
+      const cap=core[0]===core[0].toUpperCase();
+      core=core.toLowerCase();
+      let res='';
+      if(vowels.includes(core[0])) res=core+'yay';
+      else { const c=(core.match(/^[^aeiou]+/)||[''])[0]; res=core.slice(c.length)+c+'ay'; }
+      if(cap) res=res[0].toUpperCase()+res.slice(1);
+      return res+suffix;
     }
-
     function translateToEnglish(word) {
-      const punct = word.match(/[.,!?;:]$/);
-      let clean = punct ? word.slice(0, -1) : word;
-      let suffix = punct ? punct[0] : '';
-
-      const isCap = clean[0] === clean[0].toUpperCase();
-      clean = clean.toLowerCase();
-
-      let result = clean;
-
-      if (clean.endsWith("yay")) {
-        result = clean.slice(0, -3);
-      } else if (clean.endsWith("ay")) {
-        let base = clean.slice(0, -2);
-        const match = base.match(/(.*?)([^aeiou']+)$/);
-        if (match) {
-          result = match[2] + match[1];
-        } else {
-          result = base;
-        }
-      }
-
-      if (isCap) result = result.charAt(0).toUpperCase() + result.slice(1);
-      return result + suffix;
+      const punct=word.match(/[.,!?;:]$/);
+      let core=punct?word.slice(0,-1):word;
+      let suffix=punct?punct[0]:'';
+      let res=core;
+      if(core.toLowerCase().endsWith('yay')) res=core.slice(0,-3);
+      else if(core.toLowerCase().endsWith('ay')) { let b=core.slice(0,-2); const m=b.match(/(.*?)([^aeiou]+)$/); res=m?m[2]+m[1]:b; }
+      return res+suffix;
     }
-
-    document.getElementById("input").addEventListener("input", function(e) {
-      const mode = document.getElementById("mode").value;
-      const words = e.target.value.trim().split(/\s+/);
-      const result = words.map(word =>
-        mode === "enToPig" ? translateToPigLatin(word) : translateToEnglish(word)
-      ).join(" ");
-      document.getElementById("output").innerText = result;
+    document.getElementById('input').addEventListener('input',e=>{
+      const words=e.target.value.trim().split(/\s+/);
+      const out=words.map(w=>document.getElementById('mode').value==='enToPig'?translateToPigLatin(w):translateToEnglish(w)).join(' ');
+      document.getElementById('output').innerText=out;
     });
+    function clearFields(){document.getElementById('input').value='';document.getElementById('output').innerText='';}
+    function copyOutput(){navigator.clipboard.writeText(document.getElementById('output').innerText).then(_=>alert('Copied!')).catch(_=>alert('Failed to copy.'));}
 
-    function clearFields() {
-      document.getElementById("input").value = "";
-      document.getElementById("output").innerText = "Your translation will appear here...";
-    }
-
-    function copyOutput() {
-      const outputText = document.getElementById("output").innerText;
-      navigator.clipboard.writeText(outputText).then(() => {
-        alert("Translation copied to clipboard!");
-      }).catch(err => {
-        alert("Failed to copy text: " + err);
+    document.querySelectorAll('.video-thumb').forEach(div => {
+      div.addEventListener('click', () => {
+        const id = div.dataset.id;
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        iframe.style.width = "100%";
+        iframe.style.height = "200px";
+        div.innerHTML = '';
+        div.appendChild(iframe);
       });
-    }
+    });
   </script>
-
 </body>
 </html>
