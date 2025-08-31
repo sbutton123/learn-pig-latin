@@ -1,24 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-8ZL77F3HRT');
-</script>
-
- <head>
+<head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Pig Latin Translator
-  </title>
+  <title>Pig Latin Translator</title>
   <style>
-   body {
+    body {
       font-family: sans-serif;
       margin: 0;
       padding: 0;
@@ -103,103 +90,90 @@
       margin-top: 3rem;
     }
   </style>
- </head>
- <body>
+</head>
+<body>
   <nav>
-   <a href="lessons.html">
-    Lessons &amp; Translator
-   </a>
-   <a href="games.html">
-    Games &amp; Printables
-   </a>
-   <a href="piglatinia.html">
-    Piglatinia
-   </a>
-   <a href="products.html">
-    Products
-   </a>
+    <a href="lessons.html">Lessons &amp; Translator</a>
+    <a href="games.html">Games &amp; Printables</a>
+    <a href="piglatinia.html">Piglatinia</a>
+    <a href="products.html">Products</a>
   </nav>
+
   <div class="card">
-   <h2 style="text-align: center; color: #a97ef9;">
-    Pig Latin Translator
-   </h2>
-   <label for="mode">
-    Translation Mode:
-   </label>
-   <select id="mode">
-    <option value="enToPig">
-     English to Pig Latin
-    </option>
-    <option value="pigToEn">
-     Pig Latin to English
-    </option>
-   </select>
-   <label for="input">
-    Enter text:
-   </label>
-   <input id="input" placeholder="Type your sentence here..." type="text"/>
-   <label>
-    Translation:
-   </label>
-   <div class="output" id="output">
-   </div>
-   <div class="button-group">
-    <button class="button" onclick="clearFields()">
-     Clear
-    </button>
-    <button class="button" onclick="copyOutput()">
-     Copy
-    </button>
-   </div>
+    <h2>Pig Latin Translator</h2>
+    <label for="mode">Translation Mode:</label>
+    <select id="mode">
+      <option value="enToPig">English to Pig Latin</option>
+      <option value="pigToEn">Pig Latin to English</option>
+    </select>
+
+    <label for="input">Enter text:</label>
+    <input id="input" placeholder="Type your sentence here..." type="text"/>
+
+    <label>Translation:</label>
+    <div class="output" id="output"></div>
+
+    <div class="button-group">
+      <button class="button" onclick="clearFields()">Clear</button>
+      <button class="button" onclick="copyOutput()">Copy</button>
+    </div>
   </div>
-  <footer>
-   © 2025 Learn Pig Latin. Oink yeah!
-  </footer>
+
+  <footer>© 2025 Learn Pig Latin. Oink yeah!</footer>
+
   <script>
-   function translateToPigLatin(word) {
+    function translateToPigLatin(word) {
       const vowels = ['a', 'e', 'i', 'o', 'u'];
       const punct = word.match(/[.,!?;:]$/);
-      let cleanWord = punct ? word.slice(0, -1) : word;
+      let clean = punct ? word.slice(0, -1) : word;
       let suffix = punct ? punct[0] : '';
 
-      const isCapitalized = cleanWord[0] === cleanWord[0].toUpperCase();
-      cleanWord = cleanWord.toLowerCase();
+      if (!clean) return word; // skip empty strings
 
-      let translated = '';
-      if (vowels.includes(cleanWord[0])) {
-        translated = cleanWord + 'yay';
+      const isCap = clean[0] === clean[0].toUpperCase();
+      clean = clean.toLowerCase();
+
+      const match = clean.match(/^([^aeiou']*)(.+)/);
+      let result = '';
+
+      if (vowels.includes(clean[0])) {
+        result = clean + 'yay';
+      } else if (match) {
+        result = match[2] + match[1] + 'ay';
       } else {
-        const match = cleanWord.match(/^[^aeiou]+/);
-        const cluster = match ? match[0] : '';
-        translated = cleanWord.slice(cluster.length) + cluster + 'ay';
+        result = clean + 'ay';
       }
 
-      if (isCapitalized) {
-        translated = translated.charAt(0).toUpperCase() + translated.slice(1);
-      }
-
-      return translated + suffix;
+      if (isCap) result = result.charAt(0).toUpperCase() + result.slice(1);
+      return result + suffix;
     }
 
     function translateToEnglish(word) {
       const punct = word.match(/[.,!?;:]$/);
-      let cleanWord = punct ? word.slice(0, -1) : word;
+      let clean = punct ? word.slice(0, -1) : word;
       let suffix = punct ? punct[0] : '';
-      let translated = cleanWord;
 
-      if (cleanWord.toLowerCase().endsWith("yay")) {
-        translated = cleanWord.slice(0, -3);
-      } else if (cleanWord.toLowerCase().endsWith("ay")) {
-        let core = cleanWord.slice(0, -2);
-        const match = core.match(/(.*?)([^aeiou]+)$/);
+      if (!clean) return word;
+
+      const isCap = clean[0] === clean[0].toUpperCase();
+      clean = clean.toLowerCase();
+
+      let result = clean;
+
+      if (clean.endsWith("yay")) {
+        result = clean.slice(0, -3);
+      } else if (clean.endsWith("ay")) {
+        let base = clean.slice(0, -2);
+        const match = base.match(/(.*?)([^aeiou']+)$/);
         if (match) {
-          translated = match[2] + match[1];
+          result = match[2] + match[1];
         } else {
-          translated = core;
+          result = base;
         }
       }
 
-      return translated + suffix;
+      if (isCap) result = result.charAt(0).toUpperCase() + result.slice(1);
+      return result + suffix;
     }
 
     document.getElementById("input").addEventListener("input", function(e) {
@@ -225,5 +199,5 @@
       });
     }
   </script>
- </body>
+</body>
 </html>
