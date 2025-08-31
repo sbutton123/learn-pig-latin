@@ -33,15 +33,21 @@
       background: #ffffff;
       border-radius: 1rem;
       padding: 2rem;
-      max-width: 500px;
+      max-width: 520px;
       width: 90%;
       margin: 2rem auto;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     h2 {
       font-size: 1.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
       color: #ff69b4;
+      text-align: center;
+    }
+    .hint {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
       text-align: center;
     }
     label {
@@ -51,33 +57,35 @@
     }
     select, input {
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.6rem;
       font-size: 1rem;
       margin-bottom: 1rem;
       border: 1px solid #ccc;
       border-radius: 0.5rem;
     }
     .output {
-      padding: 0.5rem;
+      padding: 0.6rem;
       background: #fce4ec;
       border-radius: 0.5rem;
       min-height: 2rem;
       margin-bottom: 1rem;
+      white-space: pre-wrap;
     }
     .button-group {
       display: flex;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 0.6rem;
+      flex-wrap: wrap;
     }
     .button {
       flex: 1;
-      padding: 0.4rem;
+      padding: 0.6rem;
       background-color: #ff69b4;
       color: white;
       border: none;
       border-radius: 0.5rem;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
     .button:hover {
       background-color: #ff4899;
@@ -101,6 +109,10 @@
 
   <div class="card">
     <h2>Pig Latin Translator</h2>
+    <p class="hint">
+      Try: <em>You're amazing!</em> → <strong>Ou'reyay amazingyay!</strong>
+    </p>
+
     <label for="mode">Translation Mode:</label>
     <select id="mode">
       <option value="enToPig">English to Pig Latin</option>
@@ -116,30 +128,34 @@
     <div class="button-group">
       <button class="button" onclick="clearFields()">Clear</button>
       <button class="button" onclick="copyOutput()">Copy</button>
+      <button class="button" onclick="shareOutput()">Share</button>
     </div>
   </div>
 
   <footer>© 2025 Learn Pig Latin. Oink yeah!</footer>
 
   <script>
+    // English -> Pig Latin (apostrophes treated as letters)
     function translateToPigLatin(word) {
       const vowels = ['a', 'e', 'i', 'o', 'u'];
       const punct = word.match(/[.,!?;:]$/);
       let clean = punct ? word.slice(0, -1) : word;
-      let suffix = punct ? punct[0] : '';
+      const suffix = punct ? punct[0] : '';
 
-      if (!clean) return word; // skip empty strings
+      if (!clean) return word;
 
       const isCap = clean[0] === clean[0].toUpperCase();
       clean = clean.toLowerCase();
 
-      const match = clean.match(/^([^aeiou']*)(.+)/);
+      // Capture leading consonant cluster (apostrophes count as letters)
+      // Then move that cluster to the end + "ay"
+      const clusterMatch = clean.match(/^([^aeiou']*)(.+)/);
       let result = '';
 
       if (vowels.includes(clean[0])) {
         result = clean + 'yay';
-      } else if (match) {
-        result = match[2] + match[1] + 'ay';
+      } else if (clusterMatch) {
+        result = clusterMatch[2] + clusterMatch[1] + 'ay';
       } else {
         result = clean + 'ay';
       }
@@ -148,10 +164,11 @@
       return result + suffix;
     }
 
+    // Pig Latin -> English (apostrophes preserved, treated as letters)
     function translateToEnglish(word) {
       const punct = word.match(/[.,!?;:]$/);
       let clean = punct ? word.slice(0, -1) : word;
-      let suffix = punct ? punct[0] : '';
+      const suffix = punct ? punct[0] : '';
 
       if (!clean) return word;
 
@@ -160,43 +177,57 @@
 
       let result = clean;
 
-      if (clean.endsWith("yay")) {
+      if (clean.endsWith('yay')) {
         result = clean.slice(0, -3);
-      } else if (clean.endsWith("ay")) {
-        let base = clean.slice(0, -2);
-        const match = base.match(/(.*?)([^aeiou']+)$/);
-        if (match) {
-          result = match[2] + match[1];
-        } else {
-          result = base;
-        }
+      } else if (clean.endsWith('ay')) {
+        const base = clean.slice(0, -2);
+        // Bring trailing consonant cluster (incl. apostrophes) back to front
+        const backMatch = base.match(/(.*?)([^aeiou']+)$/);
+        result = backMatch ? backMatch[2] + backMatch[1] : base;
       }
 
       if (isCap) result = result.charAt(0).toUpperCase() + result.slice(1);
       return result + suffix;
     }
 
-    document.getElementById("input").addEventListener("input", function(e) {
-      const mode = document.getElementById("mode").value;
+    // Live translate on input
+    document.getElementById('input').addEventListener('input', function (e) {
+      const mode = document.getElementById('mode').value;
       const words = e.target.value.trim().split(/\s+/);
       const result = words.map(word =>
-        mode === "enToPig" ? translateToPigLatin(word) : translateToEnglish(word)
-      ).join(" ");
-      document.getElementById("output").innerText = result;
+        mode === 'enToPig' ? translateToPigLatin(word) : translateToEnglish(word)
+      ).join(' ');
+      document.getElementById('output').innerText = result;
     });
 
     function clearFields() {
-      document.getElementById("input").value = "";
-      document.getElementById("output").innerText = "";
+      document.getElementById('input').value = '';
+      document.getElementById('output').innerText = '';
     }
 
     function copyOutput() {
-      const outputText = document.getElementById("output").innerText;
-      navigator.clipboard.writeText(outputText).then(() => {
-        alert("Translation copied to clipboard!");
-      }).catch(err => {
-        alert("Failed to copy text: " + err);
-      });
+      const text = document.getElementById('output').innerText;
+      if (!text.trim()) { alert('Nothing to copy yet—type something first!'); return; }
+      navigator.clipboard.writeText(text)
+        .then(() => alert('Translation copied to clipboard!'))
+        .catch(() => alert('Failed to copy text.'));
+    }
+
+    // Share via Web Share API (falls back to copy)
+    function shareOutput() {
+      const text = (document.getElementById('output').innerText || '').trim();
+      if (!text) { alert('Nothing to share yet—type something first!'); return; }
+
+      if (navigator.share) {
+        navigator.share({ title: 'Pig Latin Translator', text })
+          .catch(err => console.log('Share canceled/failed:', err));
+      } else if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(() => alert("Sharing isn't supported here, so I copied it to your clipboard instead!"))
+          .catch(() => alert("Sharing isn't supported. Try copying the text manually."));
+      } else {
+        alert("Sharing isn't supported. Try copying the text manually.");
+      }
     }
   </script>
 </body>
