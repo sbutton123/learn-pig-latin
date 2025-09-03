@@ -400,8 +400,12 @@
       const textOnly = (outEl?.innerText || '').trim();
       if (!textOnly) { alert('Nothing to share yet—type something first!'); return; }
 
-      const message = `${textOnly}\n\n— sent from LearnPigLatin.com`;
-      const subject = 'Pig Latin Translation';
+     const pigs = '🐷';                            // emoji pigs to send
+const includeTagline = true;                  // set to false if you ever want no credit line
+const subject = `🐷 Pig Latin Translation 🐷`;
+const message =
+  `${pigs} ${textOnly} ${pigs}` +
+  (includeTagline ? `\n\n— sent from LearnPigLatin.com ${pigs}` : '');
 
       if (isMobile() && navigator.share) {
         navigator.share({ title: subject, text: message }).catch(() => {});
@@ -416,3 +420,4 @@
   </script>
 </body>
 </html>
+
