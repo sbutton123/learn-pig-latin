@@ -63,118 +63,36 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
       transition: background 0.3s, transform 0.2s;
     }
-    nav a:hover {
-      background: var(--primary);
-      transform: translateY(-2px);
-    }
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 2rem 1rem;
-    }
-    .translator-section {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      align-items: stretch;
-    }
+    nav a:hover { background: var(--primary); transform: translateY(-2px); }
+    main { max-width: 1200px; margin: auto; padding: 2rem 1rem; }
+    .translator-section { display: flex; gap: 2rem; flex-wrap: wrap; align-items: stretch; }
     .card {
       background: var(--card-bg);
       border-radius: 1rem;
       padding: 1.5rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      flex: 1;
-      min-width: 280px;
-      display: flex;
-      flex-direction: column;
+      flex: 1; min-width: 280px;
+      display: flex; flex-direction: column;
     }
     .card h3, .card h4 { margin-top: 0; }
-    .translator-card h2 {
-      text-align: center;
-      margin: 0 0 1rem;
-      color: var(--primary);
-      font-size: 1.5rem;
-    }
+    .translator-card h2 { text-align: center; margin: 0 0 1rem; color: var(--primary); font-size: 1.5rem; }
     label { font-weight: bold; margin-top: 1rem; display: block; }
-    select, input {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-    }
-    .output {
-      background: #e0d3ff;
-      border-radius: 0.5rem;
-      min-height: 2rem;
-      margin-top: 1rem;
-      padding: 0.5rem;
-      white-space: pre-wrap;
-    }
-    .button-group {
-      margin-top: auto;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .button {
-      flex: 1;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.3s;
-    }
+    select, input { width: 100%; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 0.5rem; font-size: 1rem; }
+    .output { background: #e0d3ff; border-radius: 0.5rem; min-height: 2rem; margin-top: 1rem; padding: 0.5rem; white-space: pre-wrap; }
+    .button-group { margin-top: auto; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .button { flex: 1; background: var(--primary); color: white; border: none; border-radius: 0.5rem; padding: 0.5rem; cursor: pointer; font-size: 0.9rem; transition: background 0.3s; }
     .button:hover { background: var(--primary-dark); }
     #lesson-videos { margin-top: 3rem; }
-    #lesson-videos h2 {
-      text-align: center;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-    .video-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .video-thumb {
-      position: relative;
-      width: 100%;
-      max-width: 350px;
-      cursor: pointer;
-      overflow: hidden;
-      border-radius: 0.75rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
+    #lesson-videos h2 { text-align: center; color: var(--primary); margin-bottom: 1rem; }
+    .video-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .video-thumb { position: relative; width: 100%; max-width: 350px; cursor: pointer; overflow: hidden; border-radius: 0.75rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
     .video-thumb img { display: block; width: 100%; height: auto; }
     .play-button {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      font-size: 2rem;
-      padding: 0.5rem 1rem;
-      border-radius: 50%;
-      cursor: pointer;
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.6); color: white; border: none; font-size: 2rem; padding: 0.5rem 1rem; border-radius: 50%; cursor: pointer;
     }
-    footer {
-      background: var(--primary);
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-    @media (max-width: 768px) {
-      .translator-section { flex-direction: column; }
-    }
+    footer { background: var(--primary); color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+    @media (max-width: 768px) { .translator-section { flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -455,30 +373,25 @@
       return sub;
     }
 
-    function positionChooser(chooser, anchorEl) {
+    function positionChooser(el, anchorEl) {
       const rect = anchorEl.getBoundingClientRect();
-      chooser.style.left = (rect.left + window.scrollX) + 'px';
-      chooser.style.top  = (rect.bottom + window.scrollY) + 'px';
+      el.style.left = (rect.left + window.scrollX) + 'px';
+      el.style.top  = (rect.bottom + window.scrollY) + 'px';
     }
 
     function openSMS(bodyText) {
       const encoded = encodeURIComponent(bodyText);
       const isApple = /iPad|iPhone|iPod/i.test(navigator.userAgent);
       const smsUrl = isApple ? `sms:&body=${encoded}` : `sms:?body=${encoded}`;
-      window.location.href = smsUrl;
+      location.href = smsUrl; // location.href: safest against blockers
     }
 
-    function safeCopy(text) {
+    async function safeCopy(text) {
       if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
-      return new Promise((resolve) => {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); } catch {}
-        document.body.removeChild(ta);
-        resolve();
-      });
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch {}
+      document.body.removeChild(ta);
     }
 
     function shareOutput() {
@@ -491,13 +404,13 @@
       const encMsg = encodeURIComponent(message);
       const encSub = encodeURIComponent(subject);
 
-      // Mobile: use native share (best UX; includes SMS/WhatsApp/etc)
+      // Mobile: native share
       if (isMobile() && navigator.share) {
         navigator.share({ title: subject, text: message }).catch(() => {});
         return;
       }
 
-      // Desktop: custom dropdown (Text hidden)
+      // Desktop dropdown
       const shareBtn = document.getElementById('shareBtn') || document.body;
       const chooser = getOrCreateShareChooser();
       positionChooser(chooser, shareBtn);
@@ -523,22 +436,22 @@
           openSMS(message);
           closeAll();
         } else if (choice === 'whatsapp') {
-          window.open(`https://api.whatsapp.com/send?text=${encMsg}`, '_blank', 'noopener,noreferrer');
+          location.href = `https://api.whatsapp.com/send?text=${encMsg}`;
           closeAll();
         } else if (choice === 'telegram') {
-          window.open(`https://t.me/share/url?text=${encMsg}`, '_blank', 'noopener,noreferrer');
+          location.href = `https://t.me/share/url?text=${encMsg}`;
           closeAll();
         } else if (choice === 'tweet') {
-          window.open(`https://twitter.com/intent/tweet?text=${encMsg}`, '_blank', 'noopener,noreferrer');
+          location.href = `https://twitter.com/intent/tweet?text=${encMsg}`;
           closeAll();
         } else if (choice === 'facebook') {
           await safeCopy(message);
           alert('Your translation is copied. Facebook will open — just paste it into your post.');
           const pageUrl = encodeURIComponent(location.href.split('#')[0]);
-          window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, '_blank', 'noopener,noreferrer');
+          location.href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           closeAll();
         } else if (choice === 'email') {
-          // Email submenu
+          // Email submenu: choose default / Gmail / Outlook
           const sub = getOrCreateEmailSubmenu();
           positionChooser(sub, shareBtn);
           sub.style.display = 'block';
@@ -549,13 +462,13 @@
           sub.addEventListener('emailchoose', (ev2) => {
             const which = ev2.detail;
             if (which === 'mailto') {
-              window.location.href = `mailto:?subject=${encSub}&body=${encMsg}`;
+              // Use location.href for reliability
+              location.href = `mailto:?subject=${encSub}&body=${encMsg}`;
             } else if (which === 'gmail') {
-              window.open(`https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encSub}&body=${encMsg}`,
-                '_blank', 'noopener,noreferrer');
+              location.href = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encSub}&body=${encMsg}`;
             } else if (which === 'outlook') {
-              window.open(`https://outlook.live.com/owa/?path=/mail/action/compose&subject=${encSub}&body=${encMsg}`,
-                '_blank', 'noopener,noreferrer');
+              // Consumer Outlook Web (live.com); for work/school, users usually redirect to office.com
+              location.href = `https://outlook.live.com/owa/?path=/mail/action/compose&subject=${encSub}&body=${encMsg}`;
             }
             sub.style.display = 'none';
             chooser.style.display = 'none';
