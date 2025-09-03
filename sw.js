@@ -1,23 +1,21 @@
 // sw.js — offline caching for Learn Pig Latin
-// bump this string whenever you change the list
-const CACHE = 'piglatin-v5';
+const CACHE = 'piglatin-v6';
 
-// All top-level pages you want working offline:
+// Pages that should work offline
 const OFFLINE_PAGES = [
-  '/',                 // host root
   '/index.html',
   '/games.html',
   '/piglatinia.html',
   '/products.html',
 
-  // Game pages in your repo:
+  // Game pages
   '/animalsway-wordsearch.html',
   '/colorsshapes-wordsearch.html',
   '/erbsbay-wordsearch.html',
   '/oodfay-wordsearch.html'
 ];
 
-// Icons & small assets
+// Small assets/icons
 const OFFLINE_ASSETS = [
   '/img/piglatinfavicon.png',
   '/img/iconsandroidchrome192x192.png',
@@ -30,11 +28,18 @@ const OFFLINE_ASSETS = [
 
 const PRECACHE = [...OFFLINE_PAGES, ...OFFLINE_ASSETS];
 
+// Install: cache everything we can, but don't abort if one item fails
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE)));
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE);
+    await Promise.all(PRECACHE.map(async (url) => {
+      try { await cache.add(url); } catch (e) { /* skip missing/blocked */ }
+    }));
+  })());
   self.skipWaiting();
 });
 
+// Activate: delete old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -44,8 +49,8 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Strategy:
-// - HTML/navigations: **cache-first** (instant offline), then update cache in background when online
+// Fetch:
+// - HTML/navigations: cache-first, update in background when online, hard fallback to /index.html
 // - Other assets: cache-first
 self.addEventListener('fetch', (event) => {
   const req = event.request;
@@ -55,29 +60,23 @@ self.addEventListener('fetch', (event) => {
   const isNavigation = req.mode === 'navigate' || accept.includes('text/html');
 
   if (isNavigation) {
-    event.respondWith(
-      caches.match(req).then(cached => {
-        const fetchAndUpdate = fetch(req).then(res => {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(req, copy));
-          return res;
-        }).catch(() => cached || caches.match('/index.html'));
-        // Serve cached immediately if present; otherwise go to network
-        return cached || fetchAndUpdate;
-      })
-    );
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE);
+      const cached = await cache.match(req) || await cache.match('/index.html');
+      // Start a background update (won't block the response)
+      fetch(req).then(res => cache.put(req, res.clone())).catch(() => {});
+      return cached;
+    })());
     return;
   }
 
-  // Assets: cache-first
   event.respondWith(
     caches.match(req).then(cached =>
-      cached ||
-      fetch(req).then(res => {
+      cached || fetch(req).then(res => {
         const copy = res.clone();
         caches.open(CACHE).then(c => c.put(req, copy));
         return res;
-      }).catch(() => cached) // if both fail, return whatever we had
+      }).catch(() => cached)
     )
   );
 });
