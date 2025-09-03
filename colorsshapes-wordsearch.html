@@ -1,152 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>Olorscay &amp; Apesshay</title>
   <style>
-    /* Force letter‑portrait with a small margin */
-    @page {
-      size: letter portrait;
-      margin: 0.25in;
+    @page { size: letter portrait; margin: 0.25in; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:sans-serif;background:#ede4ff;color:#2c174e;text-align:center;padding:1rem;margin:0;}
+    h1{color:#a97ef9;}
+    #puzzle-wrapper{width:min(680px,100%);margin:0 auto;padding:8px;}
+    #wordsearch{
+      --cols:15; --gap:2px;
+      display:grid; grid-template-columns:repeat(var(--cols),1fr); gap:var(--gap);
+      width:100%; margin:1rem auto 1.5rem; user-select:none;
     }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    .cell{
+      aspect-ratio:1/1; width:100%; height:auto; border:1px solid #ccc; background:#f7f4ff;
+      text-transform:uppercase; font-weight:bold; font-size:clamp(12px,2.7vw,16px);
+      display:flex; align-items:center; justify-content:center; cursor:pointer;
     }
-
-    body {
-      font-family: sans-serif;
-      background: #ede4ff;
-      color: #2c174e;
-      text-align: center;
-      padding: 1rem;
+    .cell.selected{background:#a97ef9;color:#fff;}
+    .cell.found{background:#78aaff;color:#fff;}
+    #wordlist{
+      display:flex; flex-wrap:wrap; justify-content:center; width:min(680px,100%);
+      margin:1rem auto 0; gap:.6rem;
     }
-
-    h1 {
-      color: #a97ef9;
-    }
-
-    #puzzle-wrapper {
-      max-width: 680px;
-      margin: auto;
-    }
-
-    #wordsearch {
-      display: grid;
-      grid-template-columns: repeat(15, 2rem);
-      gap: 2px;
-      justify-content: center;
-      margin: 2rem auto;
-      user-select: none;
-    }
-
-    .cell {
-      width: 2rem;
-      height: 2rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: 1rem;
-      text-align: center;
-      border: 1px solid #ccc;
-      background: #f7f4ff;
-      cursor: pointer;
-    }
-
-    .cell.selected {
-      background: #a97ef9;
-      color: white;
-    }
-
-    .cell.found {
-      background: #78aaff;
-      color: white;
-    }
-
-    #wordlist {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      max-width: 680px;
-      margin: 1.5rem auto;
-    }
-
-    .word {
-      background: #f7f4ff;
-      border-radius: 1rem;
-      border: 1px solid #ccc;
-      padding: 0.5rem 1rem;
-      font-size: 0.95rem;
-      font-weight: bold;
-      margin: 0.3rem;
-      min-width: 110px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      white-space: nowrap;
-    }
-
-    .word.found {
-      background: #a97ef9;
-      color: white;
-      text-decoration: line-through;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    button {
-      background: #a97ef9;
-      color: white;
-      padding: 0.6rem 1.5rem;
-      border: none;
-      border-radius: 0.8rem;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      min-width: 140px;
-    }
-
-    /* PRINT STYLES */
-    @media print {
-      /* white background, black text */
-      body {
-        background: white !important;
-        color: black !important;
-        padding: 0 !important;
-      }
-      /* scale puzzle to fit one page */
-      #puzzle-wrapper {
-        transform: scale(0.85);
-        transform-origin: top center;
-        width: 100%;
-      }
-      /* ensure cells print clearly */
-      .cell,
-      .cell.selected,
-      .cell.found {
-        background: white !important;
-        color: black !important;
-        border: 1px solid black !important;
-      }
-      /* words list clean */
-      .word,
-      .word.found {
-        background: white !important;
-        color: black !important;
-        text-decoration: none !important;
-      }
-      /* hide buttons */
-      .buttons {
-        display: none !important;
-      }
+    .word{background:#f7f4ff;border:1px solid #ccc;border-radius:1rem;padding:.5rem 1rem;font-size:.95rem;font-weight:bold;white-space:nowrap;}
+    .word.found{background:#a97ef9;color:#fff;text-decoration:line-through;}
+    .buttons{display:flex;justify-content:center;gap:1rem;margin:1.25rem 0 0;flex-wrap:wrap;}
+    button{background:#a97ef9;color:#fff;padding:.6rem 1.5rem;border:none;border-radius:.8rem;font-size:1rem;font-weight:bold;cursor:pointer;min-width:140px;}
+    @media print{
+      body{background:#fff!important;color:#000!important;padding:0!important;}
+      #puzzle-wrapper{transform:scale(0.85);transform-origin:top center;width:100%;padding:0;}
+      #wordsearch{grid-template-columns:repeat(15,2rem);gap:2px;}
+      .cell{aspect-ratio:auto;width:2rem;height:2rem;font-size:1rem;background:#fff!important;color:#000!important;border:1px solid #000!important;}
+      .cell.selected,.cell.found{background:#fff!important;color:#000!important;}
+      .word,.word.found{background:#fff!important;color:#000!important;text-decoration:none!important;}
+      .buttons{display:none!important;}
     }
   </style>
 </head>
@@ -157,109 +48,92 @@
     <div id="wordlist"></div>
     <div class="buttons">
       <button onclick="window.print()">🖨️ Print</button>
-      <button onclick="window.location.href='/games'">⬅️ Return to Games</button>
+      <button onclick="window.location.href='games.html'">⬅️ Return to Games</button>
     </div>
   </div>
 
   <script>
-    const words = [
-      "INKPAY", "ITEWHAY", "ACKBLAY", "ELLOWYAY", "EENGRAY", "UEBLAY", "EDRAY",
-      "EARTHAY", "UARESQAY", "IANGLETRAY", "IRCLECAY", "ARSTAY", "OWNBRAY", "URPLEPAY"
-    ];
+    const words=["INKPAY","ITEWHAY","ACKBLAY","ELLOWYAY","EENGRAY","UEBLAY","EDRAY","EARTHAY","UARESQAY","IANGLETRAY","IRCLECAY","ARSTAY","OWNBRAY","URPLEPAY"];
+    const gridSize=15;
+    const grid=Array.from({length:gridSize},()=>Array(gridSize).fill(''));
+    const directions=[[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0],[-1,-1],[1,-1]];
+    const placedWords=[];
 
-    const gridSize = 15;
-    const grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
-    const directions = [[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0],[-1,-1],[1,-1]];
-    const placedWords = [];
-
-    function canPlace(word, row, col, dir) {
-      const [dx, dy] = dir;
-      for (let i = 0; i < word.length; i++) {
-        let x = row + i * dx, y = col + i * dy;
-        if (x < 0 || x >= gridSize || y < 0 || y >= gridSize) return false;
-        if (grid[x][y] && grid[x][y] !== word[i]) return false;
+    function canPlace(word,row,col,dir){
+      const[dx,dy]=dir;
+      for(let i=0;i<word.length;i++){
+        let x=row+i*dx, y=col+i*dy;
+        if(x<0||x>=gridSize||y<0||y>=gridSize) return false;
+        if(grid[x][y] && grid[x][y]!==word[i]) return false;
       }
       return true;
     }
-
-    function placeWord(word) {
-      for (let tries = 0; tries < 1000; tries++) {
-        let dir = directions[Math.floor(Math.random() * directions.length)];
-        let row = Math.floor(Math.random() * gridSize);
-        let col = Math.floor(Math.random() * gridSize);
-        if (canPlace(word, row, col, dir)) {
-          let positions = [];
-          for (let i = 0; i < word.length; i++) {
-            let x = row + i * dir[0], y = col + i * dir[1];
-            grid[x][y] = word[i];
-            positions.push(`${x}-${y}`);
+    function placeWord(word){
+      for(let t=0;t<1000;t++){
+        let dir=directions[Math.floor(Math.random()*directions.length)];
+        let row=Math.floor(Math.random()*gridSize);
+        let col=Math.floor(Math.random()*gridSize);
+        if(canPlace(word,row,col,dir)){
+          let pos=[];
+          for(let i=0;i<word.length;i++){
+            let x=row+i*dir[0], y=col+i*dir[1];
+            grid[x][y]=word[i]; pos.push(`${x}-${y}`);
           }
-          placedWords.push({ word, positions });
-          return;
+          placedWords.push({word,positions:pos}); return;
         }
       }
-      console.warn("Could not place word:", word);
     }
 
     words.forEach(placeWord);
-
-    // fill empty cells
-    for (let r = 0; r < gridSize; r++) {
-      for (let c = 0; c < gridSize; c++) {
-        if (!grid[r][c]) grid[r][c] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    for(let r=0;r<gridSize;r++){
+      for(let c=0;c<gridSize;c++){
+        if(!grid[r][c]) grid[r][c]=String.fromCharCode(65+Math.floor(Math.random()*26));
       }
     }
 
-    const searchEl = document.getElementById('wordsearch');
-    const wordListEl = document.getElementById('wordlist');
-    const cells = {}, selectedCells = [];
+    const searchEl=document.getElementById('wordsearch');
+    const wordListEl=document.getElementById('wordlist');
+    const cells={}; const selected=[];
 
-    // render grid
-    for (let r = 0; r < gridSize; r++) {
-      for (let c = 0; c < gridSize; c++) {
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        cell.textContent = grid[r][c];
-        cell.dataset.pos = `${r}-${c}`;
+    for(let r=0;r<gridSize;r++){
+      for(let c=0;c<gridSize;c++){
+        const cell=document.createElement('div');
+        cell.className='cell'; cell.textContent=grid[r][c];
+        cell.dataset.pos=`${r}-${c}`;
         searchEl.appendChild(cell);
-        cells[cell.dataset.pos] = cell;
-        cell.onclick = () => {
+        cells[cell.dataset.pos]=cell;
+        cell.onclick=()=>{
           cell.classList.toggle('selected');
-          if (cell.classList.contains('selected')) selectedCells.push(cell);
-          else selectedCells.splice(selectedCells.indexOf(cell),1);
+          if(cell.classList.contains('selected')) selected.push(cell);
+          else selected.splice(selected.indexOf(cell),1);
           checkSelection();
         };
       }
     }
 
-    // render word list
-    words.forEach(word => {
-      const el = document.createElement('div');
-      el.className = 'word';
-      el.textContent = word;
-      el.dataset.word = word;
+    words.forEach(word=>{
+      const el=document.createElement('div');
+      el.className='word'; el.textContent=word; el.dataset.word=word;
       wordListEl.appendChild(el);
-      el.onclick = () => {
-        const entry = placedWords.find(e => e.word === word);
-        const found = el.classList.toggle('found');
-        entry.positions.forEach(pos => {
-          cells[pos].classList.toggle('found', found);
-        });
+      el.onclick=()=>{
+        const entry=placedWords.find(e=>e.word===word);
+        const found=el.classList.toggle('found');
+        entry?.positions.forEach(p=>cells[p].classList.toggle('found',found));
       };
     });
 
-    function checkSelection() {
-      const seq = selectedCells.map(c=>c.textContent).join('');
-      const rev = seq.split('').reverse().join('');
-      const match = words.find(w=>w===seq||w===rev);
-      if (match) {
-        const entry = placedWords.find(e=>e.word===match);
-        entry.positions.forEach(pos => {
-          cells[pos].classList.remove('selected');
-          cells[pos].classList.add('found');
+    function checkSelection(){
+      const s=selected.map(c=>c.textContent).join('');
+      const rev=s.split('').reverse().join('');
+      const match=words.find(w=>w===s||w===rev);
+      if(match){
+        const entry=placedWords.find(e=>e.word===match);
+        entry?.positions.forEach(p=>{
+          cells[p].classList.remove('selected');
+          cells[p].classList.add('found');
         });
-        document.querySelector(`.word[data-word="${match}"]`).classList.add('found');
-        selectedCells.length = 0;
+        document.querySelector(`.word[data-word="${match}"]`)?.classList.add('found');
+        selected.length=0;
       }
     }
   </script>
