@@ -11,7 +11,7 @@ const OFFLINE_PAGES = [
   // Game pages
   '/animalsway-wordsearch.html',
   '/colorsshapes-wordsearch.html',
-  '/erbsbay-wordsearch.html',
+  '/erbsvay-wordsearch.html',
   '/oodfay-wordsearch.html'
 ];
 
