@@ -28,6 +28,7 @@
       padding: 2rem 1rem;
     }
     header h1 { font-size: 2.2rem; }
+
     nav {
       background: var(--secondary);
       text-align: center;
@@ -42,23 +43,23 @@
       text-decoration: none;
       font-weight: bold;
       border-radius: .5rem;
-      transition: background .3s;
+      transition: background .3s, transform .2s;
     }
-    nav a:hover { background: var(--primary); }
+    nav a:hover { background: var(--primary); transform: translateY(-2px); }
+
     main {
       max-width: 1000px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
-    .product-section {
-      margin-bottom: 3rem;
-    }
+    .product-section { margin-bottom: 3rem; }
     .product-section h2 {
       color: var(--primary);
       font-size: 1.6rem;
       text-align: center;
       margin-bottom: 1rem;
     }
+
     .product-grid {
       display: flex;
       flex-wrap: wrap;
@@ -66,54 +67,72 @@
       justify-content: center;
     }
     .card {
-      width: 150px;
+      width: 170px;
       background: var(--card-bg);
-      border-radius: 0.5rem;
+      border-radius: 0.75rem;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      align-items: center;
       text-align: center;
+      border: 2px solid rgba(120,170,255,0.35);
     }
     .card img {
       width: 100%;
       height: auto;
       object-fit: contain;
+      display: block;
     }
     .card-content {
-      padding: 0.5rem;
+      padding: 0.6rem;
       display: flex;
       flex-direction: column;
+      gap: .45rem;
       flex: 1;
     }
     .card-content h3 {
-      font-size: 0.9rem;
-      margin: 0.25rem 0;
+      font-size: 0.95rem;
+      margin: 0.15rem 0 0.2rem;
       color: var(--primary);
+      min-height: 2.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .card-content p {
-      font-size: 0.8rem;
-      margin-bottom: 0.5rem;
+    .btn-row {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .4rem;
     }
-    .card-content a {
+    .btn {
+      display: inline-block;
       text-decoration: none;
+      text-align: center;
       background: var(--primary);
       color: white;
       font-size: 0.8rem;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      transition: background 0.3s;
+      padding: 0.38rem 0.5rem;
+      border-radius: 6px;
+      transition: background .2s, transform .1s;
+      white-space: nowrap;
     }
-    .card-content a:hover {
-      background: var(--accent);
-    }
+    .btn:hover { background: var(--secondary); }
+    .btn:active { transform: translateY(1px); }
+    .btn-alt { background: var(--accent); }
+    .btn-alt:hover { background: var(--primary); }
+
     footer {
       background: var(--primary);
       color: white;
       text-align: center;
       padding: 1rem;
       margin-top: 3rem;
+    }
+
+    @media (max-width: 480px) {
+      .card { width: 46%; min-width: 160px; }
+      .btn-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -130,55 +149,73 @@
   </nav>
 
   <main>
+    <!-- Books & Printables -->
     <section class="product-section">
       <h2>📘 Books &amp; Printables</h2>
       <div class="product-grid">
+
+        <!-- Coloring Book (with Amazon + Etsy) -->
         <div class="card">
-          <img src="thumbnails/coloringbook.webp" alt="Coloring Book">
+          <img src="thumbnails/coloringbook.webp" loading="lazy" alt="Pig Latin Coloring Book cover">
           <div class="card-content">
             <h3>Coloring Book</h3>
-            <a href="https://www.amazon.com/dp/YOUR-COLORING-ASIN">Amazon</a>
+            <div class="btn-row">
+              <!-- Clean, working Amazon DP link -->
+              <a class="btn" href="https://www.amazon.com/dp/B0FL7GPQLC" target="_blank" rel="noopener noreferrer" aria-label="Buy the Coloring Book on Amazon">
+                Amazon
+              </a>
+              <!-- Digital download on Etsy -->
+              <a class="btn btn-alt" href="https://www.etsy.com/listing/4345537260/ipgay-atinlay-oloringcay-ookbay-an?ref=shop_home_active_1" target="_blank" rel="noopener noreferrer" aria-label="Buy the Coloring Book digital download on Etsy">
+                Digital (Etsy)
+              </a>
+            </div>
           </div>
         </div>
+
         <div class="card">
-          <img src="thumbnails/threelittlepigs.webp" alt="Three Little Pigs">
+          <img src="thumbnails/threelittlepigs.webp" loading="lazy" alt="Three Little Pigs cover">
           <div class="card-content">
             <h3>Three Little Pigs</h3>
-            <a href="https://www.amazon.com/dp/B0FD83WYNK/">Amazon</a>
+            <a class="btn" href="https://www.amazon.com/dp/B0FD83WYNK/" target="_blank" rel="noopener noreferrer">Amazon</a>
           </div>
         </div>
+
         <div class="card">
-          <img src="thumbnails/Goldilocks.webp" alt="Goldilocks">
+          <img src="thumbnails/Goldilocks.webp" loading="lazy" alt="Goldilocks cover">
           <div class="card-content">
             <h3>Goldilocks</h3>
-            <a href="https://www.amazon.com/dp/B0FG4J13FG/">Amazon</a>
+            <a class="btn" href="https://www.amazon.com/dp/B0FG4J13FG/" target="_blank" rel="noopener noreferrer">Amazon</a>
           </div>
         </div>
+
         <div class="card">
-          <img src="thumbnails/littleredriding.webp" alt="Little Red Riding Hood">
+          <img src="thumbnails/littleredriding.webp" loading="lazy" alt="Little Red Riding Hood cover">
           <div class="card-content">
             <h3>Little Red</h3>
-            <a href="https://www.amazon.com/dp/B0FGQ6PWRC/">Amazon</a>
+            <a class="btn" href="https://www.amazon.com/dp/B0FGQ6PWRC/" target="_blank" rel="noopener noreferrer">Amazon</a>
           </div>
         </div>
+
         <div class="card">
-          <img src="thumbnails/tripleanthology.webp" alt="Triple Anthology">
+          <img src="thumbnails/tripleanthology.webp" loading="lazy" alt="Triple Anthology cover">
           <div class="card-content">
             <h3>Anthology</h3>
-            <a href="https://www.amazon.com/dp/B0FGWHCVVL/">Amazon</a>
+            <a class="btn" href="https://www.amazon.com/dp/B0FGWHCVVL/" target="_blank" rel="noopener noreferrer">Amazon</a>
           </div>
         </div>
+
       </div>
     </section>
 
+    <!-- Apparel -->
     <section class="product-section">
       <h2>👕 Apparel</h2>
       <div class="product-grid">
         <div class="card">
-          <img src="thumbnails/piglatintshirt.webp" alt="T-shirt">
+          <img src="thumbnails/piglatintshirt.webp" loading="lazy" alt="Pig Latin shirt">
           <div class="card-content">
             <h3>Pig Latin Shirt</h3>
-            <a href="https://www.etsy.com/listing/YOUR-TSHIRT-ID">Etsy</a>
+            <a class="btn btn-alt" href="https://www.etsy.com/listing/YOUR-TSHIRT-ID" target="_blank" rel="noopener noreferrer">Etsy</a>
           </div>
         </div>
       </div>
