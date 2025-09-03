@@ -11,19 +11,30 @@
   <meta name="apple-mobile-web-app-title" content="Learn Pig Latin">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
   <link rel="apple-touch-icon" sizes="180x180" href="/img/appletouchicon180.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
   <link rel="icon" href="/img/favicon.ico">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT"></script>
+  <!-- Google Analytics: load on website only (NOT in installed PWA) -->
   <script>
+  (function () {
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+    if (isStandalone) return;
+
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT';
+    document.head.appendChild(s);
+
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
     gtag('js', new Date());
     gtag('config', 'G-8ZL77F3HRT');
+  })();
   </script>
 
   <style>
@@ -51,13 +62,7 @@
       padding: 1.5rem;
     }
     header h1 { margin: 0; font-size: 2.5rem; }
-    header p {
-      margin: 0.5rem 0 0;
-      font-size: 1.3rem;
-      letter-spacing: 0.5px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-    }
-
+    header p { margin: 0.5rem 0 0; font-size: 1.3rem; letter-spacing: 0.5px; text-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
     nav {
       display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
       background: var(--secondary); padding: 1rem; border-bottom: 2px solid rgba(0,0,0,0.1);
@@ -68,24 +73,16 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: background 0.3s, transform 0.2s;
     }
     nav a:hover { background: var(--primary); transform: translateY(-2px); }
-
     main { max-width: 1200px; margin: auto; padding: 2rem 1rem; }
 
     .translator-section { display: flex; gap: 2rem; flex-wrap: wrap; align-items: stretch; }
-    .card {
-      background: var(--card-bg); border-radius: 1rem; padding: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05); flex: 1; min-width: 280px; display: flex; flex-direction: column;
-    }
+    .card { background: var(--card-bg); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); flex: 1; min-width: 280px; display: flex; flex-direction: column; }
     .card h3, .card h4 { margin-top: 0; }
 
-    /* Translator card with exactly two pigs */
     .translator-card { position: relative; overflow: visible; }
-    .translator-pig {
-      position: absolute; top: -18px; width: 88px; height: auto;
-      pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15));
-    }
+    .translator-pig { position: absolute; top: -18px; width: 88px; height: auto; pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); }
     .translator-pig.left  { left: -12px; }
-    .translator-pig.right { right: -12px; top: -26px; } /* closer to header */
+    .translator-pig.right { right: -12px; top: -26px; }
     @media (max-width: 480px){
       .translator-pig { width: 62px; top: -12px; }
       .translator-pig.right { top: -18px; }
@@ -97,13 +94,8 @@
     .translator-title h2 { margin: 0; color: var(--primary); font-size: 1.6rem; line-height: 1; text-align: center; width: 100%; }
 
     label { font-weight: bold; margin-top: 1rem; display: block; }
-    select, input {
-      width: 100%; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 0.5rem; font-size: 1rem;
-    }
-    .output {
-      background: #e0d3ff; border-radius: 0.5rem; min-height: 2rem; margin-top: 1rem; padding: 0.5rem;
-      white-space: pre-wrap;
-    }
+    select, input { width: 100%; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 0.5rem; font-size: 1rem; }
+    .output { background: #e0d3ff; border-radius: 0.5rem; min-height: 2rem; margin-top: 1rem; padding: 0.5rem; white-space: pre-wrap; }
     .button-group { margin-top: auto; display: flex; gap: 1rem; flex-wrap: wrap; }
     .button { flex: 1; background: var(--primary); color: white; border: none; border-radius: 0.5rem; padding: 0.5rem; cursor: pointer; font-size: 0.9rem; transition: background 0.3s; }
     .button:hover { background: var(--primary-dark); }
@@ -113,39 +105,20 @@
     .video-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
     .video-thumb { position: relative; width: 100%; max-width: 350px; cursor: pointer; overflow: hidden; border-radius: 0.75rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
     .video-thumb img { display: block; width: 100%; height: auto; }
-    .play-button {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.6); color: white; border: none; font-size: 2rem; padding: 0.5rem 1rem; border-radius: 50%; cursor: pointer;
-    }
+    .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.6); color: white; border: none; font-size: 2rem; padding: 0.5rem 1rem; border-radius: 50%; cursor: pointer; }
 
     footer { background: var(--primary); color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
-
     @media (max-width: 768px) { .translator-section { flex-direction: column; } }
 
     /* Share dropdown */
-    #share-chooser {
-      position: absolute; z-index: 9999; display: none; background: #fff; border: 1px solid rgba(0,0,0,0.15);
-      border-radius: 0.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 0.5rem; min-width: 260px; font-family: inherit;
-    }
-    #share-chooser button {
-      display: block; width: 100%; text-align: left; background: transparent; border: none; padding: 0.6rem 0.7rem; cursor: pointer; font-size: 0.95rem;
-    }
+    #share-chooser { position: absolute; z-index: 9999; display: none; background: #fff; border: 1px solid rgba(0,0,0,0.15); border-radius: 0.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 0.5rem; min-width: 260px; font-family: inherit; }
+    #share-chooser button { display: block; width: 100%; text-align: left; background: transparent; border: none; padding: 0.6rem 0.7rem; cursor: pointer; font-size: 0.95rem; }
     #share-chooser button:hover { background: rgba(0,0,0,0.05); }
 
-    /* Sent-from line (text only; centered) */
-    .sent-by{
-      display:flex; align-items:center; gap:.4rem; margin-top:.4rem; font-size:.9rem; color:#6b5aa7;
-      justify-content: center;
-    }
+    .sent-by{ display:flex; align-items:center; gap:.4rem; margin-top:.4rem; font-size:.9rem; color:#6b5aa7; justify-content: center; }
     .sent-by a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
 
-    /* Install App pill button (shows when installable) */
-    #installAppBtn {
-      position: fixed; right: 16px; bottom: 16px; z-index: 9999;
-      background: var(--primary); color: #fff; border: none; border-radius: 999px;
-      padding: 10px 16px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,.2);
-      cursor: pointer; display: none;
-    }
+    #installAppBtn { position: fixed; right: 16px; bottom: 16px; z-index: 9999; background: var(--primary); color: #fff; border: none; border-radius: 999px; padding: 10px 16px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,.2); cursor: pointer; display: none; }
     #installAppBtn:hover { background: var(--primary-dark); }
   </style>
 </head>
@@ -166,13 +139,9 @@
     <section id="translator">
       <div class="translator-section">
         <div class="card translator-card">
-          <!-- ONLY TWO PIGS: top-left & top-right of the translator card -->
           <img src="/img/piglatinpig1.png" alt="" aria-hidden="true" class="translator-pig left">
           <img src="/img/piglatinpig2.png" alt="" aria-hidden="true" class="translator-pig right">
-
-          <div class="translator-title">
-            <h2>Pig Latin Translator</h2>
-          </div>
+          <div class="translator-title"><h2>Pig Latin Translator</h2></div>
 
           <label for="mode">Translation mode:</label>
           <select id="mode">
@@ -185,7 +154,6 @@
 
           <div class="output" id="output"></div>
 
-          <!-- Sent-from line (text only; appears when output has text) -->
           <div class="sent-by" id="sentBy" hidden>
             <span>— sent from <a href="https://learnpiglatin.com">LearnPigLatin.com</a></span>
           </div>
@@ -231,10 +199,7 @@
 
   <footer>© 2025 Learn Pig Latin. All rights reserved.</footer>
 
-  <!-- Share dropdown container -->
   <div id="share-chooser" role="menu" aria-label="Share options"></div>
-
-  <!-- Install App (shows only when installable on Android/Desktop Chrome) -->
   <button id="installAppBtn">Install App</button>
 
   <script>
@@ -317,7 +282,6 @@
       }
     }
 
-    // Show/hide the sent-by line based on whether there is output
     function updateSentByVisibility() {
       const hasText = (document.getElementById('output').innerText || '').trim().length > 0;
       document.getElementById('sentBy').hidden = !hasText;
@@ -338,7 +302,7 @@
       });
     });
 
-    // ---------- SHARE (desktop dropdown; mobile = native share) ----------
+    // ---------- SHARE ----------
     const chooserEl = document.getElementById('share-chooser');
     let outsideDownHandler = null, escHandler = null, scrollHandler = null, resizeHandler = null;
 
@@ -393,7 +357,6 @@
         chooserEl.appendChild(b);
       };
 
-      // Social first
       add('WhatsApp', () => {
         window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
         hideChooser();
@@ -414,7 +377,6 @@
         hideChooser();
       });
 
-      // Email last
       add('Email via Gmail (web)', () => {
         window.open(`https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
         hideChooser();
@@ -433,7 +395,6 @@
       const textOnly = (outEl?.innerText || '').trim();
       if (!textOnly) { alert('Nothing to share yet—type something first!'); return; }
 
-      // 🐷 wrap translation with pigs + optional tagline
       const pigs = '🐷';
       const includeTagline = true;
       const subject = `🐷 Pig Latin Translation 🐷`;
@@ -450,28 +411,24 @@
       showChooser(shareBtn);
     }
 
-    // ---------- PWA: Service worker registration ----------
+    // ---------- PWA: Service worker ----------
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       });
     }
 
-    // ---------- PWA: Visible Install button (Android & Desktop Chrome) ----------
+    // ---------- PWA: Install button ----------
     let deferredPrompt;
     const installBtn = document.getElementById('installAppBtn');
-
-    // iOS Safari uses A2HS via Share menu; hide the button there
     const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
     const isInStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-    if (isIOS || isInStandalone) {
-      installBtn.style.display = 'none';
-    }
+    if (isIOS || isInStandalone) installBtn.style.display = 'none';
 
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      installBtn.style.display = 'inline-block'; // show the pill when installable
+      installBtn.style.display = 'inline-block';
     });
 
     installBtn.addEventListener('click', async () => {
