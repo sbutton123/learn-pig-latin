@@ -44,77 +44,82 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
     nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      background: var(--secondary);
-      padding: 1rem;
-      border-bottom: 2px solid rgba(0,0,0,0.1);
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+      background: var(--secondary); padding: 1rem; border-bottom: 2px solid rgba(0,0,0,0.1);
     }
     nav a {
-      background: var(--accent);
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0.75rem 1.5rem;
-      font-size: 1.2rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      transition: background 0.3s, transform 0.2s;
+      background: var(--accent); color: white; text-decoration: none; font-weight: bold;
+      padding: 0.75rem 1.5rem; font-size: 1.2rem; border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: background 0.3s, transform 0.2s;
     }
     nav a:hover { background: var(--primary); transform: translateY(-2px); }
 
     main { max-width: 1200px; margin: auto; padding: 2rem 1rem; }
     .translator-section { display: flex; gap: 2rem; flex-wrap: wrap; align-items: stretch; }
     .card {
-      background: var(--card-bg);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      flex: 1; min-width: 280px;
-      display: flex; flex-direction: column;
+      background: var(--card-bg); border-radius: 1rem; padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05); flex: 1; min-width: 280px; display: flex; flex-direction: column;
     }
     .card h3, .card h4 { margin-top: 0; }
-    .translator-card h2 { text-align: center; margin: 0 0 1rem; color: var(--primary); font-size: 1.5rem; }
+    .translator-card { position: relative; overflow: hidden; }
+    .translator-title {
+      display: flex; align-items: center; justify-content: center; gap: .6rem; margin-bottom: .75rem;
+    }
+    .translator-title h2 {
+      margin: 0; color: var(--primary); font-size: 1.6rem; line-height: 1;
+    }
+    .title-pig { width: 72px; height: 72px; display: block; }
+    @media (max-width: 480px) {
+      .title-pig { width: 52px; height: 52px; }
+    }
+
+    /* corner sticker on translator card */
+    .sticker-corner {
+      position: absolute; right: -10px; top: -10px; width: 96px; height: 96px;
+      pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); opacity: .9;
+    }
+
     label { font-weight: bold; margin-top: 1rem; display: block; }
-    select, input { width: 100%; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 0.5rem; font-size: 1rem; }
+    select, input {
+      width: 100%; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 0.5rem; font-size: 1rem;
+    }
     .output { background: #e0d3ff; border-radius: 0.5rem; min-height: 2rem; margin-top: 1rem; padding: 0.5rem; white-space: pre-wrap; }
     .button-group { margin-top: auto; display: flex; gap: 1rem; flex-wrap: wrap; }
     .button { flex: 1; background: var(--primary); color: white; border: none; border-radius: 0.5rem; padding: 0.5rem; cursor: pointer; font-size: 0.9rem; transition: background 0.3s; }
     .button:hover { background: var(--primary-dark); }
 
     #lesson-videos { margin-top: 3rem; }
-    #lesson-videos h2 { text-align: center; color: var(--primary); margin-bottom: 1rem; }
+    #lesson-videos h2 {
+      text-align: center; color: var(--primary); margin-bottom: 1rem; display: flex; gap: .5rem; justify-content: center; align-items: center;
+    }
+    .videos-pig { width: 48px; height: 48px; display: inline-block; }
+
     .video-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-    .video-thumb { position: relative; width: 100%; max-width: 350px; cursor: pointer; overflow: hidden; border-radius: 0.75rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
+    .video-thumb { position: relative; width: 100%; max-width: 350px; cursor: pointer; overflow: hidden; border-radius: 0.75rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
     .video-thumb img { display: block; width: 100%; height: auto; }
     .play-button {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       background: rgba(0,0,0,0.6); color: white; border: none; font-size: 2rem; padding: 0.5rem 1rem; border-radius: 50%; cursor: pointer;
     }
     footer { background: var(--primary); color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+
     @media (max-width: 768px) { .translator-section { flex-direction: column; } }
 
     /* Share dropdown */
     #share-chooser {
-      position: absolute; z-index: 9999; display: none;
-      background: #fff; border: 1px solid rgba(0,0,0,0.15); border-radius: 0.5rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 0.5rem; min-width: 260px;
-      font-family: inherit;
+      position: absolute; z-index: 9999; display: none; background: #fff; border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 0.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 0.5rem; min-width: 260px; font-family: inherit;
     }
     #share-chooser button {
-      display: block; width: 100%; text-align: left; background: transparent; border: none;
-      padding: 0.6rem 0.7rem; cursor: pointer; font-size: 0.95rem;
+      display: block; width: 100%; text-align: left; background: transparent; border: none; padding: 0.6rem 0.7rem; cursor: pointer; font-size: 0.95rem;
     }
     #share-chooser button:hover { background: rgba(0,0,0,0.05); }
 
-    /* Sent-from badge with pigs */
+    /* Sent-from line (text only now) */
     .sent-by{
-      display:flex; align-items:center; gap:.4rem;
-      margin-top:.4rem; font-size:.9rem; color:#6b5aa7;
+      display:flex; align-items:center; gap:.4rem; margin-top:.4rem; font-size:.9rem; color:#6b5aa7;
+      justify-content: center;
     }
-    .sent-by .mascot{ display:block; }
     .sent-by a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
   </style>
 </head>
@@ -146,7 +151,14 @@
         </div>
 
         <div class="card translator-card">
-          <h2>Pig Latin Translator</h2>
+          <!-- corner sticker -->
+          <img src="img/piglatinpig2.png" alt="" aria-hidden="true" class="sticker-corner">
+
+          <div class="translator-title">
+            <img src="img/piglatinpig3.png" alt="" aria-hidden="true" class="title-pig">
+            <h2>Pig Latin Translator</h2>
+            <img src="img/piglatinpig4.png" alt="" aria-hidden="true" class="title-pig">
+          </div>
 
           <label for="mode">Translation mode:</label>
           <select id="mode">
@@ -159,11 +171,9 @@
 
           <div class="output" id="output"></div>
 
-          <!-- Sent-from badge with two pigs (hidden until there is output) -->
+          <!-- Sent-from line (text only; appears when output has text) -->
           <div class="sent-by" id="sentBy" hidden>
-            <img src="img/piglatinpig1.png" alt="Pig mascot" width="32" height="32" class="mascot">
-            <span>sent from <a href="https://learnpiglatin.com">LearnPigLatin.com</a></span>
-            <img src="img/piglatinpig2.png" alt="" aria-hidden="true" width="32" height="32" class="mascot">
+            <span>— sent from <a href="https://learnpiglatin.com">LearnPigLatin.com</a></span>
           </div>
 
           <div class="button-group">
@@ -176,7 +186,7 @@
     </section>
 
     <section id="lesson-videos">
-      <h2>Videos</h2>
+      <h2><img src="img/piglatinpig1.png" alt="" aria-hidden="true" class="videos-pig"> Videos</h2>
       <div class="video-grid">
         <div class="video-thumb" data-id="APrST3lK3NE">
           <img src="https://img.youtube.com/vi/APrST3lK3NE/hqdefault.jpg" alt="Video 1 thumbnail">
@@ -305,9 +315,7 @@
     const chooserEl = document.getElementById('share-chooser');
     let outsideDownHandler = null, escHandler = null, scrollHandler = null, resizeHandler = null;
 
-    function isMobile() {
-      return /(android|iphone|ipad|ipod)/i.test(navigator.userAgent);
-    }
+    function isMobile() { return /(android|iphone|ipad|ipod)/i.test(navigator.userAgent); }
     function positionChooser(anchorEl) {
       const rect = anchorEl.getBoundingClientRect();
       chooserEl.style.left = (rect.left + window.scrollX) + 'px';
@@ -316,8 +324,7 @@
     async function safeCopy(text) {
       if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
       const ta = document.createElement('textarea'); ta.value = text;
-      document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); } catch {}
+      document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch {}
       document.body.removeChild(ta);
     }
     function hideChooser() {
@@ -400,12 +407,11 @@
       const textOnly = (outEl?.innerText || '').trim();
       if (!textOnly) { alert('Nothing to share yet—type something first!'); return; }
 
-     const pigs = '🐷';                            // emoji pigs to send
-const includeTagline = true;                  // set to false if you ever want no credit line
-const subject = `🐷 Pig Latin Translation 🐷`;
-const message =
-  `${pigs} ${textOnly} ${pigs}` +
-  (includeTagline ? `\n\n— sent from LearnPigLatin.com ${pigs}` : '');
+      // 🐷 wrap translation with pigs + optional tagline
+      const pigs = '🐷';
+      const includeTagline = true;
+      const subject = `🐷 Pig Latin Translation 🐷`;
+      const message = `${pigs} ${textOnly} ${pigs}` + (includeTagline ? `\n\n— sent from LearnPigLatin.com ${pigs}` : '');
 
       if (isMobile() && navigator.share) {
         navigator.share({ title: subject, text: message }).catch(() => {});
@@ -420,4 +426,3 @@ const message =
   </script>
 </body>
 </html>
-
