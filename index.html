@@ -277,7 +277,7 @@
       if(!core) return word;
 
       const isCap = core[0]===core[0].toUpperCase();
-      let lower = core.toLowerCase();
+      const lower = core.toLowerCase();
 
       let res=core;
       if(lower.endsWith('yay')) {
@@ -318,16 +318,12 @@
       });
     });
 
-    // ---------- Share (mobile = native; desktop = custom so text is included) ----------
-    function isLikelyMobile() {
+    // ---------- SMART SHARE ----------
+    function isMobile() {
       return /(android|iphone|ipad|ipod)/i.test(navigator.userAgent);
     }
-    function openSMS(bodyText) {
-      const encoded = encodeURIComponent(bodyText);
-      const isApple = /iPad|iPhone|iPod/i.test(navigator.userAgent);
-      const smsUrl = isApple ? `sms:&body=${encoded}` : `sms:?body=${encoded}`;
-      window.location.href = smsUrl;
-    }
+
+    // Desktop chooser (no SMS option to avoid "Pick an app" dialog)
     function getOrCreateShareChooser() {
       let chooser = document.getElementById('share-chooser');
       if (chooser) return chooser;
@@ -341,14 +337,15 @@
       chooser.style.borderRadius = '0.5rem';
       chooser.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
       chooser.style.padding = '0.5rem';
-      chooser.style.minWidth = '200px';
+      chooser.style.minWidth = '220px';
       chooser.style.fontFamily = 'inherit';
       chooser.style.display = 'none';
 
-      const btn = (label, onclick) => {
+      const btn = (label, key) => {
         const b = document.createElement('button');
         b.type = 'button';
         b.textContent = label;
+        b.dataset.key = key;
         b.style.display = 'block';
         b.style.width = '100%';
         b.style.textAlign = 'left';
@@ -358,19 +355,25 @@
         b.style.cursor = 'pointer';
         b.onmouseenter = () => b.style.background = 'rgba(0,0,0,0.05)';
         b.onmouseleave = () => b.style.background = 'transparent';
-        b.onclick = onclick;
         return b;
       };
 
-      chooser.appendChild(btn('Email',    () => chooser.dispatchEvent(new CustomEvent('choose', { detail: 'email' }))));
-      chooser.appendChild(btn('Text',     () => chooser.dispatchEvent(new CustomEvent('choose', { detail: 'sms' }))));
-      chooser.appendChild(btn('Tweet',    () => chooser.dispatchEvent(new CustomEvent('choose', { detail: 'tweet' }))));
-      chooser.appendChild(btn('WhatsApp', () => chooser.dispatchEvent(new CustomEvent('choose', { detail: 'whatsapp' }))));
-      chooser.appendChild(btn('Copy',     () => chooser.dispatchEvent(new CustomEvent('choose', { detail: 'copy' }))));
+      chooser.appendChild(btn('Email (Gmail)', 'gmail'));
+      chooser.appendChild(btn('Email (Outlook Web)', 'outlookweb'));
+      chooser.appendChild(btn('Tweet', 'tweet'));
+      chooser.appendChild(btn('WhatsApp Web', 'whatsapp'));
+      chooser.appendChild(btn('Copy', 'copy'));
+
+      chooser.addEventListener('click', (e) => {
+        const key = e.target?.dataset?.key;
+        if (!key) return;
+        chooser.dispatchEvent(new CustomEvent('choose', { detail: key }));
+      });
 
       document.body.appendChild(chooser);
       return chooser;
     }
+
     function positionChooser(chooser, anchorEl) {
       const rect = anchorEl.getBoundingClientRect();
       chooser.style.left = (rect.left + window.scrollX) + 'px';
@@ -382,17 +385,19 @@
       const textOnly = (outEl?.innerText || '').trim();
       if (!textOnly) { alert('Nothing to share yet—type something first!'); return; }
 
-      // Put the translation first, and the site after it.
+      // Put the translation first; site credit after it.
       const message = `${textOnly}\n\n— sent from LearnPigLatin.com`;
+      const subject = 'Pig Latin Translation';
+      const encMsg = encodeURIComponent(message);
+      const encSub = encodeURIComponent(subject);
 
-      // On mobile, use native share (works great with SMS/WhatsApp/etc).
-      if (isLikelyMobile() && navigator.share) {
-        navigator.share({ title: 'Pig Latin Translator', text: message })
-          .catch(() => {});
+      // Mobile: native share (works great with SMS/WhatsApp/etc). Avoid adding url to prevent some platforms from dropping text.
+      if (isMobile() && navigator.share) {
+        navigator.share({ title: subject, text: message }).catch(() => {});
         return;
       }
 
-      // Desktop: custom chooser so the full text is preserved
+      // Desktop: custom chooser so the full text is preserved everywhere
       const shareBtn = document.getElementById('shareBtn') || document.body;
       const chooser = getOrCreateShareChooser();
       positionChooser(chooser, shareBtn);
@@ -406,17 +411,21 @@
 
       chooser.addEventListener('choose', (ev) => {
         const choice = ev.detail;
-        const encoded = encodeURIComponent(message);
 
-        if (choice === 'email') {
-          const mailto = `mailto:?subject=${encodeURIComponent('Pig Latin Translation')}&body=${encoded}`;
-          window.location.href = mailto;
-        } else if (choice === 'sms') {
-          openSMS(message);
+        if (choice === 'gmail') {
+          window.open(
+            `https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encSub}&body=${encMsg}`,
+            '_blank','noopener,noreferrer'
+          );
+        } else if (choice === 'outlookweb') {
+          window.open(
+            `https://outlook.live.com/owa/?path=/mail/action/compose&subject=${encSub}&body=${encMsg}`,
+            '_blank','noopener,noreferrer'
+          );
         } else if (choice === 'tweet') {
-          window.open(`https://twitter.com/intent/tweet?text=${encoded}`, '_blank', 'noopener,noreferrer');
+          window.open(`https://twitter.com/intent/tweet?text=${encMsg}`, '_blank', 'noopener,noreferrer');
         } else if (choice === 'whatsapp') {
-          window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank', 'noopener,noreferrer');
+          window.open(`https://api.whatsapp.com/send?text=${encMsg}`, '_blank', 'noopener,noreferrer');
         } else if (choice === 'copy') {
           if (navigator.clipboard?.writeText) {
             navigator.clipboard.writeText(message).then(() => alert('Translation copied!'));
