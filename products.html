@@ -13,172 +13,59 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
   <link rel="icon" href="/img/favicon.ico">
 
+  <!-- Google Analytics: website only -->
+  <script>
+  (function () {
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+    if (isStandalone) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT';
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-8ZL77F3HRT');
+  })();
+  </script>
+
   <style>
     :root {
-      --primary: #a97ef9;
-      --secondary: #d682f4;
-      --accent: #78aaff;
-      --background-start: #f3eaff;
-      --background-end: #ede4ff;
-      --text-dark: #2c174e;
-      --muted: #6b5aa7;
-      --card-bg: #ffffff;
+      --primary: #a97ef9; --secondary: #d682f4; --accent: #78aaff;
+      --background-start: #f3eaff; --background-end: #ede4ff;
+      --text-dark: #2c174e; --muted: #6b5aa7; --card-bg: #ffffff;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, var(--background-start), var(--background-end));
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-    header {
-      background: linear-gradient(to right, var(--primary), var(--accent));
-      color: #fff;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
+    body { font-family: Arial, sans-serif; background: linear-gradient(to bottom, var(--background-start), var(--background-end)); color: var(--text-dark); line-height: 1.6; }
+    header { background: linear-gradient(to right, var(--primary), var(--accent)); color: #fff; text-align: center; padding: 2rem 1rem; }
     header h1 { font-size: 2.2rem; }
-
-    nav {
-      background: var(--secondary);
-      text-align: center;
-      padding: 1rem;
-    }
-    nav a {
-      display: inline-block;
-      margin: 0 .5rem;
-      padding: .5rem 1rem;
-      background: var(--accent);
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: .5rem;
-      transition: background .3s, transform .2s;
-    }
+    nav { background: var(--secondary); text-align: center; padding: 1rem; }
+    nav a { display: inline-block; margin: 0 .5rem; padding: .5rem 1rem; background: var(--accent); color: #fff; text-decoration: none; font-weight: bold; border-radius: .5rem; transition: background .3s, transform .2s; }
     nav a:hover { background: var(--primary); transform: translateY(-2px); }
-
-    main {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
+    main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
     .product-section { margin-bottom: 3rem; }
-    .product-section h2 {
-      color: var(--primary);
-      font-size: 1.6rem;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    .product-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      justify-content: center;
-    }
-
-    /* CARD (size unchanged; images fill more with thin border) */
-    .card {
-      width: 170px;
-      background: var(--card-bg);
-      border-radius: 0.75rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      border: 2px solid rgba(120,170,255,0.35);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
-    }
-    .card-image {
-      width: 100%;
-      padding: 6px;                 /* thin equal white edge on sides + top */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: contain;
-    }
-    .card-content {
-      padding: 0.45rem 0.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: .35rem;
-      width: 100%;
-      align-items: center;
-      flex: 1;                      /* lets buttons anchor to bottom */
-    }
-    .card-content h3 {
-      font-size: 0.95rem;
-      margin: 0.1rem 0 0.1rem;
-      color: var(--primary);
-      line-height: 1.2;
-      min-height: 1.6em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    /* Small subtitle under titles (used on the shirt card) */
-    .sub {
-      font-size: .8rem;
-      color: var(--muted);
-      margin-top: -0.2rem;
-      margin-bottom: 0.15rem;
-    }
-
-    /* Buttons anchored to bottom */
-    .buttons-wrap {
-      margin-top: auto;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-    .btn-row {
-      display: flex;
-      justify-content: center;
-      gap: .5rem;
-      flex-wrap: wrap;
-      width: 100%;
-    }
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      text-align: center;
-      background: var(--primary);
-      color: white;
-      font-size: 0.8rem;
-      padding: 0.38rem 0.6rem;
-      border-radius: 6px;
-      transition: background .2s, transform .1s;
-      white-space: nowrap;
-    }
+    .product-section h2 { color: var(--primary); font-size: 1.6rem; text-align: center; margin-bottom: 1rem; }
+    .product-grid { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center; }
+    .card { width: 170px; background: var(--card-bg); border-radius: 0.75rem; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); border: 2px solid rgba(120,170,255,0.35); display: flex; flex-direction: column; align-items: center; text-align: center; overflow: hidden; }
+    .card-image { width: 100%; padding: 6px; display: flex; align-items: center; justify-content: center; }
+    .card-image img { width: 100%; height: auto; display: block; object-fit: contain; }
+    .card-content { padding: 0.45rem 0.5rem; display: flex; flex-direction: column; gap: .35rem; width: 100%; align-items: center; flex: 1; }
+    .card-content h3 { font-size: 0.95rem; margin: 0.1rem 0 0.1rem; color: var(--primary); line-height: 1.2; min-height: 1.6em; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .sub { font-size: .8rem; color: var(--muted); margin-top: -0.2rem; margin-bottom: 0.15rem; }
+    .buttons-wrap { margin-top: auto; width: 100%; display: flex; justify-content: center; }
+    .btn-row { display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; width: 100%; }
+    .btn { display: inline-block; text-decoration: none; text-align: center; background: var(--primary); color: white; font-size: 0.8rem; padding: 0.38rem 0.6rem; border-radius: 6px; transition: background .2s, transform .1s; white-space: nowrap; }
     .btn:hover { background: var(--secondary); }
     .btn:active { transform: translateY(1px); }
-
-    footer {
-      background: var(--primary);
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 3rem;
-    }
-
-    /* Mobile: two across; thinner image edge so images feel larger */
-    @media (max-width: 540px) {
-      .card { width: 47%; min-width: 170px; }
-      .card-image { padding: 4px; }
-    }
+    footer { background: var(--primary); color: white; text-align: center; padding: 1rem; margin-top: 3rem; }
+    @media (max-width: 540px) { .card { width: 47%; min-width: 170px; } .card-image { padding: 4px; } }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Our Products</h1>
-  </header>
+  <header><h1>Our Products</h1></header>
 
   <nav>
     <a href="index.html">Lessons &amp; Translator</a>
@@ -188,12 +75,10 @@
   </nav>
 
   <main>
-    <!-- Featured (Top Row): Shirt, Mug, Coloring Book -->
     <section class="product-section">
       <h2>⭐ Featured</h2>
       <div class="product-grid">
 
-        <!-- Shirt -->
         <div class="card">
           <div class="card-image">
             <img src="thumbnails/piglatintshirt.webp" loading="lazy" alt="Pig Latin shirt">
@@ -207,7 +92,6 @@
           </div>
         </div>
 
-        <!-- Mug -->
         <div class="card">
           <div class="card-image">
             <img src="thumbnails/mug.png" loading="lazy" alt="Ivelay, Ovelay, Aughlay Pig Latin mug">
@@ -220,7 +104,6 @@
           </div>
         </div>
 
-        <!-- Coloring Book -->
         <div class="card">
           <div class="card-image">
             <img src="thumbnails/coloringbook.webp" loading="lazy" alt="Pig Latin Coloring Book cover">
@@ -239,55 +122,38 @@
       </div>
     </section>
 
-    <!-- Books (Second Row) -->
     <section class="product-section">
       <h2>📘 Books &amp; Printables</h2>
       <div class="product-grid">
         <div class="card">
-          <div class="card-image">
-            <img src="thumbnails/threelittlepigs.webp" loading="lazy" alt="Three Little Pigs cover">
-          </div>
+          <div class="card-image"><img src="thumbnails/threelittlepigs.webp" loading="lazy" alt="Three Little Pigs cover"></div>
           <div class="card-content">
             <h3>Three Little Pigs</h3>
-            <div class="buttons-wrap">
-              <a class="btn" href="https://www.amazon.com/dp/B0FD83WYNK/" target="_blank" rel="noopener noreferrer">Amazon</a>
-            </div>
+            <div class="buttons-wrap"><a class="btn" href="https://www.amazon.com/dp/B0FD83WYNK/" target="_blank" rel="noopener noreferrer">Amazon</a></div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-image">
-            <img src="thumbnails/Goldilocks.webp" loading="lazy" alt="Goldilocks cover">
-          </div>
+          <div class="card-image"><img src="thumbnails/Goldilocks.webp" loading="lazy" alt="Goldilocks cover"></div>
           <div class="card-content">
             <h3>Goldilocks</h3>
-            <div class="buttons-wrap">
-              <a class="btn" href="https://www.amazon.com/dp/B0FG4J13FG/" target="_blank" rel="noopener noreferrer">Amazon</a>
-            </div>
+            <div class="buttons-wrap"><a class="btn" href="https://www.amazon.com/dp/B0FG4J13FG/" target="_blank" rel="noopener noreferrer">Amazon</a></div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-image">
-            <img src="thumbnails/littleredriding.webp" loading="lazy" alt="Little Red Riding Hood cover">
-          </div>
+          <div class="card-image"><img src="thumbnails/littleredriding.webp" loading="lazy" alt="Little Red Riding Hood cover"></div>
           <div class="card-content">
             <h3>Little Red</h3>
-            <div class="buttons-wrap">
-              <a class="btn" href="https://www.amazon.com/dp/B0FGQ6PWRC/" target="_blank" rel="noopener noreferrer">Amazon</a>
-            </div>
+            <div class="buttons-wrap"><a class="btn" href="https://www.amazon.com/dp/B0FGQ6PWRC/" target="_blank" rel="noopener noreferrer">Amazon</a></div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-image">
-            <img src="thumbnails/tripleanthology.webp" loading="lazy" alt="Triple Anthology cover">
-          </div>
+          <div class="card-image"><img src="thumbnails/tripleanthology.webp" loading="lazy" alt="Triple Anthology cover"></div>
           <div class="card-content">
             <h3>Anthology</h3>
-            <div class="buttons-wrap">
-              <a class="btn" href="https://www.amazon.com/dp/B0FGWHCVVL/" target="_blank" rel="noopener noreferrer">Amazon</a>
-            </div>
+            <div class="buttons-wrap"><a class="btn" href="https://www.amazon.com/dp/B0FGWHCVVL/" target="_blank" rel="noopener noreferrer">Amazon</a></div>
           </div>
         </div>
       </div>
@@ -295,8 +161,6 @@
 
   </main>
 
-  <footer>
-    © 2025 Learn Pig Latin. All rights reserved.
-  </footer>
+  <footer>© 2025 Learn Pig Latin. All rights reserved.</footer>
 </body>
 </html>
