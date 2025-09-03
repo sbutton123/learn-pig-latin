@@ -1,9 +1,8 @@
 // sw.js — offline caching for Learn Pig Latin
-// bump this if you change the file list
-const CACHE = 'piglatin-v4';
+// bump this string whenever you change the list
+const CACHE = 'piglatin-v5';
 
-// Put every page you want to work offline here.
-// (Add new game pages here in the future.)
+// All top-level pages you want working offline:
 const OFFLINE_PAGES = [
   '/',                 // host root
   '/index.html',
@@ -11,14 +10,14 @@ const OFFLINE_PAGES = [
   '/piglatinia.html',
   '/products.html',
 
-  // Word search / games pages (from your repo listing)
+  // Game pages in your repo:
   '/animalsway-wordsearch.html',
   '/colorsshapes-wordsearch.html',
   '/erbsbay-wordsearch.html',
   '/oodfay-wordsearch.html'
 ];
 
-// Icons & small assets (safe to keep)
+// Icons & small assets
 const OFFLINE_ASSETS = [
   '/img/piglatinfavicon.png',
   '/img/iconsandroidchrome192x192.png',
@@ -29,7 +28,6 @@ const OFFLINE_ASSETS = [
   '/img/favicon.ico'
 ];
 
-// Combine for install pre-cache
 const PRECACHE = [...OFFLINE_PAGES, ...OFFLINE_ASSETS];
 
 self.addEventListener('install', (event) => {
@@ -47,8 +45,8 @@ self.addEventListener('activate', (event) => {
 });
 
 // Strategy:
-// - HTML/navigations: network-first, fall back to cached copy
-// - Everything else: cache-first (once seen online, it works offline)
+// - HTML/navigations: **cache-first** (instant offline), then update cache in background when online
+// - Other assets: cache-first
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -58,29 +56,28 @@ self.addEventListener('fetch', (event) => {
 
   if (isNavigation) {
     event.respondWith(
+      caches.match(req).then(cached => {
+        const fetchAndUpdate = fetch(req).then(res => {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(req, copy));
+          return res;
+        }).catch(() => cached || caches.match('/index.html'));
+        // Serve cached immediately if present; otherwise go to network
+        return cached || fetchAndUpdate;
+      })
+    );
+    return;
+  }
+
+  // Assets: cache-first
+  event.respondWith(
+    caches.match(req).then(cached =>
+      cached ||
       fetch(req).then(res => {
         const copy = res.clone();
         caches.open(CACHE).then(c => c.put(req, copy));
         return res;
-      }).catch(async () => {
-        // try exact page first
-        const cached = await caches.match(req);
-        if (cached) return cached;
-        // last resort: show the home page
-        return caches.match('/index.html');
-      })
-    );
-  } else {
-    // cache-first for assets (images, css, js)
-    event.respondWith(
-      caches.match(req).then(cached =>
-        cached ||
-        fetch(req).then(res => {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(req, copy));
-          return res;
-        })
-      )
-    );
-  }
+      }).catch(() => cached) // if both fail, return whatever we had
+    )
+  );
 });
