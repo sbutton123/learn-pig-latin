@@ -8,13 +8,14 @@
   <!-- PWA: manifest + theme color + icons -->
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#a97ef9">
+  <meta name="apple-mobile-web-app-title" content="Learn Pig Latin">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
   <link rel="apple-touch-icon" sizes="180x180" href="/img/appletouchicon180.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
   <link rel="icon" href="/img/favicon.ico">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Learn Pig Latin">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT"></script>
@@ -137,6 +138,15 @@
       justify-content: center;
     }
     .sent-by a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+
+    /* Install App pill button (shows when installable) */
+    #installAppBtn {
+      position: fixed; right: 16px; bottom: 16px; z-index: 9999;
+      background: var(--primary); color: #fff; border: none; border-radius: 999px;
+      padding: 10px 16px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,.2);
+      cursor: pointer; display: none;
+    }
+    #installAppBtn:hover { background: var(--primary-dark); }
   </style>
 </head>
 <body>
@@ -223,6 +233,9 @@
 
   <!-- Share dropdown container -->
   <div id="share-chooser" role="menu" aria-label="Share options"></div>
+
+  <!-- Install App (shows only when installable on Android/Desktop Chrome) -->
+  <button id="installAppBtn">Install App</button>
 
   <script>
     // ---------- Translator ----------
@@ -437,13 +450,42 @@
       showChooser(shareBtn);
     }
 
-    // ---------- PWA: register service worker (safe if sw.js doesn't exist yet) ----------
+    // ---------- PWA: Service worker registration ----------
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       });
     }
+
+    // ---------- PWA: Visible Install button (Android & Desktop Chrome) ----------
+    let deferredPrompt;
+    const installBtn = document.getElementById('installAppBtn');
+
+    // iOS Safari uses A2HS via Share menu; hide the button there
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isInStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+    if (isIOS || isInStandalone) {
+      installBtn.style.display = 'none';
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block'; // show the pill when installable
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      try { await deferredPrompt.userChoice; } catch {}
+      installBtn.style.display = 'none';
+      deferredPrompt = null;
+    });
+
+    window.addEventListener('appinstalled', () => {
+      installBtn.style.display = 'none';
+      deferredPrompt = null;
+    });
   </script>
 </body>
 </html>
-
