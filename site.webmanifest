@@ -1,5 +1,5 @@
 {
-  "id": "https://learnpiglatin.com/",
+  "id": "/?source=pwa",
   "name": "Learn Pig Latin",
   "short_name": "Pig Latin",
   "description": "Translate English ↔ Pig Latin, play word games, and share your phrases — even offline.",
@@ -13,17 +13,16 @@
   "icons": [
     { "src": "/img/iconsandroidchrome192x192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/img/iconsandroidchrome512x512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "/img/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "/img/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
   ],
 
   "screenshots": [
-  { "src": "/img/screenshots/translator1080x1920.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Translator" },
-  { "src": "/img/screenshots/wordsearch1080x1920.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Word Search" },
-  { "src": "/img/screenshots/coloring1080x1920.png",   "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Coloring Page" }
-]
+    { "src": "/img/screenshots/translator1080x1920.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Translator" },
+    { "src": "/img/screenshots/wordsearch1080x1920.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Word Search" },
+    { "src": "/img/screenshots/coloring1080x1920.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Coloring Page" }
+  ],
 
   "launch_handler": { "client_mode": "navigate-existing" },
-
   "lang": "en-US",
   "categories": ["education", "games"]
 }
