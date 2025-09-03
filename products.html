@@ -21,6 +21,7 @@
       --background-start: #f3eaff;
       --background-end: #ede4ff;
       --text-dark: #2c174e;
+      --muted: #6b5aa7;
       --card-bg: #ffffff;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -76,7 +77,7 @@
       justify-content: center;
     }
 
-    /* CARD (card size unchanged; images fill more) */
+    /* CARD (size unchanged; images fill more with thin border) */
     .card {
       width: 170px;
       background: var(--card-bg);
@@ -113,7 +114,7 @@
     }
     .card-content h3 {
       font-size: 0.95rem;
-      margin: 0.1rem 0 0.2rem;
+      margin: 0.1rem 0 0.1rem;
       color: var(--primary);
       line-height: 1.2;
       min-height: 1.6em;
@@ -121,6 +122,13 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+    }
+    /* Small subtitle under titles (used on the shirt card) */
+    .sub {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: -0.2rem;
+      margin-bottom: 0.15rem;
     }
 
     /* Buttons anchored to bottom */
@@ -192,6 +200,7 @@
           </div>
           <div class="card-content">
             <h3>Pig Latin Shirt</h3>
+            <div class="sub">Ivelay, Ovelay, Aughlay</div>
             <div class="buttons-wrap">
               <a class="btn" href="https://www.etsy.com/listing/4335457946" target="_blank" rel="noopener noreferrer">Etsy</a>
             </div>
@@ -201,10 +210,10 @@
         <!-- Mug -->
         <div class="card">
           <div class="card-image">
-            <img src="thumbnails/mug.webp" loading="lazy" alt="‘Ivelay Ovelay Aughlay’ Pig Latin mug">
+            <img src="thumbnails/mug.png" loading="lazy" alt="Ivelay, Ovelay, Aughlay Pig Latin mug">
           </div>
           <div class="card-content">
-            <h3>“Ivelay Ovelay Aughlay” Mug</h3>
+            <h3>Ivelay, Ovelay, Aughlay Mug</h3>
             <div class="buttons-wrap">
               <a class="btn" href="https://www.etsy.com/listing/4363174220/pig-latin-ivelay-ovelay-aughlay-mug-fun" target="_blank" rel="noopener noreferrer">Etsy</a>
             </div>
