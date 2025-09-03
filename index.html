@@ -249,227 +249,320 @@
   <footer>© 2025 Learn Pig Latin. All rights reserved.</footer>
 
   <script>
-  // ---------- SMART SHARE (with Email submenu) ----------
-  function isMobile() {
-    return /(android|iphone|ipad|ipod)/i.test(navigator.userAgent);
-  }
+    // ---------- Translation ----------
+    function translateToPigLatin(word) {
+      const vowels = ['a','e','i','o','u'];
+      const punct = word.match(/[.,!?;:]$/);
+      let core = punct ? word.slice(0, -1) : word;
+      const suffix = punct ? punct[0] : '';
+      if (!core) return word;
 
-  function getOrCreateShareChooser() {
-    let chooser = document.getElementById('share-chooser');
-    if (chooser) return chooser;
+      const cap = core[0] === core[0].toUpperCase();
+      core = core.toLowerCase();
 
-    chooser = document.createElement('div');
-    chooser.id = 'share-chooser';
-    chooser.style.position = 'absolute';
-    chooser.style.zIndex = '9999';
-    chooser.style.background = '#ffffff';
-    chooser.style.border = '1px solid rgba(0,0,0,0.15)';
-    chooser.style.borderRadius = '0.5rem';
-    chooser.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
-    chooser.style.padding = '0.5rem';
-    chooser.style.minWidth = '240px';
-    chooser.style.fontFamily = 'inherit';
-    chooser.style.display = 'none';
-
-    const list = document.createElement('div');
-    list.style.display = 'flex';
-    list.style.flexDirection = 'column';
-
-    const addBtn = (label, key) => {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.textContent = label;
-      b.dataset.key = key;
-      b.style.display = 'block';
-      b.style.width = '100%';
-      b.style.textAlign = 'left';
-      b.style.background = 'transparent';
-      b.style.border = 'none';
-      b.style.padding = '0.55rem 0.7rem';
-      b.style.cursor = 'pointer';
-      b.style.fontSize = '0.95rem';
-      b.onmouseenter = () => b.style.background = 'rgba(0,0,0,0.05)';
-      b.onmouseleave = () => b.style.background = 'transparent';
-      list.appendChild(b);
-    };
-
-    if (isMobile()) addBtn('Text message', 'sms'); // hidden on desktop
-    addBtn('WhatsApp', 'whatsapp');
-    addBtn('Telegram', 'telegram');
-    addBtn('X (Twitter)', 'tweet');
-    addBtn('Facebook (paste text)', 'facebook');
-    addBtn('Email…', 'email'); // opens submenu
-
-    chooser.appendChild(list);
-
-    chooser.addEventListener('click', (e) => {
-      const key = e.target?.dataset?.key;
-      if (!key) return;
-      chooser.dispatchEvent(new CustomEvent('choose', { detail: key }));
-    });
-
-    document.body.appendChild(chooser);
-    return chooser;
-  }
-
-  function getOrCreateEmailSubmenu() {
-    let sub = document.getElementById('email-submenu');
-    if (sub) return sub;
-
-    sub = document.createElement('div');
-    sub.id = 'email-submenu';
-    sub.style.position = 'absolute';
-    sub.style.zIndex = '10000';
-    sub.style.background = '#ffffff';
-    sub.style.border = '1px solid rgba(0,0,0,0.15)';
-    sub.style.borderRadius = '0.5rem';
-    sub.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
-    sub.style.padding = '0.5rem';
-    sub.style.minWidth = '220px';
-    sub.style.fontFamily = 'inherit';
-    sub.style.display = 'none';
-
-    const addBtn = (label, key) => {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.textContent = label;
-      b.dataset.key = key;
-      b.style.display = 'block';
-      b.style.width = '100%';
-      b.style.textAlign = 'left';
-      b.style.background = 'transparent';
-      b.style.border = 'none';
-      b.style.padding = '0.55rem 0.7rem';
-      b.style.cursor = 'pointer';
-      b.style.fontSize = '0.95rem';
-      b.onmouseenter = () => b.style.background = 'rgba(0,0,0,0.05)';
-      b.onmouseleave = () => b.style.background = 'transparent';
-      sub.appendChild(b);
-    };
-
-    addBtn('Default mail app', 'mailto');
-    addBtn('Gmail (web)', 'gmail');
-    addBtn('Outlook (web)', 'outlook');
-
-    sub.addEventListener('click', (e) => {
-      const key = e.target?.dataset?.key;
-      if (!key) return;
-      sub.dispatchEvent(new CustomEvent('emailchoose', { detail: key }));
-    });
-
-    document.body.appendChild(sub);
-    return sub;
-  }
-
-  function positionChooser(chooser, anchorEl) {
-    const rect = anchorEl.getBoundingClientRect();
-    chooser.style.left = (rect.left + window.scrollX) + 'px';
-    chooser.style.top  = (rect.bottom + window.scrollY) + 'px';
-  }
-
-  function openSMS(bodyText) {
-    const encoded = encodeURIComponent(bodyText);
-    const isApple = /iPad|iPhone|iPod/i.test(navigator.userAgent);
-    const smsUrl = isApple ? `sms:&body=${encoded}` : `sms:?body=${encoded}`;
-    window.location.href = smsUrl;
-  }
-
-  function safeCopy(text) {
-    if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
-    return new Promise((resolve) => {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      try { document.execCommand('copy'); } catch {}
-      document.body.removeChild(ta);
-      resolve();
-    });
-  }
-
-  function shareOutput() {
-    const outEl = document.getElementById('output');
-    const textOnly = (outEl?.innerText || '').trim();
-    if (!textOnly) { alert('Nothing to share yet—type something first!'); return; }
-
-    const message = `${textOnly}\n\n— sent from LearnPigLatin.com`;
-    const subject = 'Pig Latin Translation';
-    const encMsg = encodeURIComponent(message);
-    const encSub = encodeURIComponent(subject);
-
-    // Mobile native share
-    if (isMobile() && navigator.share) {
-      navigator.share({ title: subject, text: message }).catch(() => {});
-      return;
+      let res = '';
+      if (vowels.includes(core[0])) {
+        res = core + 'yay';
+      } else {
+        const cluster = (core.match(/^[^aeiou]+/) || [''])[0];
+        res = core.slice(cluster.length) + cluster + 'ay';
+      }
+      if (cap) res = res[0].toUpperCase() + res.slice(1);
+      return res + suffix;
     }
 
-    // Desktop dropdown
-    const shareBtn = document.getElementById('shareBtn') || document.body;
-    const chooser = getOrCreateShareChooser();
-    positionChooser(chooser, shareBtn);
-    chooser.style.display = 'block';
+    function translateToEnglish(word) {
+      const punct = word.match(/[.,!?;:]$/);
+      let core = punct ? word.slice(0, -1) : word;
+      const suffix = punct ? punct[0] : '';
+      if (!core) return word;
 
-    const closeAll = () => {
-      chooser.style.display = 'none';
-      const sub = document.getElementById('email-submenu');
-      if (sub) sub.style.display = 'none';
-    };
-    const onDocClick = (e) => {
-      if (!chooser.contains(e.target) && !document.getElementById('email-submenu')?.contains(e.target) && e.target !== shareBtn) closeAll();
-    };
-    const onEsc = (e) => { if (e.key === 'Escape') closeAll(); };
-    document.addEventListener('click', onDocClick, { once: true });
-    document.addEventListener('keydown', onEsc, { once: true });
+      const isCap = core[0] === core[0].toUpperCase();
+      const lower = core.toLowerCase();
 
-    chooser.addEventListener('choose', async (ev) => {
-      const choice = ev.detail;
-
-      if (choice === 'sms') {
-        openSMS(message);
-      } else if (choice === 'whatsapp') {
-        window.open(`https://api.whatsapp.com/send?text=${encMsg}`, '_blank', 'noopener,noreferrer');
-      } else if (choice === 'telegram') {
-        window.open(`https://t.me/share/url?text=${encMsg}`, '_blank', 'noopener,noreferrer');
-      } else if (choice === 'tweet') {
-        window.open(`https://twitter.com/intent/tweet?text=${encMsg}`, '_blank', 'noopener,noreferrer');
-      } else if (choice === 'facebook') {
-        await safeCopy(message);
-        alert('Your translation is copied. Facebook will open — just paste it into your post.');
-        const pageUrl = encodeURIComponent(location.href.split('#')[0]);
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, '_blank', 'noopener,noreferrer');
-      } else if (choice === 'email') {
-        // Show Email submenu
-        const sub = getOrCreateEmailSubmenu();
-        positionChooser(sub, shareBtn);
-        sub.style.display = 'block';
-
-        const onSubClickAway = (e) => { if (!sub.contains(e.target)) sub.style.display = 'none'; };
-        document.addEventListener('click', onSubClickAway, { once: true });
-
-        sub.addEventListener('emailchoose', (ev2) => {
-          const which = ev2.detail;
-          if (which === 'mailto') {
-            window.location.href = `mailto:?subject=${encSub}&body=${encMsg}`;
-          } else if (which === 'gmail') {
-            window.open(
-              `https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encSub}&body=${encMsg}`,
-              '_blank','noopener,noreferrer'
-            );
-          } else if (which === 'outlook') {
-            window.open(
-              `https://outlook.live.com/owa/?path=/mail/action/compose&subject=${encSub}&body=${encMsg}`,
-              '_blank','noopener,noreferrer'
-            );
-          }
-          sub.style.display = 'none';
-        }, { once: true });
+      let res = core;
+      if (lower.endsWith('yay')) {
+        res = core.slice(0, -3);
+      } else if (lower.endsWith('ay')) {
+        let base = core.slice(0, -2);
+        const m = base.match(/(.*?)([^aeiou]+)$/);
+        res = m ? m[2] + m[1] : base;
       }
-      // keep chooser open only for email submenu; otherwise close
-      if (choice !== 'email') chooser.style.display = 'none';
-    }, { once: true });
-  }
-</script>
+      if (isCap) res = res[0].toUpperCase() + res.slice(1);
+      return res + suffix;
+    }
 
+    function runTranslation() {
+      const inputEl = document.getElementById('input');
+      const outEl = document.getElementById('output');
+      const mode = document.getElementById('mode').value;
+      const raw = inputEl.value;
+
+      if (!raw.trim()) { outEl.innerText = ''; return; }
+
+      const words = raw.trim().split(/\s+/);
+      const out = words.map(w => mode === 'enToPig' ? translateToPigLatin(w) : translateToEnglish(w)).join(' ');
+      outEl.innerText = out;
+    }
+
+    document.getElementById('input').addEventListener('input', runTranslation);
+    document.getElementById('mode').addEventListener('change', runTranslation);
+
+    function clearFields() {
+      document.getElementById('input').value = '';
+      document.getElementById('output').innerText = '';
+    }
+
+    function copyOutput() {
+      const t = (document.getElementById('output').innerText || '').trim();
+      if (!t) { alert('Nothing to copy yet—type something first!'); return; }
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(t).then(() => alert('Translation copied!')).catch(() => alert('Failed to copy.'));
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = t;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); alert('Translation copied!'); } catch {}
+        document.body.removeChild(ta);
+      }
+    }
+
+    // ---------- YouTube thumbs ----------
+    document.querySelectorAll('.video-thumb').forEach(div => {
+      div.addEventListener('click', () => {
+        const id = div.dataset.id;
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        iframe.style.width = "100%";
+        iframe.style.height = "200px";
+        div.innerHTML = '';
+        div.appendChild(iframe);
+      });
+    });
+
+    // ---------- SMART SHARE (Text → Social → Email submenu) ----------
+    function isMobile() {
+      return /(android|iphone|ipad|ipod)/i.test(navigator.userAgent);
+    }
+
+    function getOrCreateShareChooser() {
+      let chooser = document.getElementById('share-chooser');
+      if (chooser) return chooser;
+
+      chooser = document.createElement('div');
+      chooser.id = 'share-chooser';
+      chooser.style.position = 'absolute';
+      chooser.style.zIndex = '9999';
+      chooser.style.background = '#ffffff';
+      chooser.style.border = '1px solid rgba(0,0,0,0.15)';
+      chooser.style.borderRadius = '0.5rem';
+      chooser.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+      chooser.style.padding = '0.5rem';
+      chooser.style.minWidth = '240px';
+      chooser.style.fontFamily = 'inherit';
+      chooser.style.display = 'none';
+
+      const list = document.createElement('div');
+      list.style.display = 'flex';
+      list.style.flexDirection = 'column';
+
+      const addBtn = (label, key) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = label;
+        b.dataset.key = key;
+        b.style.display = 'block';
+        b.style.width = '100%';
+        b.style.textAlign = 'left';
+        b.style.background = 'transparent';
+        b.style.border = 'none';
+        b.style.padding = '0.55rem 0.7rem';
+        b.style.cursor = 'pointer';
+        b.style.fontSize = '0.95rem';
+        b.onmouseenter = () => b.style.background = 'rgba(0,0,0,0.05)';
+        b.onmouseleave = () => b.style.background = 'transparent';
+        list.appendChild(b);
+      };
+
+      if (isMobile()) addBtn('Text message', 'sms');  // hidden on desktop
+      addBtn('WhatsApp', 'whatsapp');
+      addBtn('Telegram', 'telegram');
+      addBtn('X (Twitter)', 'tweet');
+      addBtn('Facebook (paste text)', 'facebook');
+      addBtn('Email…', 'email');  // opens email submenu
+
+      chooser.appendChild(list);
+
+      chooser.addEventListener('click', (e) => {
+        const key = e.target?.dataset?.key;
+        if (!key) return;
+        chooser.dispatchEvent(new CustomEvent('choose', { detail: key }));
+      });
+
+      document.body.appendChild(chooser);
+      return chooser;
+    }
+
+    function getOrCreateEmailSubmenu() {
+      let sub = document.getElementById('email-submenu');
+      if (sub) return sub;
+
+      sub = document.createElement('div');
+      sub.id = 'email-submenu';
+      sub.style.position = 'absolute';
+      sub.style.zIndex = '10000';
+      sub.style.background = '#ffffff';
+      sub.style.border = '1px solid rgba(0,0,0,0.15)';
+      sub.style.borderRadius = '0.5rem';
+      sub.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+      sub.style.padding = '0.5rem';
+      sub.style.minWidth = '220px';
+      sub.style.fontFamily = 'inherit';
+      sub.style.display = 'none';
+
+      const addBtn = (label, key) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = label;
+        b.dataset.key = key;
+        b.style.display = 'block';
+        b.style.width = '100%';
+        b.style.textAlign = 'left';
+        b.style.background = 'transparent';
+        b.style.border = 'none';
+        b.style.padding = '0.55rem 0.7rem';
+        b.style.cursor = 'pointer';
+        b.style.fontSize = '0.95rem';
+        b.onmouseenter = () => b.style.background = 'rgba(0,0,0,0.05)';
+        b.onmouseleave = () => b.style.background = 'transparent';
+        sub.appendChild(b);
+      };
+
+      addBtn('Default mail app', 'mailto');
+      addBtn('Gmail (web)', 'gmail');
+      addBtn('Outlook (web)', 'outlook');
+
+      sub.addEventListener('click', (e) => {
+        const key = e.target?.dataset?.key;
+        if (!key) return;
+        sub.dispatchEvent(new CustomEvent('emailchoose', { detail: key }));
+      });
+
+      document.body.appendChild(sub);
+      return sub;
+    }
+
+    function positionChooser(chooser, anchorEl) {
+      const rect = anchorEl.getBoundingClientRect();
+      chooser.style.left = (rect.left + window.scrollX) + 'px';
+      chooser.style.top  = (rect.bottom + window.scrollY) + 'px';
+    }
+
+    function openSMS(bodyText) {
+      const encoded = encodeURIComponent(bodyText);
+      const isApple = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+      const smsUrl = isApple ? `sms:&body=${encoded}` : `sms:?body=${encoded}`;
+      window.location.href = smsUrl;
+    }
+
+    function safeCopy(text) {
+      if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
+      return new Promise((resolve) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch {}
+        document.body.removeChild(ta);
+        resolve();
+      });
+    }
+
+    function shareOutput() {
+      const outEl = document.getElementById('output');
+      const textOnly = (outEl?.innerText || '').trim();
+      if (!textOnly) { alert('Nothing to share yet—type something first!'); return; }
+
+      const message = `${textOnly}\n\n— sent from LearnPigLatin.com`;
+      const subject = 'Pig Latin Translation';
+      const encMsg = encodeURIComponent(message);
+      const encSub = encodeURIComponent(subject);
+
+      // Mobile: use native share (best UX; includes SMS/WhatsApp/etc)
+      if (isMobile() && navigator.share) {
+        navigator.share({ title: subject, text: message }).catch(() => {});
+        return;
+      }
+
+      // Desktop: custom dropdown (Text hidden)
+      const shareBtn = document.getElementById('shareBtn') || document.body;
+      const chooser = getOrCreateShareChooser();
+      positionChooser(chooser, shareBtn);
+      chooser.style.display = 'block';
+
+      const closeAll = () => {
+        chooser.style.display = 'none';
+        const sub = document.getElementById('email-submenu');
+        if (sub) sub.style.display = 'none';
+      };
+      const onDocClick = (e) => {
+        const sub = document.getElementById('email-submenu');
+        if (!chooser.contains(e.target) && !(sub && sub.contains(e.target)) && e.target !== shareBtn) closeAll();
+      };
+      const onEsc = (e) => { if (e.key === 'Escape') closeAll(); };
+      document.addEventListener('click', onDocClick, { once: true });
+      document.addEventListener('keydown', onEsc, { once: true });
+
+      chooser.addEventListener('choose', async (ev) => {
+        const choice = ev.detail;
+
+        if (choice === 'sms') {
+          openSMS(message);
+          closeAll();
+        } else if (choice === 'whatsapp') {
+          window.open(`https://api.whatsapp.com/send?text=${encMsg}`, '_blank', 'noopener,noreferrer');
+          closeAll();
+        } else if (choice === 'telegram') {
+          window.open(`https://t.me/share/url?text=${encMsg}`, '_blank', 'noopener,noreferrer');
+          closeAll();
+        } else if (choice === 'tweet') {
+          window.open(`https://twitter.com/intent/tweet?text=${encMsg}`, '_blank', 'noopener,noreferrer');
+          closeAll();
+        } else if (choice === 'facebook') {
+          await safeCopy(message);
+          alert('Your translation is copied. Facebook will open — just paste it into your post.');
+          const pageUrl = encodeURIComponent(location.href.split('#')[0]);
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, '_blank', 'noopener,noreferrer');
+          closeAll();
+        } else if (choice === 'email') {
+          // Email submenu
+          const sub = getOrCreateEmailSubmenu();
+          positionChooser(sub, shareBtn);
+          sub.style.display = 'block';
+
+          const onSubAway = (e2) => { if (!sub.contains(e2.target)) sub.style.display = 'none'; };
+          document.addEventListener('click', onSubAway, { once: true });
+
+          sub.addEventListener('emailchoose', (ev2) => {
+            const which = ev2.detail;
+            if (which === 'mailto') {
+              window.location.href = `mailto:?subject=${encSub}&body=${encMsg}`;
+            } else if (which === 'gmail') {
+              window.open(`https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encSub}&body=${encMsg}`,
+                '_blank', 'noopener,noreferrer');
+            } else if (which === 'outlook') {
+              window.open(`https://outlook.live.com/owa/?path=/mail/action/compose&subject=${encSub}&body=${encMsg}`,
+                '_blank', 'noopener,noreferrer');
+            }
+            sub.style.display = 'none';
+            chooser.style.display = 'none';
+          }, { once: true });
+        }
+      }, { once: true });
+    }
+  </script>
 </body>
 </html>
-
