@@ -1,151 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>Erbsvay</title>
   <style>
-    /* Force letter‑portrait with zero margins */
-    @page {
-      size: letter portrait;
-      margin: 0;
-    }
+    @page{ size: letter portrait; margin:0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:sans-serif;background:#ede4ff;color:#2c174e;text-align:center;padding:1rem;margin:0;}
+    #puzzle-wrapper{width:min(800px,100%);margin:0 auto;padding:8px;}
+    h1{color:#a97ef9;margin-bottom:1rem;}
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    #wordsearch{
+      --cols:15; --gap:2px;
+      display:grid; grid-template-columns:repeat(var(--cols),1fr); gap:var(--gap);
+      width:100%; margin:0 auto 1.5rem; user-select:none;
     }
+    .cell{
+      aspect-ratio:1/1; width:100%; height:auto; border:1px solid #ccc; background:#f7f4ff;
+      text-transform:uppercase; font-weight:bold; font-size:clamp(12px,2.7vw,16px);
+      display:flex; align-items:center; justify-content:center; cursor:pointer;
+    }
+    .cell.selected{background:#a97ef9;color:#fff;}
+    .cell.found{background:#78aaff;color:#fff;}
 
-    body {
-      font-family: sans-serif;
-      background: #ede4ff;
-      color: #2c174e;
-      text-align: center;
-      padding: 1rem;
+    #wordlist{
+      display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem;
+      width:min(700px,100%); margin:1.5rem auto 0;
     }
+    .word{padding:.3rem .9rem;background:#f7f4ff;border-radius:1rem;border:1px solid #ccc;font-weight:bold;white-space:nowrap;}
+    .word.found{background:#a97ef9;color:#fff;text-decoration:line-through;}
 
-    /* container for scaling on print */
-    #puzzle-wrapper {
-      max-width: 800px;
-      margin: auto;
-    }
+    .buttons{margin-top:1rem;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+    .buttons button{background:#a97ef9;color:#fff;padding:.5rem 1.2rem;border:none;border-radius:1rem;font-size:1rem;cursor:pointer;display:flex;align-items:center;gap:.4rem;}
+    .buttons button:hover{background:#925fee;}
 
-    h1 {
-      color: #a97ef9;
-      margin-bottom: 1.5rem;
-    }
-
-    #wordsearch {
-      display: grid;
-      grid-template-columns: repeat(15, 2rem);
-      gap: 2px;
-      justify-content: center;
-      margin: auto;
-      user-select: none;
-      page-break-inside: avoid;
-    }
-
-    .cell {
-      width: 2rem;
-      height: 2rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: 1rem;
-      text-align: center;
-      border: 1px solid #ccc;
-      background: #f7f4ff;
-      cursor: pointer;
-    }
-    .cell.selected {
-      background: #a97ef9;
-      color: white;
-    }
-    .cell.found {
-      background: #78aaff;
-      color: white;
-    }
-
-    #wordlist {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-      margin: 2rem auto;
-      max-width: 700px;
-      page-break-inside: avoid;
-    }
-    .word {
-      padding: 0.3rem 0.9rem;
-      background: #f7f4ff;
-      border-radius: 1rem;
-      border: 1px solid #ccc;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-    .word.found {
-      background: #a97ef9;
-      color: white;
-      text-decoration: line-through;
-    }
-
-    .buttons {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-    .buttons button {
-      background: #a97ef9;
-      color: white;
-      padding: 0.5rem 1.2rem;
-      border: none;
-      border-radius: 1rem;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .buttons button:hover {
-      background: #925fee;
-    }
-
-    /* PRINT STYLES */
-    @media print {
-      /* reset page */
-      body {
-        background: white !important;
-        color: black !important;
-        margin: 0;
-        padding: 0;
-      }
-      /* hide UI */
-      .buttons {
-        display: none !important;
-      }
-      /* shrink content to one page */
-      #puzzle-wrapper {
-        transform: scale(0.75);
-        transform-origin: top center;
-        width: 100%;
-        margin: 0;
-      }
-      /* ensure grid prints cleanly */
-      .cell,
-      .cell.selected,
-      .cell.found {
-        background: white !important;
-        color: black !important;
-        border: 1px solid black !important;
-      }
-      /* words print clean */
-      .word,
-      .word.found {
-        background: white !important;
-        color: black !important;
-        text-decoration: none !important;
-      }
+    @media print{
+      body{background:#fff!important;color:#000!important;margin:0;padding:0;}
+      .buttons{display:none!important;}
+      #puzzle-wrapper{transform:scale(0.75);transform-origin:top center;width:100%;margin:0;padding:0;}
+      #wordsearch{grid-template-columns:repeat(15,2rem);gap:2px;}
+      .cell{aspect-ratio:auto;width:2rem;height:2rem;font-size:1rem;background:#fff!important;color:#000!important;border:1px solid #000!important;}
+      .word,.word.found{background:#fff!important;color:#000!important;text-decoration:none!important;}
     }
   </style>
 </head>
@@ -156,110 +52,83 @@
     <div id="wordlist"></div>
     <div class="buttons">
       <button id="printBtn">🖨️ Print</button>
-      <button onclick="window.location.href='/games'">🔙 Return to Games</button>
+      <button onclick="window.location.href='games.html'">🔙 Return to Games</button>
     </div>
   </div>
 
   <script>
-    const words = ['UNRAY','ALKWAY','EATWAY','EEPSLAY','AUGHLAY','OVELAY','UMPJAY','INGSAY','ANCEDAY','INKTHAY','EADRAY','ITEWRAY','EAKSPAY','ISTENLAY'];
-    const gridSize = 15;
-    const grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
-    const directions = [[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0],[-1,-1],[1,-1]];
-    const placedWords = [];
-
-    function canPlace(word, row, col, dir) {
-      const [dx, dy] = dir;
-      for (let i = 0; i < word.length; i++) {
-        let x = row + i*dx, y = col + i*dy;
-        if (x<0||x>=gridSize||y<0||y>=gridSize) return false;
-        if (grid[x][y] && grid[x][y] !== word[i]) return false;
-      }
-      return true;
+    const words=['UNRAY','ALKWAY','EATWAY','EEPSLAY','AUGHLAY','OVELAY','UMPJAY','INGSAY','ANCEDAY','INKTHAY','EADRAY','ITEWRAY','EAKSPAY','ISTENLAY'];
+    const gridSize=15;
+    const grid=Array.from({length:gridSize},()=>Array(gridSize).fill(''));
+    const directions=[[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0],[-1,-1],[1,-1]];
+    const placedWords=[];
+    function canPlace(word,row,col,dir){
+      const[dx,dy]=dir;
+      for(let i=0;i<word.length;i++){
+        let x=row+i*dx, y=col+i*dy;
+        if(x<0||x>=gridSize||y<0||y>=gridSize) return false;
+        if(grid[x][y] && grid[x][y]!==word[i]) return false;
+      } return true;
     }
-
-    function placeWord(word) {
-      for (let t=0; t<1000; t++){
-        let dir = directions[Math.floor(Math.random()*directions.length)];
-        let row = Math.floor(Math.random()*gridSize);
-        let col = Math.floor(Math.random()*gridSize);
-        if (canPlace(word,row,col,dir)) {
-          let pos = [];
-          for (let i=0; i<word.length; i++){
+    function placeWord(word){
+      for(let t=0;t<1000;t++){
+        let dir=directions[Math.floor(Math.random()*directions.length)];
+        let row=Math.floor(Math.random()*gridSize);
+        let col=Math.floor(Math.random()*gridSize);
+        if(canPlace(word,row,col,dir)){
+          let pos=[];
+          for(let i=0;i<word.length;i++){
             let x=row+i*dir[0], y=col+i*dir[1];
-            grid[x][y] = word[i];
-            pos.push(`${x}-${y}`);
+            grid[x][y]=word[i]; pos.push(`${x}-${y}`);
           }
-          placedWords.push({word,positions:pos});
-          return;
+          placedWords.push({word,positions:pos}); return;
         }
       }
     }
-
     words.forEach(placeWord);
-    for (let r=0; r<gridSize; r++){
-      for (let c=0; c<gridSize; c++){
-        if (!grid[r][c]) grid[r][c] = String.fromCharCode(65 + Math.floor(Math.random()*26));
-      }
-    }
+    for(let r=0;r<gridSize;r++){ for(let c=0;c<gridSize;c++){ if(!grid[r][c]) grid[r][c]=String.fromCharCode(65+Math.random()*26|0); } }
 
-    const searchEl = document.getElementById('wordsearch');
-    const wordListEl = document.getElementById('wordlist');
-    const cells = {};
-    const selected = [];
-
-    // render grid
-    for (let r=0; r<gridSize; r++){
-      for (let c=0; c<gridSize; c++){
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        cell.textContent = grid[r][c];
-        cell.dataset.pos = `${r}-${c}`;
-        searchEl.appendChild(cell);
-        cells[cell.dataset.pos] = cell;
-        cell.addEventListener('click', ()=>{
+    const searchEl=document.getElementById('wordsearch');
+    const wordListEl=document.getElementById('wordlist');
+    const cells={}; const selected=[];
+    for(let r=0;r<gridSize;r++){
+      for(let c=0;c<gridSize;c++){
+        const cell=document.createElement('div');
+        cell.className='cell'; cell.textContent=grid[r][c]; cell.dataset.pos=`${r}-${c}`;
+        searchEl.appendChild(cell); cells[cell.dataset.pos]=cell;
+        cell.addEventListener('click',()=>{
           cell.classList.toggle('selected');
-          if (cell.classList.contains('selected')) selected.push(cell);
+          if(cell.classList.contains('selected')) selected.push(cell);
           else selected.splice(selected.indexOf(cell),1);
           checkSelection();
         });
       }
     }
-
-    // render word list
     words.forEach(w=>{
-      const span = document.createElement('span');
-      span.className = 'word';
-      span.textContent = w;
-      span.dataset.word = w;
+      const span=document.createElement('span');
+      span.className='word'; span.textContent=w; span.dataset.word=w;
       wordListEl.appendChild(span);
-      span.addEventListener('click', ()=>{
-        const entry = placedWords.find(e=>e.word===w);
-        const found = span.classList.toggle('found');
-        entry.positions.forEach(p=>{
-          cells[p].classList.toggle('found', found);
-        });
+      span.addEventListener('click',()=>{
+        const entry=placedWords.find(e=>e.word===w);
+        const found=span.classList.toggle('found');
+        entry?.positions.forEach(p=>cells[p].classList.toggle('found',found));
       });
     });
-
     function checkSelection(){
-      const s = selected.map(c=>c.textContent).join('');
-      const rev = s.split('').reverse().join('');
-      const match = words.find(w=>w===s||w===rev);
-      if (match){
-        const entry = placedWords.find(e=>e.word===match);
-        entry.positions.forEach(p=>{
+      const s=selected.map(c=>c.textContent).join('');
+      const rev=s.split('').reverse().join('');
+      const match=words.find(w=>w===s||w===rev);
+      if(match){
+        const entry=placedWords.find(e=>e.word===match);
+        entry?.positions.forEach(p=>{
           cells[p].classList.remove('selected');
           cells[p].classList.add('found');
         });
-        document.querySelector(`.word[data-word="${match}"]`).classList.add('found');
-        selected.length = 0;
+        document.querySelector(`.word[data-word="${match}"]`)?.classList.add('found');
+        selected.length=0;
       }
     }
-
-    document.getElementById('printBtn').addEventListener('click', e=>{
-      e.preventDefault();
-      window.print();
-    });
+    document.getElementById('printBtn').addEventListener('click',e=>{e.preventDefault();window.print();});
   </script>
 </body>
 </html>
