@@ -108,6 +108,14 @@
       padding: 0.6rem 0.7rem; cursor: pointer; font-size: 0.95rem;
     }
     #share-chooser button:hover { background: rgba(0,0,0,0.05); }
+
+    /* Sent-from badge with pigs */
+    .sent-by{
+      display:flex; align-items:center; gap:.4rem;
+      margin-top:.4rem; font-size:.9rem; color:#6b5aa7;
+    }
+    .sent-by .mascot{ display:block; }
+    .sent-by a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
   </style>
 </head>
 <body>
@@ -150,6 +158,13 @@
           <input id="input" type="text" placeholder="Type your sentence here…" />
 
           <div class="output" id="output"></div>
+
+          <!-- Sent-from badge with two pigs (hidden until there is output) -->
+          <div class="sent-by" id="sentBy" hidden>
+            <img src="img/piglatinpig1.png" alt="Pig mascot" width="32" height="32" class="mascot">
+            <span>sent from <a href="https://learnpiglatin.com">LearnPigLatin.com</a></span>
+            <img src="img/piglatinpig2.png" alt="" aria-hidden="true" width="32" height="32" class="mascot">
+          </div>
 
           <div class="button-group">
             <button class="button" onclick="clearFields()">Clear</button>
@@ -234,11 +249,12 @@
       const mode = document.getElementById('mode').value;
       const raw = inputEl.value;
 
-      if (!raw.trim()) { outEl.innerText = ''; return; }
+      if (!raw.trim()) { outEl.innerText = ''; updateSentByVisibility(); return; }
 
       const words = raw.trim().split(/\s+/);
       const out = words.map(w => mode === 'enToPig' ? translateToPigLatin(w) : translateToEnglish(w)).join(' ');
       outEl.innerText = out;
+      updateSentByVisibility();
     }
 
     document.getElementById('input').addEventListener('input', runTranslation);
@@ -247,6 +263,7 @@
     function clearFields() {
       document.getElementById('input').value = '';
       document.getElementById('output').innerText = '';
+      updateSentByVisibility();
     }
 
     function copyOutput() {
@@ -260,6 +277,13 @@
         try { document.execCommand('copy'); alert('Translation copied!'); } catch {}
         document.body.removeChild(ta);
       }
+    }
+
+    // Show/hide the sent-by line based on whether there is output
+    function updateSentByVisibility() {
+      const hasText = (document.getElementById('output').innerText || '').trim().length > 0;
+      const el = document.getElementById('sentBy');
+      if (el) el.hidden = !hasText;
     }
 
     // ---------- YouTube thumbs ----------
@@ -289,16 +313,13 @@
       chooserEl.style.left = (rect.left + window.scrollX) + 'px';
       chooserEl.style.top  = (rect.bottom + window.scrollY) + 'px';
     }
-    function safeCopy(text) {
+    async function safeCopy(text) {
       if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
-      return new Promise((resolve) => {
-        const ta = document.createElement('textarea');
-        ta.value = text; document.body.appendChild(ta);
-        ta.select(); try { document.execCommand('copy'); } catch {}
-        document.body.removeChild(ta); resolve();
-      });
+      const ta = document.createElement('textarea'); ta.value = text;
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch {}
+      document.body.removeChild(ta);
     }
-
     function hideChooser() {
       chooserEl.style.display = 'none';
       if (outsideDownHandler) {
@@ -306,24 +327,13 @@
         document.removeEventListener('touchstart', outsideDownHandler, true);
         outsideDownHandler = null;
       }
-      if (escHandler) {
-        document.removeEventListener('keydown', escHandler, true);
-        escHandler = null;
-      }
-      if (scrollHandler) {
-        window.removeEventListener('scroll', scrollHandler);
-        scrollHandler = null;
-      }
-      if (resizeHandler) {
-        window.removeEventListener('resize', resizeHandler);
-        resizeHandler = null;
-      }
+      if (escHandler) { document.removeEventListener('keydown', escHandler, true); escHandler = null; }
+      if (scrollHandler) { window.removeEventListener('scroll', scrollHandler); scrollHandler = null; }
+      if (resizeHandler) { window.removeEventListener('resize', resizeHandler); resizeHandler = null; }
     }
-
     function showChooser(anchorEl) {
       chooserEl.style.display = 'block';
       positionChooser(anchorEl);
-      // Defer so the opening click doesn't immediately close it
       setTimeout(() => {
         outsideDownHandler = (e) => {
           const shareBtn = document.getElementById('shareBtn');
@@ -341,15 +351,12 @@
         window.addEventListener('resize', resizeHandler, { once: true });
       }, 0);
     }
-
     function buildChooser(message, subject) {
       chooserEl.innerHTML = '';
 
       const add = (label, handler) => {
         const b = document.createElement('button');
-        b.type = 'button';
-        b.textContent = label;
-        b.onclick = handler;
+        b.type = 'button'; b.textContent = label; b.onclick = handler;
         chooserEl.appendChild(b);
       };
 
@@ -388,7 +395,6 @@
         hideChooser();
       });
     }
-
     function shareOutput() {
       const outEl = document.getElementById('output');
       const textOnly = (outEl?.innerText || '').trim();
@@ -397,18 +403,13 @@
       const message = `${textOnly}\n\n— sent from LearnPigLatin.com`;
       const subject = 'Pig Latin Translation';
 
-      // Mobile: native share (includes Text/iMessage/WhatsApp/etc)
       if (isMobile() && navigator.share) {
         navigator.share({ title: subject, text: message }).catch(() => {});
         return;
       }
 
-      // Desktop: toggle dropdown
       const shareBtn = document.getElementById('shareBtn');
-      if (chooserEl.style.display === 'block') {
-        hideChooser();
-        return;
-      }
+      if (chooserEl.style.display === 'block') { hideChooser(); return; }
       buildChooser(message, subject);
       showChooser(shareBtn);
     }
