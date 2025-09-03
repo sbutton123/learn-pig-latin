@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Products | Learn Pig Latin</title>
 
-  <!-- Favicon / PWA (use these on every page) -->
+  <!-- Favicon / PWA -->
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#a97ef9">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/appletouchicon180.png">
@@ -76,7 +76,7 @@
       justify-content: center;
     }
 
-    /* CARD (card size stays the same; images are large with thin border) */
+    /* CARD (card size unchanged; images fill more) */
     .card {
       width: 170px;
       background: var(--card-bg);
@@ -123,7 +123,7 @@
       text-align: center;
     }
 
-    /* Buttons anchored to bottom for tidy rows */
+    /* Buttons anchored to bottom */
     .buttons-wrap {
       margin-top: auto;
       width: 100%;
@@ -160,7 +160,7 @@
       margin-top: 3rem;
     }
 
-    /* Mobile: two across; even thinner edge so images feel larger */
+    /* Mobile: two across; thinner image edge so images feel larger */
     @media (max-width: 540px) {
       .card { width: 47%; min-width: 170px; }
       .card-image { padding: 4px; }
@@ -180,10 +180,36 @@
   </nav>
 
   <main>
-    <!-- Books & Printables -->
+    <!-- Featured (Top Row): Shirt, Mug, Coloring Book -->
     <section class="product-section">
-      <h2>📘 Books &amp; Printables</h2>
+      <h2>⭐ Featured</h2>
       <div class="product-grid">
+
+        <!-- Shirt -->
+        <div class="card">
+          <div class="card-image">
+            <img src="thumbnails/piglatintshirt.webp" loading="lazy" alt="Pig Latin shirt">
+          </div>
+          <div class="card-content">
+            <h3>Pig Latin Shirt</h3>
+            <div class="buttons-wrap">
+              <a class="btn" href="https://www.etsy.com/listing/4335457946" target="_blank" rel="noopener noreferrer">Etsy</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mug -->
+        <div class="card">
+          <div class="card-image">
+            <img src="thumbnails/mug.webp" loading="lazy" alt="‘Ivelay Ovelay Aughlay’ Pig Latin mug">
+          </div>
+          <div class="card-content">
+            <h3>“Ivelay Ovelay Aughlay” Mug</h3>
+            <div class="buttons-wrap">
+              <a class="btn" href="https://www.etsy.com/listing/4363174220/pig-latin-ivelay-ovelay-aughlay-mug-fun" target="_blank" rel="noopener noreferrer">Etsy</a>
+            </div>
+          </div>
+        </div>
 
         <!-- Coloring Book -->
         <div class="card">
@@ -201,6 +227,13 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- Books (Second Row) -->
+    <section class="product-section">
+      <h2>📘 Books &amp; Printables</h2>
+      <div class="product-grid">
         <div class="card">
           <div class="card-image">
             <img src="thumbnails/threelittlepigs.webp" loading="lazy" alt="Three Little Pigs cover">
@@ -248,42 +281,9 @@
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- Apparel & Gifts -->
-    <section class="product-section">
-      <h2>👕 Apparel &amp; Gifts</h2>
-      <div class="product-grid">
-        <!-- Shirt -->
-        <div class="card">
-          <div class="card-image">
-            <img src="thumbnails/piglatintshirt.webp" loading="lazy" alt="Pig Latin shirt">
-          </div>
-          <div class="card-content">
-            <h3>Pig Latin Shirt</h3>
-            <div class="buttons-wrap">
-              <a class="btn" href="https://www.etsy.com/listing/4335457946" target="_blank" rel="noopener noreferrer">Etsy</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mug -->
-        <div class="card">
-          <div class="card-image">
-            <img src="thumbnails/mug.png" loading="lazy" alt="‘Ivelay Ovelay Aughlay’ Pig Latin mug">
-          </div>
-          <div class="card-content">
-            <h3>“Ivelay Ovelay Aughlay” Mug</h3>
-            <div class="buttons-wrap">
-              <a class="btn" href="https://www.etsy.com/listing/4363174220/pig-latin-ivelay-ovelay-aughlay-mug-fun" target="_blank" rel="noopener noreferrer">Etsy</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
   </main>
 
   <footer>
