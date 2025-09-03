@@ -64,6 +64,7 @@
       transition: background 0.3s, transform 0.2s;
     }
     nav a:hover { background: var(--primary); transform: translateY(-2px); }
+
     main { max-width: 1200px; margin: auto; padding: 2rem 1rem; }
     .translator-section { display: flex; gap: 2rem; flex-wrap: wrap; align-items: stretch; }
     .card {
@@ -82,6 +83,7 @@
     .button-group { margin-top: auto; display: flex; gap: 1rem; flex-wrap: wrap; }
     .button { flex: 1; background: var(--primary); color: white; border: none; border-radius: 0.5rem; padding: 0.5rem; cursor: pointer; font-size: 0.9rem; transition: background 0.3s; }
     .button:hover { background: var(--primary-dark); }
+
     #lesson-videos { margin-top: 3rem; }
     #lesson-videos h2 { text-align: center; color: var(--primary); margin-bottom: 1rem; }
     .video-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
@@ -94,7 +96,7 @@
     footer { background: var(--primary); color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
     @media (max-width: 768px) { .translator-section { flex-direction: column; } }
 
-    /* Simple dropdown styles */
+    /* Share dropdown */
     #share-chooser {
       position: absolute; z-index: 9999; display: none;
       background: #fff; border: 1px solid rgba(0,0,0,0.15); border-radius: 0.5rem;
@@ -179,6 +181,7 @@
 
   <footer>© 2025 Learn Pig Latin. All rights reserved.</footer>
 
+  <!-- Share dropdown container -->
   <div id="share-chooser" role="menu" aria-label="Share options"></div>
 
   <script>
@@ -252,10 +255,8 @@
       if (navigator.clipboard?.writeText) {
         navigator.clipboard.writeText(t).then(() => alert('Translation copied!')).catch(() => alert('Failed to copy.'));
       } else {
-        const ta = document.createElement('textarea');
-        ta.value = t;
-        document.body.appendChild(ta);
-        ta.select();
+        const ta = document.createElement('textarea'); ta.value = t;
+        document.body.appendChild(ta); ta.select();
         try { document.execCommand('copy'); alert('Translation copied!'); } catch {}
         document.body.removeChild(ta);
       }
@@ -276,8 +277,9 @@
       });
     });
 
-    // ---------- SHARE ----------
+    // ---------- SHARE (closes on outside click / Esc / scroll / resize) ----------
     const chooserEl = document.getElementById('share-chooser');
+    let outsideDownHandler = null, escHandler = null, scrollHandler = null, resizeHandler = null;
 
     function isMobile() {
       return /(android|iphone|ipad|ipod)/i.test(navigator.userAgent);
@@ -291,19 +293,58 @@
       if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
       return new Promise((resolve) => {
         const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); } catch {}
-        document.body.removeChild(ta);
-        resolve();
+        ta.value = text; document.body.appendChild(ta);
+        ta.select(); try { document.execCommand('copy'); } catch {}
+        document.body.removeChild(ta); resolve();
       });
     }
 
-    function buildChooser(message, subject) {
-      chooserEl.innerHTML = ''; // reset
+    function hideChooser() {
+      chooserEl.style.display = 'none';
+      if (outsideDownHandler) {
+        document.removeEventListener('mousedown', outsideDownHandler, true);
+        document.removeEventListener('touchstart', outsideDownHandler, true);
+        outsideDownHandler = null;
+      }
+      if (escHandler) {
+        document.removeEventListener('keydown', escHandler, true);
+        escHandler = null;
+      }
+      if (scrollHandler) {
+        window.removeEventListener('scroll', scrollHandler);
+        scrollHandler = null;
+      }
+      if (resizeHandler) {
+        window.removeEventListener('resize', resizeHandler);
+        resizeHandler = null;
+      }
+    }
 
-      // Build items
+    function showChooser(anchorEl) {
+      chooserEl.style.display = 'block';
+      positionChooser(anchorEl);
+      // Defer so the opening click doesn't immediately close it
+      setTimeout(() => {
+        outsideDownHandler = (e) => {
+          const shareBtn = document.getElementById('shareBtn');
+          if (chooserEl.contains(e.target) || e.target === shareBtn) return;
+          hideChooser();
+        };
+        escHandler = (e) => { if (e.key === 'Escape') hideChooser(); };
+        scrollHandler = () => hideChooser();
+        resizeHandler = () => hideChooser();
+
+        document.addEventListener('mousedown', outsideDownHandler, true);
+        document.addEventListener('touchstart', outsideDownHandler, true);
+        document.addEventListener('keydown', escHandler, true);
+        window.addEventListener('scroll', scrollHandler, { once: true });
+        window.addEventListener('resize', resizeHandler, { once: true });
+      }, 0);
+    }
+
+    function buildChooser(message, subject) {
+      chooserEl.innerHTML = '';
+
       const add = (label, handler) => {
         const b = document.createElement('button');
         b.type = 'button';
@@ -312,51 +353,39 @@
         chooserEl.appendChild(b);
       };
 
-      // Order: (Text on mobile via native share), WhatsApp, Telegram, X, Facebook, Email (Gmail / Outlook / Default)
+      // Social first
       add('WhatsApp', () => {
-        const u = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-        window.open(u, '_blank', 'noopener,noreferrer');
-        chooserEl.style.display = 'none';
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+        hideChooser();
       });
-
       add('Telegram', () => {
-        const u = `https://t.me/share/url?text=${encodeURIComponent(message)}`;
-        window.open(u, '_blank', 'noopener,noreferrer');
-        chooserEl.style.display = 'none';
+        window.open(`https://t.me/share/url?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+        hideChooser();
       });
-
       add('X (Twitter)', () => {
-        const u = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
-        window.open(u, '_blank', 'noopener,noreferrer');
-        chooserEl.style.display = 'none';
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+        hideChooser();
       });
-
       add('Facebook (paste text)', async () => {
         await safeCopy(message);
         alert('Your translation is copied. Facebook will open — paste it into your post.');
         const pageUrl = encodeURIComponent(location.href.split('#')[0]);
-        const u = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
-        window.open(u, '_blank', 'noopener,noreferrer');
-        chooserEl.style.display = 'none';
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, '_blank', 'noopener,noreferrer');
+        hideChooser();
       });
 
-      // Email options inline (no submenu to break)
+      // Email last
       add('Email via Gmail (web)', () => {
-        const u = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-        window.open(u, '_blank', 'noopener,noreferrer');
-        chooserEl.style.display = 'none';
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+        hideChooser();
       });
-
       add('Email via Outlook Web', () => {
-        const u = `https://outlook.live.com/owa/?path=/mail/action/compose&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-        window.open(u, '_blank', 'noopener,noreferrer');
-        chooserEl.style.display = 'none';
+        window.open(`https://outlook.live.com/owa/?path=/mail/action/compose&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+        hideChooser();
       });
-
       add('Email via default mail app', () => {
-        // If the OS has no default mail client, this may do nothing—hence the web options above.
         location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-        chooserEl.style.display = 'none';
+        hideChooser();
       });
     }
 
@@ -368,26 +397,20 @@
       const message = `${textOnly}\n\n— sent from LearnPigLatin.com`;
       const subject = 'Pig Latin Translation';
 
-      // Mobile: native share sheet (works for Text, WhatsApp, etc.)
+      // Mobile: native share (includes Text/iMessage/WhatsApp/etc)
       if (isMobile() && navigator.share) {
         navigator.share({ title: subject, text: message }).catch(() => {});
         return;
       }
 
-      // Desktop: show dropdown
+      // Desktop: toggle dropdown
+      const shareBtn = document.getElementById('shareBtn');
+      if (chooserEl.style.display === 'block') {
+        hideChooser();
+        return;
+      }
       buildChooser(message, subject);
-      positionChooser(document.getElementById('shareBtn'));
-      chooserEl.style.display = 'block';
-
-      // Close when clicking elsewhere or pressing Esc
-      const onDocClick = (e) => {
-        if (!chooserEl.contains(e.target) && e.target !== document.getElementById('shareBtn')) {
-          chooserEl.style.display = 'none';
-        }
-      };
-      const onEsc = (e) => { if (e.key === 'Escape') { chooserEl.style.display = 'none'; } };
-      document.addEventListener('click', onDocClick, { once: true });
-      document.addEventListener('keydown', onEsc, { once: true });
+      showChooser(shareBtn);
     }
   </script>
 </body>
