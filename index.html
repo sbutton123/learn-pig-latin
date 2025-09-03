@@ -31,10 +31,12 @@
       color: var(--text-dark);
     }
     header {
+      position: relative; /* so the header pig can be absolutely placed */
       background: linear-gradient(to right, var(--primary), var(--accent));
       color: white;
       text-align: center;
       padding: 1.5rem;
+      overflow: hidden;
     }
     header h1 { margin: 0; font-size: 2.5rem; }
     header p {
@@ -43,6 +45,20 @@
       letter-spacing: 0.5px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
+    /* Top-right header pig */
+    .header-pig-right{
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 110px;
+      height: auto;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,.18));
+    }
+    @media (max-width: 480px){
+      .header-pig-right{ width: 72px; top: 6px; right: 6px; }
+    }
+
     nav {
       display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
       background: var(--secondary); padding: 1rem; border-bottom: 2px solid rgba(0,0,0,0.1);
@@ -73,7 +89,7 @@
       .title-pig { width: 52px; height: 52px; }
     }
 
-    /* corner sticker on translator card */
+    /* corner sticker on translator card (using pig #4) */
     .sticker-corner {
       position: absolute; right: -10px; top: -10px; width: 96px; height: 96px;
       pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); opacity: .9;
@@ -95,7 +111,7 @@
     .videos-pig { width: 48px; height: 48px; display: inline-block; }
 
     .video-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-    .video-thumb { position: relative; width: 100%; max-width: 350px; cursor: pointer; overflow: hidden; border-radius: 0.75rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    .video-thumb { position: relative; width: 100%; max-width: 350px; cursor: pointer; overflow: hidden; border-radius: 0.75rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
     .video-thumb img { display: block; width: 100%; height: auto; }
     .play-button {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -115,7 +131,7 @@
     }
     #share-chooser button:hover { background: rgba(0,0,0,0.05); }
 
-    /* Sent-from line (text only now) */
+    /* Sent-from line (text only; centered) */
     .sent-by{
       display:flex; align-items:center; gap:.4rem; margin-top:.4rem; font-size:.9rem; color:#6b5aa7;
       justify-content: center;
@@ -127,6 +143,8 @@
   <header>
     <h1>Learn Pig Latin</h1>
     <p>Your quirky guide to mastering Pig Latin!</p>
+    <!-- Top-right header pig (pig #2) -->
+    <img src="img/piglatinpig2.png" alt="" aria-hidden="true" class="header-pig-right">
   </header>
 
   <nav>
@@ -151,8 +169,8 @@
         </div>
 
         <div class="card translator-card">
-          <!-- corner sticker -->
-          <img src="img/piglatinpig2.png" alt="" aria-hidden="true" class="sticker-corner">
+          <!-- corner sticker on the translator card (pig #4) -->
+          <img src="img/piglatinpig4.png" alt="" aria-hidden="true" class="sticker-corner">
 
           <div class="translator-title">
             <img src="img/piglatinpig3.png" alt="" aria-hidden="true" class="title-pig">
