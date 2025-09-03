@@ -197,7 +197,7 @@
       <div class="translator-section">
         <div class="card">
           <h3>What is Pig Latin?</h3>
-          <p>Pig Latin originates from Piglatinia, a secret land of word‑flippers. It’s now a playful code in America, turning English words into fun phrases. Popular rumor says Thomas Jefferson used it, though it’s never confirmed!</p>
+          <p>Pig Latin originates from Piglatinia, a secret land of word-flippers. It’s now a playful code in America, turning English words into fun phrases. Popular rumor says Thomas Jefferson used it, though it’s never confirmed!</p>
           <h3>How to Translate:</h3>
           <ul>
             <li>If a word starts with a vowel, add <strong>"yay"</strong> or <strong>"way"</strong>, depending on which region of Piglatinia you come from (e.g. "apple" → "appleyay" or "appleway").</li>
@@ -218,6 +218,7 @@
           <div class="button-group">
             <button class="button" onclick="clearFields()">Clear</button>
             <button class="button" onclick="copyOutput()">Copy</button>
+            <button class="button" id="shareBtn" onclick="shareOutput()">Share</button>
           </div>
         </div>
       </div>
@@ -288,6 +289,104 @@
         div.appendChild(iframe);
       });
     });
+
+    // ========== Share Button Logic ==========
+    function openSMS(bodyText) {
+      const encoded = encodeURIComponent(bodyText);
+      const isApple = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+      const smsUrl = isApple ? `sms:&body=${encoded}` : `sms:?body=${encoded}`;
+      window.location.href = smsUrl;
+    }
+    function getOrCreateShareChooser() {
+      let chooser = document.getElementById('share-chooser');
+      if (chooser) return chooser;
+      chooser = document.createElement('div');
+      chooser.id = 'share-chooser';
+      chooser.style.position = 'absolute';
+      chooser.style.zIndex = '9999';
+      chooser.style.background = '#ffffff';
+      chooser.style.border = '1px solid rgba(0,0,0,0.15)';
+      chooser.style.borderRadius = '0.5rem';
+      chooser.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+      chooser.style.padding = '0.5rem';
+      chooser.style.minWidth = '200px';
+      chooser.style.fontFamily = 'inherit';
+      chooser.style.display = 'none';
+      const btn = (label, onclick) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = label;
+        b.style.display = 'block';
+        b.style.width = '100%';
+        b.style.textAlign = 'left';
+        b.style.background = 'transparent';
+        b.style.border = 'none';
+        b.style.padding = '0.5rem 0.6rem';
+        b.style.cursor = 'pointer';
+        b.onmouseenter = () => b.style.background = 'rgba(0,0,0,0.05)';
+        b.onmouseleave = () => b.style.background = 'transparent';
+        b.onclick = onclick;
+        return b;
+      };
+      chooser.appendChild(btn('Email', () => chooser.dispatchEvent(new CustomEvent('choose', { detail: 'email' }))));
+      chooser.appendChild(btn('Text message', () => chooser.dispatchEvent(new CustomEvent('choose', { detail: 'sms' }))));
+      chooser.appendChild(btn('Tweet', () => chooser.dispatchEvent(new CustomEvent('choose', { detail: 'tweet' }))));
+      chooser.appendChild(btn('WhatsApp', () => chooser.dispatchEvent(new CustomEvent('choose', { detail: 'whatsapp' }))));
+      chooser.appendChild(btn('Copy', () => chooser.dispatchEvent(new CustomEvent('choose', { detail: 'copy' }))));
+      document.body.appendChild(chooser);
+      return chooser;
+    }
+    function positionChooser(chooser, anchorEl) {
+      const rect = anchorEl.getBoundingClientRect();
+      chooser.style.left = (rect.left + window.scrollX) + 'px';
+      chooser.style.top  = (rect.bottom + window.scrollY) + 'px';
+    }
+    function shareOutput() {
+      const outEl = document.getElementById('output');
+      const text = (outEl?.innerText || '').trim();
+      if (!text) { alert('Nothing to share yet—type something first!'); return; }
+      const shareData = { title: 'Pig Latin Translator', text, url: location.href.split('#')[0] };
+      if (navigator.share) {
+        navigator.share(shareData).catch(() => {});
+        return;
+      }
+      const shareBtn = document.getElementById('shareBtn') || document.body;
+      const chooser = getOrCreateShareChooser();
+      positionChooser(chooser, shareBtn);
+      chooser.style.display = 'block';
+      const closeChooser = () => chooser.style.display = 'none';
+      const onDocClick = (e) => { if (!chooser.contains(e.target) && e.target !== shareBtn) closeChooser(); };
+      const onEsc = (e) => { if (e.key === 'Escape') closeChooser(); };
+      document.addEventListener('click', onDocClick, { once: true });
+      document.addEventListener('keydown', onEsc, { once: true });
+      chooser.onchoose = null;
+      chooser.addEventListener('choose', (ev) => {
+        const choice = ev.detail;
+        const encoded = encodeURIComponent(text);
+        if (choice === 'email') {
+          const mailto = `mailto:?subject=${encodeURIComponent('Pig Latin Translation')}&body=${encoded}`;
+          window.location.href = mailto;
+        } else if (choice === 'sms') {
+          openSMS(text);
+        } else if (choice === 'tweet') {
+          window.open(`https://twitter.com/intent/tweet?text=${encoded}`, '_blank', 'noopener,noreferrer');
+        } else if (choice === 'whatsapp') {
+          window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank', 'noopener,noreferrer');
+        } else if (choice === 'copy') {
+          if (navigator.clipboard?.writeText) {
+            navigator.clipboard.writeText(text).then(() => alert('Translation copied!'));
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); alert('Translation copied!'); } catch {}
+            document.body.removeChild(ta);
+          }
+        }
+        closeChooser();
+      }, { once: true });
+    }
   </script>
 </body>
 </html>
