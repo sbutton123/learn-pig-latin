@@ -318,12 +318,11 @@
       });
     });
 
-    // ---------- SMART SHARE ----------
+    // ---------- SMART SHARE (Text → Social → Email) ----------
     function isMobile() {
       return /(android|iphone|ipad|ipod)/i.test(navigator.userAgent);
     }
 
-    // Desktop chooser (no SMS option to avoid "Pick an app" dialog)
     function getOrCreateShareChooser() {
       let chooser = document.getElementById('share-chooser');
       if (chooser) return chooser;
@@ -337,11 +336,15 @@
       chooser.style.borderRadius = '0.5rem';
       chooser.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
       chooser.style.padding = '0.5rem';
-      chooser.style.minWidth = '220px';
+      chooser.style.minWidth = '240px';
       chooser.style.fontFamily = 'inherit';
       chooser.style.display = 'none';
 
-      const btn = (label, key) => {
+      const list = document.createElement('div');
+      list.style.display = 'flex';
+      list.style.flexDirection = 'column';
+
+      const addBtn = (label, key) => {
         const b = document.createElement('button');
         b.type = 'button';
         b.textContent = label;
@@ -351,18 +354,23 @@
         b.style.textAlign = 'left';
         b.style.background = 'transparent';
         b.style.border = 'none';
-        b.style.padding = '0.5rem 0.6rem';
+        b.style.padding = '0.55rem 0.7rem';
         b.style.cursor = 'pointer';
+        b.style.fontSize = '0.95rem';
         b.onmouseenter = () => b.style.background = 'rgba(0,0,0,0.05)';
         b.onmouseleave = () => b.style.background = 'transparent';
-        return b;
+        list.appendChild(b);
       };
 
-      chooser.appendChild(btn('Email (Gmail)', 'gmail'));
-      chooser.appendChild(btn('Email (Outlook Web)', 'outlookweb'));
-      chooser.appendChild(btn('Tweet', 'tweet'));
-      chooser.appendChild(btn('WhatsApp Web', 'whatsapp'));
-      chooser.appendChild(btn('Copy', 'copy'));
+      // Order: Text (mobile only), WhatsApp, Telegram, X, Facebook, Email
+      if (isMobile()) addBtn('Text message', 'sms');
+      addBtn('WhatsApp', 'whatsapp');
+      addBtn('Telegram', 'telegram');
+      addBtn('X (Twitter)', 'tweet');
+      addBtn('Facebook (paste text)', 'facebook');
+      addBtn('Email', 'email');
+
+      chooser.appendChild(list);
 
       chooser.addEventListener('click', (e) => {
         const key = e.target?.dataset?.key;
@@ -380,24 +388,43 @@
       chooser.style.top  = (rect.bottom + window.scrollY) + 'px';
     }
 
+    function openSMS(bodyText) {
+      const encoded = encodeURIComponent(bodyText);
+      const isApple = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+      const smsUrl = isApple ? `sms:&body=${encoded}` : `sms:?body=${encoded}`;
+      window.location.href = smsUrl;
+    }
+
+    function safeCopy(text) {
+      if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
+      return new Promise((resolve) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch {}
+        document.body.removeChild(ta);
+        resolve();
+      });
+    }
+
     function shareOutput() {
       const outEl = document.getElementById('output');
       const textOnly = (outEl?.innerText || '').trim();
       if (!textOnly) { alert('Nothing to share yet—type something first!'); return; }
 
-      // Put the translation first; site credit after it.
       const message = `${textOnly}\n\n— sent from LearnPigLatin.com`;
       const subject = 'Pig Latin Translation';
       const encMsg = encodeURIComponent(message);
       const encSub = encodeURIComponent(subject);
 
-      // Mobile: native share (works great with SMS/WhatsApp/etc). Avoid adding url to prevent some platforms from dropping text.
+      // Mobile: native share (has Text first on most devices)
       if (isMobile() && navigator.share) {
         navigator.share({ title: subject, text: message }).catch(() => {});
         return;
       }
 
-      // Desktop: custom chooser so the full text is preserved everywhere
+      // Desktop: custom dropdown with requested order
       const shareBtn = document.getElementById('shareBtn') || document.body;
       const chooser = getOrCreateShareChooser();
       positionChooser(chooser, shareBtn);
@@ -409,35 +436,28 @@
       document.addEventListener('click', onDocClick, { once: true });
       document.addEventListener('keydown', onEsc, { once: true });
 
-      chooser.addEventListener('choose', (ev) => {
+      chooser.addEventListener('choose', async (ev) => {
         const choice = ev.detail;
 
-        if (choice === 'gmail') {
-          window.open(
-            `https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encSub}&body=${encMsg}`,
-            '_blank','noopener,noreferrer'
-          );
-        } else if (choice === 'outlookweb') {
-          window.open(
-            `https://outlook.live.com/owa/?path=/mail/action/compose&subject=${encSub}&body=${encMsg}`,
-            '_blank','noopener,noreferrer'
-          );
-        } else if (choice === 'tweet') {
-          window.open(`https://twitter.com/intent/tweet?text=${encMsg}`, '_blank', 'noopener,noreferrer');
+        if (choice === 'sms') {
+          openSMS(message);
         } else if (choice === 'whatsapp') {
           window.open(`https://api.whatsapp.com/send?text=${encMsg}`, '_blank', 'noopener,noreferrer');
-        } else if (choice === 'copy') {
-          if (navigator.clipboard?.writeText) {
-            navigator.clipboard.writeText(message).then(() => alert('Translation copied!'));
-          } else {
-            const ta = document.createElement('textarea');
-            ta.value = message;
-            document.body.appendChild(ta);
-            ta.select();
-            try { document.execCommand('copy'); alert('Translation copied!'); } catch {}
-            document.body.removeChild(ta);
-          }
+        } else if (choice === 'telegram') {
+          window.open(`https://t.me/share/url?text=${encMsg}`, '_blank', 'noopener,noreferrer');
+        } else if (choice === 'tweet') {
+          window.open(`https://twitter.com/intent/tweet?text=${encMsg}`, '_blank', 'noopener,noreferrer');
+        } else if (choice === 'facebook') {
+          // Facebook ignores prefilled text; copy then open share dialog so user can paste.
+          await safeCopy(message);
+          alert('Your translation is copied. Facebook will open—just paste it into your post.');
+          const pageUrl = encodeURIComponent(location.href.split('#')[0]);
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, '_blank', 'noopener,noreferrer');
+        } else if (choice === 'email') {
+          // Single email option — OS/browser chooses the provider
+          window.location.href = `mailto:?subject=${encSub}&body=${encMsg}`;
         }
+
         closeChooser();
       }, { once: true });
     }
