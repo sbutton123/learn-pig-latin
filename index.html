@@ -93,6 +93,19 @@
     }
     footer { background: var(--primary); color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
     @media (max-width: 768px) { .translator-section { flex-direction: column; } }
+
+    /* Simple dropdown styles */
+    #share-chooser {
+      position: absolute; z-index: 9999; display: none;
+      background: #fff; border: 1px solid rgba(0,0,0,0.15); border-radius: 0.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 0.5rem; min-width: 260px;
+      font-family: inherit;
+    }
+    #share-chooser button {
+      display: block; width: 100%; text-align: left; background: transparent; border: none;
+      padding: 0.6rem 0.7rem; cursor: pointer; font-size: 0.95rem;
+    }
+    #share-chooser button:hover { background: rgba(0,0,0,0.05); }
   </style>
 </head>
 <body>
@@ -165,6 +178,8 @@
   </main>
 
   <footer>© 2025 Learn Pig Latin. All rights reserved.</footer>
+
+  <div id="share-chooser" role="menu" aria-label="Share options"></div>
 
   <script>
     // ---------- Translation ----------
@@ -261,137 +276,88 @@
       });
     });
 
-    // ---------- SMART SHARE (Text → Social → Email submenu) ----------
+    // ---------- SHARE ----------
+    const chooserEl = document.getElementById('share-chooser');
+
     function isMobile() {
       return /(android|iphone|ipad|ipod)/i.test(navigator.userAgent);
     }
-
-    function getOrCreateShareChooser() {
-      let chooser = document.getElementById('share-chooser');
-      if (chooser) return chooser;
-
-      chooser = document.createElement('div');
-      chooser.id = 'share-chooser';
-      chooser.style.position = 'absolute';
-      chooser.style.zIndex = '9999';
-      chooser.style.background = '#ffffff';
-      chooser.style.border = '1px solid rgba(0,0,0,0.15)';
-      chooser.style.borderRadius = '0.5rem';
-      chooser.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
-      chooser.style.padding = '0.5rem';
-      chooser.style.minWidth = '240px';
-      chooser.style.fontFamily = 'inherit';
-      chooser.style.display = 'none';
-
-      const list = document.createElement('div');
-      list.style.display = 'flex';
-      list.style.flexDirection = 'column';
-
-      const addBtn = (label, key) => {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.textContent = label;
-        b.dataset.key = key;
-        b.style.display = 'block';
-        b.style.width = '100%';
-        b.style.textAlign = 'left';
-        b.style.background = 'transparent';
-        b.style.border = 'none';
-        b.style.padding = '0.55rem 0.7rem';
-        b.style.cursor = 'pointer';
-        b.style.fontSize = '0.95rem';
-        b.onmouseenter = () => b.style.background = 'rgba(0,0,0,0.05)';
-        b.onmouseleave = () => b.style.background = 'transparent';
-        list.appendChild(b);
-      };
-
-      if (isMobile()) addBtn('Text message', 'sms');  // hidden on desktop
-      addBtn('WhatsApp', 'whatsapp');
-      addBtn('Telegram', 'telegram');
-      addBtn('X (Twitter)', 'tweet');
-      addBtn('Facebook (paste text)', 'facebook');
-      addBtn('Email…', 'email');  // opens email submenu
-
-      chooser.appendChild(list);
-
-      chooser.addEventListener('click', (e) => {
-        const key = e.target?.dataset?.key;
-        if (!key) return;
-        chooser.dispatchEvent(new CustomEvent('choose', { detail: key }));
-      });
-
-      document.body.appendChild(chooser);
-      return chooser;
-    }
-
-    function getOrCreateEmailSubmenu() {
-      let sub = document.getElementById('email-submenu');
-      if (sub) return sub;
-
-      sub = document.createElement('div');
-      sub.id = 'email-submenu';
-      sub.style.position = 'absolute';
-      sub.style.zIndex = '10000';
-      sub.style.background = '#ffffff';
-      sub.style.border = '1px solid rgba(0,0,0,0.15)';
-      sub.style.borderRadius = '0.5rem';
-      sub.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
-      sub.style.padding = '0.5rem';
-      sub.style.minWidth = '220px';
-      sub.style.fontFamily = 'inherit';
-      sub.style.display = 'none';
-
-      const addBtn = (label, key) => {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.textContent = label;
-        b.dataset.key = key;
-        b.style.display = 'block';
-        b.style.width = '100%';
-        b.style.textAlign = 'left';
-        b.style.background = 'transparent';
-        b.style.border = 'none';
-        b.style.padding = '0.55rem 0.7rem';
-        b.style.cursor = 'pointer';
-        b.style.fontSize = '0.95rem';
-        b.onmouseenter = () => b.style.background = 'rgba(0,0,0,0.05)';
-        b.onmouseleave = () => b.style.background = 'transparent';
-        sub.appendChild(b);
-      };
-
-      addBtn('Default mail app', 'mailto');
-      addBtn('Gmail (web)', 'gmail');
-      addBtn('Outlook (web)', 'outlook');
-
-      sub.addEventListener('click', (e) => {
-        const key = e.target?.dataset?.key;
-        if (!key) return;
-        sub.dispatchEvent(new CustomEvent('emailchoose', { detail: key }));
-      });
-
-      document.body.appendChild(sub);
-      return sub;
-    }
-
-    function positionChooser(el, anchorEl) {
+    function positionChooser(anchorEl) {
       const rect = anchorEl.getBoundingClientRect();
-      el.style.left = (rect.left + window.scrollX) + 'px';
-      el.style.top  = (rect.bottom + window.scrollY) + 'px';
+      chooserEl.style.left = (rect.left + window.scrollX) + 'px';
+      chooserEl.style.top  = (rect.bottom + window.scrollY) + 'px';
     }
-
-    function openSMS(bodyText) {
-      const encoded = encodeURIComponent(bodyText);
-      const isApple = /iPad|iPhone|iPod/i.test(navigator.userAgent);
-      const smsUrl = isApple ? `sms:&body=${encoded}` : `sms:?body=${encoded}`;
-      location.href = smsUrl; // location.href: safest against blockers
-    }
-
-    async function safeCopy(text) {
+    function safeCopy(text) {
       if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
-      const ta = document.createElement('textarea');
-      ta.value = text; document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); } catch {}
-      document.body.removeChild(ta);
+      return new Promise((resolve) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch {}
+        document.body.removeChild(ta);
+        resolve();
+      });
+    }
+
+    function buildChooser(message, subject) {
+      chooserEl.innerHTML = ''; // reset
+
+      // Build items
+      const add = (label, handler) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = label;
+        b.onclick = handler;
+        chooserEl.appendChild(b);
+      };
+
+      // Order: (Text on mobile via native share), WhatsApp, Telegram, X, Facebook, Email (Gmail / Outlook / Default)
+      add('WhatsApp', () => {
+        const u = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+        window.open(u, '_blank', 'noopener,noreferrer');
+        chooserEl.style.display = 'none';
+      });
+
+      add('Telegram', () => {
+        const u = `https://t.me/share/url?text=${encodeURIComponent(message)}`;
+        window.open(u, '_blank', 'noopener,noreferrer');
+        chooserEl.style.display = 'none';
+      });
+
+      add('X (Twitter)', () => {
+        const u = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
+        window.open(u, '_blank', 'noopener,noreferrer');
+        chooserEl.style.display = 'none';
+      });
+
+      add('Facebook (paste text)', async () => {
+        await safeCopy(message);
+        alert('Your translation is copied. Facebook will open — paste it into your post.');
+        const pageUrl = encodeURIComponent(location.href.split('#')[0]);
+        const u = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+        window.open(u, '_blank', 'noopener,noreferrer');
+        chooserEl.style.display = 'none';
+      });
+
+      // Email options inline (no submenu to break)
+      add('Email via Gmail (web)', () => {
+        const u = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        window.open(u, '_blank', 'noopener,noreferrer');
+        chooserEl.style.display = 'none';
+      });
+
+      add('Email via Outlook Web', () => {
+        const u = `https://outlook.live.com/owa/?path=/mail/action/compose&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        window.open(u, '_blank', 'noopener,noreferrer');
+        chooserEl.style.display = 'none';
+      });
+
+      add('Email via default mail app', () => {
+        // If the OS has no default mail client, this may do nothing—hence the web options above.
+        location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        chooserEl.style.display = 'none';
+      });
     }
 
     function shareOutput() {
@@ -401,80 +367,27 @@
 
       const message = `${textOnly}\n\n— sent from LearnPigLatin.com`;
       const subject = 'Pig Latin Translation';
-      const encMsg = encodeURIComponent(message);
-      const encSub = encodeURIComponent(subject);
 
-      // Mobile: native share
+      // Mobile: native share sheet (works for Text, WhatsApp, etc.)
       if (isMobile() && navigator.share) {
         navigator.share({ title: subject, text: message }).catch(() => {});
         return;
       }
 
-      // Desktop dropdown
-      const shareBtn = document.getElementById('shareBtn') || document.body;
-      const chooser = getOrCreateShareChooser();
-      positionChooser(chooser, shareBtn);
-      chooser.style.display = 'block';
+      // Desktop: show dropdown
+      buildChooser(message, subject);
+      positionChooser(document.getElementById('shareBtn'));
+      chooserEl.style.display = 'block';
 
-      const closeAll = () => {
-        chooser.style.display = 'none';
-        const sub = document.getElementById('email-submenu');
-        if (sub) sub.style.display = 'none';
-      };
+      // Close when clicking elsewhere or pressing Esc
       const onDocClick = (e) => {
-        const sub = document.getElementById('email-submenu');
-        if (!chooser.contains(e.target) && !(sub && sub.contains(e.target)) && e.target !== shareBtn) closeAll();
+        if (!chooserEl.contains(e.target) && e.target !== document.getElementById('shareBtn')) {
+          chooserEl.style.display = 'none';
+        }
       };
-      const onEsc = (e) => { if (e.key === 'Escape') closeAll(); };
+      const onEsc = (e) => { if (e.key === 'Escape') { chooserEl.style.display = 'none'; } };
       document.addEventListener('click', onDocClick, { once: true });
       document.addEventListener('keydown', onEsc, { once: true });
-
-      chooser.addEventListener('choose', async (ev) => {
-        const choice = ev.detail;
-
-        if (choice === 'sms') {
-          openSMS(message);
-          closeAll();
-        } else if (choice === 'whatsapp') {
-          location.href = `https://api.whatsapp.com/send?text=${encMsg}`;
-          closeAll();
-        } else if (choice === 'telegram') {
-          location.href = `https://t.me/share/url?text=${encMsg}`;
-          closeAll();
-        } else if (choice === 'tweet') {
-          location.href = `https://twitter.com/intent/tweet?text=${encMsg}`;
-          closeAll();
-        } else if (choice === 'facebook') {
-          await safeCopy(message);
-          alert('Your translation is copied. Facebook will open — just paste it into your post.');
-          const pageUrl = encodeURIComponent(location.href.split('#')[0]);
-          location.href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
-          closeAll();
-        } else if (choice === 'email') {
-          // Email submenu: choose default / Gmail / Outlook
-          const sub = getOrCreateEmailSubmenu();
-          positionChooser(sub, shareBtn);
-          sub.style.display = 'block';
-
-          const onSubAway = (e2) => { if (!sub.contains(e2.target)) sub.style.display = 'none'; };
-          document.addEventListener('click', onSubAway, { once: true });
-
-          sub.addEventListener('emailchoose', (ev2) => {
-            const which = ev2.detail;
-            if (which === 'mailto') {
-              // Use location.href for reliability
-              location.href = `mailto:?subject=${encSub}&body=${encMsg}`;
-            } else if (which === 'gmail') {
-              location.href = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encSub}&body=${encMsg}`;
-            } else if (which === 'outlook') {
-              // Consumer Outlook Web (live.com); for work/school, users usually redirect to office.com
-              location.href = `https://outlook.live.com/owa/?path=/mail/action/compose&subject=${encSub}&body=${encMsg}`;
-            }
-            sub.style.display = 'none';
-            chooser.style.display = 'none';
-          }, { once: true });
-        }
-      }, { once: true });
     }
   </script>
 </body>
