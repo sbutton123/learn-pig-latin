@@ -66,6 +66,8 @@
       gap: 1.2rem;
       justify-content: center;
     }
+
+    /* CARD */
     .card {
       width: 170px;
       background: var(--card-bg);
@@ -74,41 +76,54 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      text-align: center;
+      align-items: center;           /* center everything in the card */
+      text-align: center;            /* center text */
       border: 2px solid rgba(120,170,255,0.35);
     }
-    .card img {
+
+    /* Consistent, centered image area (less extra white space) */
+    .card-image {
+      height: 180px;                 /* adjust to taste for card height */
       width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+    }
+    .card-image img {
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
       height: auto;
-      max-height: 160px;             /* <= shorter cards */
       object-fit: contain;
       display: block;
     }
+
     .card-content {
-      padding: 0.5rem;               /* <= tighter spacing */
+      padding: 0.5rem;               /* tighter spacing */
       display: flex;
       flex-direction: column;
       gap: .35rem;
       flex: 1;
-      align-items: center;           /* center single buttons too */
+      align-items: center;           /* center buttons/labels */
     }
     .card-content h3 {
       font-size: 0.95rem;
       margin: 0.1rem 0 0.2rem;
       color: var(--primary);
       line-height: 1.2;
-      min-height: 1.6em;             /* <= less forced height */
+      min-height: 1.6em;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
     }
 
-    /* Centered two-button row */
+    /* Centered button row */
     .btn-row {
       margin-top: .2rem;
       display: flex;
-      justify-content: center;       /* <= centered */
+      justify-content: center;
       gap: .5rem;
       flex-wrap: wrap;
       width: 100%;
@@ -118,7 +133,7 @@
       display: inline-block;
       text-decoration: none;
       text-align: center;
-      background: var(--primary);    /* <= purple */
+      background: var(--primary);
       color: white;
       font-size: 0.8rem;
       padding: 0.38rem 0.6rem;
@@ -139,7 +154,7 @@
 
     @media (max-width: 480px) {
       .card { width: 46%; min-width: 160px; }
-      .card img { max-height: 140px; }    /* a touch smaller on phones */
+      .card-image { height: 160px; } /* slightly shorter on phones */
     }
   </style>
 </head>
@@ -161,9 +176,11 @@
       <h2>📘 Books &amp; Printables</h2>
       <div class="product-grid">
 
-        <!-- Coloring Book with two centered purple buttons -->
+        <!-- Coloring Book with 2 centered purple buttons -->
         <div class="card">
-          <img src="thumbnails/coloringbook.webp" loading="lazy" alt="Pig Latin Coloring Book cover">
+          <div class="card-image">
+            <img src="thumbnails/coloringbook.webp" loading="lazy" alt="Pig Latin Coloring Book cover">
+          </div>
           <div class="card-content">
             <h3>Coloring Book</h3>
             <div class="btn-row">
@@ -174,7 +191,9 @@
         </div>
 
         <div class="card">
-          <img src="thumbnails/threelittlepigs.webp" loading="lazy" alt="Three Little Pigs cover">
+          <div class="card-image">
+            <img src="thumbnails/threelittlepigs.webp" loading="lazy" alt="Three Little Pigs cover">
+          </div>
           <div class="card-content">
             <h3>Three Little Pigs</h3>
             <a class="btn" href="https://www.amazon.com/dp/B0FD83WYNK/" target="_blank" rel="noopener noreferrer">Amazon</a>
@@ -182,7 +201,9 @@
         </div>
 
         <div class="card">
-          <img src="thumbnails/Goldilocks.webp" loading="lazy" alt="Goldilocks cover">
+          <div class="card-image">
+            <img src="thumbnails/Goldilocks.webp" loading="lazy" alt="Goldilocks cover">
+          </div>
           <div class="card-content">
             <h3>Goldilocks</h3>
             <a class="btn" href="https://www.amazon.com/dp/B0FG4J13FG/" target="_blank" rel="noopener noreferrer">Amazon</a>
@@ -190,7 +211,9 @@
         </div>
 
         <div class="card">
-          <img src="thumbnails/littleredriding.webp" loading="lazy" alt="Little Red Riding Hood cover">
+          <div class="card-image">
+            <img src="thumbnails/littleredriding.webp" loading="lazy" alt="Little Red Riding Hood cover">
+          </div>
           <div class="card-content">
             <h3>Little Red</h3>
             <a class="btn" href="https://www.amazon.com/dp/B0FGQ6PWRC/" target="_blank" rel="noopener noreferrer">Amazon</a>
@@ -198,7 +221,9 @@
         </div>
 
         <div class="card">
-          <img src="thumbnails/tripleanthology.webp" loading="lazy" alt="Triple Anthology cover">
+          <div class="card-image">
+            <img src="thumbnails/tripleanthology.webp" loading="lazy" alt="Triple Anthology cover">
+          </div>
           <div class="card-content">
             <h3>Anthology</h3>
             <a class="btn" href="https://www.amazon.com/dp/B0FGWHCVVL/" target="_blank" rel="noopener noreferrer">Amazon</a>
@@ -213,10 +238,13 @@
       <h2>👕 Apparel</h2>
       <div class="product-grid">
         <div class="card">
-          <img src="thumbnails/piglatintshirt.webp" loading="lazy" alt="Pig Latin shirt">
+          <div class="card-image">
+            <img src="thumbnails/piglatintshirt.webp" loading="lazy" alt="Pig Latin shirt">
+          </div>
           <div class="card-content">
             <h3>Pig Latin Shirt</h3>
-            <a class="btn" href="https://www.etsy.com/listing/YOUR-TSHIRT-ID" target="_blank" rel="noopener noreferrer">Etsy</a>
+            <!-- Public listing link (not the private edit link) -->
+            <a class="btn" href="https://www.etsy.com/listing/4335457946" target="_blank" rel="noopener noreferrer">Etsy</a>
           </div>
         </div>
       </div>
