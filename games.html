@@ -4,6 +4,33 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Games & Printables | Learn Pig Latin</title>
+
+  <!-- PWA (optional but nice to keep consistent) -->
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#a97ef9">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+  <link rel="icon" href="/img/favicon.ico">
+
+  <!-- Google Analytics: website only -->
+  <script>
+  (function () {
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+    if (isStandalone) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT';
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-8ZL77F3HRT');
+  })();
+  </script>
+
   <style>
     :root {
       --primary: #a97ef9;
@@ -21,140 +48,34 @@
       color: var(--text-dark);
       line-height:1.6;
     }
-    header {
-      background: linear-gradient(to right, var(--primary), var(--accent));
-      color:#fff; text-align:center; padding:2rem 1rem;
-    }
+    header { background: linear-gradient(to right, var(--primary), var(--accent)); color:#fff; text-align:center; padding:2rem 1rem; }
     header h1 { font-size:2.5rem; }
     header p { margin-top:.5rem; font-size:1.2rem; }
-    nav {
-      background: var(--secondary);
-      text-align: center; padding: 1rem;
-    }
+    nav { background: var(--secondary); text-align: center; padding: 1rem; }
     nav a {
-      display: inline-block;
-      margin: 0 .5rem;
-      padding: .75rem 1.5rem;
-      background: var(--accent);
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: .5rem;
-      transition: background .3s, transform .2s;
+      display: inline-block; margin: 0 .5rem; padding: .75rem 1.5rem; background: var(--accent);
+      color: #fff; text-decoration: none; font-weight: bold; border-radius: .5rem; transition: background .3s, transform .2s;
     }
-    nav a:hover {
-      background: var(--primary);
-      transform: translateY(-2px);
-    }
-    main {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .instruction {
-      text-align: center;
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      font-weight: bold;
-    }
-    .section-title {
-      text-align: center;
-      color: var(--primary);
-      font-size: 2rem;
-      margin: 1rem 0 1.5rem;
-    }
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .coloring-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .game-card {
-      background: var(--card-bg);
-      border-radius: 1rem;
-      border: 2px solid var(--accent);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      overflow: hidden;
-      transition: transform .2s, box-shadow .2s, border-color .2s;
-    }
-    .game-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      border-color: var(--primary);
-    }
-    .game-card a {
-      display: block;
-      position: relative;
-    }
-    .game-card img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      display: block;
-    }
-    .badge {
-      position: absolute;
-      top: .5rem;
-      right: .5rem;
-      background: var(--accent);
-      color: #fff;
-      padding: .25rem .5rem;
-      border-radius: .25rem;
-      font-size: .75rem;
-    }
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      font-weight: bold;
-      font-size: 1.2rem;
-      transition: opacity .2s;
-    }
+    nav a:hover { background: var(--primary); transform: translateY(-2px); }
+    main { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+    .instruction { text-align: center; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: bold; }
+    .section-title { text-align: center; color: var(--primary); font-size: 2rem; margin: 1rem 0 1.5rem; }
+    .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .coloring-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+    .game-card { background: var(--card-bg); border-radius: 1rem; border: 2px solid var(--accent); box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; transition: transform .2s, box-shadow .2s, border-color .2s; }
+    .game-card:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.15); border-color: var(--primary); }
+    .game-card a { display: block; position: relative; }
+    .game-card img { width: 100%; height: auto; object-fit: contain; display: block; }
+    .badge { position: absolute; top: .5rem; right: .5rem; background: var(--accent); color: #fff; padding: .25rem .5rem; border-radius: .25rem; font-size: .75rem; }
+    .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); color: #fff; display: flex; align-items: center; justify-content: center; opacity: 0; font-weight: bold; font-size: 1.2rem; transition: opacity .2s; }
     .game-card:hover .overlay { opacity: 1; }
-    .buy-button {
-      text-align: center;
-      margin: 2rem 0;
-    }
-    .buy-button a {
-      display: inline-block;
-      padding: .75rem 1.5rem;
-      background: var(--accent);
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: .5rem;
-      transition: background .3s, transform .2s;
-    }
-    .buy-button a:hover {
-      background: var(--primary);
-      transform: translateY(-2px);
-    }
-    footer {
-      background: var(--primary);
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-      font-size: .9rem;
-    }
+    .buy-button { text-align: center; margin: 2rem 0; }
+    .buy-button a { display: inline-block; padding: .75rem 1.5rem; background: var(--accent); color: #fff; text-decoration: none; font-weight: bold; border-radius: .5rem; transition: background .3s, transform .2s; }
+    .buy-button a:hover { background: var(--primary); transform: translateY(-2px); }
+    footer { background: var(--primary); color: #fff; text-align: center; padding: 1rem; font-size: .9rem; }
     @media (max-width:768px) {
-      .coloring-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
-      }
-      nav a {
-        padding: .5rem 1rem;
-        font-size: 1rem;
-      }
+      .coloring-grid { grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); }
+      nav a { padding: .5rem 1rem; font-size: 1rem; }
     }
   </style>
 </head>
@@ -178,29 +99,25 @@
     <div class="game-grid">
       <div class="game-card">
         <a href="animalsway-wordsearch.html">
-          <span class="badge">Printable</span>
-          <div class="overlay">Play Now</div>
+          <span class="badge">Printable</span><div class="overlay">Play Now</div>
           <img src="thumbnails/animalsway-thumb.jpg" loading="lazy" alt="Animalsway Word Search">
         </a>
       </div>
       <div class="game-card">
         <a href="colorsshapes-wordsearch.html">
-          <span class="badge">Printable</span>
-          <div class="overlay">Play Now</div>
+          <span class="badge">Printable</span><div class="overlay">Play Now</div>
           <img src="thumbnails/colorsshapes-thumb.jpg" loading="lazy" alt="Olorscay &amp; Apesshay Word Search">
         </a>
       </div>
       <div class="game-card">
         <a href="oodfay-wordsearch.html">
-          <span class="badge">Printable</span>
-          <div class="overlay">Play Now</div>
+          <span class="badge">Printable</span><div class="overlay">Play Now</div>
           <img src="thumbnails/food-thumb.jpg" loading="lazy" alt="Oodfay Word Search">
         </a>
       </div>
       <div class="game-card">
         <a href="erbsvay-wordsearch.html">
-          <span class="badge">Printable</span>
-          <div class="overlay">Play Now</div>
+          <span class="badge">Printable</span><div class="overlay">Play Now</div>
           <img src="thumbnails/verbs-thumb.jpg" loading="lazy" alt="Erbsvay Word Search">
         </a>
       </div>
@@ -210,22 +127,19 @@
     <div class="coloring-grid">
       <div class="game-card">
         <a href="coloring/ivelay-ovelay-aughlay.html" target="_blank">
-          <span class="badge">Printable</span>
-          <div class="overlay">Color &amp; Print</div>
+          <span class="badge">Printable</span><div class="overlay">Color &amp; Print</div>
           <img src="coloring/IVELAYOVELAYAUGLAY.png" loading="lazy" alt="IVELAY OVELAY AUGHLAY">
         </a>
       </div>
       <div class="game-card">
         <a href="coloring/dreamray-igbay.html" target="_blank">
-          <span class="badge">Printable</span>
-          <div class="overlay">Color &amp; Print</div>
+          <span class="badge">Printable</span><div class="overlay">Color &amp; Print</div>
           <img src="coloring/dreambig.png" loading="lazy" alt="EAMDRAY IGBAY">
         </a>
       </div>
       <div class="game-card">
         <a href="coloring/ontday-orryway-ebay-appyhay.html" target="_blank">
-          <span class="badge">Printable</span>
-          <div class="overlay">Color &amp; Print</div>
+          <span class="badge">Printable</span><div class="overlay">Color &amp; Print</div>
           <img src="coloring/dontworrybehappy.png" loading="lazy" alt="ONT'DAY ORRYWAY – EBAY APPYHAY">
         </a>
       </div>
@@ -236,8 +150,6 @@
     </div>
   </main>
 
-  <footer>
-    © 2025 Learn Pig Latin. All rights reserved.
-  </footer>
+  <footer>© 2025 Learn Pig Latin. All rights reserved.</footer>
 </body>
 </html>
