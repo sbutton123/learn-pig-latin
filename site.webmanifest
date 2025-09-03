@@ -17,10 +17,10 @@
   ],
 
   "screenshots": [
-    { "src": "/img/screenshots/translator-1080x1920.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Translator" },
-    { "src": "/img/screenshots/games-1080x1920.png",      "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Games" },
-    { "src": "/img/screenshots/share-1080x1920.png",      "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Share" }
-  ],
+  { "src": "/img/screenshots/translator1080x1920.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Translator" },
+  { "src": "/img/screenshots/wordsearch1080x1920.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Word Search" },
+  { "src": "/img/screenshots/coloring1080x1920.png",   "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Coloring Page" }
+]
 
   "launch_handler": { "client_mode": "navigate-existing" },
 
