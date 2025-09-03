@@ -31,12 +31,10 @@
       color: var(--text-dark);
     }
     header {
-      position: relative; /* so the header pig can be absolutely placed */
       background: linear-gradient(to right, var(--primary), var(--accent));
       color: white;
       text-align: center;
       padding: 1.5rem;
-      overflow: hidden;
     }
     header h1 { margin: 0; font-size: 2.5rem; }
     header p {
@@ -44,19 +42,6 @@
       font-size: 1.3rem;
       letter-spacing: 0.5px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-    }
-    /* Top-right header pig */
-    .header-pig-right{
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      width: 110px;
-      height: auto;
-      pointer-events: none;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,.18));
-    }
-    @media (max-width: 480px){
-      .header-pig-right{ width: 72px; top: 6px; right: 6px; }
     }
 
     nav {
@@ -71,28 +56,35 @@
     nav a:hover { background: var(--primary); transform: translateY(-2px); }
 
     main { max-width: 1200px; margin: auto; padding: 2rem 1rem; }
+
     .translator-section { display: flex; gap: 2rem; flex-wrap: wrap; align-items: stretch; }
     .card {
       background: var(--card-bg); border-radius: 1rem; padding: 1.5rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05); flex: 1; min-width: 280px; display: flex; flex-direction: column;
     }
     .card h3, .card h4 { margin-top: 0; }
-    .translator-card { position: relative; overflow: hidden; }
+    .translator-card { position: relative; overflow: visible; }
+
+    /* Two pigs at the top corners of the translator */
+    .translator-pig {
+      position: absolute; top: -18px; width: 88px; height: auto;
+      pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15));
+    }
+    .translator-pig.left  { left: -12px; }
+    .translator-pig.right { right: -12px; top: -26px; } /* slightly higher to sit closer to header */
+    @media (max-width: 480px){
+      .translator-pig { width: 62px; top: -12px; }
+      .translator-pig.right { top: -18px; }
+      .translator-pig.left  { left: -8px; }
+      .translator-pig.right { right: -8px; }
+    }
+
     .translator-title {
-      display: flex; align-items: center; justify-content: center; gap: .6rem; margin-bottom: .75rem;
+      display: flex; align-items: center; justify-content: center; margin-bottom: .75rem;
     }
     .translator-title h2 {
       margin: 0; color: var(--primary); font-size: 1.6rem; line-height: 1;
-    }
-    .title-pig { width: 72px; height: 72px; display: block; }
-    @media (max-width: 480px) {
-      .title-pig { width: 52px; height: 52px; }
-    }
-
-    /* corner sticker on translator card (using pig #4) */
-    .sticker-corner {
-      position: absolute; right: -10px; top: -10px; width: 96px; height: 96px;
-      pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); opacity: .9;
+      text-align: center; width: 100%;
     }
 
     label { font-weight: bold; margin-top: 1rem; display: block; }
@@ -105,11 +97,7 @@
     .button:hover { background: var(--primary-dark); }
 
     #lesson-videos { margin-top: 3rem; }
-    #lesson-videos h2 {
-      text-align: center; color: var(--primary); margin-bottom: 1rem; display: flex; gap: .5rem; justify-content: center; align-items: center;
-    }
-    .videos-pig { width: 48px; height: 48px; display: inline-block; }
-
+    #lesson-videos h2 { text-align: center; color: var(--primary); margin-bottom: 1rem; }
     .video-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
     .video-thumb { position: relative; width: 100%; max-width: 350px; cursor: pointer; overflow: hidden; border-radius: 0.75rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
     .video-thumb img { display: block; width: 100%; height: auto; }
@@ -117,6 +105,7 @@
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       background: rgba(0,0,0,0.6); color: white; border: none; font-size: 2rem; padding: 0.5rem 1rem; border-radius: 50%; cursor: pointer;
     }
+
     footer { background: var(--primary); color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
 
     @media (max-width: 768px) { .translator-section { flex-direction: column; } }
@@ -143,8 +132,6 @@
   <header>
     <h1>Learn Pig Latin</h1>
     <p>Your quirky guide to mastering Pig Latin!</p>
-    <!-- Top-right header pig (pig #2) -->
-    <img src="img/piglatinpig2.png" alt="" aria-hidden="true" class="header-pig-right">
   </header>
 
   <nav>
@@ -157,25 +144,13 @@
   <main>
     <section id="translator">
       <div class="translator-section">
-        <div class="card">
-          <h3>What is Pig Latin?</h3>
-          <p>Pig Latin originates from Piglatinia, a secret land of word-flippers. It’s now a playful code in America, turning English words into fun phrases. Popular rumor says Thomas Jefferson used it, though it’s never confirmed!</p>
-          <h3>How to Translate:</h3>
-          <ul>
-            <li>If a word starts with a vowel, add <strong>"yay"</strong> or <strong>"way"</strong> (e.g. "apple" → "appleyay" or "appleway").</li>
-            <li>If it starts with a consonant or consonant cluster, move it to the end and add <strong>"ay"</strong> (e.g. "hello" → "ellohay").</li>
-            <li>Punctuation and capitalization stay the same.</li>
-          </ul>
-        </div>
-
         <div class="card translator-card">
-          <!-- corner sticker on the translator card (pig #4) -->
-          <img src="img/piglatinpig4.png" alt="" aria-hidden="true" class="sticker-corner">
+          <!-- ONLY TWO PIGS: top-left and top-right of the translator card -->
+          <img src="img/piglatinpig1.png" alt="" aria-hidden="true" class="translator-pig left">
+          <img src="img/piglatinpig2.png" alt="" aria-hidden="true" class="translator-pig right">
 
           <div class="translator-title">
-            <img src="img/piglatinpig3.png" alt="" aria-hidden="true" class="title-pig">
             <h2>Pig Latin Translator</h2>
-            <img src="img/piglatinpig4.png" alt="" aria-hidden="true" class="title-pig">
           </div>
 
           <label for="mode">Translation mode:</label>
@@ -200,11 +175,22 @@
             <button class="button" id="shareBtn" onclick="shareOutput()">Share</button>
           </div>
         </div>
+
+        <div class="card">
+          <h3>What is Pig Latin?</h3>
+          <p>Pig Latin originates from Piglatinia, a secret land of word-flippers. It’s now a playful code in America, turning English words into fun phrases. Popular rumor says Thomas Jefferson used it, though it’s never confirmed!</p>
+          <h3>How to Translate:</h3>
+          <ul>
+            <li>If a word starts with a vowel, add <strong>"yay"</strong> or <strong>"way"</strong> (e.g. "apple" → "appleyay" or "appleway").</li>
+            <li>If it starts with a consonant or consonant cluster, move it to the end and add <strong>"ay"</strong> (e.g. "hello" → "ellohay").</li>
+            <li>Punctuation and capitalization stay the same.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <section id="lesson-videos">
-      <h2><img src="img/piglatinpig1.png" alt="" aria-hidden="true" class="videos-pig"> Videos</h2>
+      <h2>Videos</h2>
       <div class="video-grid">
         <div class="video-thumb" data-id="APrST3lK3NE">
           <img src="https://img.youtube.com/vi/APrST3lK3NE/hqdefault.jpg" alt="Video 1 thumbnail">
