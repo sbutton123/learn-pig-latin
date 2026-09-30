@@ -67,8 +67,8 @@
     .greeting span:first-child { color:#7650c7; } .greeting span:nth-child(2) { color:#b32a7f; }
     .hero p:last-child { margin:0; }
     .panel { background:var(--card-bg); padding:1.5rem; border-radius:1rem; box-shadow:0 4px 10px #0000000d; margin-bottom:1.5rem; }
-    .feature { text-align:center; }
-    .video { max-width:780px; margin:1rem auto; aspect-ratio:16/9; border-radius:.75rem; overflow:hidden; background:#251740; box-shadow:0 4px 10px #0003; }
+    .feature { text-align:center; padding:1rem 1.5rem; }
+    .video { max-width:570px; margin:.65rem auto; aspect-ratio:16/9; border-radius:.75rem; overflow:hidden; background:#251740; box-shadow:0 4px 10px #0003; }
     .video button { display:block; width:100%; height:100%; border:0; padding:0; position:relative; cursor:pointer; background:transparent; }
     .video img { display:block; width:100%; height:100%; object-fit:cover; }
     .play { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:#251740e6; color:white; border:2px solid white; border-radius:50%; width:72px; height:72px; display:grid; place-items:center; font-size:2rem; padding-left:5px; }
@@ -80,7 +80,8 @@
     .secondary:hover { background:#d7c6f5; }
     :focus-visible { outline:3px solid #301257; outline-offset:4px; }
     .video button:focus-visible { outline-offset:-5px; }
-    .status { min-height:1.5em; font-size:.95rem; margin:.45rem 0 0!important; }
+    .status { font-size:.95rem; margin:.45rem 0 0!important; }
+    .status:empty { margin:0!important; }
     .fallback { margin:.5rem auto; max-width:36rem; }
     .fallback input { width:100%; padding:.6rem; font:inherit; }
     .songs-intro { margin-bottom:1rem; }
@@ -162,7 +163,7 @@
     </section>
     <section class="panel" aria-labelledby="how-title">
       <h2 id="how-title">How Do You Say Happy Birthday in Pig Latin?</h2>
-      <div class="phrase-grid"><p class="phrase">Happy Birthday<span class="arrow" aria-label="becomes">↓</span><strong>Appy-hay Irthday-bay!</strong></p><p class="phrase">Happy Birthday to you!<span class="arrow" aria-label="becomes">↓</span><strong>Appy-hay Irthday-bay otay ouyay!</strong></p></div>
+      <div class="phrase-grid"><p class="phrase">Happy Birthday<span class="arrow" aria-label="becomes">↓</span><strong>Appy-hay Irthday-bay!</strong></p><p class="phrase">Happy Birthday to you!<span class="arrow" aria-label="becomes">↓</span><strong>Appy-hay Irthday-bay oo-tay oo-yay!</strong></p></div>
       <p>Move the starting consonant sound to the end and add “ay”: happy becomes appyhay, and birthday becomes irthdaybay. The hyphens here help you say it aloud. For words starting with a vowel, our translator adds “yay.”</p>
       <a href="translator.html">Translate Something Else →</a>
     </section>
