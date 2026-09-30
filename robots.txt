@@ -1,0 +1,6 @@
+# robots.txt for LearnPigLatin.com
+# Everyone is welcome to explore Piglatinia. Oink!
+User-agent: *
+Allow: /
+
+Sitemap: https://learnpiglatin.com/sitemap.xml
