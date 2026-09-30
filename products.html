@@ -87,14 +87,37 @@
     .site-header .site-nav a { display:inline-block; margin:0; padding:7px 14px; max-width:100%; background:#78aaff; color:#fff; font-family:Arial,sans-serif; font-size:16px; font-weight:bold; line-height:1.4; text-decoration:none; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.16); transition:background .3s,transform .2s; }
     .site-header .site-nav a:hover { background:#9063f5; transform:translateY(-2px); }
     .site-header .site-nav a:focus-visible { outline:3px solid #301257; outline-offset:3px; }
+    /* Brand links home; looks exactly the same as before. */
+    .site-header .site-brand a { color:inherit; text-decoration:none; }
+    .site-header .site-brand a:focus-visible { outline:3px solid #301257; outline-offset:3px; border-radius:4px; }
+    /* "Learn Pig Latin" dropdown. Without JavaScript its links show as normal nav buttons. */
+    .site-header .site-nav .nav-group, .site-header .site-nav .nav-menu, .site-header .site-nav .nav-menu li { display:contents; }
+    .site-header .site-nav .nav-toggle { display:none; }
+    .site-header .site-nav.js-ready .nav-group { display:block; position:relative; }
+    .site-header .site-nav.js-ready .nav-toggle { display:inline-flex; align-items:center; gap:7px; margin:0; padding:7px 14px; border:0; background:#78aaff; color:#fff; font-family:Arial,sans-serif; font-size:16px; font-weight:bold; line-height:1.4; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.16); cursor:pointer; transition:background .3s,transform .2s; }
+    .site-header .site-nav.js-ready .nav-toggle:hover, .site-header .site-nav.js-ready .nav-toggle[aria-expanded="true"] { background:#9063f5; }
+    .site-header .site-nav.js-ready .nav-toggle:hover { transform:translateY(-2px); }
+    .site-header .site-nav.js-ready .nav-toggle:focus-visible { outline:3px solid #301257; outline-offset:3px; }
+    .site-header .nav-caret { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid currentColor; transition:transform .2s; }
+    .site-header .nav-toggle[aria-expanded="true"] .nav-caret { transform:rotate(180deg); }
+    .site-header .site-nav.js-ready .nav-menu { display:block; position:absolute; z-index:1000; top:calc(100% + 6px); left:50%; transform:translateX(calc(-50% + var(--nav-shift, 0px))); min-width:230px; max-width:calc(100vw - 24px); margin:0; padding:6px; list-style:none; background:#fff; border-radius:10px; box-shadow:0 8px 24px rgba(44,23,78,.28); text-align:left; }
+    .site-header .site-nav.js-ready .nav-menu[hidden] { display:none; }
+    .site-header .site-nav.js-ready .nav-menu li { display:block; }
+    .site-header .site-nav.js-ready .nav-menu a { display:flex; align-items:center; min-height:44px; padding:8px 12px; background:transparent; color:#2c174e; box-shadow:none; border-radius:8px; font-size:16px; white-space:normal; }
+    .site-header .site-nav.js-ready .nav-menu a:hover { background:#f3e8ff; transform:none; }
+    .site-header .site-nav.js-ready .nav-menu a[aria-current="page"] { background:#efe5ff; color:#5b2fc4; }
+    .site-header .site-nav.js-ready .nav-menu a:focus-visible { outline-offset:-3px; }
     @media(max-width:540px) {
       .site-header { padding:10px 12px; }
       .site-header .site-brand { font-size:27px; }
       .site-header .site-tagline { font-size:14px; }
       .site-header .site-nav { gap:6px; margin-top:9px; }
       .site-header .site-nav a { padding:6px 10px; font-size:14px; }
+      .site-header .site-nav.js-ready .nav-toggle { padding:6px 10px; font-size:14px; }
+      .site-header .site-nav.js-ready .nav-menu { min-width:220px; }
+      .site-header .site-nav.js-ready .nav-menu a { font-size:15px; padding:8px 12px; }
     }
-    @media(prefers-reduced-motion:reduce) { .site-header .site-nav a { transition:none; } }
+    @media(prefers-reduced-motion:reduce) { .site-header .site-nav a, .site-header .site-nav .nav-toggle, .site-header .nav-caret { transition:none; } }
   </style>
   <style>
     /* ===== Piglatinia Gift Shop (Products page only) ===== */
@@ -233,15 +256,22 @@
 </head>
 <body>
   <header class="site-header">
-    <h1 class="site-brand">Learn Pig Latin</h1>
+    <h1 class="site-brand"><a href="/">Learn Pig Latin</a></h1>
     <p class="site-tagline">Your quirky guide to mastering Pig Latin!</p>
     <nav class="site-nav" aria-label="Main navigation">
-    <a href="/">Lessons &amp; Translator</a>
+    <div class="nav-group" data-nav-menu>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="learn-menu">Learn Pig Latin<span class="nav-caret" aria-hidden="true"></span></button>
+      <ul class="nav-menu" id="learn-menu">
+        <li><a href="how-to-speak-pig-latin.html">How to Speak Pig Latin</a></li>
+        <li><a href="translator.html">Pig Latin Translator</a></li>
+      </ul>
+    </div>
     <a href="games.html">Games &amp; Printables</a>
     <a href="piglatinia.html">Piglatinia</a>
     <a href="products.html">Products</a>
   </nav>
   </header>
+  <script src="/js/site-nav.js"></script>
 
   <main>
     <section class="shop-intro" aria-labelledby="shop-title">
