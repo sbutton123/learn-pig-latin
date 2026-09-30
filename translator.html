@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pig Latin Translator: English to Pig Latin and Back | Learn Pig Latin</title>
+  <meta name="description" content="Type anything and watch it turn into Pig Latin instantly. Translate English to Pig Latin or Pig Latin to English, then copy it or share it with a friend. Ellohay!">
+  <link rel="canonical" href="https://learnpiglatin.com/translator.html">
+
+  <!-- Social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Learn Pig Latin">
+  <meta property="og:title" content="Pig Latin Translator: English to Pig Latin and Back">
+  <meta property="og:description" content="Type anything and watch it turn into Pig Latin instantly, then copy it or share it with a friend. Ellohay!">
+  <meta property="og:url" content="https://learnpiglatin.com/translator.html">
+  <meta property="og:image" content="https://learnpiglatin.com/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Learn Pig Latin translator with two hula hooping pigs">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- PWA: manifest + theme color + icons -->
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#a97ef9">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/appletouchicon180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+  <link rel="icon" href="/img/favicon.ico">
+
+  <!-- Google Analytics: website only -->
+  <script>
+  (function () {
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+    if (isStandalone) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT';
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-8ZL77F3HRT');
+  })();
+  </script>
+
+  <style>
+    :root {
+      --primary: #a97ef9;
+      --primary-dark: #9063f5;
+      --secondary: #d682f4;
+      --accent: #78aaff;
+      --background-start: #f3eaff;
+      --background-end: #ede4ff;
+      --text-dark: #1f1440;
+      --card-bg: #f7f4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, var(--background-start), var(--background-end));
+      color: var(--text-dark);
+    }
+    header {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    header h1 { margin: 0; font-size: 2.5rem; }
+    header p { margin: 0.5rem 0 0; font-size: 1.3rem; letter-spacing: 0.5px; text-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
+    nav {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+      background: var(--secondary); padding: 1rem; border-bottom: 2px solid rgba(0,0,0,0.1);
+    }
+    nav a {
+      background: var(--accent); color: white; text-decoration: none; font-weight: bold;
+      padding: 0.75rem 1.5rem; font-size: 1.2rem; border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: background 0.3s, transform 0.2s;
+    }
+    nav a:hover { background: var(--primary); transform: translateY(-2px); }
+    main { max-width: 720px; margin: auto; padding: 2rem 1rem; }
+
+    .card { background: var(--card-bg); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; margin-bottom: 2rem; }
+    .card h2, .card h3 { margin-top: 0; }
+
+    .translator-card { position: relative; overflow: visible; }
+    .translator-pig { position: absolute; top: -18px; width: 88px; height: auto; pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); }
+    .translator-pig.left  { left: -12px; }
+    .translator-pig.right { right: -12px; top: -26px; }
+    @media (max-width: 480px){
+      .translator-pig { width: 62px; top: -12px; }
+      .translator-pig.right { top: -18px; }
+      .translator-pig.left  { left: -8px; }
+      .translator-pig.right { right: -8px; }
+    }
+
+    .translator-title { display: flex; align-items: center; justify-content: center; margin-bottom: .75rem; }
+    .translator-title h2 { margin: 0; color: var(--primary); font-size: 1.6rem; line-height: 1; text-align: center; width: 100%; }
+    .hint { font-size: .95rem; color: #6b5aa7; margin: .25rem 0 0; text-align: center; }
+
+    label { font-weight: bold; margin-top: 1rem; display: block; }
+    select, input { width: 100%; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 0.5rem; font-size: 1rem; }
+    .output { background: #e0d3ff; border-radius: 0.5rem; min-height: 2rem; margin-top: 1rem; padding: 0.5rem; white-space: pre-wrap; }
+    .button-group { margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .button { flex: 1; background: var(--primary); color: white; border: none; border-radius: 0.5rem; padding: 0.5rem; cursor: pointer; font-size: 0.9rem; transition: background 0.3s; }
+    .button:hover { background: var(--primary-dark); }
+
+    .tips h3 { color: var(--primary); }
+    .tips ul { margin: 0; padding-left: 1.2rem; line-height: 1.6; }
+    .tips a { color: #6b5aa7; }
+
+    footer { background: var(--primary); color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+
+    /* Share dropdown */
+    #share-chooser { position: absolute; z-index: 9999; display: none; background: #fff; border: 1px solid rgba(0,0,0,0.15); border-radius: 0.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 0.5rem; min-width: 260px; font-family: inherit; }
+    #share-chooser button { display: block; width: 100%; text-align: left; background: transparent; border: none; padding: 0.6rem 0.7rem; cursor: pointer; font-size: 0.95rem; }
+    #share-chooser button:hover { background: rgba(0,0,0,0.05); }
+
+    .sent-by{ display:flex; align-items:center; gap:.4rem; margin-top:.4rem; font-size:.9rem; color:#6b5aa7; justify-content: center; }
+    .sent-by a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+    .sent-by[hidden]{ display:none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pig Latin Translator</h1>
+    <p>Type it in English. Get it back in Pig Latin. Oink yeah!</p>
+  </header>
+
+  <nav>
+    <a href="/">Lessons &amp; Translator</a>
+    <a href="games.html">Games &amp; Printables</a>
+    <a href="piglatinia.html">Piglatinia</a>
+    <a href="products.html">Products</a>
+  </nav>
+
+  <main>
+    <section class="card translator-card" id="translator">
+      <img src="/img/piglatinpig1.png" alt="" aria-hidden="true" class="translator-pig left" width="88" height="88">
+      <img src="/img/piglatinpig2.png" alt="" aria-hidden="true" class="translator-pig right" width="88" height="88">
+      <div class="translator-title"><h2>Translate Anything</h2></div>
+      <p class="hint">Try: <em>You're amazing!</em> &rarr; <strong>Ou'reyay amazingyay!</strong></p>
+
+      <label for="mode">Translation mode:</label>
+      <select id="mode">
+        <option value="enToPig">English to Pig Latin</option>
+        <option value="pigToEn">Pig Latin to English</option>
+      </select>
+
+      <label for="input">Enter text:</label>
+      <input id="input" type="text" placeholder="Type your sentence here…" />
+
+      <div class="output" id="output"></div>
+
+      <div class="sent-by" id="sentBy" hidden>
+        <span>— sent from <a href="https://learnpiglatin.com/">LearnPigLatin.com</a></span>
+      </div>
+
+      <div class="button-group">
+        <button class="button" onclick="clearFields()">Clear</button>
+        <button class="button" onclick="copyOutput()">Copy</button>
+        <button class="button" id="shareBtn" onclick="shareOutput()">Share</button>
+      </div>
+    </section>
+
+    <section class="card tips">
+      <h3>How the translator works</h3>
+      <ul>
+        <li><strong>English to Pig Latin:</strong> words that start with a vowel get <strong>"yay"</strong> (apple &rarr; appleyay). Words that start with consonants move them to the end and add <strong>"ay"</strong> (hello &rarr; ellohay, string &rarr; ingstray).</li>
+        <li><strong>Pig Latin to English:</strong> the translator un-flips your words and makes its best guess. Pig Latin can be sneaky, so a few words have twins. "Owhay" could be <em>how</em> or <em>who</em>!</li>
+        <li>Numbers, punctuation, and web addresses stay just the way you typed them.</li>
+      </ul>
+      <p>Ready to practice? Try a <a href="games.html">Pig Latin word search</a>.</p>
+    </section>
+  </main>
+
+  <footer>© 2025 Learn Pig Latin. Oink yeah!</footer>
+
+  <div id="share-chooser" role="menu" aria-label="Share options"></div>
+
+  <!-- Shared Pig Latin engine + translator box behavior (same files used by the homepage) -->
+  <script src="/js/piglatin.js"></script>
+  <script src="/js/translator-ui.js"></script>
+</body>
+</html>
