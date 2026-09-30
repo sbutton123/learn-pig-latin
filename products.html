@@ -77,16 +77,37 @@
     footer { background: var(--primary); color: white; text-align: center; padding: 1rem; margin-top: 3rem; }
     @media (max-width: 540px) { .card { width: 47%; min-width: 170px; } .card-image { padding: 4px; } }
   </style>
+
+  <style>
+    /* Compact site header: branding and navigation share one gradient. */
+    .site-header { background:linear-gradient(to right,#a97ef9,#78aaff); color:#fff; text-align:center; padding:12px 16px; }
+    .site-header .site-brand { margin:0; font-family:Arial,sans-serif; font-size:30px; font-weight:bold; line-height:1.2; letter-spacing:0; text-shadow:none; }
+    .site-header .site-tagline { margin:4px 0 0; font-size:17px; line-height:1.4; letter-spacing:0; text-shadow:1px 1px 3px rgba(0,0,0,.3); }
+    .site-header .site-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:10px 0 0; padding:0; background:transparent; border:0; }
+    .site-header .site-nav a { display:inline-block; margin:0; padding:7px 14px; max-width:100%; background:#78aaff; color:#fff; font-family:Arial,sans-serif; font-size:16px; font-weight:bold; line-height:1.4; text-decoration:none; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.16); transition:background .3s,transform .2s; }
+    .site-header .site-nav a:hover { background:#9063f5; transform:translateY(-2px); }
+    .site-header .site-nav a:focus-visible { outline:3px solid #301257; outline-offset:3px; }
+    @media(max-width:540px) {
+      .site-header { padding:10px 12px; }
+      .site-header .site-brand { font-size:27px; }
+      .site-header .site-tagline { font-size:14px; }
+      .site-header .site-nav { gap:6px; margin-top:9px; }
+      .site-header .site-nav a { padding:6px 10px; font-size:14px; }
+    }
+    @media(prefers-reduced-motion:reduce) { .site-header .site-nav a { transition:none; } }
+  </style>
 </head>
 <body>
-  <header><h1>Our Products</h1></header>
-
-  <nav>
+  <header class="site-header">
+    <h1 class="site-brand">Learn Pig Latin</h1>
+    <p class="site-tagline">Your quirky guide to mastering Pig Latin!</p>
+    <nav class="site-nav" aria-label="Main navigation">
     <a href="/">Lessons &amp; Translator</a>
     <a href="games.html">Games &amp; Printables</a>
     <a href="piglatinia.html">Piglatinia</a>
     <a href="products.html">Products</a>
   </nav>
+  </header>
 
   <main>
     <section class="product-section">
