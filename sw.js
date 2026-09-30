@@ -12,7 +12,7 @@
 //
 // When you change this file, bump VERSION so old caches get cleaned up.
 
-const VERSION = 'v8';
+const VERSION = 'v9';
 const CORE_CACHE = `piglatin-core-${VERSION}`;       // saved at install, kept for offline
 const RUNTIME_CACHE = `piglatin-runtime-${VERSION}`; // saved while browsing, size-limited
 const RUNTIME_MAX_ENTRIES = 40;
@@ -24,6 +24,7 @@ const MAX_CACHEABLE_BYTES = 1024 * 1024;              // don't keep files over 1
 const OFFLINE_PAGES = [
   '/',
   '/translator.html',
+  '/happy-birthday-in-pig-latin.html',
   '/games.html',
   '/piglatinia.html',
   '/products.html',
@@ -39,6 +40,7 @@ const OFFLINE_PAGES = [
 const OFFLINE_ASSETS = [
   '/js/piglatin.js',
   '/js/translator-ui.js',
+  '/js/birthday.js',
   '/site.webmanifest',
   '/img/piglatinpig1.png',
   '/img/piglatinpig2.png',
@@ -166,6 +168,10 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(req.url);
   // Leave other websites alone (Google Analytics, YouTube, fonts, etc.)
   if (url.origin !== self.location.origin) return;
+
+  // Birthday media stays online: preserve native audio ranges and avoid
+  // caching large downloads or artwork. The birthday page itself works offline.
+  if (req.headers.has('range') || url.pathname.startsWith('/birthday/')) return;
 
   const accept = req.headers.get('accept') || '';
   const isPage = req.mode === 'navigate' || accept.includes('text/html');
