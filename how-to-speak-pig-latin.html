@@ -114,7 +114,8 @@
     .phrases tbody th { font-weight: normal; width: 42%; }
     .phrases tbody td { font-weight: bold; color: var(--plum); }
     .phrases tbody tr:nth-child(even) { background: var(--paper); }
-    .phrases .row-link { display: inline-block; font-weight: normal; font-size: .9rem; margin-left: .3rem; padding: .2rem .35rem; }
+    .birthday-link { margin: .7rem 0 0; font-weight: bold; }
+    .birthday-link a { display: inline-block; padding: .2rem 0; }
     .note { font-size: .9rem; color: var(--muted); margin: .55rem 0 0; }
 
     /* Practice */
@@ -199,6 +200,11 @@
     /* Brand links home; looks exactly the same as before. */
     .site-header .site-brand a { color:inherit; text-decoration:none; }
     .site-header .site-brand a:focus-visible { outline:3px solid #301257; outline-offset:3px; border-radius:4px; }
+    /* Tablets: slightly tighter buttons so all six nav links stay on one row. */
+    @media(min-width:541px) and (max-width:900px) {
+      .site-header .site-nav { gap:6px; }
+      .site-header .site-nav a { padding:7px 10px; font-size:15px; }
+    }
     @media(max-width:540px) {
       .site-header { padding:10px 12px; }
       .site-header .site-brand { font-size:27px; }
@@ -215,6 +221,7 @@
     <p class="site-brand"><a href="/">Learn Pig Latin</a></p>
     <p class="site-tagline">Your quirky guide to mastering Pig Latin!</p>
     <nav class="site-nav" aria-label="Main navigation">
+    <a href="/">Home</a>
     <a href="how-to-speak-pig-latin.html">How to Speak Pig Latin</a>
     <a href="translator.html">Translator</a>
     <a href="games.html">Games &amp; Printables</a>
@@ -293,10 +300,11 @@
           <tr><th scope="row">Thank you</th><td>Ankthay ouyay</td></tr>
           <tr><th scope="row">Good morning</th><td>Oodgay orningmay</td></tr>
           <tr><th scope="row">What’s your name?</th><td>At’swhay ouryay amenay?</td></tr>
-          <tr><th scope="row">Happy Birthday</th><td>Appyhay Irthdaybay <a class="row-link" href="happy-birthday-in-pig-latin.html">Sing it &rarr;</a></td></tr>
+          <tr><th scope="row">Happy Birthday</th><td>Appyhay Irthdaybay</td></tr>
           <tr><th scope="row">Happy Birthday to you</th><td>Appyhay Irthdaybay otay ouyay</td></tr>
         </tbody>
       </table>
+      <p class="birthday-link">Want the whole birthday greeting? <a href="happy-birthday-in-pig-latin.html">Visit Happy Birthday in Pig Latin &rarr;</a></p>
       <p class="note">On our birthday page you&#8217;ll also see it written with hyphens, like Appy-hay Irthday-bay, to make it easier to read out loud. Same words, same pig.</p>
     </section>
 
