@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Speak Pig Latin | Rules, Examples &amp; Practice</title>
+  <meta name="description" content="Learn how to speak Pig Latin with simple rules, examples, and practice. See how words change, try common phrases, and use the free Pig Latin translator.">
+  <link rel="canonical" href="https://learnpiglatin.com/how-to-speak-pig-latin.html">
+
+  <!-- Social sharing -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Learn Pig Latin">
+  <meta property="og:title" content="How to Speak Pig Latin | Rules, Examples &amp; Practice">
+  <meta property="og:description" content="Learn the Pig Latin rules in a few minutes, try some everyday phrases, and practice before you use the free translator. Et&#8217;slay ogay!">
+  <meta property="og:url" content="https://learnpiglatin.com/how-to-speak-pig-latin.html">
+  <meta property="og:image" content="https://learnpiglatin.com/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Learn Pig Latin translator with two hula hooping pigs">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- PWA: manifest + theme color + icons -->
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#a97ef9">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/appletouchicon180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+  <link rel="icon" href="/img/favicon.ico">
+
+  <!-- Google Analytics: website only -->
+  <script>
+  (function () {
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+    if (isStandalone) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-8ZL77F3HRT';
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-8ZL77F3HRT');
+  })();
+  </script>
+
+  <style>
+    :root {
+      --primary: #a97ef9; --primary-dark: #9063f5; --secondary: #d682f4; --accent: #78aaff;
+      --ink: #1f1440; --plum: #5b2fc4; --plum-soft: #6941aa; --muted: #5a4697;
+      --moved: #c2267a; --suffix: #5b2fc4; --paper: #fbf8ff; --line: #e1d4fa;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(to bottom, #f3eaff, #ede4ff); color: var(--ink); line-height: 1.6; }
+    main { max-width: 860px; margin: 0 auto; padding: 0 1rem 2rem; }
+    h1, h2, h3, p { margin-top: 0; }
+    a { color: var(--plum); text-underline-offset: 3px; }
+    :focus-visible { outline: 3px solid #301257; outline-offset: 3px; }
+    .skip { position: absolute; left: 1rem; top: -100px; z-index: 10; background: #fff; padding: .5rem; }
+    .skip:focus { top: 1rem; }
+
+    h2 { font-size: 1.45rem; line-height: 1.25; color: var(--plum-soft); margin-bottom: .5rem; }
+    h3 { font-size: 1.1rem; line-height: 1.3; margin-bottom: .35rem; }
+    section { margin: 0 0 2.1rem; }
+
+    /* Intro */
+    .intro { text-align: center; padding: 1.4rem 0 .4rem; margin-bottom: 1.6rem; }
+    .intro h1 { font-size: clamp(1.75rem, 4.5vw, 2.3rem); line-height: 1.15; margin-bottom: .5rem; color: var(--ink); }
+    .intro p { max-width: 36rem; margin: 0 auto .9rem; font-size: 1.08rem; }
+    .intro .go { font-size: 1.15rem; font-weight: bold; color: var(--moved); margin: .7rem 0 0; }
+
+    .btn { display: inline-block; background: var(--plum); color: #fff; text-decoration: none; font-weight: bold;
+            padding: .7rem 1.25rem; border-radius: 10px; box-shadow: 0 3px 0 #3b1f86; line-height: 1.3; }
+    .btn:hover { background: #4a23a8; }
+    .btn.light { background: #fff; color: var(--plum); border: 2px solid var(--plum); box-shadow: none; }
+    .btn.light:hover { background: #f3e8ff; }
+
+    /* Easier than it looks */
+    .easy { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin: .8rem 0 0; padding: 0; list-style: none; }
+    .easy li { background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: .6rem .8rem; font-weight: bold; line-height: 1.35; }
+    .easy li:last-child { background: #f3e8ff; border-color: #c9b2f5; color: var(--plum); }
+
+    /* Rules */
+    .rule-head { display: flex; align-items: center; gap: .6rem; }
+    .rule-num { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%;
+                 background: var(--plum); color: #fff; font-weight: bold; font-size: 1rem; }
+    .rule-head h2 { margin: 0; }
+    .rule p { margin: .5rem 0 .6rem; }
+    .examples { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .45rem .9rem; }
+    .ex { display: flex; align-items: baseline; gap: .55rem; background: #fff; border-radius: 10px; padding: .45rem .8rem;
+           border-left: 4px solid var(--primary); font-size: 1.12rem; }
+    .ex .arr { color: #8a78b8; }
+    .ex .pl { font-weight: bold; }
+    .ex b { font-weight: bold; }
+    .ex .en b.mv { color: var(--moved); }
+    .pl .mv { color: var(--moved); }
+    .pl .sf { color: var(--suffix); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    .y-else { margin-top: .8rem !important; }
+    .legend { font-size: .9rem; color: var(--muted); margin: .55rem 0 0; }
+    .legend .mv { color: var(--moved); font-weight: bold; }
+    .legend .sf { color: var(--suffix); font-weight: bold; text-decoration: underline; text-underline-offset: 3px; }
+
+    .debate { margin-top: 1rem; background: #fff7d1; border: 1.5px solid #f2d36b; border-radius: 12px; padding: .8rem 1rem; }
+    .debate h3 { margin-bottom: .25rem; }
+    .debate p { margin: 0; }
+    .debate p + p { margin-top: .35rem; }
+
+    /* Phrases */
+    .phrases { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; border-radius: 12px; overflow: hidden; border: 1.5px solid var(--line); }
+    .phrases th, .phrases td { text-align: left; padding: .55rem .9rem; vertical-align: top; }
+    .phrases thead th { background: #efe5ff; color: var(--plum-soft); font-size: .92rem; }
+    .phrases tbody th { font-weight: normal; width: 42%; }
+    .phrases tbody td { font-weight: bold; color: var(--plum); }
+    .phrases tbody tr:nth-child(even) { background: var(--paper); }
+    .phrases .row-link { display: inline-block; font-weight: normal; font-size: .9rem; margin-left: .3rem; padding: .2rem .35rem; }
+    .note { font-size: .9rem; color: var(--muted); margin: .55rem 0 0; }
+
+    /* Practice */
+    .practice { background: #fff; border: 2px solid #c9b2f5; border-radius: 16px; padding: 1.1rem 1.1rem 1.2rem; }
+    .practice > p { margin-bottom: .7rem; }
+    .tries { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+    .try { background: var(--paper); border: 1.5px solid var(--line); border-radius: 12px; padding: .6rem .5rem; text-align: center; }
+    .try-word { display: block; font-size: 1.3rem; font-weight: bold; letter-spacing: .03em; margin-bottom: .3rem; }
+    .try summary { display: inline-block; cursor: pointer; list-style: none; font-size: .9rem; font-weight: bold; color: var(--plum);
+                    border: 1.5px solid var(--plum); border-radius: 999px; padding: .35rem .75rem; min-height: 44px; line-height: 1.9; }
+    .try summary::-webkit-details-marker { display: none; }
+    .try details[open] summary { background: #f3e8ff; }
+    .try .answer { display: block; margin-top: .4rem; font-size: 1.2rem; font-weight: bold; color: var(--moved); }
+    .practice-next { display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; border-top: 1.5px dashed var(--line); padding-top: .9rem; }
+    .practice-next p { margin: 0; font-weight: bold; }
+
+    /* Say it */
+    .steps { margin: .4rem 0 .8rem; padding-left: 1.3rem; }
+    .steps li { margin-bottom: .15rem; }
+    .challenge { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; background: linear-gradient(110deg, #ffe9f6, #efe5ff); border-radius: 12px; padding: .8rem 1rem; }
+    .challenge p { margin: 0; }
+    .challenge .twister { font-size: 1.35rem; font-weight: bold; color: var(--plum); }
+    .aside { font-size: .95rem; color: var(--muted); font-style: italic; margin: .6rem 0 0; }
+
+    /* Cheat sheet */
+    .cheat { background: #fff; border: 2px dashed #b594f0; border-radius: 16px; padding: 1rem 1.1rem; }
+    .cheat h2 { margin-bottom: .6rem; }
+    .cheat dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; margin: 0 0 .8rem; }
+    .cheat dl div { background: var(--paper); border-radius: 12px; padding: .6rem .75rem; }
+    .cheat dt { font-weight: bold; color: var(--plum-soft); }
+    .cheat dd { margin: .15rem 0 0; line-height: 1.4; }
+    .cheat dd .eg { display: block; font-weight: bold; margin-top: .2rem; }
+    .cheat .forgot { margin: 0; }
+    .cheat .forgot a { display: inline-block; padding: .2rem 0; }
+
+    /* Piglatinia */
+    .visit { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+              background: linear-gradient(110deg, #e4eeff, #f3e8ff 55%, #ffe9f6); border: 1.5px solid #cdbdf5; border-radius: 16px; padding: 1rem 1.2rem; }
+    .visit h2 { margin-bottom: .2rem; }
+    .visit p { margin: 0; max-width: 32rem; }
+
+    /* Explore */
+    .explore ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .6rem; }
+    .explore a { display: block; background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: .7rem .9rem; text-decoration: none;
+                  color: var(--ink); font-weight: bold; min-height: 44px; }
+    .explore a:hover { border-color: var(--primary); background: #faf6ff; }
+    .explore a span { display: block; font-weight: normal; font-size: .9rem; color: var(--muted); }
+
+    footer { background: var(--primary); color: #fff; text-align: center; padding: 1rem; }
+
+    @media (max-width: 700px) {
+      .easy { grid-template-columns: 1fr; }
+      .tries { grid-template-columns: repeat(2, 1fr); }
+      .cheat dl { grid-template-columns: 1fr; }
+      .practice-next .btn, .visit .btn { width: 100%; text-align: center; }
+      section { margin-bottom: 1.8rem; }
+    }
+    @media (max-width: 520px) {
+      .examples { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .4rem; }
+      .ex { font-size: .98rem; padding: .4rem .55rem; gap: .35rem; flex-wrap: wrap; }
+      .easy li { padding: .45rem .7rem; }
+      .try-word { font-size: 1.15rem; }
+      .try summary { font-size: .84rem; padding: .3rem .6rem; white-space: nowrap; }
+    }
+    @media (max-width: 420px) {
+      .phrases th, .phrases td { padding: .5rem .6rem; }
+    }
+  </style>
+
+  <style>
+    /* Compact site header: branding and navigation share one gradient. */
+    .site-header { background:linear-gradient(to right,#a97ef9,#78aaff); color:#fff; text-align:center; padding:12px 16px; }
+    .site-header .site-brand { margin:0; font-family:Arial,sans-serif; font-size:30px; font-weight:bold; line-height:1.2; letter-spacing:0; text-shadow:none; }
+    .site-header .site-tagline { margin:4px 0 0; font-size:17px; line-height:1.4; letter-spacing:0; text-shadow:1px 1px 3px rgba(0,0,0,.3); }
+    .site-header .site-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:10px 0 0; padding:0; background:transparent; border:0; }
+    .site-header .site-nav a { display:inline-block; margin:0; padding:7px 14px; max-width:100%; background:#78aaff; color:#fff; font-family:Arial,sans-serif; font-size:16px; font-weight:bold; line-height:1.4; text-decoration:none; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.16); transition:background .3s,transform .2s; }
+    .site-header .site-nav a:hover { background:#9063f5; transform:translateY(-2px); }
+    .site-header .site-nav a:focus-visible { outline:3px solid #301257; outline-offset:3px; }
+    @media(max-width:540px) {
+      .site-header { padding:10px 12px; }
+      .site-header .site-brand { font-size:27px; }
+      .site-header .site-tagline { font-size:14px; }
+      .site-header .site-nav { gap:6px; margin-top:9px; }
+      .site-header .site-nav a { padding:6px 10px; font-size:14px; }
+    }
+    @media(prefers-reduced-motion:reduce) { .site-header .site-nav a { transition:none; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the lesson</a>
+  <header class="site-header">
+    <p class="site-brand">Learn Pig Latin</p>
+    <p class="site-tagline">Your quirky guide to mastering Pig Latin!</p>
+    <nav class="site-nav" aria-label="Main navigation">
+    <a href="/">Lessons &amp; Translator</a>
+    <a href="games.html">Games &amp; Printables</a>
+    <a href="piglatinia.html">Piglatinia</a>
+    <a href="products.html">Products</a>
+  </nav>
+  </header>
+
+  <main id="main">
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">How to Speak Pig Latin</h1>
+      <p>Pig Latin sounds ridiculous&#8212;which is exactly why it&#8217;s fun. Once you know a few simple rules, you can start turning regular English into Pig Latin almost immediately.</p>
+      <a class="btn" href="translator.html">Try the Pig Latin Translator &rarr;</a>
+      <p class="go">Ready? Et’slay ogay!</p>
+    </section>
+
+    <section aria-labelledby="easy-title">
+      <h2 id="easy-title">🐷 Pig Latin Is Easier Than It Looks</h2>
+      <p>Pig Latin is a word game that changes English words by moving sounds around and adding an ending.</p>
+      <ul class="easy">
+        <li>You don&#8217;t need a new alphabet.</li>
+        <li>You don&#8217;t need to memorize hundreds of words.</li>
+        <li>You just need to learn a few patterns.</li>
+      </ul>
+    </section>
+
+    <section class="rule" aria-labelledby="rule1-title">
+      <div class="rule-head"><span class="rule-num" aria-hidden="true">1</span><h2 id="rule1-title">Rule #1: Move It!</h2></div>
+      <p>If a word starts with a consonant, take every consonant before the first vowel, move that chunk to the end of the word, and add <strong>ay</strong>. One letter or a whole cluster like <em>sch</em> or <em>tr</em> moves together.</p>
+      <ul class="examples">
+        <li class="ex"><span class="en"><b class="mv">p</b>ig</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">ig<b class="mv">p</b><b class="sf">ay</b></span></li>
+        <li class="ex"><span class="en"><b class="mv">l</b>atin</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">atin<b class="mv">l</b><b class="sf">ay</b></span></li>
+        <li class="ex"><span class="en"><b class="mv">h</b>ello</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">ello<b class="mv">h</b><b class="sf">ay</b></span></li>
+        <li class="ex"><span class="en"><b class="mv">sch</b>ool</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">ool<b class="mv">sch</b><b class="sf">ay</b></span></li>
+        <li class="ex"><span class="en"><b class="mv">tr</b>ain</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">ain<b class="mv">tr</b><b class="sf">ay</b></span></li>
+      </ul>
+      <p class="legend"><span class="mv">Pink</span> = the sound that moves. <span class="sf">Underlined</span> = the ending you add.</p>
+    </section>
+
+    <section class="rule" aria-labelledby="rule2-title">
+      <div class="rule-head"><span class="rule-num" aria-hidden="true">2</span><h2 id="rule2-title">Rule #2: Vowel Words Get It Easy</h2></div>
+      <p>If a word starts with a vowel (a, e, i, o, or u), nothing moves. Just keep the whole word and add <strong>yay</strong> to the end.</p>
+      <ul class="examples">
+        <li class="ex"><span class="en">orange</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">orange<b class="sf">yay</b></span></li>
+        <li class="ex"><span class="en">egg</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">egg<b class="sf">yay</b></span></li>
+      </ul>
+      <aside class="debate" aria-labelledby="debate-title">
+        <h3 id="debate-title">🐷 The Great YAY vs. WAY Debate</h3>
+        <p>Pig Latin has more than one version. Some people add <strong>yay</strong> to vowel words, and others add <strong>way</strong> (so <em>orange</em> could also be <em>orangeway</em>). LearnPigLatin.com uses <strong>yay</strong>.</p>
+        <p>In Piglatinia, this has caused more arguments than runaway juggling pins. Around here, we use YAY.</p>
+      </aside>
+    </section>
+
+    <section aria-labelledby="y-title">
+      <h2 id="y-title">What About the Letter Y?</h2>
+      <p>Y plays both sides. <strong>At the start of a word</strong>, Y is a consonant, so it moves like any other consonant:</p>
+      <ul class="examples">
+        <li class="ex"><span class="en"><b class="mv">y</b>es</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">es<b class="mv">y</b><b class="sf">ay</b></span></li>
+        <li class="ex"><span class="en"><b class="mv">y</b>ellow</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">ellow<b class="mv">y</b><b class="sf">ay</b></span></li>
+      </ul>
+      <p class="y-else">Anywhere else in a word, Y acts like a vowel, so it stays put and everything before it moves:</p>
+      <ul class="examples">
+        <li class="ex"><span class="en"><b class="mv">m</b>y</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">y<b class="mv">m</b><b class="sf">ay</b></span></li>
+        <li class="ex"><span class="en"><b class="mv">g</b>ym</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">ym<b class="mv">g</b><b class="sf">ay</b></span></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="phrases-title">
+      <h2 id="phrases-title">Try Some Pig Latin</h2>
+      <table class="phrases">
+        <thead><tr><th scope="col">English</th><th scope="col">Pig Latin</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Hello</th><td>Ellohay</td></tr>
+          <tr><th scope="row">Pig Latin</th><td>Igpay Atinlay</td></tr>
+          <tr><th scope="row">I love you</th><td>Iyay ovelay ouyay</td></tr>
+          <tr><th scope="row">Thank you</th><td>Ankthay ouyay</td></tr>
+          <tr><th scope="row">Good morning</th><td>Oodgay orningmay</td></tr>
+          <tr><th scope="row">What’s your name?</th><td>At’swhay ouryay amenay?</td></tr>
+          <tr><th scope="row">Happy Birthday</th><td>Appyhay Irthdaybay <a class="row-link" href="happy-birthday-in-pig-latin.html">Sing it &rarr;</a></td></tr>
+          <tr><th scope="row">Happy Birthday to you</th><td>Appyhay Irthdaybay otay ouyay</td></tr>
+        </tbody>
+      </table>
+      <p class="note">On our birthday page you&#8217;ll also see it written with hyphens, like Appy-hay Irthday-bay, to make it easier to read out loud. Same words, same pig.</p>
+    </section>
+
+    <section class="practice" aria-labelledby="practice-title">
+      <h2 id="practice-title">🎯 Your Turn!</h2>
+      <p>Work out the Pig Latin for each word in your head (or out loud), then check your answer.</p>
+      <ul class="tries">
+        <li class="try"><span class="try-word">dog</span><details><summary>Reveal Pig Latin</summary><span class="answer">ogday</span></details></li>
+        <li class="try"><span class="try-word">banana</span><details><summary>Reveal Pig Latin</summary><span class="answer">ananabay</span></details></li>
+        <li class="try"><span class="try-word">smile</span><details><summary>Reveal Pig Latin</summary><span class="answer">ilesmay</span></details></li>
+        <li class="try"><span class="try-word">apple</span><details><summary>Reveal Pig Latin</summary><span class="answer">appleyay</span></details></li>
+      </ul>
+      <div class="practice-next">
+        <p>Want to translate anything you want?</p>
+        <a class="btn" href="translator.html">Open the Full Pig Latin Translator &rarr;</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="say-title">
+      <h2 id="say-title">🗣️ Now Say It!</h2>
+      <p>Reading Pig Latin slowly is the easy part. Speaking it quickly is where it gets fun.</p>
+      <ol class="steps">
+        <li>Start slowly.</li>
+        <li>Say the Pig Latin version out loud.</li>
+        <li>Speed it up.</li>
+        <li>Try it without thinking about the rule.</li>
+      </ol>
+      <div class="challenge">
+        <p><strong>Can you say it three times fast?</strong></p>
+        <p class="twister">Igspay ovelay itterglay</p>
+      </div>
+      <p class="aside">(That&#8217;s &#8220;Pigs love glitter.&#8221; Piglatinians say it on the hoop-powered bus to Oopapalishay every morning.)</p>
+    </section>
+
+    <section class="cheat" aria-labelledby="cheat-title">
+      <h2 id="cheat-title">Pig Latin Cheat Sheet</h2>
+      <dl>
+        <div><dt>Starts with a consonant</dt><dd>Move the beginning sound to the end + <strong>ay</strong><span class="eg">pig &rarr; igpay</span></dd></div>
+        <div><dt>Starts with a vowel</dt><dd>Keep the word + <strong>yay</strong><span class="eg">egg &rarr; eggyay</span></dd></div>
+        <div><dt>The letter Y</dt><dd>First letter: a consonant. Anywhere else: a vowel.<span class="eg">yes &rarr; esyay, my &rarr; ymay</span></dd></div>
+      </dl>
+      <p class="forgot">Forgot the rule? <a href="translator.html">Use the free Pig Latin translator &rarr;</a></p>
+    </section>
+
+    <section class="visit" aria-labelledby="visit-title">
+      <div>
+        <h2 id="visit-title">🌍 Need a Break From Studying? Visit Piglatinia</h2>
+        <p>Home of word flipping, emergency hula hooping, runaway juggling pins, and a suspicious amount of glitter.</p>
+      </div>
+      <a class="btn light" href="piglatinia.html">Visit Piglatinia &rarr;</a>
+    </section>
+
+    <section class="explore" aria-labelledby="explore-title">
+      <h2 id="explore-title">Explore More Pig Latin Fun</h2>
+      <ul>
+        <li><a href="translator.html">🔁 Pig Latin Translator<span>Flip any sentence, both directions</span></a></li>
+        <li><a href="games.html">🧩 Games &amp; Printables<span>Word searches and coloring pages</span></a></li>
+        <li><a href="happy-birthday-in-pig-latin.html">🎂 Happy Birthday in Pig Latin<span>Songs, a video, and a printable card</span></a></li>
+        <li><a href="piglatinia.html">🌍 Piglatinia<span>The land where everyone talks like this</span></a></li>
+        <li><a href="products.html">🐷 Visit the Piglatinia Gift Shop<span>Goofy gifts and Pig Latin goodies</span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>© 2025 Learn Pig Latin. All rights reserved.</footer>
+</body>
+</html>
