@@ -121,6 +121,11 @@
     /* Brand links home; looks exactly the same as before. */
     .site-header .site-brand a { color:inherit; text-decoration:none; }
     .site-header .site-brand a:focus-visible { outline:3px solid #301257; outline-offset:3px; border-radius:4px; }
+    /* Tablets: slightly tighter buttons so all six nav links stay on one row. */
+    @media(min-width:541px) and (max-width:900px) {
+      .site-header .site-nav { gap:6px; }
+      .site-header .site-nav a { padding:7px 10px; font-size:15px; }
+    }
     @media(max-width:540px) {
       .site-header { padding:10px 12px; }
       .site-header .site-brand { font-size:27px; }
@@ -137,6 +142,7 @@
     <p class="site-brand"><a href="/">Learn Pig Latin</a></p>
     <p class="site-tagline">Your quirky guide to mastering Pig Latin!</p>
     <nav class="site-nav" aria-label="Main navigation">
+    <a href="/">Home</a>
     <a href="how-to-speak-pig-latin.html">How to Speak Pig Latin</a>
     <a href="translator.html">Translator</a>
     <a href="games.html">Games &amp; Printables</a>
