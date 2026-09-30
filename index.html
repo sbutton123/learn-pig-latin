@@ -158,6 +158,28 @@
     }
     @media(prefers-reduced-motion:reduce) { .site-header .site-nav a { transition:none; } }
   </style>
+
+  <style>
+    .birthday-promo { position:relative; isolation:isolate; display:grid; grid-template-columns:156px minmax(0,1fr); align-items:center; gap:24px; margin-top:2rem; padding:16px 24px; overflow:hidden; border:2px solid #f373b7; border-radius:1rem; background:linear-gradient(110deg,#fff2bc 0%,#fff3fa 48%,#dff4ff 100%); box-shadow:0 4px 12px rgba(168,61,126,.12); }
+    .birthday-promo::before { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.65; background:radial-gradient(circle at 97% 18%,#ffca35 0 4px,transparent 5px),radial-gradient(circle at 86% 90%,#ee64ac 0 3px,transparent 4px),radial-gradient(circle at 2% 80%,#44bcec 0 4px,transparent 5px),linear-gradient(35deg,transparent 40%,#57c9ef 41% 60%,transparent 61%) 95% 78%/8px 18px no-repeat,linear-gradient(-25deg,transparent 40%,#ed6dad 41% 60%,transparent 61%) 83% 10%/7px 15px no-repeat; }
+    .birthday-promo-art { display:block; width:156px; height:156px; object-fit:contain; border-radius:12px; border:3px solid #fff; box-shadow:0 2px 7px #b54c8626; }
+    .birthday-promo-copy { min-width:0; }
+    .birthday-promo h2 { margin:0 0 4px; font-size:1.55rem; line-height:1.15; color:#5b338e; }
+    .birthday-promo-greeting { margin:0 0 6px; font-size:1.25rem; line-height:1.2; font-weight:bold; color:#b12575; }
+    .birthday-promo-description { margin:0 0 10px; font-size:.95rem; line-height:1.4; }
+    .birthday-promo-cta { display:inline-block; padding:9px 15px; border-radius:8px; background:#a52c79; color:#fff; text-decoration:none; font-weight:bold; font-size:.95rem; line-height:1.3; box-shadow:0 3px 0 #f2c94d; }
+    .birthday-promo-cta:hover { background:#842063; }
+    .birthday-promo-cta:focus-visible { outline:3px solid #301257; outline-offset:4px; }
+    @media(max-width:600px) {
+      .birthday-promo { grid-template-columns:82px minmax(0,1fr); gap:12px; padding:14px; align-items:start; }
+      .birthday-promo-art { width:82px; height:82px; }
+      .birthday-promo-copy { display:contents; }
+      .birthday-promo h2 { grid-column:2; grid-row:1; font-size:1.2rem; align-self:start; margin:2px 0 0; padding-bottom:28px; }
+      .birthday-promo-greeting { grid-column:2; grid-row:1; margin:0; align-self:end; font-size:1rem; }
+      .birthday-promo-description { grid-column:1/-1; margin:0; font-size:.9rem; }
+      .birthday-promo-cta { grid-column:1/-1; justify-self:start; font-size:.9rem; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -215,11 +237,13 @@
       </div>
     </section>
 
-    <section aria-labelledby="birthday-heading" style="margin-top:2rem;">
-      <div class="card" style="text-align:center;">
-        <h2 id="birthday-heading" style="margin-top:0;color:var(--primary-dark);">Happy Birthday in Pig Latin!</h2>
-        <p>Send an Appy-hay Irthday-bay! Watch the birthday greeting, play a song, or print a free card.</p>
-        <p style="margin-bottom:0;"><a href="happy-birthday-in-pig-latin.html" style="display:inline-block;background:var(--primary-dark);color:white;padding:.75rem 1.5rem;border-radius:.5rem;text-decoration:none;font-weight:bold;">Visit the Birthday Page &rarr;</a></p>
+    <section class="birthday-promo" aria-labelledby="birthday-heading">
+      <img class="birthday-promo-art" src="birthday/happy%20birthday%20pig%20latin%20album%20cover.png" width="2000" height="2000" loading="lazy" alt="Birthday pigs celebrating with cake, balloons, and colorful Appy-hay Irthday-bay lettering">
+      <div class="birthday-promo-copy">
+        <h2 id="birthday-heading">Happy Birthday in Pig Latin!</h2>
+        <p class="birthday-promo-greeting">Appy-hay Irthday-bay!</p>
+        <p class="birthday-promo-description">Send an Appy-hay Irthday-bay! Watch the birthday greeting, play a song, or print a free card.</p>
+        <a class="birthday-promo-cta" href="happy-birthday-in-pig-latin.html">Visit the Birthday Page &rarr;</a>
       </div>
     </section>
 
