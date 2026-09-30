@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pig Latin Shirts, Mugs, Books &amp; Coloring Book | Learn Pig Latin</title>
-  <meta name="description" content="Shop Pig Latin goodies: the Ivelay, Ovelay, Aughlay shirt and mug, a Pig Latin coloring book, and classic children&#8217;s stories retold in Pig Latin. Ellohay, Oldilocksgay!">
+  <title>Piglatinia Gift Shop | Pig Latin Gifts &amp; Printables</title>
+  <meta name="description" content="Goofy gifts and Pig Latin goodies from Piglatinia: a 25-page printable Pig Latin coloring book for just 99&#162;, plus classic children&#8217;s stories retold in Pig Latin. Ellohay, Oldilocksgay!">
   <link rel="canonical" href="https://learnpiglatin.com/products.html">
 
   <!-- Social sharing -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Learn Pig Latin">
-  <meta property="og:title" content="Pig Latin Shirts, Mugs, Books &amp; Coloring Book">
-  <meta property="og:description" content="The Ivelay, Ovelay, Aughlay shirt and mug, a Pig Latin coloring book, and classic children&#8217;s stories retold in Pig Latin.">
+  <meta property="og:title" content="The Piglatinia Gift Shop">
+  <meta property="og:description" content="Goofy gifts and Pig Latin goodies: a 25-page printable Pig Latin coloring book for just 99&#162;, plus classic children&#8217;s stories retold in Pig Latin.">
   <meta property="og:url" content="https://learnpiglatin.com/products.html">
   <meta property="og:image" content="https://learnpiglatin.com/img/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -96,6 +96,140 @@
     }
     @media(prefers-reduced-motion:reduce) { .site-header .site-nav a { transition:none; } }
   </style>
+  <style>
+    /* ===== Piglatinia Gift Shop (Products page only) ===== */
+    .shop-intro { text-align: center; margin: 0 auto 1.5rem; max-width: 640px; }
+    .shop-intro h2 { color: #5b2fc4; font-size: 2rem; line-height: 1.2; }
+    .shop-intro p { color: #5a4697; font-size: 1.1rem; margin-top: .35rem; }
+
+    .featured-product {
+      position: relative;
+      display: grid; grid-template-columns: minmax(220px, 5fr) 7fr; gap: 2.25rem; align-items: center;
+      padding: 2.25rem; margin-bottom: 3rem;
+      background: linear-gradient(135deg, #f3e8ff 0%, #ffe9f6 55%, #e4eeff 100%);
+      border: 2px solid #d9c6ff; border-radius: 24px;
+      box-shadow: 0 10px 28px rgba(91, 47, 196, .12);
+      overflow: hidden;
+    }
+    /* a few tiny sparkles, purely decorative */
+    .featured-product .sparkle { position: absolute; width: 18px; height: 18px; color: #f5c518; pointer-events: none; }
+    .featured-product .sparkle.s1 { top: 14px; left: 18px; }
+    .featured-product .sparkle.s2 { top: 22px; right: 26px; width: 14px; height: 14px; color: #78aaff; }
+    .featured-product .sparkle.s3 { bottom: 18px; right: 44%; width: 12px; height: 12px; color: #d682f4; }
+
+    .cover-wrap { position: relative; max-width: 360px; width: 100%; justify-self: center; }
+    .cover-wrap img {
+      display: block; width: 100%; height: auto; border-radius: 6px; background: #fff;
+      box-shadow: 0 2px 0 #fff, 0 14px 30px rgba(44, 23, 78, .25);
+      transform: rotate(-2deg);
+    }
+    /* the gift-shop price tag */
+    .price-tag {
+      position: absolute; right: -26px; top: -14px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-width: 104px; padding: .55rem .9rem .5rem 1.4rem;
+      background: #ffd84d; color: #2c174e; border-radius: 10px 6px 6px 10px;
+      box-shadow: 0 6px 14px rgba(44, 23, 78, .25); transform: rotate(6deg);
+      clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 50%);
+    }
+    .price-tag::before { /* the little string hole */
+      content: ""; position: absolute; left: 14px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px;
+      border-radius: 50%; background: #fff4c7; box-shadow: inset 0 1px 2px rgba(0,0,0,.25);
+    }
+    .price-tag .just { font-size: .8rem; font-weight: bold; line-height: 1; }
+    .price-tag .amount { font-size: 2.1rem; font-weight: 900; line-height: 1.05; }
+
+    .product-info h3 { color: #2c174e; font-size: 1.75rem; line-height: 1.2; }
+    .product-info .subtitle { color: #5b2fc4; font-size: 1.1rem; font-weight: bold; margin-top: .25rem; }
+    .product-info .desc { margin-top: .85rem; font-size: 1.02rem; max-width: 60ch; }
+    .product-facts { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 0; padding: 0; }
+    .product-facts li {
+      display: inline-flex; align-items: center; gap: .35rem;
+      background: #fff; border: 1.5px solid #d9c6ff; border-radius: 999px;
+      padding: .3rem .8rem; font-size: .92rem; font-weight: bold; color: #3d2570;
+    }
+    .digital-note { margin-top: .75rem; font-size: .92rem; color: #5a4697; }
+
+    .product-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
+    .shop-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+      min-height: 48px; padding: .75rem 1.3rem; border-radius: 12px;
+      font: bold 1.05rem/1.2 Arial, sans-serif; text-decoration: none; cursor: pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .shop-btn.buy { background: #5b2fc4; color: #fff; border: 2px solid #5b2fc4; box-shadow: 0 4px 0 #3b1f86; }
+    .shop-btn.buy:hover { background: #4a23a8; transform: translateY(-1px); }
+    .shop-btn.buy:active { transform: translateY(2px); box-shadow: 0 2px 0 #3b1f86; }
+    .shop-btn.peek { background: #fff; color: #5b2fc4; border: 2px solid #5b2fc4; }
+    .shop-btn.peek:hover { background: #f3e8ff; }
+    .shop-btn:focus-visible { outline: 3px solid #f5c518; outline-offset: 3px; }
+
+    @media (max-width: 760px) {
+      .featured-product { grid-template-columns: 1fr; gap: 1.75rem; padding: 1.5rem 1.1rem 1.6rem; }
+      .cover-wrap { max-width: 270px; }
+      .product-info { text-align: center; }
+      .product-info .desc { margin-left: auto; margin-right: auto; }
+      .product-facts, .product-actions { justify-content: center; }
+      .shop-btn { width: 100%; }
+      .shop-intro h2 { font-size: 1.6rem; }
+      .featured-product .sparkle.s3 { display: none; }
+    }
+    @media (max-width: 380px) {
+      .price-tag { right: -10px; min-width: 90px; }
+      .price-tag .amount { font-size: 1.8rem; }
+    }
+
+    /* ===== Preview viewer (dialog) ===== */
+    .preview-dialog {
+      width: min(640px, calc(100vw - 24px)); max-width: none; max-height: calc(100dvh - 24px);
+      margin: auto; padding: 0; border: 0; border-radius: 18px;
+      background: #fff; color: #2c174e; box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      overflow: hidden;
+    }
+    .preview-dialog::backdrop { background: rgba(44, 23, 78, .72); }
+    .preview-dialog[open] { display: flex; flex-direction: column; }
+    .preview-top { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .6rem .6rem .4rem 1rem; }
+    .preview-top h2 { font-size: 1.05rem; color: #2c174e; }
+    .preview-close {
+      width: 44px; height: 44px; border: 0; border-radius: 50%; background: #f3e8ff; color: #2c174e;
+      font-size: 1.6rem; line-height: 1; cursor: pointer; flex: none;
+    }
+    .preview-close:hover { background: #e6d6ff; }
+    .preview-stage { position: relative; display: flex; align-items: center; justify-content: center; padding: 0 3.25rem; min-height: 0; flex: 1; }
+    .preview-page {
+      /* coloring pages have transparent backgrounds, so they always sit on white paper */
+      display: block; background: #fff; border: 1px solid #e3d8f7; border-radius: 4px;
+      width: auto; height: auto; max-width: 100%;
+      max-height: calc(100dvh - 260px);
+      aspect-ratio: 1545 / 1999; object-fit: contain;
+    }
+    .preview-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%; border: 2px solid #5b2fc4;
+      background: #fff; color: #5b2fc4; font-size: 1.4rem; font-weight: bold; line-height: 1; cursor: pointer;
+    }
+    .preview-arrow.prev { left: .5rem; }
+    .preview-arrow.next { right: .5rem; }
+    .preview-arrow:hover:not(:disabled) { background: #f3e8ff; }
+    .preview-arrow:disabled { opacity: .35; cursor: default; }
+    .preview-count { text-align: center; font-weight: bold; color: #5a4697; margin: .5rem 0 0; }
+    .preview-cta { text-align: center; padding: .6rem 1rem 1rem; }
+    .preview-cta p { font-weight: bold; margin-bottom: .5rem; }
+    .preview-close:focus-visible, .preview-arrow:focus-visible { outline: 3px solid #f5c518; outline-offset: 2px; }
+    @media (max-width: 520px) {
+      .preview-stage { padding: 0 .5rem; }
+      .preview-arrow { top: auto; bottom: -52px; transform: none; }
+      .preview-arrow.prev { left: 1rem; }
+      .preview-arrow.next { right: 1rem; }
+      .preview-count { margin-top: .9rem; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+      .preview-page { max-height: calc(100dvh - 290px); }
+      .preview-cta .shop-btn { width: 100%; }
+    }
+    html.preview-open { overflow: hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      .shop-btn, .preview-arrow { transition: none; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -110,50 +244,36 @@
   </header>
 
   <main>
-    <section class="product-section">
-      <h2>⭐ Featured</h2>
-      <div class="product-grid">
+    <section class="shop-intro" aria-labelledby="shop-title">
+      <h2 id="shop-title">🐷 The Piglatinia Gift Shop</h2>
+      <p>Goofy gifts, Pig Latin goodies, and things you probably didn't know you needed.</p>
+    </section>
 
-        <div class="card">
-          <div class="card-image">
-            <img src="thumbnails/piglatintshirt.webp" loading="lazy" alt="Pig Latin shirt">
-          </div>
-          <div class="card-content">
-            <h3>Pig Latin Shirt</h3>
-            <div class="sub">Ivelay, Ovelay, Aughlay</div>
-            <div class="buttons-wrap">
-              <a class="btn" href="https://www.etsy.com/listing/4335457946" target="_blank" rel="noopener noreferrer">Etsy</a>
-            </div>
-          </div>
+    <section class="featured-product" aria-labelledby="coloring-book-title">
+      <svg class="sparkle s1" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0c.7 5.6 2.9 9.4 12 12-9.1 2.6-11.3 6.4-12 12-.7-5.6-2.9-9.4-12-12 9.1-2.6 11.3-6.4 12-12z"/></svg>
+      <svg class="sparkle s2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0c.7 5.6 2.9 9.4 12 12-9.1 2.6-11.3 6.4-12 12-.7-5.6-2.9-9.4-12-12 9.1-2.6 11.3-6.4 12-12z"/></svg>
+      <svg class="sparkle s3" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0c.7 5.6 2.9 9.4 12 12-9.1 2.6-11.3 6.4-12 12-.7-5.6-2.9-9.4-12-12 9.1-2.6 11.3-6.4 12-12z"/></svg>
+
+      <div class="cover-wrap">
+        <img src="img/pig-latin-coloring-book-cover-web.webp" width="1000" height="1294" fetchpriority="high"
+             alt="Cover of the Pig Latin Inspirational Coloring Book: rainbow bubble letters spell IGPAY ATINLAY OLORINGCAY OOKBAY (Pig Latin Coloring Book) among colorful swirls, hearts, and stars.">
+        <div class="price-tag" aria-hidden="true"><span class="just">JUST</span><span class="amount">99&#162;</span></div>
+      </div>
+
+      <div class="product-info">
+        <h3 id="coloring-book-title">Pig Latin Inspirational Coloring Book</h3>
+        <p class="subtitle">25 Printable Coloring Pages</p>
+        <p class="desc">Color, decode, and discover 25 inspirational messages written in Pig Latin! From flowers and doodles to fun positive sayings, every page gives you something to color&#8212;and something to decode.</p>
+        <ul class="product-facts" aria-label="What you get">
+          <li><span aria-hidden="true">🖍️</span> 25 Coloring Pages</li>
+          <li><span aria-hidden="true">📄</span> Printable PDF</li>
+          <li><span aria-hidden="true">⚡</span> Instant Digital Download</li>
+        </ul>
+        <p class="digital-note">Just 99&#162;. This is a digital download, so nothing is mailed: you get the PDF right after checkout.</p>
+        <div class="product-actions">
+          <a class="shop-btn buy" href="https://payhip.com/b/GgLab" target="_blank" rel="noopener">Get All 25 Pages &#8212; 99&#162;</a>
+          <button type="button" class="shop-btn peek" id="openPreview" aria-haspopup="dialog" aria-controls="previewDialog">👀 Preview the Coloring Book</button>
         </div>
-
-        <div class="card">
-          <div class="card-image">
-            <img src="thumbnails/mug.png" loading="lazy" alt="Ivelay, Ovelay, Aughlay Pig Latin mug">
-          </div>
-          <div class="card-content">
-            <h3>Ivelay, Ovelay, Aughlay Mug</h3>
-            <div class="buttons-wrap">
-              <a class="btn" href="https://www.etsy.com/listing/4363174220/pig-latin-ivelay-ovelay-aughlay-mug-fun" target="_blank" rel="noopener noreferrer">Etsy</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-image">
-            <img src="thumbnails/coloringbook.webp" loading="lazy" alt="Pig Latin Coloring Book cover">
-          </div>
-          <div class="card-content">
-            <h3>Coloring Book</h3>
-            <div class="buttons-wrap">
-              <div class="btn-row">
-                <a class="btn" href="https://www.amazon.com/dp/B0FL7GPQLC" target="_blank" rel="noopener noreferrer" aria-label="Buy the Coloring Book on Amazon">Amazon</a>
-                <a class="btn" href="https://www.etsy.com/listing/4345537260/ipgay-atinlay-oloringcay-ookbay-an?ref=shop_home_active_1" target="_blank" rel="noopener noreferrer" aria-label="Buy the Coloring Book digital download on Etsy">Digital (Etsy)</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
 
@@ -197,5 +317,109 @@
   </main>
 
   <footer>© 2025 Learn Pig Latin. All rights reserved.</footer>
+  <!-- Coloring book preview viewer -->
+  <dialog class="preview-dialog" id="previewDialog" aria-labelledby="previewTitle">
+    <div class="preview-top">
+      <h2 id="previewTitle">Coloring Book Preview</h2>
+      <button type="button" class="preview-close" id="closePreview" aria-label="Close preview">&times;</button>
+    </div>
+    <div class="preview-stage">
+      <button type="button" class="preview-arrow prev" id="prevPreview" aria-label="Previous page">&#8249;</button>
+      <img class="preview-page" id="previewImage" alt="" width="1545" height="1999" draggable="false">
+      <button type="button" class="preview-arrow next" id="nextPreview" aria-label="Next page">&#8250;</button>
+    </div>
+    <p class="preview-count" id="previewCount" aria-live="polite">1 of 5</p>
+    <div class="preview-cta">
+      <p>Like what you see? Get all 25 pages for 99&#162;</p>
+      <a class="shop-btn buy" href="https://payhip.com/b/GgLab" target="_blank" rel="noopener">Get All 25 Pages &#8212; 99&#162;</a>
+    </div>
+  </dialog>
+
+  <script>
+  (function () {
+    // The five watermarked preview pages, in order. These are the ONLY
+    // interior pages shown on this site; Payhip delivers the full PDF.
+    var pages = [
+      { src: 'img/pig-latin-coloring-book-preview-1.png', alt: 'Preview page 1: IVELAY, OVELAY, AUGHLAY in bubble letters surrounded by flowers and vines, with a PREVIEW watermark.' },
+      { src: 'img/pig-latin-coloring-book-preview-2.png', alt: 'Preview page 2: APPYHAY OOPINGHAY in bubble letters with hula hoops, stars, and confetti, with a PREVIEW watermark.' },
+      { src: 'img/pig-latin-coloring-book-preview-3.png', alt: 'Preview page 3: EAMDRAY IGBAY in bubble letters with an umbrella, clouds, stars, and a smiling whale, with a PREVIEW watermark.' },
+      { src: 'img/pig-latin-coloring-book-preview-4.png', alt: 'Preview page 4: ELIEVEBAY in bubble letters surrounded by flowers, berries, and stars, with a PREVIEW watermark.' },
+      { src: 'img/pig-latin-coloring-book-preview-5.png', alt: 'Preview page 5: ON\u2019TDAY ORRYWAY EBAY APPYHAY in bubble letters with butterflies, a bird, and flowers, with a PREVIEW watermark.' }
+    ];
+
+    var dialog = document.getElementById('previewDialog');
+    var openBtn = document.getElementById('openPreview');
+    var closeBtn = document.getElementById('closePreview');
+    var prevBtn = document.getElementById('prevPreview');
+    var nextBtn = document.getElementById('nextPreview');
+    var img = document.getElementById('previewImage');
+    var count = document.getElementById('previewCount');
+    if (!dialog || !openBtn || typeof dialog.showModal !== 'function') {
+      // Very old browsers without <dialog>: hide the preview button rather than break.
+      if (openBtn) openBtn.hidden = true;
+      return;
+    }
+
+    var index = 0;
+    var preloaded = {};
+    function preload(i) {
+      if (i < 0 || i >= pages.length || preloaded[i]) return;
+      var p = new Image(); p.src = pages[i].src; preloaded[i] = p;
+    }
+    function show(i) {
+      index = Math.max(0, Math.min(pages.length - 1, i));
+      img.src = pages[index].src;
+      img.alt = pages[index].alt;
+      count.textContent = (index + 1) + ' of ' + pages.length;
+      var focused = document.activeElement;
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === pages.length - 1;
+      // If the arrow you just used became disabled, keep focus on the other one
+      // so keyboard users never lose their place.
+      if (focused === prevBtn && prevBtn.disabled) nextBtn.focus();
+      if (focused === nextBtn && nextBtn.disabled) prevBtn.focus();
+      preload(index + 1); preload(index - 1);
+    }
+    function openPreview() {
+      show(0);
+      document.documentElement.classList.add('preview-open');
+      dialog.showModal();
+      closeBtn.focus();
+    }
+    function closePreview() { if (dialog.open) dialog.close(); }
+
+    openBtn.addEventListener('click', openPreview);
+    closeBtn.addEventListener('click', closePreview);
+    prevBtn.addEventListener('click', function () { show(index - 1); });
+    nextBtn.addEventListener('click', function () { show(index + 1); });
+
+    // Escape is handled by <dialog> itself; this runs for every way of closing.
+    dialog.addEventListener('close', function () {
+      document.documentElement.classList.remove('preview-open');
+      openBtn.focus();
+    });
+    // Clicking the dimmed area outside the viewer closes it.
+    dialog.addEventListener('click', function (e) {
+      if (e.target !== dialog) return;
+      var r = dialog.getBoundingClientRect();
+      var inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+      if (!inside) closePreview();
+    });
+    // Left/right arrow keys flip pages whenever the viewer is open.
+    document.addEventListener('keydown', function (e) {
+      if (!dialog.open) return;
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(index - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1); }
+    });
+    // Swipe left/right on touch screens.
+    var startX = null;
+    img.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    img.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX; startX = null;
+      if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
+    });
+  })();
+  </script>
 </body>
 </html>
