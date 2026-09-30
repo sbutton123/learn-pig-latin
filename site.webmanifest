@@ -3,7 +3,7 @@
   "name": "Learn Pig Latin",
   "short_name": "Pig Latin",
   "description": "Translate English ↔ Pig Latin, play word games, and share your phrases — even offline.",
-  "start_url": "/index.html?source=pwa",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
