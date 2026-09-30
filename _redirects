@@ -1,0 +1,5 @@
+# Netlify redirects for LearnPigLatin.com
+# Send /index.html to the one official homepage address, /
+# (query strings like ?source=pwa are kept automatically).
+# The "!" is needed because index.html is a real file.
+/index.html  /  301!
