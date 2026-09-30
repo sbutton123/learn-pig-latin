@@ -83,6 +83,8 @@
     .badge { position: absolute; top: .5rem; right: .5rem; background: var(--accent); color: #fff; padding: .25rem .5rem; border-radius: .25rem; font-size: .75rem; }
     .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); color: #fff; display: flex; align-items: center; justify-content: center; opacity: 0; font-weight: bold; font-size: 1.2rem; transition: opacity .2s; }
     .game-card:hover .overlay { opacity: 1; }
+    .birthday-card-link { text-align: center; margin: 0 0 1rem; }
+    .birthday-card-link a { color: #5b2fc4; font-weight: bold; text-underline-offset: 3px; }
     .buy-button { text-align: center; margin: 2rem 0; }
     .buy-button a { display: inline-block; padding: .75rem 1.5rem; background: var(--accent); color: #fff; text-decoration: none; font-weight: bold; border-radius: .5rem; transition: background .3s, transform .2s; }
     .buy-button a:hover { background: var(--primary); transform: translateY(-2px); }
@@ -105,6 +107,11 @@
     /* Brand links home; looks exactly the same as before. */
     .site-header .site-brand a { color:inherit; text-decoration:none; }
     .site-header .site-brand a:focus-visible { outline:3px solid #301257; outline-offset:3px; border-radius:4px; }
+    /* Tablets: slightly tighter buttons so all six nav links stay on one row. */
+    @media(min-width:541px) and (max-width:900px) {
+      .site-header .site-nav { gap:6px; }
+      .site-header .site-nav a { padding:7px 10px; font-size:15px; }
+    }
     @media(max-width:540px) {
       .site-header { padding:10px 12px; }
       .site-header .site-brand { font-size:27px; }
@@ -120,6 +127,7 @@
     <h1 class="site-brand"><a href="/">Learn Pig Latin</a></h1>
     <p class="site-tagline">Your quirky guide to mastering Pig Latin!</p>
     <nav class="site-nav" aria-label="Main navigation">
+    <a href="/">Home</a>
     <a href="how-to-speak-pig-latin.html">How to Speak Pig Latin</a>
     <a href="translator.html">Translator</a>
     <a href="games.html">Games &amp; Printables</a>
@@ -180,6 +188,8 @@
         </a>
       </div>
     </div>
+
+    <p class="birthday-card-link">🎂 Printing for a birthday? Get a free printable Pig Latin birthday card on our <a href="happy-birthday-in-pig-latin.html">Happy Birthday in Pig Latin</a> page.</p>
 
     <div class="buy-button">
       <a href="products.html" target="_blank">Buy Full Coloring Book</a>
