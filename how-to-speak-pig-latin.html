@@ -93,6 +93,7 @@
            border-left: 4px solid var(--primary); font-size: 1.12rem; }
     .ex .arr { color: #8a78b8; }
     .ex .pl { font-weight: bold; }
+    .ex .dialect-tag { font-size: .85rem; color: var(--muted); }
     .ex b { font-weight: bold; }
     .ex .en b.mv { color: var(--moved); }
     .pl .mv { color: var(--moved); }
@@ -263,16 +264,18 @@
 
     <section class="rule" aria-labelledby="rule2-title">
       <div class="rule-head"><span class="rule-num" aria-hidden="true">2</span><h2 id="rule2-title">Rule #2: Vowel Words Get It Easy</h2></div>
-      <p>If a word starts with a vowel (a, e, i, o, or u), nothing moves. Just keep the whole word and add <strong>yay</strong> to the end.</p>
+      <p>If a word starts with a vowel (a, e, i, o, or u), keep the whole word and add <strong>YAY</strong> in the Northern dialect or <strong>WAY</strong> in the Southern dialect.</p>
       <ul class="examples">
         <li class="ex"><span class="en">orange</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">orange<b class="sf">yay</b></span></li>
         <li class="ex"><span class="en">egg</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">egg<b class="sf">yay</b></span></li>
+        <li class="ex" data-dialect="yay"><span class="en">apple</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">apple<b class="sf">yay</b></span><small class="dialect-tag">(Northern)</small></li>
+        <li class="ex" data-dialect="way"><span class="en">apple</span><span class="arr" aria-hidden="true">&rarr;</span><span class="pl">apple<b class="sf">way</b></span><small class="dialect-tag">(Southern)</small></li>
       </ul>
       <aside class="debate" aria-labelledby="debate-title">
         <h3 id="debate-title">🐷 The Great YAY vs. WAY Debate</h3>
         <p>Pig Latin has more than one version. Some people add <strong>YAY</strong> to words that begin with a vowel, while others add <strong>WAY</strong>. So <em>orange</em> can become <em>orangeyay</em> or <em>orangeway</em>.</p>
         <p>Both are Pig Latin.</p>
-        <p>Even Piglatinia has regional differences! In Oopapalishay and western Piglatinia, you&#8217;ll usually hear YAY, while over on the Whimsy Coast, locals traditionally use WAY.</p>
+        <p>Even Piglatinia has regional differences! Northern Piglatinia traditionally uses YAY for vowel-starting words (<em>apple</em> &rarr; <em>appleyay</em>), while Southern Piglatinia traditionally uses WAY (<em>apple</em> &rarr; <em>appleway</em>).</p>
         <p>LearnPigLatin.com usually teaches the YAY version&#8212;but if you learned WAY, you&#8217;re speaking Pig Latin too.</p>
       </aside>
     </section>
@@ -345,7 +348,7 @@
       <h2 id="cheat-title">Pig Latin Cheat Sheet</h2>
       <dl>
         <div><dt>Starts with a consonant</dt><dd>Move the beginning sound to the end + <strong>ay</strong><span class="eg">pig &rarr; igpay</span></dd></div>
-        <div><dt>Starts with a vowel</dt><dd>Keep the word + <strong>yay</strong><span class="eg">egg &rarr; eggyay</span></dd></div>
+        <div><dt>Starts with a vowel</dt><dd>Keep the word + <strong>YAY</strong> (Northern) or <strong>WAY</strong> (Southern)<span class="eg">egg &rarr; eggyay / eggway</span></dd></div>
         <div><dt>The letter Y</dt><dd>First letter: a consonant. Anywhere else: a vowel.<span class="eg">yes &rarr; esyay, my &rarr; ymay</span></dd></div>
       </dl>
       <p class="forgot">Forgot the rule? <a href="translator.html">Use the free Pig Latin translator &rarr;</a></p>
