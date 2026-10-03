@@ -5,6 +5,7 @@
  *
  * Expected page elements (same IDs on every page that has a translator):
  *   #mode    <select> with values "enToPig" / "pigToEn"
+ *   input[name="dialect"]  optional radio buttons, values "yay" (default) / "way"
  *   #input   text field
  *   #output  translation output
  *   #sentBy  optional "sent from LearnPigLatin.com" line
@@ -20,14 +21,22 @@
   if (!inputEl || !outEl || !modeEl || !window.PigLatin) return;
 
   // ---------- Translate as you type ----------
+  // Northern (YAY) unless the Southern (WAY) dialect radio is selected.
+  function currentDialect() {
+    var picked = document.querySelector('input[name="dialect"]:checked');
+    return picked && picked.value === 'way' ? 'way' : 'yay';
+  }
   function runTranslation() {
     var raw = inputEl.value;
     if (!raw.trim()) { outEl.innerText = ''; updateSentByVisibility(); return; }
-    outEl.innerText = window.PigLatin.translate(raw.trim(), modeEl.value);
+    outEl.innerText = window.PigLatin.translate(raw.trim(), modeEl.value, { dialect: currentDialect() });
     updateSentByVisibility();
   }
   inputEl.addEventListener('input', runTranslation);
   modeEl.addEventListener('change', runTranslation);
+  document.querySelectorAll('input[name="dialect"]').forEach(function (r) {
+    r.addEventListener('change', runTranslation);
+  });
 
   function updateSentByVisibility() {
     var sentBy = document.getElementById('sentBy');
