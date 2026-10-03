@@ -6,6 +6,7 @@
  *
  * House style (matches the existing site):
  *   - Words that start with a vowel get "yay":        apple  -> appleyay
+ *     (or "way" in the Southern dialect:               apple  -> appleway)
  *   - Words that start with consonants move them:      hello  -> ellohay
  *                                                      string -> ingstray
  *   - "y" at the START of a word is a consonant:       you    -> ouyay
@@ -24,7 +25,13 @@
 (function (root) {
   'use strict';
 
-  var VOWEL_SUFFIX = 'yay';
+  var VOWEL_SUFFIX = 'yay';     // Northern dialect (the site default)
+  var WAY_SUFFIX = 'way';       // Southern dialect
+
+  // options: { dialect: 'yay' | 'way' }. Anything other than 'way' means 'yay'.
+  function suffixFor(options) {
+    return options && options.dialect === 'way' ? WAY_SUFFIX : VOWEL_SUFFIX;
+  }
 
   // ---------- Character helpers ----------
 
@@ -97,19 +104,20 @@
 
   // ---------- English -> Pig Latin ----------
 
-  function wordToPigLatin(word) {
+  function wordToPigLatin(word, suffix) {
+    suffix = suffix || VOWEL_SUFFIX;
     var pattern = casePattern(word);
     var lower = word.toLowerCase();
     var result;
 
     if (isVowelChar(lower.charAt(0))) {
-      result = lower + VOWEL_SUFFIX;
+      result = lower + suffix;
     } else {
       // Move the leading consonant cluster (letters only) to the end.
       var i = 0;
       while (i < lower.length && isLetter(lower.charAt(i)) && !isVowelAt(lower, i)) i++;
       if (i === 0) {
-        result = lower + VOWEL_SUFFIX;           // e.g. starts with an apostrophe
+        result = lower + suffix;                 // e.g. starts with an apostrophe
       } else if (i >= lower.length) {
         result = lower + 'ay';                   // no vowels at all: "hmm" -> "hmmay"
       } else {
@@ -119,8 +127,9 @@
     return applyCase(result, pattern);
   }
 
-  function toPigLatin(text) {
-    return mapWords(text, wordToPigLatin);
+  function toPigLatin(text, options) {
+    var suffix = suffixFor(options);
+    return mapWords(text, function (word) { return wordToPigLatin(word, suffix); });
   }
 
   // ---------- Pig Latin -> English ----------
@@ -166,14 +175,66 @@
     "you're you'll you've you'd"
   );
 
-  // Common vowel words that may arrive in the "way" style (Iway, andway).
-  // Most "...way" words are "w" words (ithway = with), so only these
-  // get read as vowel words.
-  var WAY_VOWEL_WORDS = toSet(
-    'i a an and am are as at all is it in if of on or our out up us eat egg apple elephant ' +
-    'each every only other over also any even ever into off oh ok until under open ice idea ' +
-    'easy enough always am about after again away'
-  );
+  // WAY_WORDS: Pig Latin forms ending in "way" that are really common
+  // consonant words whose moved sound ends in W (ithway = with, eetsway = sweet).
+  // Any other "...way" word is read as a vowel word (Southern dialect:
+  // applesway = apples). A "!" marks words that win outright; the few without
+  // "!" are true twins ("inway" = win or in), decided by the selected dialect.
+  var WAY_WORDS = (function () {
+    var t = {};
+    (
+    'eway:we! ithway:with! asway:was! illway:will! ereway:were! ouldway:would! otway:two! antway:want! ' +
+    'ellway:well! ayway:way! orkway:work! orldway:world! ithoutway:without! omenway:women! ' +
+    'eekway:week! aterway:water! entway:went! arway:war! orkingway:working! ithinway:within! ' +
+    'inway:win antedway:wanted! aitway:wait! omanway:woman! atchway:watch! estway:west! ' +
+    'orksway:works! ordway:word! ordsway:words! antsway:wants! ifeway:wife! onway:won ' +
+    'eeksway:weeks! ishway:wish! orkedway:worked! orthway:worth! ebsiteway:website! alkway:walk! ' +
+    'ashingtonway:washington! aitingway:waiting! aysway:ways! allway:wall annaway:wanna! ' +
+    'atchingway:watching! eightway:weight esternway:western! elcomeway:welcome! ' +
+    'inningway:winning! ideway:wide! owway:wow! orkersway:workers! eekendway:weekend! ' +
+    'onderway:wonder! orstway:worst! earway:wear! eetsway:sweet! interway:winter! orseway:worse! ' +
+    'illiamway:william! eatherway:weather! alkingway:walking! earingway:wearing! ' +
+    'onderfulway:wonderful! icetway:twice! indway:wind! orryway:worry! ittertway:twitter! ' +
+    'eddingway:wedding! asteway:waste! eirdway:weird! ildway:wild! indowway:window! ' +
+    'innerway:winner! oodway:wood! akeway:wake! eaponsway:weapons! ebway:web! ineway:wine! ' +
+    'atchedway:watched! illingway:willing! indowsway:windows! armway:warm insway:wins! ' +
+    'alkedway:walked! illiamsway:williams! eakway:weak! entytway:twenty! orriedway:worried! ' +
+    'allsway:walls! aveway:wave! ingway:wing! itchsway:switch! alesway:wales! arningway:warning! ' +
+    'arsway:wars! ednesdayway:wednesday! eeklyway:weekly! eaponway:weapon! etway:wet! ' +
+    'idelyway:widely! orldwideway:worldwide! ilsonway:wilson! onderingway:wondering! ' +
+    'itnessway:witness! earsway:swear! ealthway:wealth! iseway:wise! antingway:wanting! ' +
+    'ashway:wash! atersway:waters! oodsway:woods! ageway:wage ingsway:wings! ' +
+    'immingsway:swimming! elfareway:welfare! innersway:winners! ireway:wire! orkerway:worker! ' +
+    'alkerway:walker! edensway:sweden! ardway:ward! avesway:waves! ayneway:wayne! ' +
+    'alterway:walter! isconsinway:wisconsin! elvetway:twelve! ishesway:wishes! olfway:wolf! ' +
+    'intway:twin! ildlifeway:wildlife! oodenway:wooden! alksway:walks! oundedway:wounded! ' +
+    'arriorsway:warriors! isdomway:wisdom! itnessesway:witnesses! oreway:wore! ' +
+    'orshipway:worship! orthyway:worthy! eedway:weed! aitedway:waited! arrenway:warren! ' +
+    'ornway:worn! agesway:wages ellsway:wells! arrantway:warrant! iderway:wider! oundway:wound! ' +
+    'itzerlandsway:switzerland! orldsway:worlds! isttway:twist! indsway:winds! okeway:woke! ' +
+    'edishsway:swedish! imsway:swim! isssway:swiss! ealthyway:wealthy! ebsitesway:websites! ' +
+    'irelessway:wireless! onderedway:wondered! astedway:wasted! eaknessway:weakness! ' +
+    'idespreadway:widespread! arnedway:warned! atsonway:watson! eettway:tweet! ' +
+    'arriorway:warrior! orriesway:worries! iftsway:swift! instway:twins! alletway:wallet! ' +
+    'elshway:welsh! orkshopway:workshop! eatsway:sweat! itchedsway:switched! ashingway:washing! ' +
+    'orryingway:worrying! arnerway:warner! astingway:wasting! itchway:witch! ashedway:washed! ' +
+    'atchesway:watches! eetedtway:tweeted! ontway:wont! arehouseway:warehouse! idowway:widow! ' +
+    'ivesway:wives! oundsway:wounds! itchingsway:switching! allaceway:wallace! ' +
+    'arfareway:warfare! armingway:warming! eekendsway:weekends! ithdrawway:withdraw! ' +
+    'ithdrawalway:withdrawal! itnessedway:witnessed! orkplaceway:workplace! arnway:warn! ' +
+    'idthway:width! orkoutway:workout! eetstway:tweets! ipeway:wipe! olvesway:wolves! ' +
+    'estminsterway:westminster! ishedway:wished! ondersway:wonders! eighway:weigh! ' +
+    'ickedway:wicked! istedtway:twisted! adeway:wade! eepsway:sweep! ewway:wwe! aistway:waist! ' +
+    'elcomedway:welcomed! itway:wit akingway:waking! almartway:walmart! angway:wang! ' +
+    'ildernessway:wilderness! apsway:swap! eptsway:swept! ifiway:wifi! ishingway:wishing! ' +
+    'orkforceway:workforce! izardway:wizard!'
+    ).trim().split(/\s+/).forEach(function (pair) {
+      var k = pair.split(':'), w = k[1];
+      var strong = w.charAt(w.length - 1) === '!';
+      t[k[0]] = { word: strong ? w.slice(0, -1) : w, strong: strong };
+    });
+    return t;
+  })();
 
   // COMMON_FIXES: everyday words that the rules above would reverse wrongly,
   // generated by testing the engine against the most used English words.
@@ -266,44 +327,51 @@
 
   // Returns the best English guess for one lowercase Pig Latin word,
   // or null if the word does not look like Pig Latin at all.
-  function guessEnglish(w) {
+  // Both YAY and WAY vowel words are always recognized; `dialect` only
+  // breaks ties for the few true twins ("asway" = "was" or "as").
+  function guessEnglish(w, dialect) {
     if (w.length < 3 || w.slice(-2) !== 'ay') return null;
     var plain = w.replace(/\u2019/g, "'");
-    if (Object.prototype.hasOwnProperty.call(COMMON_FIXES, plain)) return COMMON_FIXES[plain];
 
     var ending = w.slice(-3);
     var stem = w.slice(0, -3);
     var stemKey = stem.replace(/\u2019/g, "'");
     var vowelStem = (ending === 'yay' || ending === 'way') && stem && isVowelChar(stem.charAt(0)) ? stem : null;
 
+    if (vowelStem && ending === 'way') {
+      // "ithway" -> "with", but "appleway" / "applesway" / "Iway" -> "apple" / "apples" / "I".
+      var hit = Object.prototype.hasOwnProperty.call(WAY_WORDS, plain) ? WAY_WORDS[plain] : null;
+      if (hit && (hit.strong || dialect !== 'way')) return hit.word;
+      return vowelStem;
+    }
+
+    if (Object.prototype.hasOwnProperty.call(COMMON_FIXES, plain)) return COMMON_FIXES[plain];
+
     if (vowelStem && ending === 'yay') {
       // Site style: "appleyay" -> "apple", but "ellowyay" -> "yellow".
       return Y_WORDS['y' + stemKey] ? 'y' + vowelStem : vowelStem;
     }
-    if (vowelStem && ending === 'way') {
-      // "ithway" -> "with", but "Iway" / "andway" -> "I" / "and".
-      if (WAY_VOWEL_WORDS[stemKey]) return vowelStem;
-      return consonantReading(w) || vowelStem;
-    }
     return consonantReading(w) || w.slice(0, -2);
   }
 
-  function wordToEnglish(word) {
+  function wordToEnglish(word, dialect) {
     var pattern = casePattern(word);
-    var guess = guessEnglish(word.toLowerCase());
+    var guess = guessEnglish(word.toLowerCase(), dialect);
     if (guess === null) return word;             // not Pig Latin: leave it alone
     // Keep "I" capitalized, as English expects.
     if (guess === 'i') return 'I';
     return applyCase(guess, pattern);
   }
 
-  function toEnglish(text) {
-    return mapWords(text, wordToEnglish);
+  function toEnglish(text, options) {
+    var dialect = options && options.dialect === 'way' ? 'way' : 'yay';
+    return mapWords(text, function (word) { return wordToEnglish(word, dialect); });
   }
 
   // mode: "enToPig" or "pigToEn" (matches the translator's <select> values)
-  function translate(text, mode) {
-    return mode === 'pigToEn' ? toEnglish(text) : toPigLatin(text);
+  // options: { dialect: 'yay' | 'way' } (optional; default 'yay')
+  function translate(text, mode, options) {
+    return mode === 'pigToEn' ? toEnglish(text, options) : toPigLatin(text, options);
   }
 
   var api = {
@@ -312,7 +380,8 @@
     translate: translate,
     wordToPigLatin: wordToPigLatin,
     wordToEnglish: wordToEnglish,
-    VOWEL_SUFFIX: VOWEL_SUFFIX
+    VOWEL_SUFFIX: VOWEL_SUFFIX,
+    WAY_SUFFIX: WAY_SUFFIX
   };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
