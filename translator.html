@@ -109,6 +109,20 @@
     .button { flex: 1; background: var(--primary); color: white; border: none; border-radius: 0.5rem; padding: 0.5rem; cursor: pointer; font-size: 0.9rem; transition: background 0.3s; }
     .button:hover { background: var(--primary-dark); }
 
+    /* Dialect picker (Northern YAY / Southern WAY) */
+    .dialect-picker { border:0; margin:1rem 0 0; padding:0; min-width:0; }
+    .dialect-picker legend { font-weight:bold; padding:0; margin-bottom:.4rem; }
+    .dialect-options { display:flex; gap:.5rem; flex-wrap:wrap; }
+    .dialect-option { flex:1 1 150px; display:flex; align-items:center; gap:.5rem; margin:0; font-weight:normal; cursor:pointer;
+      background:#fff; border:1.5px solid #d9c6ff; border-radius:.5rem; padding:.4rem .6rem; min-height:44px; }
+    .dialect-option input { width:auto; margin:0; padding:0; accent-color:#5b2fc4; flex:none; }
+    .dialect-option strong { display:block; font-size:.92rem; line-height:1.25; }
+    .dialect-option small { display:block; font-size:.82rem; color:#5a4697; line-height:1.25; }
+    .dialect-option:has(input:checked) { border-color:#5b2fc4; background:#f3e8ff; }
+    .dialect-option:has(input:focus-visible) { outline:3px solid #301257; outline-offset:2px; }
+    .dialect-why { margin-top:.35rem; font-size:.85rem; color:#5a4697; }
+    .dialect-why summary { cursor:pointer; font-weight:bold; display:inline-block; padding:.2rem 0; }
+    .dialect-why p { margin:.25rem 0 0; }
     .tips h3 { color: var(--primary); }
     .tips ul { margin: 0; padding-left: 1.2rem; line-height: 1.6; }
     .tips a { color: #6b5aa7; }
@@ -179,6 +193,18 @@
         <option value="pigToEn">Pig Latin to English</option>
       </select>
 
+      <fieldset class="dialect-picker">
+        <legend>Choose your Piglatinian dialect:</legend>
+        <div class="dialect-options">
+          <label class="dialect-option"><input type="radio" name="dialect" value="yay" checked> <span><strong>Northern &#8212; YAY</strong><small>apple &rarr; appleyay</small></span></label>
+          <label class="dialect-option"><input type="radio" name="dialect" value="way"> <span><strong>Southern &#8212; WAY</strong><small>apple &rarr; appleway</small></span></label>
+        </div>
+        <details class="dialect-why">
+          <summary>Why two versions?</summary>
+          <p>Pig Latin has different variations. Some speakers add YAY to words beginning with a vowel, while others add WAY. Both are used. In Piglatinia, we call them the Northern and Southern dialects.</p>
+        </details>
+      </fieldset>
+
       <label for="input">Enter text:</label>
       <input id="input" type="text" placeholder="Type your sentence here…" />
 
@@ -198,7 +224,7 @@
     <section class="card tips">
       <h3>How the translator works</h3>
       <ul>
-        <li><strong>English to Pig Latin:</strong> words that start with a vowel get <strong>"yay"</strong> (apple &rarr; appleyay). Words that start with consonants move them to the end and add <strong>"ay"</strong> (hello &rarr; ellohay, string &rarr; ingstray).</li>
+        <li><strong>English to Pig Latin:</strong> words that start with a vowel get <strong>YAY</strong> in the Northern dialect or <strong>WAY</strong> in the Southern dialect (apple &rarr; appleyay or appleway). Words that start with consonants move them to the end and add <strong>"ay"</strong> (hello &rarr; ellohay, string &rarr; ingstray).</li>
         <li><strong>Pig Latin to English:</strong> the translator un-flips your words and makes its best guess. Pig Latin can be sneaky, so a few words have twins. "Owhay" could be <em>how</em> or <em>who</em>!</li>
         <li>Numbers, punctuation, and web addresses stay just the way you typed them.</li>
       </ul>
